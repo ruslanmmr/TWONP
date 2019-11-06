@@ -1,0 +1,16 @@
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal, $asset-pipeline: false ) {
+	@font-face {
+		font-family: $font-family;
+		font-weight: $weight;
+		font-style: $style;
+		src: url('#{$file-path}.woff2') format('woff2'),
+				url('#{$file-path}.woff') format("woff");
+		
+	}
+}
+
+@include font-face("SFProText", "../fonts/SFPro/SF-Pro-Text-Regular", 400);
+@include font-face("SFProText", "../fonts/SFPro/SF-Pro-Text-Bold", 700);
+@include font-face("Geometos", "../fonts/Geometos/Geometos");
+
+

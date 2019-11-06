@@ -1,0 +1,89 @@
+.icon {
+  fill: #000;
+  stroke: #000;
+}
+.nav-btn {
+  width: 50px;
+  height: 50px;
+  padding: 15px 10px;
+  margin: -15px -10px;
+  display: flex;
+  text-decoration: none;
+  &__inner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+  &__item {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    right: 0;
+    &:nth-child(1) {
+      top: 0px;
+    }
+    &:nth-child(2) {
+      top: 9px;
+    }
+    &:nth-child(3) {
+      bottom: 0px;
+    }
+  }
+}
+
+
+//lazy
+.lazy {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s;
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+.cover-box {
+  overflow: hidden;
+  display: block;
+  position: relative;
+  background: rgba(0,0,0,.5);
+  .lazy {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .wh {
+    height:100%!important;
+  }
+  .ww {
+    width:100%!important;
+  }
+  &_contain {
+    background-color: transparent;
+    .wh {
+      width:100%!important;
+      height: auto!important;
+    }
+    .ww {
+      height:100%!important;
+      width: auto!important;
+    }
+  }
+  &_size-auto {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    .lazy {
+      position: static;
+      left: 0;
+      top: 0;
+      width:100%!important;
+      height: auto!important;
+      transform: translate(0);
+    }
+  }
+}

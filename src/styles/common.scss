@@ -1,0 +1,31 @@
+@import "./partials/normalize";
+@import "./partials/fonts";
+@import "./partials/custom-grid";
+
+$border-color: #f5f5f5;
+$dot-color: #e0e0e0;
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+body {
+  font-family: 'SFProText';
+  font-size: 16px;
+  min-width: 320px;
+  position: fixed;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 0 20px;
+  position: relative;
+}
+
+@import "./partials/ui";
+@import "./partials/text";
+
+
