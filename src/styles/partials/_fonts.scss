@@ -9,8 +9,8 @@
 	}
 }
 
-@include font-face("SFProText", "../fonts/SFPro/SF-Pro-Text-Regular", 400);
-@include font-face("SFProText", "../fonts/SFPro/SF-Pro-Text-Bold", 700);
-@include font-face("Geometos", "../fonts/Geometos/Geometos");
+@include font-face("Manrope", "../fonts/Manrope/manrope-regular", 400);
+@include font-face("Manrope", "../fonts/Manrope/manrope-bold", 700);
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=cyrillic');
 
 

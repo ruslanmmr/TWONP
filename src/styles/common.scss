@@ -2,8 +2,13 @@
 @import "./partials/fonts";
 @import "./partials/custom-grid";
 
+//color
 $border-color: #f5f5f5;
 $dot-color: #e0e0e0;
+$bg-color: #363C46;
+$bg-color2: #171717;
+//transition
+$trs1: .25s;
 
 html,
 body {
@@ -12,12 +17,17 @@ body {
   overflow: hidden;
 }
 body {
-  font-family: 'SFProText';
+  font-family: 'Roboto';
   font-size: 16px;
   min-width: 320px;
   position: fixed;
+  background-color: $bg-color;
+  color: #fff;
 }
-
+.page-wrapper {
+  height: 100%;
+  position: relative;
+}
 .container {
   margin: 0 auto;
   max-width: 1440px;
@@ -26,6 +36,8 @@ body {
 }
 
 @import "./partials/ui";
+@import "./partials/header";
 @import "./partials/text";
+@import "./partials/_home.scss";
 
 

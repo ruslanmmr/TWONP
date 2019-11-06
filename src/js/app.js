@@ -7,6 +7,8 @@ import Parallax from 'parallax-js'
 
 $(document).ready(function() {
   lazy();
+  elemsAnims();
+  nav();
 })
 $(window).resize(function () {
   $('.lazy').each(function() {
@@ -67,4 +69,43 @@ function imagesResize(element) {
   } else {
     element.addClass('visible');
   }
+}
+
+function nav() {
+  let $navbtn = {
+    el: $('.nav-btn'),
+    stateInterval: 1000,
+    state: true
+  }
+
+  $navbtn.el.on('click', function() {
+    if($navbtn.state == true) {
+      $navbtn.state = false;
+      setTimeout(function() {
+        $navbtn.state = true;
+      }, $navbtn.stateInterval)
+
+      console.log('+')
+
+    }
+  })
+}
+
+function elemsAnims() {
+  $(document).on('mouseenter mouseleave touchstart touchend', '.js-animated', function(event) {
+    let $target = $(this);
+
+    if(event.type=='mouseenter') {
+      $target.addClass('hover');
+    } else if(event.type=='mouseleave') {
+      $target.removeClass('hover');
+    }
+
+    if(event.type=='touchstart') {
+      $target.addClass('touch');
+    } else if(event.type=='touchend') {
+      $target.removeClass('touch');
+    }
+
+  })
 }
