@@ -114,16 +114,24 @@ a {
     }
   }
 }
+.icon {
+  width: 50px; 
+  height: 50px;
+  fill: #000;
+  stroke: #000;
+}
 
-//@at-root
-.section {
+.scene {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 1;
+  width: calc(100% + 100px);
+  height: calc(100% + 100px);
+  left: -50px;
+  top: -50px;
 }
 .bg {
+  width: 100%;
+  height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -143,8 +151,7 @@ a {
 .logo {
   &__link {
     display: block;
-    width: 130px;
-    height: auto;
+    height: 25px;
     transition: opacity $trs1;
     &.hover,
     &.touch {
@@ -152,9 +159,37 @@ a {
     }
     img {
       display: block;
-      width: 100%;
-      height: auto;
+      height: 100%;
+      width: auto;
     }
+  }
+}
+.section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  &__display {
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  &__content {
+    padding: 105px 100px 70px 70px;
+    width: 80%;
+    left: 20%;
+    height: 65%;
+    position: relative;
+    z-index: 2;
+  }
+  &__bottom {
+    position: fixed;
+    z-index: 2;
+    bottom: 0;
+    right: 0;
+    height: 35%;
+    width: 80%;
   }
 }
 .nav {
@@ -162,13 +197,10 @@ a {
   bottom: 0;
   left: 0;
   background-color: $bg-color2;
+  backdrop-filter: blur(5px);
   z-index: 99;
-  width: 280px;
-  &:before {
-    content: '';
-    display: block;
-    padding-top: 100%;
-  }
+  width: 20%;
+  height: 35%;
   &__content {
     position: absolute;
     top: 0;
@@ -181,7 +213,6 @@ a {
   }
   &__items {
     height: 100%;
-    padding: 40px;
   }
   &__copy {
     flex-shrink: 0;
@@ -203,4 +234,17 @@ a {
 }
 .copy {
   color: #959595;
+}
+
+@media all and(max-width: 1440px) {
+  .nav {
+    &__copy {
+      padding: 30px;
+    }
+  }
+  .section {
+    &__content {
+      padding: 85px 100px 50px 50px;
+    }
+  }
 }

@@ -4,12 +4,21 @@
   left: 0;
   z-index: 100;
   display: flex;
+  width: 100%;
   &__left {
     padding: 40px;
-    width: 280px;
+    width: 20%;
     flex-shrink: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+}
+
+@media all and(max-width: 1440px) {
+  .header {
+    &__left {
+      padding: 30px;
+    }
   }
 }

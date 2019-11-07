@@ -3,12 +3,16 @@
 @import "./partials/custom-grid";
 
 //color
-$border-color: #f5f5f5;
+$border-color: #767676;
 $dot-color: #e0e0e0;
 $bg-color: #363C46;
 $bg-color2: #171717;
+$color3: #6FDE9B;
 //transition
 $trs1: .25s;
+//fonts
+$font1: 'Roboto';
+$font2: 'Manrope';
 
 html,
 body {
@@ -17,7 +21,7 @@ body {
   overflow: hidden;
 }
 body {
-  font-family: 'Roboto';
+  font-family: $font1;
   font-size: 16px;
   min-width: 320px;
   position: fixed;

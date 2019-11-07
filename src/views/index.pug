@@ -1,5 +1,56 @@
 extends layout/layout
 block content
   section.section.home
-    .home-slide.bg.bg_mask(style='background-image: url("img/bg/home1.jpg")')
+    .home__content.section__display
+      .home-slide
+        .scene
+          .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home1.jpg")')
+        .home-slide__container.section__content
+          h5.home-slide__title.t-size-64 Топливная компания
+          span.home-slide__text.t-size-24 Сеть современных АЗC.  Нефтебазы.  Топливная логистика
+      .home-slide
+        .scene
+          .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home2.jpg")')
+        .home-slide__container.section__content
+          h5.home-slide__title.t-size-64 Сеть АЗС
+          span.home-slide__text.t-size-24.d-hidden Без описания
+      .home-slide
+        .scene
+          .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home3.jpg")')
+        .home-slide__container.section__content
+          h5.home-slide__title.t-size-64 Топливо оптом
+          span.home-slide__text.t-size-24.d-hidden Без описания
+      .home-slide
+        .scene
+          .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home4.jpg")')
+        .home-slide__container.section__content
+          h5.home-slide__title.t-size-64 Топливная логистика
+          span.home-slide__text.t-size-24.d-hidden Без описания
+      .home-slide
+        .scene
+          .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home5.jpg")')
+        .home-slide__container.section__content
+          h5.home-slide__title.t-size-64 Нефтебазы
+          span.home-slide__text.t-size-24.d-hidden Без описания
+    .home__nav.section__bottom
+      .home__nav-item.js-animated
+        .home__nav-item-container
+          span.t-size-20 Заправиться
+          svg.icon 
+            use(xlink:href="img/icons/sprite.svg#ico1")
+      .home__nav-item.js-animated
+        .home__nav-item-container
+          span.t-size-20 Закупить
+          svg.icon 
+            use(xlink:href="img/icons/sprite.svg#ico1")
+      .home__nav-item.js-animated
+        .home__nav-item-container
+          span.t-size-20 Перевезти
+          svg.icon 
+            use(xlink:href="img/icons/sprite.svg#ico1")
+      .home__nav-item.js-animated
+        .home__nav-item-container
+          span.t-size-20 Хранить
+          svg.icon 
+            use(xlink:href="img/icons/sprite.svg#ico1")
   

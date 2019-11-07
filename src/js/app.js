@@ -9,6 +9,7 @@ $(document).ready(function() {
   lazy();
   elemsAnims();
   nav();
+  main();
 })
 $(window).resize(function () {
   $('.lazy').each(function() {
@@ -26,6 +27,30 @@ const $page = {
     return Math.min(window.innerWidth, document.documentElement.clientWidth);
   }
 }
+
+let $nav = {
+  trigger: $('.nav-btn'),
+  el: $('.nav'),
+  state: false,
+  fadeAnim: '',
+  open: function() {
+    $nav.fadeAnim.play();
+    $nav.fadeAnim.eventCallback("onComplete", function(){
+      console.log('opened')
+      $nav.state = true;
+    })
+  },
+  close: function() {
+    $nav.fadeAnim.reverse();
+    $nav.fadeAnim.eventCallback("onReverseComplete", function(){
+      console.log('closed')
+      $nav.state = false;
+    })
+  }
+}
+$nav.fadeAnim = new TimelineMax({paused:true})
+  .to($nav.el, 0.5, {css:{'height': '100%'}, ease:Power3.easeInOut})
+  .to($nav.el, 0.5, {css:{'background-color': 'rgba(0, 0, 0, 0.75)'}, ease:Power3.easeInOut}, '-=0.5')
 
 
 //functions
@@ -72,21 +97,21 @@ function imagesResize(element) {
 }
 
 function nav() {
-  let $navbtn = {
-    el: $('.nav-btn'),
-    stateInterval: 1000,
-    state: true
-  }
+  let stateInterval = 1000,
+      state = true;
 
-  $navbtn.el.on('click', function() {
-    if($navbtn.state == true) {
-      $navbtn.state = false;
+  $nav.trigger.on('click', function() {
+    if(state == true) {
+      state = false;
       setTimeout(function() {
-        $navbtn.state = true;
-      }, $navbtn.stateInterval)
+        state = true;
+      }, stateInterval)
 
-      console.log('+')
-
+      if($nav.state == false) {
+        $nav.open();
+      } else {
+        $nav.close();
+      }
     }
   })
 }
@@ -107,5 +132,42 @@ function elemsAnims() {
       $target.removeClass('touch');
     }
 
+  })
+}
+
+function main() {
+  //parralax
+  if($('html').hasClass('desktop')) {
+    let $scene = $('.scene');
+    $scene.each(function() {
+      let parallaxInstance = new Parallax(this, {
+        limitY: '0',
+        limitX: '100'
+      });
+    })
+  }
+
+  let $slideBtn = $('.home__nav-item'),
+      $nav = $('.home__nav'),
+      $slide = $('.home-slide'),
+      current,
+      old = 0;
+
+  $slideBtn.on('mouseenter', function() {
+    current = $(this).index() + 1;
+    let animation = new TimelineMax()
+      .to($slide.eq(old), 0.5, {autoAlpha:0, ease:Power2.easeOut})
+      .to($slide.eq(current), 0.5, {autoAlpha:1, ease:Power2.easeOut}, '-=0.5')
+      .to($slide.eq(old).find('.scene'), 0.5, {scale:1.05, ease:Power2.easeIn}, '-=0.5')
+      .fromTo($slide.eq(current).find('.scene'), 0.5, {scale:1.05}, {scale:1, ease:Power2.easeOut}, '-=0.5')
+    old=current;
+    })
+  $nav.on('mouseleave', function() {
+    let animation = new TimelineMax()
+    .to($slide.eq(old), 0.5, {autoAlpha:0, ease:Power2.easeOut})
+    .to($slide.eq(0), 0.5, {autoAlpha:1, ease:Power2.easeOut}, '-=0.5')
+    .to($slide.eq(old).find('.scene'), 0.5, {scale:1.05, ease:Power2.easeIn}, '-=0.5')
+    .fromTo($slide.eq(0).find('.scene'), 0.5, {scale:1.05}, {scale:1, ease:Power2.easeOut}, '-=0.5')
+    old=0;
   })
 }
