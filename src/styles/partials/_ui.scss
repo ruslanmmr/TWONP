@@ -13,46 +13,6 @@
   appearance: none;
   padding: 0;
 }
-.nav-btn {
-  display: block;
-  width: 30px;
-  height: 18px;
-  text-decoration: none;
-  position: relative;
-  transition: $trs1;
-  &.hover,
-  &.touch {
-    opacity: 0.8;
-    span {
-      &:nth-child(1),
-      &:nth-child(3) {
-        width: 75%;
-      }
-      &:nth-child(2) {
-        width: 100%;
-      }
-    }
-  }
-  span {
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: #fff;
-    left: 0;
-    transition: inherit;
-    &:nth-child(1) {
-      top: 0px;
-    }
-    &:nth-child(2) {
-      top: 8px;
-      width: 75%;
-    }
-    &:nth-child(3) {
-      bottom: 0px;
-    }
-  }
-}
 
 a {
   color: inherit;
@@ -148,22 +108,6 @@ a {
     }
   }
 }
-.logo {
-  &__link {
-    display: block;
-    height: 25px;
-    transition: opacity $trs1;
-    &.hover,
-    &.touch {
-      opacity: 0.8;
-    }
-    img {
-      display: block;
-      height: 100%;
-      width: auto;
-    }
-  }
-}
 .section {
   position: absolute;
   top: 0;
@@ -192,56 +136,11 @@ a {
     width: 80%;
   }
 }
-.nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  background-color: $bg-color2;
-  backdrop-filter: blur(5px);
-  z-index: 99;
-  width: 20%;
-  height: 35%;
-  &__content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  &__items {
-    height: 100%;
-  }
-  &__copy {
-    flex-shrink: 0;
-    width: 100%;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    text-align: left;
-  }
-  &__phone {
-    margin-bottom: 20px;
-    &.hover,
-    &.touch {
-      opacity: 0.8;
-    }
-  }
-}
 .copy {
   color: #959595;
 }
 
 @media all and(max-width: 1440px) {
-  .nav {
-    &__copy {
-      padding: 30px;
-    }
-  }
   .section {
     &__content {
       padding: 85px 100px 50px 50px;

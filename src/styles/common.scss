@@ -8,8 +8,10 @@ $dot-color: #e0e0e0;
 $bg-color: #363C46;
 $bg-color2: #171717;
 $color3: #6FDE9B;
+$color4: #FCB566;
 //transition
 $trs1: .25s;
+$trs2: .5s;
 //fonts
 $font1: 'Roboto';
 $font2: 'Manrope';
@@ -41,7 +43,8 @@ body {
 
 @import "./partials/ui";
 @import "./partials/header";
+@import "./partials/nav";
 @import "./partials/text";
-@import "./partials/_home.scss";
+@import "./partials/home";
 
 

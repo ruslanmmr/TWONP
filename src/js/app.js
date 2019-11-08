@@ -28,30 +28,45 @@ const $page = {
   }
 }
 
+let mainColor = '#6FDE9B';
 let $nav = {
   trigger: $('.nav-btn'),
   el: $('.nav'),
   state: false,
+  triggerAnim: '',
   fadeAnim: '',
   open: function() {
     $nav.fadeAnim.play();
+    $nav.triggerAnim.play();
+    $('html').addClass('navOpened').addClass('navInAnimation');
     $nav.fadeAnim.eventCallback("onComplete", function(){
-      console.log('opened')
       $nav.state = true;
     })
   },
   close: function() {
     $nav.fadeAnim.reverse();
+    $nav.triggerAnim.reverse();
+    setTimeout(function() {
+      $('html').removeClass('navInAnimation');
+    }, 500)
     $nav.fadeAnim.eventCallback("onReverseComplete", function(){
-      console.log('closed')
+      $('html').removeClass('navOpened');
       $nav.state = false;
     })
   }
 }
+$nav.triggerAnim = new TimelineMax({paused:true})
+  .to($nav.trigger.find('span:first-child'), 0.5, {y:8, ease:Power2.easeIn})
+  .to($nav.trigger.find('span:last-child'), 0.5, {y:-8, ease:Power2.easeIn}, '-=0.5')
+  .set($nav.trigger.find('span:nth-child(2)'), {autoAlpha:0})
+  .to($nav.trigger.find('span:first-child'), 0.5, {rotation:45, ease:Power2.easeOut})
+  .to($nav.trigger.find('span:last-child'), 0.5, {rotation:135, ease:Power2.easeOut}, '-=0.5')
 $nav.fadeAnim = new TimelineMax({paused:true})
-  .to($nav.el, 0.5, {css:{'height': '100%'}, ease:Power3.easeInOut})
-  .to($nav.el, 0.5, {css:{'background-color': 'rgba(0, 0, 0, 0.75)'}, ease:Power3.easeInOut}, '-=0.5')
-
+  .to($nav.el, 0.5, {css:{'height': '100%'}, ease:Power2.easeInOut})
+  .to($nav.el, 0.5, {css:{'background-color': 'rgba(0, 0, 0, 0.75)'}, ease:Power2.easeInOut}, '-=0.5')
+  .set('.nav__items', {css:{'display': 'block'}}, '-=0.25')
+  .staggerFromTo('.nav__item', 0.5, {autoAlpha: 0}, {autoAlpha: 1, ease: Power2.easeInOut, stagger: {amount: 0.25}},0 , '-=0.25')
+  .staggerFromTo('.nav__item', 0.5, {x:40}, {x:0, ease: Power2.easeOut, stagger: {amount: 0.25}}, 0, '-=0.75')
 
 //functions
 

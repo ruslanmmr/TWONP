@@ -1,0 +1,127 @@
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: $bg-color2;
+  backdrop-filter: blur(5px);
+  z-index: 99;
+  width: 20%;
+  height: 35%;
+  &__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  &__items {
+    display: none;
+    height: 100%;
+    padding-top: 105px;
+  }
+  &__item {
+    opacity: 0;
+    visibility: hidden;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+  &__link {
+    font-weight: 500;
+    display: block;
+    transition: $trs1;
+    position: relative;
+    overflow: hidden;
+    line-height: 1;
+    padding: 10px 10px 10px 40px;
+    &:before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background-color: $color3;
+      position: absolute;
+      bottom: 0;
+      left: 40px;
+      transform: translateX(-50%) scaleX(0);
+      transition: inherit;
+    }
+    &.in-dev {
+      cursor: default;
+      &:after {
+        content: '(В разработке)';
+        opacity: 0;
+        visibility: hidden;
+        transition: inherit;
+        color: $color4;
+        margin-left: 5px;
+        font-size: 14px;
+      }
+    }
+    &.hover,
+    &.touch {
+      color: $color3;
+      &:before {
+        transform: translateX(0) scaleX(1);
+      }
+      &.in-dev {
+        &:after {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &__list {
+    list-style: none;
+    padding: 40px 0;
+    margin: 0;
+  }
+  &__copy {
+    flex-shrink: 0;
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    text-align: left;
+  }
+  &__phone {
+    margin-bottom: 20px;
+    &.hover,
+    &.touch {
+      opacity: 0.8;
+      color: $color3;
+    }
+  }
+}
+
+
+@media all and(max-width: 1440px) {
+  .nav {
+    &__items {
+      padding-top: 85px;
+    }
+    &__list {
+      padding: 30px 0;
+    }
+    &__item {
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+    }
+    &__link {
+      padding: 10px 10px 10px 30px;
+      &:before {
+        left: 30px;
+      }
+    }
+    &__copy {
+      padding: 30px;
+    }
+  }
+}
