@@ -1,0 +1,41 @@
+.category-preview {
+  &__description {
+    width: 75%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+  }
+  &__bottom {
+    display: flex;
+  }
+  &__description {
+    padding: 70px;
+  }
+  &__title {
+    margin-bottom: 25px;
+  }
+  &__more {
+    height: 100%;
+    width: 25%;
+    background-color: $bg-color3;
+    &.in-dev {
+      cursor: default;
+      span {
+        color: $color4 !important;
+        text-align: center;
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media all and(max-width: 1440px) {
+  .category-preview {
+    &__description {
+      padding: 50px;
+    }
+    &__title {
+      margin-bottom: 20px;
+    }
+  }
+}

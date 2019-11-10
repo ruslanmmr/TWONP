@@ -7,6 +7,7 @@ $border-color: #767676;
 $dot-color: #e0e0e0;
 $bg-color: #363C46;
 $bg-color2: #171717;
+$bg-color3: #0F0F0F;
 $color3: #6FDE9B;
 $color4: #FCB566;
 //transition
@@ -29,6 +30,7 @@ body {
   position: fixed;
   background-color: $bg-color;
   color: #fff;
+  line-height: 1.5;
 }
 .page-wrapper {
   height: 100%;
@@ -43,6 +45,7 @@ body {
 
 @import "./partials/ui";
 @import "./partials/header";
+@import "./partials/category";
 @import "./partials/nav";
 @import "./partials/text";
 @import "./partials/home";

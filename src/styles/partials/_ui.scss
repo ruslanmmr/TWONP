@@ -80,7 +80,42 @@ a {
   fill: #000;
   stroke: #000;
 }
-
+.btn-big {
+  position: relative;
+  display: block;
+  transition: $trs1;
+  &__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    transition: inherit;
+  }
+  span {
+    margin-top: 26px;
+    margin-bottom: 18px;
+    transition: inherit;
+  }
+  .icon {
+    width: 75px;
+    height: 8px;
+    fill: #fff;
+    transition: inherit;
+  }
+  &.hover,
+  &.touch {
+    span {
+      color: $color3;
+    }
+    .icon {
+      fill: $color3;
+      transform: translateX(5px);
+    }
+  }
+}
 .scene {
   position: absolute;
   z-index: 1;
@@ -114,6 +149,7 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
   &__display {
     height: 100%;
     position: relative;
@@ -127,6 +163,12 @@ a {
     position: relative;
     z-index: 2;
   }
+  &__full-content {
+    padding: 105px 70px 70px 70px;
+    height: 65%;
+    position: relative;
+    z-index: 2;
+  }
   &__bottom {
     position: fixed;
     z-index: 2;
@@ -134,6 +176,19 @@ a {
     right: 0;
     height: 35%;
     width: 80%;
+  }
+}
+.slide-container {
+  position: relative;
+  height: 100%;
+}
+.section-slide {
+  &:not(:first-child) {
+    opacity: 0;
+    visibility: hidden;
+  }
+  &.active {
+    z-index: 2;
   }
 }
 .copy {
@@ -144,6 +199,9 @@ a {
   .section {
     &__content {
       padding: 85px 100px 50px 50px;
+    }
+    &__full-content {
+      padding: 85px 50px 50px 50px;
     }
   }
 }

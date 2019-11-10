@@ -6,7 +6,7 @@
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(5px);
-      transition: .5s;
+      transition: $trs2;
       font-family: $font2;
       border-style: solid;
       border-color: $border-color;
@@ -15,36 +15,9 @@
       &:first-child {
         border-width: 1px 1px 0 1px;
       }
-      &-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        transition: inherit;
-      }
-      span {
-        margin-top: 26px;
-        margin-bottom: 18px;
-        transition: inherit;
-      }
-      .icon {
-        width: 75px;
-        height: 8px;
-        fill: #fff;
-        transition: inherit;
-      }
-      &.hover {
+      &.hover,
+      &.touch {
         background-color: rgba(54, 60, 70, 0.8);
-        span {
-          color: $color3;
-        }
-        .icon {
-          fill: $color3;
-          transform: translateX(5px);
-        }
       }
     }
   }

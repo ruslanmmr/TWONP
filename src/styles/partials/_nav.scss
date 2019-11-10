@@ -62,7 +62,8 @@
       }
     }
     &.hover,
-    &.touch {
+    &.touch,
+    &.active {
       color: $color3;
       &:before {
         transform: translateX(0) scaleX(1);
@@ -73,6 +74,9 @@
           opacity: 1;
         }
       }
+    }
+    &.active {
+      pointer-events: none;
     }
   }
   &__list {

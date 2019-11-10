@@ -3,8 +3,15 @@
   flex-wrap: wrap;
   margin: 0 -10px -20px -10px;
 }
+.content-b {
+  display: flex;
+  align-items: flex-end;
+}
 .d-hidden {
   visibility: hidden;
+}
+.d-none {
+  display: none;
 }
 
 .col-1,
