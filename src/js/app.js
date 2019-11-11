@@ -71,6 +71,29 @@ let $nav = {
       .fromTo('.nav__item', {x:40}, {x:0, ease:'power2.out', duration:0.5, stagger:{amount:0.25}}, '-=0.75')
   }
 }
+let $subNav = {
+  items: $('.sub-nav__item'),
+  state: false,
+  fadeAnim: '',
+  fade: function() {
+    if(!$subNav.state) {
+      $subNav.fadeAnim.play();
+      $subNav.state = true;
+    }
+  },
+  hide: function() {
+    if($subNav.state==true) {
+      $subNav.fadeAnim.reverse();
+      $subNav.state = false;
+    }
+  },
+  update: function() {
+    $subNav.fadeAnim = gsap.timeline({paused:true})
+      .fromTo($subNav.items, {autoAlpha:0}, {autoAlpha:1, ease:'power2.inOut', duration:0.4, stagger:{amount: 0.1, from:'end'}})
+      .fromTo($subNav.items, {x:-100}, {x:0, ease:'power2.out', duration:0.4, stagger:{amount:0.1, from:'end'}}, '-=0.5')
+      
+  }
+}
 //slides
 let $slide = {
   animationProgress: false,
@@ -90,6 +113,11 @@ let $slide = {
     this.prev = this.current.prev();
     $('[data-slide]').removeClass('active');
     $(`[data-slide='${$slide.index}']`).addClass('active');
+    if(this.current.hasClass('js-subnav-true')) {
+      $subNav.fade();
+    } else {
+      $subNav.hide();
+    }
     //exit anim
     $slide.exitAnimation = gsap.timeline({
       paused:true, 
@@ -156,6 +184,7 @@ let $pagination = {
     }
   }
 }
+$subNav.update();
 $nav.update()
 $pagination.create();
 $slide.update();

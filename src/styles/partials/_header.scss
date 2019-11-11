@@ -6,8 +6,8 @@
   display: flex;
   width: 100%;
   &__left {
-    padding: 40px;
-    width: 20%;
+    padding: 37.5px 40px;
+    flex: 1 0 20%;
     flex-shrink: 0;
     display: flex;
     justify-content: space-between;
@@ -35,8 +35,40 @@
       }
     }
   }
+  &__right {
+    flex: 0 1 80%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 70px;
+  }
 }
-
+.sub-nav {
+  &__list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+  }
+  &__item {
+    opacity: 0;
+    visibility: hidden;
+    &:not(:last-child) {
+      margin-right: 85px;
+    }
+  }
+  &__link {
+    transition: $trs1;
+    &.hover,
+    &.touch,
+    &.active {
+      color: $color3;
+    }
+    &.active {
+      pointer-events: none;
+    }
+  }
+}
 .navOpened {
   .nav-btn span {
     width: 100% !important;
@@ -93,9 +125,16 @@
 }
 
 @media all and(max-width: 1440px) {
+  .sub-nav__item:not(:last-child) {
+    margin-right: 50px;
+  }
   .header {
     &__left {
       padding: 30px;
+    }
+    &__right {
+      padding-right: 50px;
+      font-size: 14px;
     }
   }
 }
