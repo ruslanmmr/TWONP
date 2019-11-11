@@ -1,9 +1,9 @@
 .category-preview {
   &__description {
-    width: 75%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
+    flex: 1 0 75%;
   }
   &__bottom {
     display: flex;
@@ -16,7 +16,7 @@
   }
   &__more {
     height: 100%;
-    width: 25%;
+    flex: 0 1 25%;
     background-color: $bg-color3;
     &.in-dev {
       cursor: default;

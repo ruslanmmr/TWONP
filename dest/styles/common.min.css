@@ -1594,11 +1594,62 @@ a {
 .copy {
   color: #959595; }
 
+.pagination {
+  position: fixed;
+  z-index: 98;
+  right: 70px;
+  top: 105px;
+  height: -webkit-calc(65% - 105px);
+  height: calc(65% - 105px);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
+  .pagination__list {
+    margin: 0 -3px;
+    padding: 0;
+    list-style: none; }
+  .pagination__item {
+    display: block; }
+    .pagination__item:not(:last-child) {
+      margin-bottom: 10px; }
+  .pagination__link {
+    display: block;
+    width: 12px;
+    height: 12px;
+    padding: 3px;
+    position: relative;
+    -webkit-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s; }
+    .pagination__link:before {
+      content: '';
+      display: block;
+      border: 1px solid #fff;
+      border-radius: 100%;
+      height: 100%;
+      width: 100%;
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+      -webkit-transition: inherit;
+      -o-transition: inherit;
+      transition: inherit; }
+    .pagination__link.hover:before, .pagination__link.touch:before, .pagination__link.active:before {
+      background-color: #fff; }
+    .pagination__link.active {
+      pointer-events: none; }
+
 @media all and (max-width: 1440px) {
   .section__content {
     padding: 85px 100px 50px 50px; }
   .section__full-content {
-    padding: 85px 50px 50px 50px; } }
+    padding: 85px 50px 50px 50px; }
+  .pagination {
+    right: 50px; } }
 
 .header {
   position: fixed;
@@ -1697,11 +1748,14 @@ a {
     padding: 30px; } }
 
 .category-preview__description {
-  width: 75%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px); }
+          backdrop-filter: blur(5px);
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 75%;
+      -ms-flex: 1 0 75%;
+          flex: 1 0 75%; }
 
 .category-preview__bottom {
   display: -webkit-box;
@@ -1717,7 +1771,10 @@ a {
 
 .category-preview__more {
   height: 100%;
-  width: 25%;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 1 25%;
+      -ms-flex: 0 1 25%;
+          flex: 0 1 25%;
   background-color: #0F0F0F; }
   .category-preview__more.in-dev {
     cursor: default; }

@@ -30,6 +30,7 @@ const $page = {
 }
 
 let mainColor = '#6FDE9B';
+//navigation
 let $nav = {
   trigger: $('.nav-btn'),
   el: $('.nav'),
@@ -70,8 +71,7 @@ let $nav = {
       .fromTo('.nav__item', {x:40}, {x:0, ease:'power2.out', duration:0.5, stagger:{amount:0.25}}, '-=0.75')
   }
 }
-$nav.update()
-
+//slides
 let $slide = {
   animationProgress: false,
   count: $('.section-slide').length,
@@ -113,7 +113,7 @@ let $slide = {
         }
       })
       .to($slide.next, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-      .fromTo($slide.next, {immediateRender:false, yPercent:100}, {duration:0.5, yPercent:0, ease:'power2.out'}, '-=0.5')
+      .fromTo($slide.next, {yPercent:100}, {immediateRender:false, duration:0.5, yPercent:0, ease:'power2.out'}, '-=0.5')
     }
     //back anim
     if($slide.prev.length>0) {
@@ -128,7 +128,7 @@ let $slide = {
         }
       })
       .to($slide.prev, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-      .fromTo($slide.prev, {immediateRender: false, yPercent:-100}, {duration:0.5, yPercent:0, ease:'power2.out'}, '-=0.5')
+      .fromTo($slide.prev, {yPercent:-100}, {immediateRender:false, duration:0.5, yPercent:0, ease:'power2.out'}, '-=0.5')
     }
   },
   goTo: function(index) {
@@ -146,10 +146,19 @@ let $slide = {
     .to($('.section-slide').eq(index), {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
   }
 }
-
-$slide.update()
-
-
+//pagination
+let $pagination = {
+  $container: $('.pagination__list'),
+  create: function() {
+    for (let i=0; i<$slide.count; i++) {
+      console.log(i);
+      $pagination.$container.append(`<li class="pagination__item"><a class="pagination__link js-animated" data-slide='${i}' href="javascript:void(0);"></a></li>`)
+    }
+  }
+}
+$nav.update()
+$pagination.create();
+$slide.update();
 //functions
 
 //lazy
