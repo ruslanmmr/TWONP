@@ -128,6 +128,7 @@ let $slide = {
       }
     })
     .to($slide.current, {duration:0.5, autoAlpha:0, ease:'power2.in'})
+    .fromTo($slide.current.find('.section__display'), {scale:1}, {duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
     //forward anim
     if($slide.next.length>0) {
       $slide.forwardAnimation = gsap.timeline({
@@ -141,7 +142,7 @@ let $slide = {
         }
       })
       .to($slide.next, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-      .fromTo($slide.next, {yPercent:100}, {immediateRender:false, duration:0.5, yPercent:0, ease:'power2.out'}, '-=0.5')
+      .fromTo($slide.next.find('.section__display'), {yPercent:100, scale:1.05}, {immediateRender:false, duration:0.5, yPercent:0, scale:1, ease:'power2.out'}, '-=0.5')
     }
     //back anim
     if($slide.prev.length>0) {
@@ -156,7 +157,7 @@ let $slide = {
         }
       })
       .to($slide.prev, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-      .fromTo($slide.prev, {yPercent:-100}, {immediateRender:false, duration:0.5, yPercent:0, ease:'power2.out'}, '-=0.5')
+      .fromTo($slide.prev.find('.section__display'), {yPercent:-100, scale:1.05}, {immediateRender:false, duration:0.5, scale:1, yPercent:0, ease:'power2.out'}, '-=0.5')
     }
   },
   goTo: function(index) {
@@ -172,6 +173,7 @@ let $slide = {
       }
     })
     .to($('.section-slide').eq(index), {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
+    .fromTo($('.section-slide').eq(index).find('.section__display'), {scale:1.05}, {immediateRender:false, duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
   }
 }
 //pagination
@@ -293,8 +295,8 @@ function main() {
     let animation = gsap.timeline()
       .to($slide.eq(old), {duration:0.5, autoAlpha:0, ease:'power2.out'})
       .to($slide.eq(current), {duration:0.5, autoAlpha:1, ease:'power2.out'}, '-=0.5')
-      .to($slide.eq(old).find('.scene'), {duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
-      .fromTo($slide.eq(current).find('.scene'), {scale:1.05}, {duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
+      .fromTo($slide.eq(old).find('.scene'), {scale:1}, {immediateRender:false, duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
+      .fromTo($slide.eq(current).find('.scene'), {scale:1.05}, {immediateRender:false, duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
     old=current;
     })
   $nav.on('mouseleave', function() {
