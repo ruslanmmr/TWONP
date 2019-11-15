@@ -178,6 +178,7 @@ let $slide = {
 }
 //pagination
 let $pagination = {
+  el: $('.pagination'),
   $container: $('.pagination__list'),
   create: function() {
     for (let i=0; i<$slide.count; i++) {

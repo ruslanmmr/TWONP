@@ -5,6 +5,9 @@
   z-index: 100;
   display: flex;
   width: 100%;
+  &.bg {
+    background-color: $bg-color4;
+  }
   &__left {
     padding: 37.5px 40px;
     flex: 1 0 20%;

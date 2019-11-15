@@ -6,31 +6,31 @@ block content
       .home-slide
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home1.jpg")')
-        .home-slide__container.section__content
+        .home-slide__container.section__content.small
           h5.home-slide__title.t-size-64 Топливная компания
           span.home-slide__text.t-size-24 Сеть современных АЗC.  Нефтебазы.  Топливная логистика
       .home-slide
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home2.jpg")')
-        .home-slide__container.section__content
+        .home-slide__container.section__content.small
           h5.home-slide__title.t-size-64 Сеть АЗС
           span.home-slide__text.t-size-24.d-hidden Без описания
       .home-slide
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home3.jpg")')
-        .home-slide__container.section__content
+        .home-slide__container.section__content.small
           h5.home-slide__title.t-size-64 Оптовые продажи
           span.home-slide__text.t-size-24.d-hidden Без описания
       .home-slide
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home4.jpg")')
-        .home-slide__container.section__content
+        .home-slide__container.section__content.small
           h5.home-slide__title.t-size-64 Топливная логистика
           span.home-slide__text.t-size-24.d-hidden Без описания
       .home-slide
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home5.jpg")')
-        .home-slide__container.section__content
+        .home-slide__container.section__content.small
           h5.home-slide__title.t-size-64 Нефтебазы
           span.home-slide__text.t-size-24.d-hidden Без описания
     .home__nav.section__bottom
@@ -55,15 +55,15 @@ block content
           svg.icon 
             use(xlink:href="img/icons/sprite.svg#ico1")
   //инфраструктура компании(пока под вопросом)
-  section.section.section-slide.js-subnav-true
+  section.section.section-slide.js-subnav-true.map-section
     .section__display
-      .section__full-content
+      .section__content
   //сеть азс
   section.section.section-slide.category-preview.js-subnav-true
     .section__display
       .scene
         .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home2.jpg")')
-      .section__content.content-b
+      .section__content.small.content-b
         .section__container
           h5.ff-2.t-size-64 Сеть АЗС
     .section__bottom.category-preview__bottom
@@ -75,7 +75,7 @@ block content
     .section__display
       .scene
         .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home3.jpg")')
-      .section__content.content-b
+      .section__content.small.content-b
         .section__container
           h5.ff-2.t-size-64 Топливо оптом
     .section__bottom.category-preview__bottom
@@ -91,7 +91,7 @@ block content
     .section__display
       .scene
         .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home4.jpg")')
-      .section__content.content-b
+      .section__content.small.content-b
         .section__container
           h5.ff-2.t-size-64 Топливная логистика
     .section__bottom.category-preview__bottom
@@ -103,7 +103,7 @@ block content
     .section__display
       .scene
         .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home5.jpg")')
-      .section__content.content-b
+      .section__content.small.content-b
         .section__container
           h5.ff-2.t-size-64 Нефтебазы
     .section__bottom.category-preview__bottom
@@ -114,7 +114,7 @@ block content
     .section__display
       .scene
         .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home6.jpg")')
-      .section__content.content-b
+      .section__content.small.content-b
         .section__container
           h5.ff-2.t-size-64 Утилизация
     .section__bottom.category-preview__bottom
@@ -126,7 +126,9 @@ block content
           span.t-size-20 Подробнее
           svg.icon 
             use(xlink:href="img/icons/sprite.svg#ico1")
-  section.section.section-slide.contacts.js-subnav-true
+  section.section.section-slide.contacts.js-subnav-true.js-pag-bg-true
     .section__display
+      .section__content
+        <iframe src="https://yandex.ru/map-widget/v1/-/CGTXN41i" frameborder="1" allowfullscreen="true"></iframe>
     .section__bottom.contacts__bottom
 

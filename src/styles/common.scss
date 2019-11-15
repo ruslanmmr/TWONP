@@ -6,8 +6,9 @@
 $border-color: #767676;
 $dot-color: #e0e0e0;
 $bg-color: #363C46;
-$bg-color2: #171717;
+$bg-color2: #121212;
 $bg-color3: #0F0F0F;
+$bg-color4:#282C33;
 $color3: #6FDE9B;
 $color4: #FCB566;
 //transition
@@ -46,7 +47,9 @@ body {
 @import "./partials/ui";
 @import "./partials/header";
 @import "./partials/category";
+@import "./partials/contacts";
 @import "./partials/nav";
+@import "./partials/map";
 @import "./partials/text";
 @import "./partials/home";
 

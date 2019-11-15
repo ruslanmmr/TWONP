@@ -143,6 +143,7 @@ a {
     }
   }
 }
+
 .section {
   position: absolute;
   top: 0;
@@ -156,18 +157,15 @@ a {
     z-index: 1;
   }
   &__content {
-    padding: 100px 100px 70px 70px;
-    width: 80%;
-    left: 20%;
-    height: 65%;
+    padding: 0 70px 70px 70px;
+    height: calc(65% - 100px);
+    top: 100px;
     position: relative;
     z-index: 2;
-  }
-  &__full-content {
-    padding: 100px 70px 70px 70px;
-    height: 65%;
-    position: relative;
-    z-index: 2;
+    &.small {
+      width: 80%;
+      left: 20%;
+    }
   }
   &__bottom {
     position: fixed;
@@ -197,11 +195,18 @@ a {
 .pagination {
   position: fixed;
   z-index: 98;
-  right: 70px;
+  right: 0;
   top: 100px;
+  width: 70px;
   height: calc(65% - 100px);
   display: flex;
   align-items: center;
+  justify-content: center;
+  transition: $trs1;
+  &.bg {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+  }
   &__list {
     margin: 0 -3px;
     padding: 0;
@@ -246,14 +251,14 @@ a {
 @media all and(max-width: 1440px) {
   .section {
     &__content {
-      padding: 85px 100px 50px 50px;
-    }
-    &__full-content {
-      padding: 85px 50px 50px 50px;
+      padding: 0 50px 50px 50px;
+      height: calc(65% - 85px);
+      top: 85px;
     }
   }
   .pagination {
-    right: 50px;
+    width: 50px;
     top: 85px;
+    height: calc(65% - 85px);
   }
 }
