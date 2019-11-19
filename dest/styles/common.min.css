@@ -1648,7 +1648,7 @@ a {
         -ms-transform: rotate(90deg);
             transform: rotate(90deg); }
     .pagination__num:first-child {
-      margin-bottom: 50px; }
+      margin-bottom: 30px; }
     .pagination__num:last-child {
       margin-top: 30px; }
     .pagination__num.touch, .pagination__num.hover {
