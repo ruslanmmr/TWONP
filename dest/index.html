@@ -16,10 +16,10 @@
         <div class="header__right">
           <div class="sub-nav">
             <ul class="sub-nav__list">
-              <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="" data-slide="2">Заправиться</a></li>
-              <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="" data-slide="3">Закупить</a></li>
-              <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="" data-slide="4">Перевезти</a></li>
-              <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="" data-slide="5">Хранить</a></li>
+              <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="javascript:void(0);" data-slide="2">Заправиться</a></li>
+              <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="javascript:void(0);" data-slide="3">Закупить</a></li>
+              <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="javascript:void(0);" data-slide="4">Перевезти</a></li>
+              <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="javascript:void(0);" data-slide="5">Хранить</a></li>
             </ul>
           </div>
         </div>
@@ -40,7 +40,16 @@
         </div>
       </nav>
       <div class="pagination">
-        <ul class="pagination__list"></ul>
+        <div class="pagination__item"><a class="pagination__num pagination-prev js-animated" href="javascript:void(0)" data-slide="prev">00</a></div>
+        <div class="pagination__item"><a class="pagination__arrow pagination-prev js-animated" href="javascript:void(0)" data-slide="prev">
+            <svg class="icon"> 
+              <use xlink:href="img/icons/sprite.svg#topA"></use>
+            </svg></a></div>
+        <div class="pagination__item"><a class="pagination__arrow pagination-next js-animated" href="javascript:void(0)" data-slide="next">
+            <svg class="icon"> 
+              <use xlink:href="img/icons/sprite.svg#bottomA"></use>
+            </svg></a></div>
+        <div class="pagination__item"><a class="pagination__num pagination-next js-animated" href="javascript:void(0)" data-slide="next">00</a></div>
       </div>
       <div class="slide-container">
         <section class="section section-slide home active">
@@ -114,10 +123,10 @@
             </div>
           </div>
         </section>
-        <!--инфраструктура компании(пока под вопросом)-->
-        <section class="section section-slide js-subnav-true map-section">
+        <!--инфраструктура компании-->
+        <section class="section section-slide js-subnav-true map-section js-nav-hidden">
           <div class="section__display">
-            <div class="section__content"></div>
+            <div class="section__content full-h"></div>
           </div>
         </section>
         <!--сеть азс-->
@@ -223,7 +232,7 @@
               </div></a>
           </div>
         </section>
-        <section class="section section-slide contacts js-subnav-true js-pag-bg-true">
+        <section class="section section-slide contacts js-subnav-true js-pagination-dark">
           <div class="section__display">
             <div class="section__content"><iframe src="https://yandex.ru/map-widget/v1/-/CGTXN41i" frameborder="1" allowfullscreen="true"></iframe></div>
           </div>

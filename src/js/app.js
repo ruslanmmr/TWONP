@@ -6,12 +6,21 @@ import Lazy from "jquery-lazy";
 import Parallax from 'parallax-js'
 
 $(document).ready(function() {
-  lazy();
+  //lazy();
   elemsAnims();
-  nav();
   main();
-  siteNavEvents()
+  siteNavEvents();
+
+
+  $subNav.update();
+  $nav.update()
+  $slide.change($slide.current, {
+    onComplete: function() {
+      $slide.updateAnimations();
+    }
+  });
 })
+
 $(window).resize(function () {
   $('.lazy').each(function() {
     imagesResize(this)
@@ -29,31 +38,36 @@ const $page = {
   }
 }
 
-let mainColor = '#6FDE9B';
-//navigation
 let $nav = {
   trigger: $('.nav-btn'),
   el: $('.nav'),
   state: false,
+  interval: 1000,
+  flag: true,
   triggerAnim: '',
   fadeAnim: '',
+  hideAnim: '',
   open: function() {
+    $nav.state = true;
     $nav.fadeAnim.play();
     $nav.triggerAnim.play();
     $('html').addClass('navOpened').addClass('navInAnimation');
-    $nav.fadeAnim.eventCallback("onComplete", function(){
-      $nav.state = true;
-    })
+    if($slide.current.hasClass('js-nav-hidden')) {
+      $nav.hideAnim.reverse();
+    }
   },
   close: function() {
+    $nav.state = false;
     $nav.fadeAnim.reverse();
     $nav.triggerAnim.reverse();
     setTimeout(function() {
       $('html').removeClass('navInAnimation');
+      if($slide.current.hasClass('js-nav-hidden')) {
+        $nav.hideAnim.play();
+      }
     }, 500)
     $nav.fadeAnim.eventCallback("onReverseComplete", function(){
       $('html').removeClass('navOpened');
-      $nav.state = false;
     })
   },
   update: function() {
@@ -64,11 +78,29 @@ let $nav = {
       .to($nav.trigger.find('span:first-child'), {duration:0.5, rotation:45, ease:'power2.out'})
       .to($nav.trigger.find('span:last-child'), 0.5, {duration:0.5, rotation:135, ease:'power2.out'}, '-=0.5')
     $nav.fadeAnim = gsap.timeline({paused:true})
-      .to($nav.el, {duration:0.5, height:'100%', ease:'Power2.inOut'})
+      .to($nav.el, {duration:0.5, height:'100%', ease:'power2.inOut'})
       .to($nav.el, {duration:0.5, backgroundColor:'rgba(0, 0, 0, 0.75)', ease:'power2.inOut'}, '-=0.5')
       .set('.nav__items', {display:'block'}, '-=0.25')
       .fromTo('.nav__item', {autoAlpha:0}, {autoAlpha:1, ease:'power2.inOut', duration:0.5, stagger:{amount: 0.25}}, '-=0.25')
       .fromTo('.nav__item', {x:40}, {x:0, ease:'power2.out', duration:0.5, stagger:{amount:0.25}}, '-=0.75')
+    $nav.hideAnim = gsap.timeline({paused:true})
+      .to($nav.el, {autoAlpha:0, duration:0.5, yPercent: 100, ease:'power2.in'})
+    //
+    $nav.trigger.on('click', function() {
+      if($nav.flag == true) {
+        $nav.flag = false;
+        setTimeout(function() {
+          $nav.flag = true;
+        }, $nav.interval)
+  
+        if($nav.state == false) {
+          $nav.open();
+        } else {
+          $nav.close();
+        }
+      }
+    })
+    //
   }
 }
 let $subNav = {
@@ -94,103 +126,108 @@ let $subNav = {
       
   }
 }
-//slides
 let $slide = {
   animationProgress: false,
   count: $('.section-slide').length,
-  current: '',
-  index: '',
+  current: $('.section-slide.active'),
   next: '',
   prev: '',
-  animationDir: '',
   forwardAnimation: '',
   backAnimation: '',
   exitAnimation: '',
-  update: function() {
-    this.current = $('.section-slide.active');
-    this.index = this.current.index();
+  toNext: function() {
+    $slide.animationProgress=true;
+    this.exitAnimation.play();
+    this.forwardAnimation.play();
+    $slide.change($slide.next);
+  },
+  toPrev: function() {
+    $slide.animationProgress=true;
+    this.exitAnimation.play();
+    this.backAnimation.play();
+    $slide.change($slide.prev);
+  },
+  to: function(newSlide) {
+    $slide.animationProgress=true;
+    this.exitAnimation.play();
+    $nav.close();
+    $slide.change(newSlide);
+    //animation
+    let anim = gsap.timeline({onComplete:function(){$slide.updateAnimations()}})
+      .to(newSlide, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
+      .fromTo(newSlide.find('.section__display'), {scale:1.05}, {immediateRender:false, duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
+  },
+  change: function(newSlide, callbacks) {
+    this.current.removeClass('active');
+    newSlide.addClass('active');
+    this.current = newSlide;
     this.next = this.current.next();
     this.prev = this.current.prev();
+
+    $pagination.update();
+
     $('[data-slide]').removeClass('active');
-    $(`[data-slide='${$slide.index}']`).addClass('active');
-    if(this.current.hasClass('js-subnav-true')) {
-      $subNav.fade();
-    } else {
-      $subNav.hide();
+    $(`[data-slide='${newSlide.index()}']`).addClass('active');
+    newSlide.hasClass('js-subnav-true') ? $subNav.fade() : $subNav.hide();
+    newSlide.hasClass('js-pagination-dark') ? $pagination.el.addClass('dark') : $pagination.el.removeClass('dark');
+    //
+    if($nav.state == false && newSlide.hasClass('js-nav-hidden')) {
+      $nav.hideAnim.play()
+    } else if($nav.state == false) {
+      $nav.hideAnim.reverse()
     }
-    //exit anim
-    $slide.exitAnimation = gsap.timeline({
-      paused:true, 
-      onStart: function() {
-        $slide.animationProgress = true;
-        $slide.current.removeClass('active');
-        $nav.close();
-      }
-    })
-    .to($slide.current, {duration:0.5, autoAlpha:0, ease:'power2.in'})
-    .fromTo($slide.current.find('.section__display'), {scale:1}, {duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
-    //forward anim
-    if($slide.next.length>0) {
-      $slide.forwardAnimation = gsap.timeline({
-        paused:true,
-        onStart: function() {
-          $slide.next.addClass('active');
-        },
-        onComplete: function() {
-          $slide.animationProgress = false;
-          $slide.update()
-        }
-      })
-      .to($slide.next, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-      .fromTo($slide.next.find('.section__display'), {yPercent:100, scale:1.05}, {immediateRender:false, duration:0.5, yPercent:0, scale:1, ease:'power2.out'}, '-=0.5')
-    }
-    //back anim
-    if($slide.prev.length>0) {
-      $slide.backAnimation = gsap.timeline({
-        paused:true,
-        onStart: function() {
-          $slide.prev.addClass('active');
-        },
-        onComplete: function() {
-          $slide.animationProgress = false;
-          $slide.update()
-        }
-      })
-      .to($slide.prev, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-      .fromTo($slide.prev.find('.section__display'), {yPercent:-100, scale:1.05}, {immediateRender:false, duration:0.5, scale:1, yPercent:0, ease:'power2.out'}, '-=0.5')
+    //callback
+    if (typeof callbacks === 'object') {
+      callbacks.onComplete();
     }
   },
-  goTo: function(index) {
-    $slide.exitAnimation.play();
+  updateAnimations: function(callbacks) {
+    
+    //exit anim
+    $slide.exitAnimation = gsap.timeline({paused:true})
+      .to($slide.current, {duration:0.5, autoAlpha:0, ease:'power2.in'})
+      .fromTo($slide.current.find('.section__display'), {scale:1}, {duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
+    
+    //forward anim
+    if($slide.next.length>0) {
+      $slide.forwardAnimation = gsap.timeline({paused:true,onComplete:function(){$slide.updateAnimations()}})
+        .to($slide.next, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
+        .fromTo($slide.next.find('.section__display'), {yPercent:100, scale:1.05}, {immediateRender:false, duration:0.5, yPercent:0, scale:1, ease:'power2.out'}, '-=0.5')
+    }
 
-    let anim = gsap.timeline({
-      onStart: function() {
-        $('.section-slide').eq(index).addClass('active');
-      },
-      onComplete: function() {
-        $slide.animationProgress = false;
-        $slide.update()
-      }
-    })
-    .to($('.section-slide').eq(index), {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-    .fromTo($('.section-slide').eq(index).find('.section__display'), {scale:1.05}, {immediateRender:false, duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
+    //back anim
+    if($slide.prev.length>0) {
+      $slide.backAnimation = gsap.timeline({paused:true,onComplete:function(){$slide.updateAnimations()}})
+        .to($slide.prev, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
+        .fromTo($slide.prev.find('.section__display'), {yPercent:-100, scale:1.05}, {immediateRender:false, duration:0.5, scale:1, yPercent:0, ease:'power2.out'}, '-=0.5')
+    }
+
+    $slide.animationProgress=false;
   }
 }
-//pagination
+
 let $pagination = {
   el: $('.pagination'),
-  $container: $('.pagination__list'),
-  create: function() {
-    for (let i=0; i<$slide.count; i++) {
-      console.log(i);
-      $pagination.$container.append(`<li class="pagination__item"><a class="pagination__link js-animated" data-slide='${i}' href="javascript:void(0);"></a></li>`)
+  prevNum: $('.pagination__num.pagination-prev'),
+  nextNum: $('.pagination__num.pagination-next'),
+  prev: $('.pagination-prev'),
+  next: $('.pagination-next'),
+  update: function() {
+    if($slide.next.length>0) {
+      this.nextNum.text('0' + ($slide.next.index()+1));
+      this.next.removeClass('hidden');
+    } else {
+      this.next.addClass('hidden');
+    }
+    if($slide.prev.length>0) {
+      this.prevNum.text('0' + ($slide.prev.index()+1));
+      this.prev.removeClass('hidden');
+    } else {
+      this.prev.addClass('hidden');
     }
   }
 }
-$subNav.update();
-$nav.update()
-$pagination.create();
-$slide.update();
+
 //functions
 
 //lazy
@@ -234,40 +271,19 @@ function imagesResize(element) {
   }
 }
 
-function nav() {
-  let stateInterval = 1000,
-      state = true;
-
-  $nav.trigger.on('click', function() {
-    if(state == true) {
-      state = false;
-      setTimeout(function() {
-        state = true;
-      }, stateInterval)
-
-      if($nav.state == false) {
-        $nav.open();
-      } else {
-        $nav.close();
-      }
-    }
-  })
-}
-
 function elemsAnims() {
   $(document).on('mouseenter mouseleave touchstart touchend', '.js-animated', function(event) {
     let $target = $(this);
 
-    if(event.type=='mouseenter') {
-      $target.addClass('hover');
-    } else if(event.type=='mouseleave') {
-      $target.removeClass('hover');
-    }
-
     if(event.type=='touchstart') {
       $target.addClass('touch');
-    } else if(event.type=='touchend') {
+    } else if(event.type=='mouseenter') {
+      $target.addClass('hover');
+    }
+
+    if(event.type=='mouseleave' || event.type=='touchend') {
       $target.removeClass('touch');
+      $target.removeClass('hover');
     }
 
   })
@@ -490,11 +506,9 @@ function siteNavEvents() {
   $(window).on('wheel', function(event){
     if(!$slide.animationProgress) {
       if(event.originalEvent.deltaY>0 && $slide.current.index()+1 < $slide.count) {
-        $slide.exitAnimation.play();
-        $slide.forwardAnimation.play();
+        $slide.toNext();
       } else if(event.originalEvent.deltaY<0 && $slide.current.index()>0) {
-        $slide.exitAnimation.play();
-        $slide.backAnimation.play();
+        $slide.toPrev();
       }
     }
   });
@@ -502,10 +516,13 @@ function siteNavEvents() {
   $('[data-slide]').on('click', function(event) {
     event.preventDefault();
     if(!$slide.animationProgress) {
-      let index = $(this).data('slide');
-      $('[data-slide]').removeClass('active');
-      $(`[data-slide='${index}']`).addClass('active');
-      $slide.goTo(index);
+      if($(this).data('slide')=='next') {
+        $slide.toNext();
+      } else if($(this).data('slide')=='prev') {
+        $slide.toPrev();
+      } else {
+        $slide.to($('.section-slide').eq($(this).data('slide')));
+      }
     }
   })
 }

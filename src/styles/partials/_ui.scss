@@ -166,6 +166,9 @@ a {
       width: 80%;
       left: 20%;
     }
+    &.full-h {
+      height: calc(100% - 100px);
+    }
   }
   &__bottom {
     position: fixed;
@@ -200,50 +203,62 @@ a {
   width: 70px;
   height: calc(65% - 100px);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: $trs1;
-  &.bg {
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-  }
-  &__list {
-    margin: 0 -3px;
-    padding: 0;
-    list-style: none;
-  }
-  &__item {
+  &__arrow {
     display: block;
-    &:not(:last-child) {
-      margin-bottom: 14px;
-    }
-  }
-  &__link {
-    display: block;
-    width: 12px;
-    height: 12px;
-    padding: 3px;
-    position: relative;
-    transition: $trs1;
-    &:before {
-      content: '';
+    height: 75px;
+    width: 30px;
+    padding: 10px;
+    margin: 5px 0;
+    .icon {
       display: block;
-      border: 1px solid #fff;
-      border-radius: 100%;
       height: 100%;
       width: 100%;
-      box-sizing: border-box;
-      transition: inherit;
+      fill: #fff;
+      transition: $trs1;
     }
-    &.hover,
     &.touch,
-    &.active {
-      &:before {
-        background-color: #fff;
+    &.hover {
+      .icon {
+        fill: $color3 !important;
       }
     }
-    &.active {
-      pointer-events: none;
+  }
+  &__num {
+    display: block;
+    width: 30px;
+    text-align: center;
+    line-height: 30px;
+    transition: $trs1;
+    transform: rotate(90deg);
+    &:first-child {
+      margin-bottom: 50px;
+    }
+    &:last-child {
+      margin-top: 30px;
+    }
+    &.touch,
+    &.hover {
+      color: $color3 !important;
+    }
+  }
+  &-prev,
+  &-next {
+    transition: $trs2;
+    &.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  &.dark {
+    .pagination-next,
+    .pagination-prev {
+      color: #000;
+      .icon {
+        fill: #000;
+      }
     }
   }
 }
@@ -251,13 +266,13 @@ a {
 @media all and(max-width: 1440px) {
   .section {
     &__content {
-      padding: 0 50px 50px 50px;
+      padding: 0 60px 60px 60px;
       height: calc(65% - 85px);
       top: 85px;
     }
   }
   .pagination {
-    width: 50px;
+    width: 60px;
     top: 85px;
     height: calc(65% - 85px);
   }
