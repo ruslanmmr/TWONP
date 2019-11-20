@@ -1,7 +1,7 @@
 extends layout/layout
 
 block content
-  section.section.section-slide.home.active
+  section.section.section-slide.home
     .home__content.section__display
       .home-slide
         .scene
@@ -55,9 +55,7 @@ block content
           svg.icon 
             use(xlink:href="img/icons/sprite.svg#ico1")
   //инфраструктура компании
-  section.section.section-slide.js-subnav-true.map-section.js-nav-hidden
-    .section__display
-      .section__content.full-h
+  include blocks/map-section
   //сеть азс
   section.section.section-slide.category-preview.js-subnav-true
     .section__display

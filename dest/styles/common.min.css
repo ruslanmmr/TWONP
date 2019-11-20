@@ -1585,12 +1585,11 @@ a {
   position: relative;
   height: 100%; }
 
-.section-slide:not(:first-child) {
+.section-slide {
   opacity: 0;
   visibility: hidden; }
-
-.section-slide.active {
-  z-index: 2; }
+  .section-slide.active {
+    z-index: 2; }
 
 .copy {
   color: #959595; }
@@ -1620,52 +1619,61 @@ a {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center; }
-  .pagination__arrow {
-    display: block;
-    height: 75px;
-    width: 30px;
-    padding: 10px;
-    margin: 5px 0; }
-    .pagination__arrow .icon {
-      display: block;
-      height: 100%;
-      width: 100%;
-      fill: #fff;
-      -webkit-transition: 0.25s;
-      -o-transition: 0.25s;
-      transition: 0.25s; }
-    .pagination__arrow.touch .icon, .pagination__arrow.hover .icon {
-      fill: #6FDE9B !important; }
-  .pagination__num {
-    display: block;
-    width: 30px;
-    text-align: center;
-    line-height: 30px;
-    -webkit-transition: 0.25s;
-    -o-transition: 0.25s;
-    transition: 0.25s;
-    -webkit-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-            transform: rotate(90deg); }
-    .pagination__num:first-child {
-      margin-bottom: 30px; }
-    .pagination__num:last-child {
-      margin-top: 30px; }
-    .pagination__num.touch, .pagination__num.hover {
-      color: #6FDE9B !important; }
-  .pagination-prev, .pagination-next {
+  .pagination-arrow {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
-    transition: 0.5s; }
-    .pagination-prev.hidden, .pagination-next.hidden {
+    transition: 0.5s;
+    padding: 10px; }
+    .pagination-arrow span {
+      color: #fff;
+      -webkit-transition: 0.25s;
+      -o-transition: 0.25s;
+      transition: 0.25s;
+      -webkit-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+              transform: rotate(90deg); }
+    .pagination-arrow .icon {
+      height: 55px;
+      width: 8px;
+      display: block;
+      -webkit-transition: 0.25s;
+      -o-transition: 0.25s;
+      transition: 0.25s;
+      fill: #fff; }
+    .pagination-arrow.hidden {
       opacity: 0;
       visibility: hidden; }
-  .pagination.dark .pagination-next,
-  .pagination.dark .pagination-prev {
+    .pagination-arrow.hover .icon, .pagination-arrow.touch .icon {
+      fill: #6FDE9B !important; }
+    .pagination-arrow.hover span, .pagination-arrow.touch span {
+      color: #6FDE9B !important; }
+    .pagination-arrow:first-child {
+      margin-bottom: 20px; }
+      .pagination-arrow:first-child span {
+        margin-bottom: 10px; }
+    .pagination-arrow:last-child span {
+      margin-top: 10px; }
+  .pagination.dark .pagination-arrow .icon {
+    fill: #000; }
+  .pagination.dark .pagination-arrow span {
     color: #000; }
-    .pagination.dark .pagination-next .icon,
-    .pagination.dark .pagination-prev .icon {
-      fill: #000; }
 
 @media all and (max-width: 1440px) {
   .section__content {

@@ -168,8 +168,7 @@ let $slide = {
 
     $('[data-slide]').removeClass('active');
     $(`[data-slide='${newSlide.index()}']`).addClass('active');
-    newSlide.hasClass('js-subnav-true') ? $subNav.fade() : $subNav.hide();
-    newSlide.hasClass('js-pagination-dark') ? $pagination.el.addClass('dark') : $pagination.el.removeClass('dark');
+    this.current.hasClass('js-subnav-true') ? $subNav.fade() : $subNav.hide();
     //
     if($nav.state == false && newSlide.hasClass('js-nav-hidden')) {
       $nav.hideAnim.play()
@@ -208,22 +207,23 @@ let $slide = {
 
 let $pagination = {
   el: $('.pagination'),
-  prevNum: $('.pagination__num.pagination-prev'),
-  nextNum: $('.pagination__num.pagination-next'),
-  prev: $('.pagination-prev'),
-  next: $('.pagination-next'),
+  prev: $('.pagination-arrow_prev'),
+  next: $('.pagination-arrow_next'),
   update: function() {
-    if($slide.next.length>0) {
-      this.nextNum.text('0' + ($slide.next.index()+1));
-      this.next.removeClass('hidden');
-    } else {
-      this.next.addClass('hidden');
-    }
+
+    $slide.current.hasClass('js-pagination-dark') ? this.el.addClass('dark') : this.el.removeClass('dark');
+    
     if($slide.prev.length>0) {
-      this.prevNum.text('0' + ($slide.prev.index()+1));
+      this.prev.find('span').text('0' + ($slide.prev.index()+1));
       this.prev.removeClass('hidden');
     } else {
       this.prev.addClass('hidden');
+    }
+    if($slide.next.length>0) {
+      this.next.find('span').text('0' + ($slide.next.index()+1));
+      this.next.removeClass('hidden');
+    } else {
+      this.next.addClass('hidden');
     }
   }
 }

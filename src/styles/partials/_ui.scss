@@ -184,10 +184,8 @@ a {
   height: 100%;
 }
 .section-slide {
-  &:not(:first-child) {
-    opacity: 0;
-    visibility: hidden;
-  }
+  opacity: 0;
+  visibility: hidden;
   &.active {
     z-index: 2;
   }
@@ -206,58 +204,57 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  &__arrow {
-    display: block;
-    height: 75px;
-    width: 30px;
-    padding: 10px;
-    margin: 5px 0;
-    .icon {
-      display: block;
-      height: 100%;
-      width: 100%;
-      fill: #fff;
-      transition: $trs1;
-    }
-    &.touch,
-    &.hover {
-      .icon {
-        fill: $color3 !important;
-      }
-    }
-  }
-  &__num {
-    display: block;
-    width: 30px;
-    text-align: center;
-    line-height: 30px;
-    transition: $trs1;
-    transform: rotate(90deg);
-    &:first-child {
-      margin-bottom: 30px;
-    }
-    &:last-child {
-      margin-top: 30px;
-    }
-    &.touch,
-    &.hover {
-      color: $color3 !important;
-    }
-  }
-  &-prev,
-  &-next {
+  &-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     transition: $trs2;
+    padding: 10px;
+    span {
+      color: #fff;
+      transition: $trs1;
+      transform: rotate(90deg);
+    }
+    .icon {
+      height: 55px;
+      width: 8px;
+      display: block;
+      transition: $trs1;
+      fill: #fff;
+    }
     &.hidden {
       opacity: 0;
       visibility: hidden;
     }
+    &.hover,
+    &.touch {
+      .icon {
+        fill: $color3 !important;
+      }
+      span {
+        color: $color3 !important;
+      }
+    }
+    &:first-child {
+      margin-bottom: 20px;
+      span {
+        margin-bottom: 10px;
+      }
+    }
+    &:last-child {
+      span {
+        margin-top: 10px;
+      }
+    }
   }
   &.dark {
-    .pagination-next,
-    .pagination-prev {
-      color: #000;
+    .pagination-arrow {
       .icon {
         fill: #000;
+      }
+      span {
+        color: #000;
       }
     }
   }
