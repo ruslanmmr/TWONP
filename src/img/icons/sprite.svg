@@ -35,4 +35,13 @@
   <symbol viewBox="0 0 8 57" stroke="none" xmlns="http://www.w3.org/2000/svg" id="topA">
     <path d="M4.354.646a.5.5 0 0 0-.708 0L.464 3.828a.5.5 0 1 0 .708.708L4 1.707l2.828 2.829a.5.5 0 1 0 .708-.708L4.354.646zM4.5 57V1h-1v56h1z"></path>
   </symbol>
+  <symbol viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg" id="minus">
+    <circle fill='none' cx="12.5" cy="12.5" r="12"></circle>
+    <path stroke='none' d="M9.092 12.121v.758h6.818v-.758z"></path>
+  </symbol>
+  <symbol viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg" id="plus">
+    <circle fill='none' cx="12.5" cy="12.5" r="12"></circle>
+    <path stroke='none' d="M12.121 9.091h.758v6.818h-.758z"></path>
+    <path stroke='none' d="M9.092 12.879v-.758h6.818v.758z"></path>
+  </symbol>
 </svg>

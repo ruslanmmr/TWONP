@@ -1549,6 +1549,12 @@ a {
     height: 100%;
     background: rgba(0, 0, 0, 0.5); }
 
+.js-animated {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+
 .section {
   position: absolute;
   top: 0;
@@ -1571,8 +1577,9 @@ a {
       width: 80%;
       left: 20%; }
     .section__content.full-h {
-      height: -webkit-calc(100% - 100px);
-      height: calc(100% - 100px); }
+      top: 0;
+      height: 100%;
+      padding-top: 100px; }
   .section__bottom {
     position: fixed;
     z-index: 2;
@@ -2020,6 +2027,120 @@ a {
       left: 30px; }
   .nav__copy {
     padding: 30px; } }
+
+.map-section__description {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 50%;
+      -ms-flex: 1 1 50%;
+          flex: 1 1 50%; }
+
+.map-section .section__content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+.custom-map {
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  padding: 100px 70px 70px 100px;
+  right: 0;
+  top: 0;
+  overflow: hidden; }
+  .custom-map:before, .custom-map:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2; }
+  .custom-map:before {
+    width: 100%;
+    height: 100px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#363c46), color-stop(32%, rgba(54, 60, 70, 0.8)), color-stop(48%, rgba(54, 60, 70, 0.7)), color-stop(72%, rgba(54, 60, 70, 0.5)), to(rgba(54, 60, 70, 0)));
+    background: -o-linear-gradient(top, #363c46 0%, rgba(54, 60, 70, 0.8) 32%, rgba(54, 60, 70, 0.7) 48%, rgba(54, 60, 70, 0.5) 72%, rgba(54, 60, 70, 0) 100%);
+    background: linear-gradient(180deg, #363c46 0%, rgba(54, 60, 70, 0.8) 32%, rgba(54, 60, 70, 0.7) 48%, rgba(54, 60, 70, 0.5) 72%, rgba(54, 60, 70, 0) 100%); }
+  .custom-map:after {
+    height: 100%;
+    width: 100px;
+    background: -webkit-gradient(linear, left top, right top, from(#363c46), color-stop(32%, rgba(54, 60, 70, 0.8)), color-stop(48%, rgba(54, 60, 70, 0.7)), color-stop(72%, rgba(54, 60, 70, 0.5)), to(rgba(54, 60, 70, 0)));
+    background: -o-linear-gradient(left, #363c46 0%, rgba(54, 60, 70, 0.8) 32%, rgba(54, 60, 70, 0.7) 48%, rgba(54, 60, 70, 0.5) 72%, rgba(54, 60, 70, 0) 100%);
+    background: linear-gradient(90deg, #363c46 0%, rgba(54, 60, 70, 0.8) 32%, rgba(54, 60, 70, 0.7) 48%, rgba(54, 60, 70, 0.5) 72%, rgba(54, 60, 70, 0) 100%); }
+  .custom-map__controls {
+    position: absolute;
+    bottom: 70px;
+    right: 20px;
+    z-index: 2; }
+  .custom-map__control {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    overflow: hidden;
+    display: block; }
+    .custom-map__control:first-child {
+      margin-bottom: 15px; }
+    .custom-map__control .icon {
+      width: 100%;
+      height: 100%;
+      fill: #fff;
+      stroke: #fff;
+      -webkit-transition: 0.25s;
+      -o-transition: 0.25s;
+      transition: 0.25s; }
+    .custom-map__control.hover .icon, .custom-map__control.touch .icon {
+      fill: #6FDE9B;
+      stroke: #6FDE9B; }
+    .custom-map__control.disabled {
+      pointer-events: none; }
+      .custom-map__control.disabled .icon {
+        fill: #767676;
+        stroke: #767676; }
+  .custom-map__container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 1; }
+    .custom-map__container:after {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      position: absolute;
+      z-index: 100;
+      top: 50%;
+      left: 50%;
+      background-color: red;
+      -webkit-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+      border-radius: 100%; }
+  .custom-map__inner {
+    z-index: 1;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    position: relative; }
+    .custom-map__inner:after {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      position: absolute;
+      z-index: 100;
+      top: 50%;
+      left: 50%;
+      background-color: #08ee13;
+      -webkit-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+      border-radius: 100%; }
+  .custom-map__map {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none; }
 
 .map-section {
   background-color: #363C46; }

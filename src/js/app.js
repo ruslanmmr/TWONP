@@ -17,6 +17,8 @@ $(document).ready(function() {
   $slide.change($slide.current, {
     onComplete: function() {
       $slide.updateAnimations();
+      $slide.to($slide.current);
+      map.init();
     }
   });
 })
@@ -169,7 +171,6 @@ let $slide = {
     $('[data-slide]').removeClass('active');
     $(`[data-slide='${newSlide.index()}']`).addClass('active');
     this.current.hasClass('js-subnav-true') ? $subNav.fade() : $subNav.hide();
-    //
     if($nav.state == false && newSlide.hasClass('js-nav-hidden')) {
       $nav.hideAnim.play()
     } else if($nav.state == false) {
@@ -525,4 +526,248 @@ function siteNavEvents() {
       }
     }
   })
+}
+
+let map = {
+  container: $('.custom-map__container'),
+  inner: $('.custom-map__inner'),
+  available: false,
+  x: 0,
+  y: 0,
+  animation: '',
+  interval: '',
+  translateAnimation: '',
+  innerT: '',
+  innerR: '',
+  innerB: '',
+  innerL: '',
+  controlPlus: $('.custom-map__plus'),
+  controlMinus: $('.custom-map__minus'),
+  zoomMax: 2,
+  zoomGradations: 3,
+  zoomPlus: function() {
+    if(this.zoomGradation<this.zoomGradations) {
+      this.zoomGradation++;
+      this.zoom = 1 + ((this.zoomGradation-1)*map.zoomInterval);
+      this.update('zoom+', false);
+    }
+  },
+  zoomMinus: function() {
+    if(this.zoomGradation>1) {
+      this.zoomGradation--;
+      this.zoom = 1 + ((this.zoomGradation-1) * map.zoomInterval);
+      this.update('zoom-', false);
+    }
+  },
+  checkBtns: function() {
+    if(this.zoomGradation==this.zoomGradations) {
+      this.controlPlus.addClass('disabled');
+    } else {
+      this.controlPlus.removeClass('disabled');
+    }
+    if(this.zoomGradation==1) {
+      this.controlMinus.addClass('disabled');
+    } else {
+      this.controlMinus.removeClass('disabled');
+    }
+  },
+  update: function(zoomDir) {
+    this.available = false;
+    this.checkBtns();
+
+
+    if(zoomDir=='zoom-') {
+      let y = Math.round(map.y + ( 
+        (map.containerCenterY-map.mapCenterY) * 
+        (map.zoomInterval * (1/(map.zoom+map.zoomInterval))) 
+      ));
+      let x = Math.round(map.x + ( 
+        (map.containerCenterX-map.mapCenterX) * 
+        (map.zoomInterval * (1/(map.zoom+map.zoomInterval))) 
+      ));
+
+      if(map.innerT>map.innerB) {
+        let c = ((map.inner.height() * map.zoom - map.inner.height())/2);
+        if(y-c>0) {
+          map.y = c;
+        } else {
+          map.y = y;
+        }
+      } else {
+        let c = Math.round(((map.inner.height() * (1+map.zoomInterval) - map.inner.height())/2));
+        
+        if(y-(c+map.innerB)>map.y) {
+          map.y = y;
+        } else {
+          map.y = map.y + c;
+        }
+
+      }
+
+      if(map.innerL>map.innerR) {
+        console.log('left')
+        let c = ((map.inner.width() * map.zoom - map.inner.width())/2);
+        
+        if(x-c>0) {
+          map.x = c;
+          console.log(1)
+        } else {
+          console.log(2)
+          map.x = x;
+        }
+      } else {
+        let c = Math.round(((map.inner.width() * (1+map.zoomInterval) - map.inner.width())/2));
+        
+        if(x-(c+map.innerR)>map.x) {
+          map.x = x;
+        } else {
+          map.x = map.x + c;
+        }
+      }
+
+    } else if(zoomDir=='zoom+') {
+
+      map.y = Math.round(map.y - ( 
+        (map.containerCenterY-map.mapCenterY) * 
+        (map.zoomInterval * (1/(map.zoom-map.zoomInterval))) 
+      ))
+
+      map.x = Math.round(map.x - ( 
+        (map.containerCenterX-map.mapCenterX) * 
+        (map.zoomInterval * (1/(map.zoom-map.zoomInterval))) 
+      ));
+
+    }
+
+    this.animation = gsap.timeline({
+      onComplete: function() {
+        map.zoomCurrent = map.zoom;
+        map.checkInner({onComplete() {
+          map.available = true;
+        }})
+        }
+    }).to(map.inner,{duration:0.25, scale:map.zoom, x:map.x, y:map.y, ease:'power2.inOut'})
+
+
+  },
+  checkInner: function(callbacks) {
+    let mapTop = this.inner.offset().top,
+        mapLeft = this.inner.offset().left,
+        containerTop = this.container.offset().top,
+        containerLeft = this.container.offset().left;
+
+      this.mapHeight = this.inner.height() * this.zoomCurrent;
+      this.mapWidth = this.inner.width() * this.zoomCurrent;
+      this.containerHeight = this.container.height();
+      this.containerWidth = this.container.width();
+
+    this.containerCenterY = (containerTop + (this.containerHeight/2));
+    this.mapCenterY = (mapTop + (this.mapHeight/2));
+    this.containerCenterX = (containerLeft + (this.containerWidth/2));
+    this.mapCenterX = (mapLeft + (this.mapWidth/2));
+
+    this.innerT = Math.round(mapTop - containerTop);
+    this.innerR = Math.round(-((mapLeft+this.mapWidth) - (containerLeft+this.containerWidth)));
+    this.innerB = Math.round(-((mapTop+this.mapHeight) - (containerTop+this.containerHeight)));
+    this.innerL = Math.round(mapLeft - containerLeft);
+
+    //callback
+    if (typeof callbacks === 'object') {
+      callbacks.onComplete();
+    }
+    
+
+  },
+  init: function() {
+    this.zoomInterval = (map.zoomMax-1)/(map.zoomGradations-1);
+    this.zoom = 1;
+    this.zoomCurrent = 1;
+    this.zoomGradation = 1;
+    
+    this.controlPlus.on('click', function(e) {
+      e.preventDefault();
+      if(map.available==true) {
+        map.zoomPlus();
+      }
+      
+    })
+    this.controlMinus.on('click', function(e) {
+      e.preventDefault();
+      if(map.available==true) { 
+        map.zoomMinus();
+      }
+    })
+
+    let area = new Hammer.Manager(map.container[0]);
+    let swipe = new Hammer.Swipe();
+    let pan = new Hammer.Pan();
+    pan.set({ threshold: 1 });
+    pan.reset()
+    area.add(swipe);
+    area.add(pan);
+
+    let startX = 0,
+        startY = 0,
+        currentX,
+        currentY,
+        compensateX = 0,
+        compensateY = 0,
+        oldX = 0,
+        oldY = 0;
+  
+    //события свайпов
+    area.on("panend panstart panup pandown panleft panright", function(event) {
+      let Event = event.type;
+
+      if(map.available==true) {
+        if(Event=='panstart') {
+          startX = event.center.x;
+          startY = event.center.y;
+          oldX = map.x;
+          oldY = map.y;
+        } else if(Event=='panend') {
+          map.x = currentX;
+          map.y = currentY;
+          compensateX = 0;
+          compensateY = 0;
+        } else if(Event=='panup' || Event=='panright' || Event=='pandown' || Event=='panleft') {
+
+          currentX = map.x + event.center.x - startX + compensateX;
+          currentY = map.y + event.center.y - startY + compensateY;
+
+          map.checkInner({onComplete: function() {
+  
+            if(map.innerT>0 && currentY>oldY) {
+              currentY = oldY;
+              compensateY = currentY - map.y + startY - event.center.y;
+            }
+            if(map.innerB>0 && currentY<oldY) {
+              currentY = oldY;
+              compensateY = currentY - map.y + startY - event.center.y;
+            }
+            if(map.innerR>0 && currentX<oldX) {
+              currentX = oldX;
+              compensateX = currentX - map.x + startX - event.center.x;
+            }
+            if(map.innerL>0 && currentX>oldX) {
+              currentX = oldX;
+              compensateX = currentX - map.x + startX - event.center.x;
+            }
+
+            gsap.set(map.inner, {y:currentY, x:currentX})
+            oldX = currentX;
+            oldY = currentY;
+
+          }})
+        }
+      } else {
+        compensateY = startY - event.center.y;
+        compensateX = startX - event.center.x;
+      }
+    });
+    this.checkBtns();
+    map.checkInner({onComplete() {
+      map.available = true;
+    }})
+  }
 }

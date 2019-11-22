@@ -143,7 +143,9 @@ a {
     }
   }
 }
-
+.js-animated {
+  user-select: none;
+}
 .section {
   position: absolute;
   top: 0;
@@ -167,7 +169,9 @@ a {
       left: 20%;
     }
     &.full-h {
-      height: calc(100% - 100px);
+      top: 0;
+      height: 100%;
+      padding-top: 100px;
     }
   }
   &__bottom {
