@@ -599,29 +599,30 @@ let map = {
         if(y-(c+map.innerB)>map.y) {
           map.y = y;
         } else {
-          map.y = map.y + c;
+          map.y = map.y + map.innerB + c;
         }
 
       }
 
       if(map.innerL>map.innerR) {
         console.log('left')
-        let c = ((map.inner.width() * map.zoom - map.inner.width())/2);
+        let c = Math.round(((map.inner.height() * map.zoom - map.inner.height())/2));
         
         if(x-c>0) {
           map.x = c;
-          console.log(1)
         } else {
-          console.log(2)
           map.x = x;
         }
       } else {
         let c = Math.round(((map.inner.width() * (1+map.zoomInterval) - map.inner.width())/2));
         
+
         if(x-(c+map.innerR)>map.x) {
           map.x = x;
         } else {
-          map.x = map.x + c;
+
+          console.log('right', map.x, c, map.innerR)
+          map.x = map.x + map.innerR + c;
         }
       }
 

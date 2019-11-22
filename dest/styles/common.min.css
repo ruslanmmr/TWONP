@@ -2139,8 +2139,7 @@ a {
   .custom-map__map {
     display: block;
     width: 100%;
-    height: auto;
-    pointer-events: none; }
+    height: auto; }
 
 .map-section {
   background-color: #363C46; }
