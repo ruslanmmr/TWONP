@@ -329,180 +329,6 @@ function main() {
 
 
 function siteNavEvents() {
-
-  function ff() {
-    /* let $link,
-  Event,
-  $touchArea = document.querySelector('.page-wrapper'),
-  cursorPos = {
-    current: {
-      x:0,
-      y:0
-    },
-    start: {
-      x:0,
-      y:0,
-      update: function(callback, func) {
-        this.x = cursorPos.current.x;
-        this.y = cursorPos.current.y;
-        if(callback=='onComplete') {
-          func();
-        }
-      }
-    }
-  },
-  swipeLength = 150,
-  maxTime = 0.5,
-  touched = false,
-  direction = false,
-  swipeForward = false,
-  swipeBack  = false;
-
-  let touchEvents = new Hammer.Manager($touchArea);
-  let swipe = new Hammer.Swipe();
-  let pan = new Hammer.Pan().set({ threshold: 1 });
-  touchEvents.add(swipe);
-  touchEvents.add(pan); */
-
-  /* //события свайпов
-  touchEvents.on("swipeup swipedown panend panstart panup pandown", function(event) {
-    Event = event.type;
-    cursorPos.current.y = event.center.y;
-    
-    if(!enterAnimationProgress && !exitAnimationProgress && !$barbaContainer.hasAttr('data-project')) {
-      //если поставили палец
-      if(Event=='panstart') {
-        touched = true;
-        cursorPos.start.update();
-      } 
-      //подняли палец с дисплея
-      else if(Event=='panend') {
-        touched = false;
-        direction = false;
-        animationTime = 0;
-        animationStartLoading.reverse();
-        if(swipeForward == true) {
-          forwardExitAnimation.reverse();
-        } else if(swipeBack == true) {
-          backExitAnimation.reverse();
-          if(pageId=='categories') {
-            logoHideAnimation.reverse();
-          }
-        }
-        if(pageId=='projectPreview') {
-          labelHideAnimation.reverse();
-        }
-        swipeForward = false;
-        swipeBack = false;
-      }
-      //если длина свайпа достаточная
-      else if(animationTime>=maxTime) {
-        touched = false;
-        direction = false;
-        if(swipeForward == true) {
-          animationDirection = 'forward';
-        } else if(swipeBack == true) {
-          animationDirection = 'back';
-        }
-        if(pageId=='projectPreview') {
-          labelHideAnimation.play(animationTime);
-          labelHideAnimation.eventCallback("onComplete", function(){ 
-            labelVisible=false;
-          });
-        }
-        swipeForward = false;
-        swipeBack = false;
-      }
-      //процесс ерзанья пальцами
-      else if(touched==true) {
-        let pos;
-        if(direction==false) {
-          if(Event=='panup' || Event=='pandown') {
-            direction = 'vertical';
-          } else if(Event=='panright' || Event=='panleft') {
-            direction = 'horizontal';
-          }
-        }
-
-        if(direction == 'vertical') {
-          pos = event.center.y - cursorPos.start.y;
-        } else if(direction == 'horizontal') {
-          pos = event.center.x - cursorPos.start.x;
-        }
-
-        //управление временем анимации
-        if(Event=='panup' || Event=='panleft') {
-          if(swipeBack == false) {
-            swipeForward = true;
-            if(pageOrder == pagesCount-1) {
-              animationTime = (-pos/(swipeLength-pos))*maxTime;
-            } else {
-              animationTime = (-pos/swipeLength)*maxTime;
-            }
-          } else {
-            if(pageOrder == 0) {
-              animationTime = (pos/(swipeLength+pos))*maxTime;
-            } else {
-              animationTime = (pos/swipeLength)*maxTime;
-            }
-            if(animationTime<=0) {
-              swipeBack = false;
-              animationTime = 0;
-            }
-          }
-        } 
-        else {
-          if(swipeForward == false) {
-            swipeBack = true;
-            if(pageOrder == 0) {
-              animationTime = (pos/(swipeLength+pos))*maxTime;
-            } else {
-              animationTime = (pos/swipeLength)*maxTime;
-            }
-          } else {
-            if(pageOrder == pagesCount-1) {
-              animationTime = (-pos/(swipeLength-pos))*maxTime;
-            } else {
-              animationTime = (-pos/swipeLength)*maxTime;
-            }
-            if(animationTime<=0) {
-              swipeForward = false;
-            }
-          }
-        }
-
-        //последняя корректировка
-        if(animationTime>maxTime) {
-          animationTime = maxTime;
-        } else if(animationTime==-0 || animationTime<0) {
-          animationTime = 0;
-        }
-
-        if(swipeForward == true) {
-          forwardExitAnimation.play(animationTime);
-          forwardExitAnimation.stop();
-        } else if(swipeBack == true) {
-          backExitAnimation.play(animationTime);
-          backExitAnimation.stop();
-          if(pageId=='categories') {
-            logoHideAnimation.play(animationTime);
-            logoHideAnimation.stop();
-          }
-        }
-
-        if(!(pageOrder==0 && swipeBack==true) && !(pageOrder == pagesCount-1 && swipeForward==true)) {
-          if(pageId=='projectPreview') {
-            labelHideAnimation.play(animationTime);
-            labelHideAnimation.stop();
-          }
-          animationStartLoading.play(animationTime);
-          animationStartLoading.stop();
-        }
-      }
-    }
-    eventChecking();
-  }); */
-  }
   //события скролла
   $(window).on('wheel', function(event){
     if(!$slide.animationProgress) {
@@ -531,6 +357,9 @@ function siteNavEvents() {
 let map = {
   container: $('.custom-map__container'),
   inner: $('.custom-map__inner'),
+  trigger: $('.map-trigger'),
+  strokeElms: $('.custom-map .region, .custom-map .road'),
+  itemsElls: $('.custom-map .item'),
   available: false,
   x: 0,
   y: 0,
@@ -575,6 +404,7 @@ let map = {
     this.available = false;
     this.checkBtns();
 
+    console.log(map.strokeElms)
 
     if(zoomDir=='zoom-') {
       let y = Math.round(map.y + ( 
@@ -648,7 +478,10 @@ let map = {
         }})
         }
     }).to(map.inner,{duration:0.25, scale:map.zoom, x:map.x, y:map.y, ease:'power2.inOut'})
+      .to(map.itemsElls,{duration:0.25, scale:1/map.zoom, ease:'power2.inOut'}, '-=0.25')
+    
 
+    map.strokeElms.css('stroke-width', `${1/map.zoom}px`)
 
   },
   checkInner: function(callbacks) {
@@ -766,6 +599,26 @@ let map = {
         compensateX = startX - event.center.x;
       }
     });
+    //условные обозначения
+    let $legendTrigger = $('.map-section__legend-item').not($('[data-disabled]'));
+    $legendTrigger.on('mouseenter mouseleave', function(event) {
+      if(event.type=='mouseenter') {
+        if($(this).data('base')!==undefined) {
+          $legendTrigger.not($(this)).addClass('disabled');
+          map.trigger.not($('[data-base]')).addClass('disabled');
+        } else if($(this).data('station')!==undefined) {
+          $legendTrigger.not($(this)).addClass('disabled');
+          map.trigger.not($('[data-station], [data-disabled]')).addClass('disabled');
+        } else if($(this).data('factory')!==undefined) {
+          $legendTrigger.not($(this)).addClass('disabled');
+          map.trigger.not($('[data-factory], [data-disabled]')).addClass('disabled');
+        }
+      } else {
+        $legendTrigger.removeClass('disabled');
+        map.trigger.removeClass('disabled');
+      }
+    })
+
     this.checkBtns();
     map.checkInner({onComplete() {
       map.available = true;

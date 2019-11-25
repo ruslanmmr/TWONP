@@ -9,7 +9,7 @@
     display: flex;
   }
   &__description {
-    padding: 70px;
+    
   }
   &__title {
     margin-bottom: 25px;
@@ -31,9 +31,6 @@
 
 @media all and(max-width: 1440px) {
   .category-preview {
-    &__description {
-      padding: 50px;
-    }
     &__title {
       margin-bottom: 20px;
     }
