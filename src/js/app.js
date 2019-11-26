@@ -536,7 +536,7 @@ let map = {
     let swipe = new Hammer.Swipe();
     let pan = new Hammer.Pan();
     pan.set({ threshold: 1 });
-    pan.reset()
+    //pan.reset()
     area.add(swipe);
     area.add(pan);
 
