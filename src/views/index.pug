@@ -1,7 +1,7 @@
 extends layout/layout
 
 block content
-  section.section.section-slide.home
+  section.section.section-slide.home.active
     .home__content.section__display
       .home-slide
         .scene
@@ -19,7 +19,7 @@ block content
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home3.jpg")')
         .home-slide__container.section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p
-          h5.home-slide__title.t-size-64 Оптовые продажи
+          h5.home-slide__title.t-size-64 Топливо оптом
           span.home-slide__text.t-size-24.d-hidden Без описания
       .home-slide
         .scene
@@ -65,9 +65,10 @@ block content
         .section__container
           h5.ff-2.t-size-64 Сеть АЗС
     .section__bottom.category-preview__bottom
-      .category-preview__description.p-s
-        h6.category-preview__title.ff-2.t-size-24 Кофортный отдых в пути
-        p Наша современная сеть АЗС всегда порадует Вас качественным топливом и удобным сервисом.
+      .category-preview__description
+        .category-preview__text.p-s
+          h6.category-preview__title.ff-2.t-size-24 Кофортный отдых в пути
+          p Наша современная сеть АЗС всегда обеспечит Вас качественным топливом и удобным сервисом. Будем рады видеть вас на наших заправках.
   //оптовые продажи
   section.section.section-slide.category-preview.js-subnav-true
     .section__display
@@ -77,11 +78,13 @@ block content
         .section__container
           h5.ff-2.t-size-64 Топливо оптом
     .section__bottom.category-preview__bottom
-      .category-preview__description.p-s
-        p Оптовые поставки бензина, дизельного топлива и СМТ. Доставка до Вас нашими бензовозами, а так же отгрузка в Ваши бензовозы напрямую от заводов производителей.
+      .category-preview__description
+        .category-preview__text.p-s
+          h6.category-preview__title.ff-2.t-size-24 Прямые поставки от производителей
+          p Оптовые поставки бензина, дизельного топлива и СМТ. Доставим нашими бензовозами, или отгрузим топливо в Ваши бензовозы на заводах производителях.
       a(href="#").category-preview__more.js-animated.btn-big
         .btn-big__container
-          span.t-size-20 Подробнее
+          span.t-size-20 Перейти
           svg.icon 
             use(xlink:href="img/icons/sprite.svg#ico1")
   //Топливная логистика
@@ -91,11 +94,12 @@ block content
         .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home4.jpg")')
       .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
         .section__container
-          h5.ff-2.t-size-64 Топливная логистика
+          h5.ff-2.t-size-64 Топливная<br> логистика
     .section__bottom.category-preview__bottom
-      .category-preview__description.p-s
-        h6.category-preview__title.ff-2.t-size-24 Любой объем на любое расстояние
-        p Доставляем топливо по территории Центрального и Южного федеральных округов. В собственности новый автопарк бензовозов, емкость бензовозов от пяти до сорока кубических метров.
+      .category-preview__description
+        .category-preview__text.p-s
+          h6.category-preview__title.ff-2.t-size-24 Любой объем на любое расстояние
+          p Доставляем топливо собственными бензовозами по территории Южного и Центрального федерального округа. В собственности новый автопарк бензовозов, емкость бензовозов от пяти до сорока кубических метров.
   //Нефтебазы
   section.section.section-slide.category-preview.js-subnav-true
     .section__display
@@ -105,8 +109,10 @@ block content
         .section__container
           h5.ff-2.t-size-64 Нефтебазы
     .section__bottom.category-preview__bottom
-      .category-preview__description.p-s
-        p На 2019 год наши нефтебазы расположены в двух областях ЦЧР - Воронежская и Тульская области. Готовы принять ваше топливо на хранение. Совокупный объем - 5500 тонн. 
+      .category-preview__description
+        .category-preview__text.p-s
+          h6.category-preview__title.ff-2.t-size-24 Хранение вашего топлива
+          p На 2019 год наши нефтебазы расположены в двух областях ЦЧР - Воронежская и Тульская области. Готовы принять ваше топливо на хранение. Совокупный объем - 5500 тонн. 
   //Утилизация
   section.section.section-slide.category-preview.js-subnav-true
     .section__display
@@ -116,17 +122,18 @@ block content
         .section__container
           h5.ff-2.t-size-64 Утилизация
     .section__bottom.category-preview__bottom
-      .category-preview__description.p-s
-        h6.category-preview__title.ff-2.t-size-24 Нефтеотходов I-IV класса опасности
-        p Экологическое предприятие полного цикла по сбору, утилизации и транспортировке нефтесодержащих отходов I-IV класса опасности. Мы работаем на основании действующей лицензии. Все наши клиенты получают полный пакет отчетных документов. Имеем собственный парк специализированного автотранспорта для сбора и транспортировки отходов.
+      .category-preview__description
+        .category-preview__text.p-s
+          h6.category-preview__title.ff-2.t-size-24 Полный цикл переработки
+          p Экологическое предприятие полного цикла по сбору, утилизации и транспортировке нефтесодержащих отходов I-IV класса опасности.Мы работаем на основании действующей лицензии. Все наши клиенты получают полный пакет отчетных документов.
       a(href="http://ecopromvrn.ru/" target='_blank').category-preview__more.js-animated.btn-big
         .btn-big__container
-          span.t-size-20 Подробнее
+          span.t-size-20 Перейти
           svg.icon 
             use(xlink:href="img/icons/sprite.svg#ico1")
   section.section.section-slide.contacts.js-subnav-true.js-pagination-dark
     .section__display
-      .section__content
+      .section__content.h-c-t.p-t-h
         <iframe src="https://yandex.ru/map-widget/v1/-/CGTXN41i" frameborder="1" allowfullscreen="true"></iframe>
     .section__bottom.contacts__bottom
 

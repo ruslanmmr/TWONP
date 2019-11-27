@@ -11,6 +11,10 @@ $(document).ready(function() {
   main();
   siteNavEvents();
 
+  Scrollbar.initAll({
+    damping: 0.1,
+    alwaysShowTracks: true
+  });
 
   $subNav.update();
   $nav.update()
@@ -157,7 +161,7 @@ let $slide = {
     //animation
     let anim = gsap.timeline({onComplete:function(){$slide.updateAnimations()}})
       .to(newSlide, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-      .fromTo(newSlide.find('.section__display'), {scale:1.05}, {immediateRender:false, duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
+      .fromTo(newSlide.find('.scene'), {scale:1.05}, {immediateRender:false, duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
   },
   change: function(newSlide, callbacks) {
     this.current.removeClass('active');
@@ -186,20 +190,21 @@ let $slide = {
     //exit anim
     $slide.exitAnimation = gsap.timeline({paused:true})
       .to($slide.current, {duration:0.5, autoAlpha:0, ease:'power2.in'})
-      .fromTo($slide.current.find('.section__display'), {scale:1}, {duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
-    
+      .fromTo($slide.current.find('.scene'), {scale:1}, {duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
+      .to($slide.current.find('.scene'), {duration:0, scale:1})
+      
     //forward anim
     if($slide.next.length>0) {
       $slide.forwardAnimation = gsap.timeline({paused:true,onComplete:function(){$slide.updateAnimations()}})
         .to($slide.next, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-        .fromTo($slide.next.find('.section__display'), {yPercent:100, scale:1.05}, {immediateRender:false, duration:0.5, yPercent:0, scale:1, ease:'power2.out'}, '-=0.5')
+        .fromTo($slide.next.find('.section__display'), {yPercent:100}, {immediateRender:false, duration:0.5, yPercent:0, ease:'power2.out'}, '-=0.5')
     }
 
     //back anim
     if($slide.prev.length>0) {
       $slide.backAnimation = gsap.timeline({paused:true,onComplete:function(){$slide.updateAnimations()}})
         .to($slide.prev, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-        .fromTo($slide.prev.find('.section__display'), {yPercent:-100, scale:1.05}, {immediateRender:false, duration:0.5, scale:1, yPercent:0, ease:'power2.out'}, '-=0.5')
+        .fromTo($slide.prev.find('.section__display'), {yPercent:-100}, {immediateRender:false, duration:0.5, yPercent:0, ease:'power2.out'}, '-=0.5')
     }
 
     $slide.animationProgress=false;
@@ -331,11 +336,13 @@ function main() {
 function siteNavEvents() {
   //события скролла
   $(window).on('wheel', function(event){
-    if(!$slide.animationProgress) {
-      if(event.originalEvent.deltaY>0 && $slide.current.index()+1 < $slide.count) {
-        $slide.toNext();
-      } else if(event.originalEvent.deltaY<0 && $slide.current.index()>0) {
-        $slide.toPrev();
+    if($(event.target).parents('[data-scrollbar]').length==0 && !$(event.target).is('[data-scrollbar]')) {
+      if(!$slide.animationProgress) {
+        if(event.originalEvent.deltaY>0 && $slide.current.index()+1 < $slide.count) {
+          $slide.toNext();
+        } else if(event.originalEvent.deltaY<0 && $slide.current.index()>0) {
+          $slide.toPrev();
+        }
       }
     }
   });
@@ -359,6 +366,7 @@ let map = {
   inner: $('.custom-map__inner'),
   trigger: $('.map-trigger'),
   strokeElms: $('.custom-map .region, .custom-map .road'),
+  lines: $('.custom-map .line'),
   itemsElls: $('.custom-map .item'),
   available: false,
   x: 0,
@@ -404,7 +412,6 @@ let map = {
     this.available = false;
     this.checkBtns();
 
-    console.log(map.strokeElms)
 
     if(zoomDir=='zoom-') {
       let y = Math.round(map.y + ( 
@@ -435,7 +442,6 @@ let map = {
       }
 
       if(map.innerL>map.innerR) {
-        console.log('left')
         let c = Math.round(((map.inner.height() * map.zoom - map.inner.height())/2));
         
         if(x-c>0) {
@@ -450,8 +456,6 @@ let map = {
         if(x-(c+map.innerR)>map.x) {
           map.x = x;
         } else {
-
-          console.log('right', map.x, c, map.innerR)
           map.x = map.x + map.innerR + c;
         }
       }
@@ -479,9 +483,11 @@ let map = {
         }
     }).to(map.inner,{duration:0.25, scale:map.zoom, x:map.x, y:map.y, ease:'power2.inOut'})
       .to(map.itemsElls,{duration:0.25, scale:1/map.zoom, ease:'power2.inOut'}, '-=0.25')
+      
     
 
     map.strokeElms.css('stroke-width', `${1/map.zoom}px`)
+    map.lines.css('stroke-width', `${3/map.zoom}px`)
 
   },
   checkInner: function(callbacks) {
@@ -536,7 +542,6 @@ let map = {
     let swipe = new Hammer.Swipe();
     let pan = new Hammer.Pan();
     pan.set({ threshold: 1 });
-    //pan.reset()
     area.add(swipe);
     area.add(pan);
 
@@ -603,13 +608,13 @@ let map = {
     let $legendTrigger = $('.map-section__legend-item').not($('[data-disabled]'));
     $legendTrigger.on('mouseenter mouseleave', function(event) {
       if(event.type=='mouseenter') {
-        if($(this).data('base')!==undefined) {
+        if($(this).is('[data-base]')) {
           $legendTrigger.not($(this)).addClass('disabled');
-          map.trigger.not($('[data-base]')).addClass('disabled');
-        } else if($(this).data('station')!==undefined) {
+          map.trigger.not($('[data-base],[data-base-station],[data-disabled]')).addClass('disabled');
+        } else if($(this).is('[data-station]')) {
           $legendTrigger.not($(this)).addClass('disabled');
-          map.trigger.not($('[data-station], [data-disabled]')).addClass('disabled');
-        } else if($(this).data('factory')!==undefined) {
+          map.trigger.not($('[data-station], [data-base-station], [data-disabled]')).addClass('disabled');
+        } else if($(this).is('[data-factory]')) {
           $legendTrigger.not($(this)).addClass('disabled');
           map.trigger.not($('[data-factory], [data-disabled]')).addClass('disabled');
         }
@@ -620,8 +625,79 @@ let map = {
     })
 
     this.checkBtns();
+    this.popups();
     map.checkInner({onComplete() {
       map.available = true;
     }})
+  },
+  popups: function() {
+    //всплывайки
+    let newPopup,
+        oldPopup,
+        contentAnim,
+        newAnimation,
+        oldAnimation,
+        data,
+        popupAvailable = true;
+
+    map.trigger.on('click', function(event) {
+      event.preventDefault();
+      if(map.available==true && popupAvailable==true) {
+        popupAvailable = false;
+        map.trigger.removeClass('active').removeClass('is');
+        map.lines.removeClass('active');
+        map.trigger.addClass('dark');
+        $(this).removeClass('dark').addClass('active');
+        //
+        if($(this).is('[data-station]')) {
+          newPopup = $(`.map-popup[data-station='${$(this).data('station')}']`);
+        } else if($(this).is('[data-base-station]')) {
+          newPopup = $(`.map-popup[data-base-station='${$(this).data('base-station')}']`);
+          //lines
+          $(`.custom-map .line[data-base='${$(this).data('base-station')}']`).addClass('active');
+          //factory
+          $('.map-trigger[data-factory]').removeClass('dark').addClass('is');;
+        } else if($(this).is('[data-base]')) {
+          newPopup = $(`.map-popup[data-base='${$(this).data('base')}']`);
+          $('.map-trigger[data-factory]').removeClass('dark').addClass('is');
+          //lines
+          $(`.custom-map .line[data-base='${$(this).data('base')}']`).addClass('active');
+        } else if($(this).is('[data-factory]')) {
+          newPopup = $(`.map-popup[data-factory='${$(this).data('factory')}']`);
+        }
+        
+        $('.map-popup').removeClass('active');
+        newPopup.addClass('active');
+        
+        newAnimation = gsap.timeline({onComplete:function() {
+          popupAvailable=true;
+          oldPopup=newPopup;
+          oldAnimation=newAnimation;
+        }})
+          .fromTo(newPopup, {yPercent:100, autoAlpha:0}, {duration:0.5, autoAlpha:1, yPercent:0, ease:'power2.out'})
+
+        if(oldAnimation!==undefined) {
+          oldAnimation.reverse();
+        } else {
+          contentAnim = gsap.timeline()
+            .to('.map-section__description', {duration:0.5, autoAlpha:0, xPercent:-100, ease:'power2.in'})
+        }
+      }
+    });
+    //close
+    $('.map-popup__close').on('click', function(event) {
+      event.preventDefault();
+      if(map.available==true && popupAvailable==true) {
+        popupAvailable = false;
+        map.trigger.removeClass('active').removeClass('dark').removeClass('is');
+        map.lines.removeClass('active');
+        newAnimation.reverse();
+        contentAnim.reverse();
+        newAnimation.eventCallback("onReverseComplete", function() {
+          oldAnimation = undefined;
+          popupAvailable = true;
+        })
+      }
+    })
   }
 }

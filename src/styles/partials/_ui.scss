@@ -147,7 +147,7 @@ a {
   user-select: none;
 }
 .copy {
-  color: #959595;
+  color: $colorB;
 }
 .pagination {
   position: fixed;
@@ -213,7 +213,55 @@ a {
     }
   }
 }
+.scroll-section {
+  overflow: hidden;
+  position: relative;
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 40px;
+    width: 100%;
+    left: 0;
+    z-index: 2;
+  }
+  &:before {
+    top: 0;
+    background: linear-gradient(180deg, rgba(40, 44, 51,1) 0%, rgba(40, 44, 51,0.8) 40%, rgba(40, 44, 51,0.7) 55%, rgba(40, 44, 51,0.5) 72%, rgba(40, 44, 51,0) 100%);
+  }
+  &:after {
+    bottom: 0;
+    background: linear-gradient(0deg, rgba(40, 44, 51,1) 0%, rgba(40, 44, 51,0.8) 40%, rgba(40, 44, 51,0.7) 55%, rgba(40, 44, 51,0.5) 72%, rgba(40, 44, 51,0) 100%);
+  }
+  [data-scrollbar] {
+    height: 100%;
+    overflow: visible !important;
+    z-index: 1;
+  }
+  .scrollbar-track-y {
+    top: 0;
+    right: auto;
+    width: 5px;
+    left: 17.5px;
+    border-radius: 5px;
+    background-color: $bg-color;
+    .scrollbar-thumb {
+      width: 5px;
+      border-radius: 5px;
+      background-color: $colorB;
+    }
+  }
+}
 
 @media all and(max-width: 1440px) {
-  
+  .scroll-section {
+    .scrollbar-track-y {
+      left: 12.5px;
+    }
+    &:before,
+    &:after {
+      height: 30px;
+    }
+  }
 }

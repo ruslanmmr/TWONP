@@ -15,10 +15,16 @@ $color4: #FCB566;
 $color5: #30CDFF;
 $color6: #C4C4C4;
 $disabled: #6C6C6C;
+$colorA: #E1E1E1;
+$colorB: #BEC0C2;
+$colorC: #888888;
+
 //условные обозначения
 $station: $color3;
 $base: $color5;
 $factory: $color4;
+
+
 //transition
 $trs1: .25s;
 $trs2: .5s;
@@ -62,6 +68,7 @@ body {
     height: 100%;
     position: relative;
     z-index: 1;
+    overflow: hidden;
   }
   &__content {
     height: 65%;

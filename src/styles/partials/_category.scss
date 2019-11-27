@@ -5,6 +5,11 @@
     backdrop-filter: blur(5px);
     flex: 1 0 75%;
   }
+  &__text {
+    height: 100%;
+    width: 100%;
+    max-width: 600px;
+  }
   &__bottom {
     display: flex;
   }
