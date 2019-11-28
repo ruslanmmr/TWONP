@@ -1,10 +1,51 @@
 .contacts {
   &__bottom {
     background-color: $colorH;
+    display: flex;
   }
   iframe {
     display: block;
     width: 100%;
     height: 100%;
   }
+}
+.contacts-socials {
+  background-color: $colorG;
+  height: 100%;
+  flex: 0 1 auto;
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+  }
+  &__link {
+    display: block;
+    border: 1px solid $colorE;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+    transition: $trs1;
+    .icon {
+      width: 100%;
+      height: 100%;
+      display: block;
+      fill: $colorE;
+      transition: inherit;
+    }
+    &.hover,
+    &.touch {
+      border-color: #fff;
+      .icon {
+        fill: #fff;
+      }
+    }
+  }
+}
+.contacts-form {
+  flex: 1 1 100%;
 }

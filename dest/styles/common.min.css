@@ -1942,12 +1942,69 @@ a {
     margin-bottom: 20px; } }
 
 .contacts__bottom {
-  background-color: #282C33; }
+  background-color: #282C33;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
 
 .contacts iframe {
   display: block;
   width: 100%;
   height: 100%; }
+
+.contacts-socials {
+  background-color: #363C46;
+  height: 100%;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 1 auto;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto; }
+  .contacts-socials__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-justify-content: space-around;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
+    height: 100%; }
+  .contacts-socials__link {
+    display: block;
+    border: 1px solid #C4C4C4;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+    -webkit-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s; }
+    .contacts-socials__link .icon {
+      width: 100%;
+      height: 100%;
+      display: block;
+      fill: #C4C4C4;
+      -webkit-transition: inherit;
+      -o-transition: inherit;
+      transition: inherit; }
+    .contacts-socials__link.hover, .contacts-socials__link.touch {
+      border-color: #fff; }
+      .contacts-socials__link.hover .icon, .contacts-socials__link.touch .icon {
+        fill: #fff; }
+
+.contacts-form {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 100%;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%; }
 
 .nav {
   position: fixed;
