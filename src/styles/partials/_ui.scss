@@ -246,33 +246,39 @@ a {
   position: relative;
   border-bottom: 1px solid $colorE;
   width: 100%;
-  max-width: 240px;
   padding-top: 15px;
   &__placeholder {
     position: absolute;
     line-height: 20px;
     font-size: 12px;
-    bottom: 5px;
+    top: 20px;
     transition: $trs1;
+    z-index: 1;
   }
   &__el {
+    position: relative;
+    z-index: 2;
+    font-size: 16px;
+    resize: none;
     display: block;
     outline: none;
     border: 0;
     appearance: none;
     border-radius: 0;
     box-shadow: 0;
-    transition: $trs2;
+    //transition: $trs2;
     background-color: transparent;
     text-decoration: none;
     width: 100%;
     font-weight: 400;
-    line-height: 30px;
+    line-height: 24px;
     padding: 0;
     color: $colorD;
+    height: 30px;
+    padding: 3px 0;
   }
   &.focus {
-    .input__el {
+    .input__placeholder {
       transform: translateY(-100%);
     }
   }

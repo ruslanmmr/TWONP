@@ -3,6 +3,7 @@ import Scrollbar from 'smooth-scrollbar';
 import Hammer from 'hammerjs';
 import { gsap } from "gsap";
 import Lazy from "jquery-lazy";
+import autosize from "autosize";
 import Parallax from 'parallax-js'
 
 $(document).ready(function() {
@@ -12,17 +13,13 @@ $(document).ready(function() {
   siteNavEvents();
   inputs();
 
-  Scrollbar.initAll({
-    damping: 0.1,
-    alwaysShowTracks: true
-  });
-
   $subNav.update();
   $nav.update()
   $slide.change($slide.current, {
     onComplete: function() {
       $slide.updateAnimations();
       $slide.to($slide.current);
+      scrollArea.init();
       if($('.custom-map').length>0) {
         map.init();
       }
@@ -46,7 +43,20 @@ const $page = {
     return Math.min(window.innerWidth, document.documentElement.clientWidth);
   }
 }
-
+let scrollArea = {
+  elms: document.querySelectorAll('.scroll-container'),
+  init: function() {
+    for (let elm of this.elms) {
+      let scroll = Scrollbar.init(elm, {
+        damping: 0.1,
+        alwaysShowTracks: true
+      });
+      setInterval(function() {
+        scroll.update();
+      }, 500)
+    }
+  }
+}
 let $nav = {
   trigger: $('.nav-btn'),
   el: $('.nav'),
@@ -213,7 +223,6 @@ let $slide = {
     $slide.animationProgress=false;
   }
 }
-
 let $pagination = {
   el: $('.pagination'),
   prev: $('.pagination-arrow_prev'),
@@ -317,21 +326,25 @@ function main() {
       old = 0;
 
   $slideBtn.on('mouseenter', function() {
-    current = $(this).index() + 1;
-    let animation = gsap.timeline()
-      .to($slide.eq(old), {duration:0.5, autoAlpha:0, ease:'power2.out'})
-      .to($slide.eq(current), {duration:0.5, autoAlpha:1, ease:'power2.out'}, '-=0.5')
-      .fromTo($slide.eq(old).find('.scene'), {scale:1}, {immediateRender:false, duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
-      .fromTo($slide.eq(current).find('.scene'), {scale:1.05}, {immediateRender:false, duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
-    old=current;
-    })
+    if(!$slide.animationProgress) {
+      current = $(this).index() + 1;
+      let animation = gsap.timeline()
+        .to($slide.eq(old), {duration:0.5, autoAlpha:0, ease:'power2.out'})
+        .to($slide.eq(current), {duration:0.5, autoAlpha:1, ease:'power2.out'}, '-=0.5')
+        .fromTo($slide.eq(old).find('.scene'), {scale:1}, {immediateRender:false, duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
+        .fromTo($slide.eq(current).find('.scene'), {scale:1.05}, {immediateRender:false, duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
+      old=current;
+    }
+  })
   $nav.on('mouseleave', function() {
-    let animation = gsap.timeline()
-    .to($slide.eq(old), {duration:0.5, autoAlpha:0, ease:'power2.out'})
-    .to($slide.eq(0), {duration:0.5, autoAlpha:1, ease:'power2.out'}, '-=0.5')
-    .to($slide.eq(old).find('.scene'), {duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
-    .fromTo($slide.eq(0).find('.scene'), {scale:1.05}, {duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
-    old=0;
+    if(!$slide.animationProgress) {
+      let animation = gsap.timeline()
+      .to($slide.eq(old), {duration:0.5, autoAlpha:0, ease:'power2.out'})
+      .to($slide.eq(0), {duration:0.5, autoAlpha:1, ease:'power2.out'}, '-=0.5')
+      .to($slide.eq(old).find('.scene'), {duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
+      .fromTo($slide.eq(0).find('.scene'), {scale:1.05}, {duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
+      old=0;
+    }
   })
 }
 
@@ -339,7 +352,7 @@ function main() {
 function siteNavEvents() {
   //события скролла
   $(window).on('wheel', function(event){
-    if($(event.target).parents('[data-scrollbar]').length==0 && !$(event.target).is('[data-scrollbar]')) {
+    if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0) {
       if(!$slide.animationProgress) {
         if(event.originalEvent.deltaY>0 && $slide.current.index()+1 < $slide.count) {
           $slide.toNext();
@@ -706,7 +719,9 @@ let map = {
 }
 
 function inputs() {
-  $(document).on('focusin focusout', 'input', function(event) {
+  autosize($('textarea'));
+
+  $(document).on('focusin focusout', 'input, textarea', function(event) {
     console.log(event.type, event.target)
     if(event.type=='focusin') {
       $(event.target).parents('.input').addClass('focus')

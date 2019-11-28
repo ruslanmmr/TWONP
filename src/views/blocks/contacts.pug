@@ -3,24 +3,23 @@ section.section.section-slide.contacts.js-subnav-true.js-pagination-dark.active
     .section__content.h-c-t.p-t-h
       <iframe src="https://yandex.ru/map-widget/v1/-/CGTXN41i" frameborder="1" allowfullscreen="true"></iframe>
   .section__bottom.contacts__bottom
-    form(action="").contacts-form.scroll-section.p-t-s.p-b-s
-      div(data-scrollbar).p-l-s.p-r-s
-        .contacts-form__content
-          .contacts-form__group
-            .contacts-form__item
-              .input
-                input(type="text").input__el
-                label.t-color-gray.input__placeholder Имя
-            .contacts-form__item
-              .input
-                input.input__el(type="email")
-                label.t-color-gray.input__placeholder E-mail
-          .contacts-form__group
-            .contacts-form__item
-              .input
-                textarea(type="email").input__el
-                label.t-color-gray.input__placeholder Текст сообщения
-            .contacts-form__item
+    form(action="").contacts-form.scroll-container.shadow
+      .contacts-form__content.scroll-child.p-s
+        .contacts-form__group
+          .contacts-form__item
+            .input.contacts-form__input
+              input(type="text").input__el
+              label.t-color-gray.input__placeholder Имя
+          .contacts-form__item
+            .input.contacts-form__input
+              input.input__el(type="email").input__el
+              label.t-color-gray.input__placeholder E-mail
+        .contacts-form__group
+          .contacts-form__item
+            .input.contacts-form__text
+              textarea(type="email").input__el
+              label.t-color-gray.input__placeholder Текст сообщения
+          .contacts-form__item
     .contacts-socials.p-s
       ul.contacts-socials__list
         li.contacts-socials__item

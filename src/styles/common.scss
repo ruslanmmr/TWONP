@@ -51,47 +51,71 @@ body {
   padding: 0 20px;
   position: relative;
 }
-.scroll-section {
+.scroll-container {
   overflow: hidden;
   position: relative;
+  &.shadow {
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 40px;
+      width: 100%;
+      left: 0;
+      z-index: 2;
+    }
+    &:before {
+      top: 0;
+      background: linear-gradient(180deg, rgba(40, 44, 51,1) 0%, rgba(40, 44, 51,0.8) 40%, rgba(40, 44, 51,0.7) 55%, rgba(40, 44, 51,0.5) 72%, rgba(40, 44, 51,0) 100%);
+    }
+    &:after {
+      bottom: 0;
+      background: linear-gradient(0deg, rgba(40, 44, 51,1) 0%, rgba(40, 44, 51,0.8) 40%, rgba(40, 44, 51,0.7) 55%, rgba(40, 44, 51,0.5) 72%, rgba(40, 44, 51,0) 100%);
+    }
+  }
   .scroll-content {
-    min-height: 100%;
     position: relative;
-  }
-  &:before,
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    height: 40px;
-    width: 100%;
-    left: 0;
-    z-index: 2;
-  }
-  &:before {
-    top: 0;
-    background: linear-gradient(180deg, rgba(40, 44, 51,1) 0%, rgba(40, 44, 51,0.8) 40%, rgba(40, 44, 51,0.7) 55%, rgba(40, 44, 51,0.5) 72%, rgba(40, 44, 51,0) 100%);
-  }
-  &:after {
-    bottom: 0;
-    background: linear-gradient(0deg, rgba(40, 44, 51,1) 0%, rgba(40, 44, 51,0.8) 40%, rgba(40, 44, 51,0.7) 55%, rgba(40, 44, 51,0.5) 72%, rgba(40, 44, 51,0) 100%);
-  }
-  [data-scrollbar] {
-    height: 100%;
-    overflow: visible !important;
     z-index: 1;
   }
   .scrollbar-track-y {
     top: 0;
     right: auto;
-    width: 5px;
-    left: 17.5px;
-    border-radius: 5px;
-    background-color: $colorG;
-    .scrollbar-thumb {
+    left: 0;
+    width: 40px;
+    height: 100%;
+    z-index: 3;
+    background-color: transparent;
+    &:after {
+      content: '';
+      display: block;
+      height: calc(100% - 80px);
       width: 5px;
+      margin: 40px auto 40px auto;
+      border-radius: 5px;
+      background-color: $colorG;
+      position: relative;
+      z-index: 1;
+    }
+  }
+  .scrollbar-thumb {
+    z-index: 2;
+    top: 0;
+    right: auto;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    &:after {
+      content: '';
+      display: block;
+      height: calc(100% - 80px);
+      width: 5px;
+      margin: 40px auto 40px auto;
       border-radius: 5px;
       background-color: $colorF;
+      position: relative;
+      z-index: 1;
     }
   }
 }
@@ -147,13 +171,20 @@ body {
 }
 
 @media all and(max-width: 1440px) {
-  .scroll-section {
+  .scroll-container {
     .scrollbar-track-y {
-      left: 12.5px;
+      width: 30px;
     }
-    &:before,
-    &:after {
-      height: 30px;
+    .scrollbar-track-y:after,
+    .scrollbar-thumb:after {
+      height: calc(100% - 60px);
+      margin: 30px auto 30px auto;
+    }
+    &.shadow {
+      &:before,
+      &:after {
+        height: 30px;
+      }
     }
   }
 }

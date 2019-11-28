@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <title>TWONP</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <!--base(href="http://localhost:9000/")-->
-    <base href="https://ruslanmmr.github.io/TWONP/dest/">
+    <base href="http://localhost:9000/">
+    <!--base(href="https://ruslanmmr.github.io/TWONP/dest/")-->
     <link rel="shortcut icon" href="img/favicon.png" type="image/png">
   </head>
   <body style="overflow:hidden">
@@ -147,32 +147,30 @@
             <div class="section__content h-c-t p-t-h"><iframe src="https://yandex.ru/map-widget/v1/-/CGTXN41i" frameborder="1" allowfullscreen="true"></iframe></div>
           </div>
           <div class="section__bottom contacts__bottom">
-            <form class="contacts-form scroll-section p-t-s p-b-s" action="">
-              <div class="p-l-s p-r-s" data-scrollbar>
-                <div class="contacts-form__content">
-                  <div class="contacts-form__group">
-                    <div class="contacts-form__item">
-                      <div class="input">
-                        <input class="input__el" type="text">
-                        <label class="t-color-gray input__placeholder">Имя</label>
-                      </div>
-                    </div>
-                    <div class="contacts-form__item">
-                      <div class="input">
-                        <input class="input__el" type="email">
-                        <label class="t-color-gray input__placeholder">E-mail</label>
-                      </div>
+            <form class="contacts-form scroll-container shadow" action="">
+              <div class="contacts-form__content scroll-child p-s">
+                <div class="contacts-form__group">
+                  <div class="contacts-form__item">
+                    <div class="input contacts-form__input">
+                      <input class="input__el" type="text">
+                      <label class="t-color-gray input__placeholder">Имя</label>
                     </div>
                   </div>
-                  <div class="contacts-form__group">
-                    <div class="contacts-form__item">
-                      <div class="input">
-                        <textarea class="input__el" type="email"></textarea>
-                        <label class="t-color-gray input__placeholder">Текст сообщения</label>
-                      </div>
+                  <div class="contacts-form__item">
+                    <div class="input contacts-form__input">
+                      <input class="input__el input__el" type="email">
+                      <label class="t-color-gray input__placeholder">E-mail</label>
                     </div>
-                    <div class="contacts-form__item"></div>
                   </div>
+                </div>
+                <div class="contacts-form__group">
+                  <div class="contacts-form__item">
+                    <div class="input contacts-form__text">
+                      <textarea class="input__el" type="email"></textarea>
+                      <label class="t-color-gray input__placeholder">Текст сообщения</label>
+                    </div>
+                  </div>
+                  <div class="contacts-form__item"></div>
                 </div>
               </div>
             </form>

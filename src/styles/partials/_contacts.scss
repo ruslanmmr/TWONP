@@ -2,6 +2,7 @@
   &__bottom {
     display: flex;
     background-color: $colorH;
+    overflow: hidden;
   }
   iframe {
     display: block;
@@ -52,7 +53,14 @@
     display: flex;
   }
   &__group {
-    min-height: 100%;
+    width: 100%;
+    margin-right: 60px;
+    &:first-child {
+      max-width: 240px;
+    }
+    &:last-child {
+      max-width: 420px;
+    }
   }
   &__item {
     &:not(:last-child) {
