@@ -5,18 +5,22 @@ section.section.section-slide.contacts.js-subnav-true.js-pagination-dark.active
   .section__bottom.contacts__bottom
     form(action="").contacts-form.scroll-section.p-t-s.p-b-s
       div(data-scrollbar).p-l-s.p-r-s
-        .contacts-form__group
-          .contacts-form__item
-            .input
-              input(type="text")
-              label.t-color-gray Имя
-          .contacts-form__item
-            .input
-              input(type="email")
-              label.t-color-gray E-mail
-        .contacts-form__group
-          .contacts-form__item
-          .contacts-form__item
+        .contacts-form__content
+          .contacts-form__group
+            .contacts-form__item
+              .input
+                input(type="text").input__el
+                label.t-color-gray.input__placeholder Имя
+            .contacts-form__item
+              .input
+                input.input__el(type="email")
+                label.t-color-gray.input__placeholder E-mail
+          .contacts-form__group
+            .contacts-form__item
+              .input
+                textarea(type="email").input__el
+                label.t-color-gray.input__placeholder Текст сообщения
+            .contacts-form__item
     .contacts-socials.p-s
       ul.contacts-socials__list
         li.contacts-socials__item

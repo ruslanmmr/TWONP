@@ -1814,9 +1814,9 @@ a {
   position: relative;
   border-bottom: 1px solid #C4C4C4;
   width: 100%;
-  max-width: 200px;
+  max-width: 240px;
   padding-top: 15px; }
-  .input label {
+  .input__placeholder {
     position: absolute;
     line-height: 20px;
     font-size: 12px;
@@ -1824,7 +1824,7 @@ a {
     -webkit-transition: 0.25s;
     -o-transition: 0.25s;
     transition: 0.25s; }
-  .input input {
+  .input__el {
     display: block;
     outline: none;
     border: 0;
@@ -1844,7 +1844,7 @@ a {
     line-height: 30px;
     padding: 0;
     color: #EAEAEA; }
-  .input.focus label {
+  .input.focus .input__el {
     -webkit-transform: translateY(-100%);
         -ms-transform: translateY(-100%);
             transform: translateY(-100%); }
@@ -2064,6 +2064,11 @@ a {
 
 .contacts-form {
   width: 100%; }
+  .contacts-form__content {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
   .contacts-form__group {
     min-height: 100%; }
   .contacts-form__item:not(:last-child) {
@@ -2478,7 +2483,7 @@ a {
     margin: -11px 0 0 -11px; }
   .map-trigger.size2 {
     width: 28px;
-    height: 30px;
+    height: 28px;
     margin: -14px 0 0 -14px; }
   .map-trigger[data-station] {
     background-color: #6FDE9B;

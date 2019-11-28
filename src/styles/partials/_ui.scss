@@ -246,16 +246,16 @@ a {
   position: relative;
   border-bottom: 1px solid $colorE;
   width: 100%;
-  max-width: 200px;
+  max-width: 240px;
   padding-top: 15px;
-  label {
+  &__placeholder {
     position: absolute;
     line-height: 20px;
     font-size: 12px;
     bottom: 5px;
     transition: $trs1;
   }
-  input {
+  &__el {
     display: block;
     outline: none;
     border: 0;
@@ -272,7 +272,7 @@ a {
     color: $colorD;
   }
   &.focus {
-    label {
+    .input__el {
       transform: translateY(-100%);
     }
   }

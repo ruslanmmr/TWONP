@@ -48,6 +48,9 @@
 }
 .contacts-form {
   width: 100%;
+  &__content {
+    display: flex;
+  }
   &__group {
     min-height: 100%;
   }
