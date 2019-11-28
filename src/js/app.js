@@ -487,7 +487,7 @@ let map = {
     
 
     map.strokeElms.css('stroke-width', `${1/map.zoom}px`)
-    map.lines.css('stroke-width', `${3/map.zoom}px`)
+    map.lines.css('stroke-width', `${2/map.zoom}px`)
 
   },
   checkInner: function(callbacks) {

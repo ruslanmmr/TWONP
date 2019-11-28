@@ -2391,7 +2391,7 @@ a {
     -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
-    stroke-width: 3px;
+    stroke-width: 2px;
     -webkit-transition: 0.25s;
     -o-transition: 0.25s;
     transition: 0.25s;
