@@ -3,26 +3,20 @@
 @import "./partials/custom-grid";
 
 //color
-$border-color: #767676;
-$dot-color: #e0e0e0;
-$bg-color: #363C46;
-$bg-color2: #121212;
-$bg-color3: #0F0F0F;
-$bg-color4:#282C33;
-$color2: #e6e6e6;
-$color3: #6FDE9B;
-$color4: #FCB566;
-$color5: #30CDFF;
-$color6: #C4C4C4;
-$disabled: #6C6C6C;
-$colorA: #E1E1E1;
-$colorB: #BEC0C2;
-$colorC: #888888;
+$colorA: #6FDE9B;
+$colorB: #FCB566;
+$colorC: #30CDFF;
+$colorD: #EAEAEA;
+$colorE: #C4C4C4;
+$colorF: #6C6C6C;
+$colorG: #363C46;
+$colorH: #282C33;
+$colorI: #121212;
 
 //условные обозначения
-$station: $color3;
-$base: $color5;
-$factory: $color4;
+$station: $colorA;
+$factory: $colorB;
+$base: $colorC;
 
 
 //transition
@@ -43,7 +37,7 @@ body {
   font-size: 16px;
   min-width: 320px;
   position: fixed;
-  background-color: $bg-color;
+  background-color: $colorG;
   color: #fff;
   line-height: 1.5;
 }

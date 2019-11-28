@@ -1656,7 +1656,7 @@ a {
           user-select: none; }
 
 .copy {
-  color: #BEC0C2; }
+  color: #6C6C6C; }
 
 .pagination {
   position: fixed;
@@ -1771,7 +1771,7 @@ a {
     .scroll-section .scrollbar-track-y .scrollbar-thumb {
       width: 5px;
       border-radius: 5px;
-      background-color: #BEC0C2; }
+      background-color: #6C6C6C; }
 
 @media all and (max-width: 1440px) {
   .scroll-section .scrollbar-track-y {
@@ -1942,7 +1942,7 @@ a {
     margin-bottom: 20px; } }
 
 .contacts__bottom {
-  background-color: #363C46; }
+  background-color: #282C33; }
 
 .contacts iframe {
   display: block;
@@ -2250,8 +2250,8 @@ a {
     .custom-map__control.disabled {
       pointer-events: none; }
       .custom-map__control.disabled .icon {
-        fill: #767676;
-        stroke: #767676; }
+        fill: #6C6C6C;
+        stroke: #6C6C6C; }
   .custom-map__container {
     height: 100%;
     width: 100%;
@@ -2290,11 +2290,11 @@ a {
       border: 1px solid #ACACAC;
       border-radius: 5px; }
     .custom-map__region span {
-      color: #e0e0e0;
+      color: #EAEAEA;
       font-size: 12px;
       line-height: 1;
       position: absolute;
-      color: #e0e0e0;
+      color: #EAEAEA;
       white-space: nowrap; }
     .custom-map__region.rb span {
       left: 0;
@@ -2445,7 +2445,7 @@ a {
     .map-popup__close .icon {
       width: 100%;
       height: 100%;
-      fill: #C4C4C4;
+      fill: #EAEAEA;
       -webkit-transition: 0.25s;
       -o-transition: 0.25s;
       transition: 0.25s; }
@@ -2478,7 +2478,7 @@ a {
     .map-popup__item span {
       line-height: 24px; }
       .map-popup__item span:first-child {
-        color: #BEC0C2;
+        color: #C4C4C4;
         font-weight: 300; }
     .map-popup__item .icon {
       height: 14px;
@@ -2518,7 +2518,7 @@ p {
   font-family: 'Manrope'; }
 
 .t-color-gray {
-  color: #e0e0e0; }
+  color: #C4C4C4; }
 
 .t-color-station {
   color: #6FDE9B; }
@@ -2627,7 +2627,7 @@ p {
     transition: 0.5s;
     font-family: "Manrope";
     border-style: solid;
-    border-color: #767676;
+    border-color: #6C6C6C;
     cursor: pointer;
     border-width: 1px 1px 0 0; }
     .home__nav-item:first-child {

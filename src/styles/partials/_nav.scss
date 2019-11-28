@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  background-color: $bg-color2;
+  background-color: $colorI;
   backdrop-filter: blur(5px);
   z-index: 99;
   width: 20%;
@@ -42,7 +42,7 @@
       display: block;
       width: 40px;
       height: 1px;
-      background-color: $color3;
+      background-color: $colorA;
       position: absolute;
       bottom: 0;
       left: 40px;
@@ -56,7 +56,7 @@
         opacity: 0;
         visibility: hidden;
         transition: inherit;
-        color: $color4;
+        color: $colorB;
         margin-left: 5px;
         font-size: 14px;
       }
@@ -64,7 +64,7 @@
     &.hover,
     &.touch,
     &.active {
-      color: $color3;
+      color: $colorA;
       &:before {
         transform: translateX(0) scaleX(1);
       }
@@ -99,7 +99,7 @@
     &.hover,
     &.touch {
       opacity: 0.8;
-      color: $color3;
+      color: $colorA;
     }
   }
 }

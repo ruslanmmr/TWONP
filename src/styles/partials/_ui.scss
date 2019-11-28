@@ -108,10 +108,10 @@ a {
   &.hover,
   &.touch {
     span {
-      color: $color3;
+      color: $colorA;
     }
     .icon {
-      fill: $color3;
+      fill: $colorA;
       transform: translateX(5px);
     }
   }
@@ -147,7 +147,7 @@ a {
   user-select: none;
 }
 .copy {
-  color: $colorB;
+  color: $colorF;
 }
 .pagination {
   position: fixed;
@@ -184,10 +184,10 @@ a {
     &.hover,
     &.touch {
       .icon {
-        fill: $color3 !important;
+        fill: $colorA !important;
       }
       span {
-        color: $color3 !important;
+        color: $colorA !important;
       }
     }
     &:first-child {
@@ -245,11 +245,11 @@ a {
     width: 5px;
     left: 17.5px;
     border-radius: 5px;
-    background-color: $bg-color;
+    background-color: $colorG;
     .scrollbar-thumb {
       width: 5px;
       border-radius: 5px;
-      background-color: $colorB;
+      background-color: $colorF;
     }
   }
 }

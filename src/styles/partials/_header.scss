@@ -16,7 +16,7 @@
       &.touch {
         opacity: 0.8;
         .icon {
-          fill: $color3;
+          fill: $colorA;
         }
       }
       .icon {
@@ -55,7 +55,7 @@
     &.hover,
     &.touch,
     &.active {
-      color: $color3;
+      color: $colorA;
     }
     &.active {
       pointer-events: none;
@@ -70,7 +70,7 @@
 .navInAnimation {
   .header .logo__link .icon {
     transition: fill $trs2 !important;
-    fill: $color3 !important;
+    fill: $colorA !important;
   }
 }
 
@@ -86,7 +86,7 @@
   &.touch {
     opacity: 0.8;
     span {
-      background-color: $color3;
+      background-color: $colorA;
       &:nth-child(1),
       &:nth-child(3) {
         width: 75%;
