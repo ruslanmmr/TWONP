@@ -1,7 +1,7 @@
 .contacts {
   &__bottom {
-    background-color: $colorH;
     display: flex;
+    background-color: $colorH;
   }
   iframe {
     display: block;
@@ -11,8 +11,8 @@
 }
 .contacts-socials {
   background-color: $colorG;
-  height: 100%;
   flex: 0 1 auto;
+  height: 100%;
   &__list {
     list-style: none;
     margin: 0;
@@ -47,5 +47,13 @@
   }
 }
 .contacts-form {
-  flex: 1 1 100%;
+  width: 100%;
+  &__group {
+    min-height: 100%;
+  }
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
 }

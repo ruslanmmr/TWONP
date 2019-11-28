@@ -1,155 +1,140 @@
 extends layout/layout
-
 block content
-  section.section.section-slide.home
-    .home__content.section__display
-      .home-slide
-        .scene
-          .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home1.jpg")')
-        .home-slide__container.section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p
-          h5.home-slide__title.t-size-64 Топливная компания
-          span.home-slide__text.t-size-24 Сеть современных АЗC.  Нефтебазы.  Топливная логистика
-      .home-slide
+  include blocks/header
+  include blocks/subnav
+  include blocks/nav
+  include blocks/pagination
+  .slide-container
+    section.section.section-slide.home
+      .home__content.section__display
+        .home-slide
+          .scene
+            .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home1.jpg")')
+          .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p.content-b
+            h5.section__title.t-size-64 Топливная компания
+            span.t-size-24.t-w-500 Сеть современных АЗC.  Нефтебазы.  Топливная логистика
+        .home-slide
+          .scene
+            .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home2.jpg")')
+          .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p.content-b
+            h5.section__title.t-size-64 Сеть АЗС
+            //span.t-size-24.d-hidden Без описания
+        .home-slide
+          .scene
+            .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home3.jpg")')
+          .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p.content-b
+            h5.section__title.t-size-64 Топливо оптом
+            //span.t-size-24.d-hidden Без описания
+        .home-slide
+          .scene
+            .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home4.jpg")')
+          .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p.content-b
+            h5.section__title.t-size-64 Топливная логистика
+            //span.t-size-24.d-hidden Без описания
+        .home-slide
+          .scene
+            .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home5.jpg")')
+          .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p.content-b
+            h5.t-size-64 Нефтебазы
+            //span.t-size-24.d-hidden Без описания
+      .home__nav.section__bottom
+        .home__nav-item.js-animated.big-block-btn(data-slide='2')
+          .big-block-btn__text
+            span.t-size-20 Заправиться
+            svg.icon 
+              use(xlink:href="img/icons/sprite.svg#ico1")
+        .home__nav-item.js-animated.big-block-btn(data-slide='3')
+          .big-block-btn__text
+            span.t-size-20 Закупить
+            svg.icon 
+              use(xlink:href="img/icons/sprite.svg#ico1")
+        .home__nav-item.js-animated.big-block-btn(data-slide='4')
+          .big-block-btn__text
+            span.t-size-20 Перевезти
+            svg.icon 
+              use(xlink:href="img/icons/sprite.svg#ico1")
+        .home__nav-item.js-animated.big-block-btn(data-slide='5')
+          .big-block-btn__text
+            span.t-size-20 Хранить
+            svg.icon 
+              use(xlink:href="img/icons/sprite.svg#ico1")
+    //инфраструктура компании
+    include blocks/map-section
+    //сеть азс
+    section.section.section-slide.category-preview.js-subnav-true
+      .section__display
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home2.jpg")')
-        .home-slide__container.section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p
-          h5.home-slide__title.t-size-64 Сеть АЗС
-          span.home-slide__text.t-size-24.d-hidden Без описания
-      .home-slide
+        .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
+          .section__container
+            h5.section__title.t-size-64 Сеть АЗС
+      .section__bottom.category-preview__bottom
+        .category-preview__description
+          .category-preview__text.p-s
+            h6.category-preview__title.ff-2.t-size-24 Кофортный отдых в пути
+            p.t-color-gray.t-w-500 Наша современная сеть АЗС всегда обеспечит Вас качественным топливом и удобным сервисом. Будем рады видеть вас на наших заправках.
+    //оптовые продажи
+    section.section.section-slide.category-preview.js-subnav-true
+      .section__display
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home3.jpg")')
-        .home-slide__container.section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p
-          h5.home-slide__title.t-size-64 Топливо оптом
-          span.home-slide__text.t-size-24.d-hidden Без описания
-      .home-slide
+        .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
+          .section__container
+            h5.section__title.t-size-64 Топливо оптом
+      .section__bottom.category-preview__bottom
+        .category-preview__description
+          .category-preview__text.p-s
+            h6.category-preview__title.ff-2.t-size-24 Прямые поставки от производителей
+            p.t-color-gray.t-w-500 Оптовые поставки бензина, дизельного топлива и СМТ. Доставим нашими бензовозами, или отгрузим топливо в Ваши бензовозы на заводах производителях.
+        a(href="wholesale-fuel/").category-preview__more.js-animated.big-block-btn
+          .big-block-btn__text
+            span.t-size-20 Перейти
+            svg.icon 
+              use(xlink:href="img/icons/sprite.svg#ico1")
+    //Топливная логистика
+    section.section.section-slide.category-preview.js-subnav-true
+      .section__display
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home4.jpg")')
-        .home-slide__container.section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p
-          h5.home-slide__title.t-size-64 Топливная логистика
-          span.home-slide__text.t-size-24.d-hidden Без описания
-      .home-slide
+        .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
+          .section__container
+            h5.section__title.t-size-64 Топливная<br> логистика
+      .section__bottom.category-preview__bottom
+        .category-preview__description
+          .category-preview__text.p-s
+            h6.category-preview__title.ff-2.t-size-24 Любой объем на любое расстояние
+            p.t-color-gray.t-w-500 Доставляем топливо собственными бензовозами по территории Южного и Центрального федерального округа. В собственности новый автопарк бензовозов, емкость бензовозов от пяти до сорока кубических метров.
+    //Нефтебазы
+    section.section.section-slide.category-preview.js-subnav-true
+      .section__display
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home5.jpg")')
-        .home-slide__container.section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p
-          h5.home-slide__title.t-size-64 Нефтебазы
-          span.home-slide__text.t-size-24.d-hidden Без описания
-    .home__nav.section__bottom
-      .home__nav-item.js-animated.btn-big(data-slide='2')
-        a(href="").btn-big__container
-          span.t-size-20 Заправиться
-          svg.icon 
-            use(xlink:href="img/icons/sprite.svg#ico1")
-      .home__nav-item.js-animated.btn-big(data-slide='3')
-        .btn-big__container
-          span.t-size-20 Закупить
-          svg.icon 
-            use(xlink:href="img/icons/sprite.svg#ico1")
-      .home__nav-item.js-animated.btn-big(data-slide='4')
-        .btn-big__container
-          span.t-size-20 Перевезти
-          svg.icon 
-            use(xlink:href="img/icons/sprite.svg#ico1")
-      .home__nav-item.js-animated.btn-big(data-slide='5')
-        .btn-big__container
-          span.t-size-20 Хранить
-          svg.icon 
-            use(xlink:href="img/icons/sprite.svg#ico1")
-  //инфраструктура компании
-  include blocks/map-section
-  //сеть азс
-  section.section.section-slide.category-preview.js-subnav-true
-    .section__display
-      .scene
-        .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home2.jpg")')
-      .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
-        .section__container
-          h5.ff-2.t-size-64 Сеть АЗС
-    .section__bottom.category-preview__bottom
-      .category-preview__description
-        .category-preview__text.p-s
-          h6.category-preview__title.ff-2.t-size-24 Кофортный отдых в пути
-          p.t-color-gray Наша современная сеть АЗС всегда обеспечит Вас качественным топливом и удобным сервисом. Будем рады видеть вас на наших заправках.
-  //оптовые продажи
-  section.section.section-slide.category-preview.js-subnav-true
-    .section__display
-      .scene
-        .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home3.jpg")')
-      .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
-        .section__container
-          h5.ff-2.t-size-64 Топливо оптом
-    .section__bottom.category-preview__bottom
-      .category-preview__description
-        .category-preview__text.p-s
-          h6.category-preview__title.ff-2.t-size-24 Прямые поставки от производителей
-          p.t-color-gray Оптовые поставки бензина, дизельного топлива и СМТ. Доставим нашими бензовозами, или отгрузим топливо в Ваши бензовозы на заводах производителях.
-      a(href="#").category-preview__more.js-animated.btn-big
-        .btn-big__container
-          span.t-size-20 Перейти
-          svg.icon 
-            use(xlink:href="img/icons/sprite.svg#ico1")
-  //Топливная логистика
-  section.section.section-slide.category-preview.js-subnav-true
-    .section__display
-      .scene
-        .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home4.jpg")')
-      .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
-        .section__container
-          h5.ff-2.t-size-64 Топливная<br> логистика
-    .section__bottom.category-preview__bottom
-      .category-preview__description
-        .category-preview__text.p-s
-          h6.category-preview__title.ff-2.t-size-24 Любой объем на любое расстояние
-          p.t-color-gray Доставляем топливо собственными бензовозами по территории Южного и Центрального федерального округа. В собственности новый автопарк бензовозов, емкость бензовозов от пяти до сорока кубических метров.
-  //Нефтебазы
-  section.section.section-slide.category-preview.js-subnav-true
-    .section__display
-      .scene
-        .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home5.jpg")')
-      .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
-        .section__container
-          h5.ff-2.t-size-64 Нефтебазы
-    .section__bottom.category-preview__bottom
-      .category-preview__description
-        .category-preview__text.p-s
-          h6.category-preview__title.ff-2.t-size-24 Хранение вашего топлива
-          p.t-color-gray На 2019 год наши нефтебазы расположены в двух областях ЦЧР - Воронежская и Тульская области. Готовы принять ваше топливо на хранение. Совокупный объем - 5500 тонн. 
-  //Утилизация
-  section.section.section-slide.category-preview.js-subnav-true
-    .section__display
-      .scene
-        .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home6.jpg")')
-      .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
-        .section__container
-          h5.ff-2.t-size-64 Утилизация
-    .section__bottom.category-preview__bottom
-      .category-preview__description
-        .category-preview__text.p-s
-          h6.category-preview__title.ff-2.t-size-24 Полный цикл переработки
-          p.t-color-gray Экологическое предприятие полного цикла по сбору, утилизации и транспортировке нефтесодержащих отходов I-IV класса опасности.Мы работаем на основании действующей лицензии. Все наши клиенты получают полный пакет отчетных документов.
-      a(href="http://ecopromvrn.ru/" target='_blank').category-preview__more.js-animated.btn-big
-        .btn-big__container
-          span.t-size-20 Перейти
-          svg.icon 
-            use(xlink:href="img/icons/sprite.svg#ico1")
-  section.section.section-slide.contacts.js-subnav-true.js-pagination-dark.active
-    .section__display
-      .section__content.h-c-t.p-t-h
-        <iframe src="https://yandex.ru/map-widget/v1/-/CGTXN41i" frameborder="1" allowfullscreen="true"></iframe>
-    .section__bottom.contacts__bottom
-      .contacts-form
-      .contacts-socials.p-s
-        ul.contacts-socials__list
-          li.contacts-socials__item
-            a(href="#" target='_blank').contacts-socials__link.js-animated
-              svg.icon 
-                use(xlink:href="img/icons/sprite.svg#vk")
-          li.contacts-socials__item
-            a(href="#" target='_blank').contacts-socials__link.js-animated
-              svg.icon 
-                use(xlink:href="img/icons/sprite.svg#phone")
-          li.contacts-socials__item
-            a(href="#" target='_blank').contacts-socials__link.js-animated
-              svg.icon 
-                use(xlink:href="img/icons/sprite.svg#mail")
+        .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
+          .section__container
+            h5.section__title.t-size-64 Нефтебазы
+      .section__bottom.category-preview__bottom
+        .category-preview__description
+          .category-preview__text.p-s
+            h6.category-preview__title.ff-2.t-size-24 Хранение вашего топлива
+            p.t-color-gray.t-w-500 На 2019 год наши нефтебазы расположены в двух областях ЦЧР - Воронежская и Тульская области. Готовы принять ваше топливо на хранение. Совокупный объем - 5500 тонн. 
+    //Утилизация
+    section.section.section-slide.category-preview.js-subnav-true
+      .section__display
+        .scene
+          .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home6.jpg")')
+        .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
+          .section__container
+            h5.section__title.t-size-64 Утилизация
+      .section__bottom.category-preview__bottom
+        .category-preview__description
+          .category-preview__text.p-s
+            h6.category-preview__title.ff-2.t-size-24 Полный цикл переработки
+            p.t-color-gray.t-w-500 Экологическое предприятие полного цикла по сбору, утилизации и транспортировке нефтесодержащих отходов I-IV класса опасности.Мы работаем на основании действующей лицензии. Все наши клиенты получают полный пакет отчетных документов.
+        a(href="http://ecopromvrn.ru/" target='_blank').category-preview__more.js-animated.big-block-btn
+          .big-block-btn__text
+            span.t-size-20 Перейти
+            svg.icon 
+              use(xlink:href="img/icons/sprite.svg#ico1")
+    include blocks/contacts
 
 

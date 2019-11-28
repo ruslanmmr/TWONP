@@ -10,6 +10,7 @@ $(document).ready(function() {
   elemsAnims();
   main();
   siteNavEvents();
+  inputs();
 
   Scrollbar.initAll({
     damping: 0.1,
@@ -22,7 +23,9 @@ $(document).ready(function() {
     onComplete: function() {
       $slide.updateAnimations();
       $slide.to($slide.current);
-      map.init();
+      if($('.custom-map').length>0) {
+        map.init();
+      }
     }
   });
 })
@@ -700,4 +703,17 @@ let map = {
       }
     })
   }
+}
+
+function inputs() {
+  $(document).on('focusin focusout', 'input', function(event) {
+    console.log(event.type, event.target)
+    if(event.type=='focusin') {
+      $(event.target).parents('.input').addClass('focus')
+    } else {
+      if($(event.target).val()=='') {
+        $(event.target).parents('.input').removeClass('focus')
+      }
+    }
+  })
 }

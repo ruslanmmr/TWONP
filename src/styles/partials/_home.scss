@@ -4,20 +4,12 @@
     &-item {
       width: 25%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(5px);
-      transition: $trs2;
-      font-family: $font2;
       border-style: solid;
       border-color: $colorF;
       cursor: pointer;
       border-width: 1px 1px 0 0;
       &:first-child {
         border-width: 1px 1px 0 1px;
-      }
-      &.hover,
-      &.touch {
-        background-color: rgba(0, 0, 0, 0.75);
       }
     }
   }
@@ -35,10 +27,5 @@
     font-family: $font2;
     margin-bottom: 0.2em;
     
-  }
-  &__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
   }
 }

@@ -32,11 +32,17 @@ p {
 .t-color-factory {
   color: $factory;
 }
+.t-w-500 {
+  max-width: 550px;
+}
 
 .t-size-72 {
   font-size: 72px;
 }
 .t-size-64 {
+  font-size: 64px;
+}
+.t-size-48 {
   font-size: 64px;
 }
 .t-size-36 {
@@ -65,7 +71,10 @@ p {
 
 @media all and(max-width: 1440px) {
   .t-size-64 {
-    font-size: 60px;
+    font-size: 54px;
+  }
+  .t-size-48 {
+    font-size: 46px;
   }
   .t-size-36 {
     font-size: 24px;
@@ -85,6 +94,9 @@ p {
   .t-size-64 {
     font-size: 46px;
     line-height: 1.25;
+  }
+  .t-size-48 {
+    font-size: 34px;
   }
   .t-size-20 {
     font-size: 22px;
@@ -113,6 +125,9 @@ p {
     font-size: 40px;
     line-height: 1.5;
   }
+  .t-size-48 {
+    font-size: 32px;
+  }
 }
 @media all and(max-width: 576px) {
   .page-head {
@@ -133,6 +148,9 @@ p {
   .t-size-64 {
     font-size: 24px;
     line-height: 1.5;
+  }
+  .t-size-48 {
+    font-size: 22px;
   }
 }
 @media all and(max-width: 360px) {

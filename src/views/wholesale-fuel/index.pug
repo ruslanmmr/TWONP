@@ -1,6 +1,76 @@
 extends ../layout/layout
-
 block content
-  
-
-
+  include ../blocks/header
+  include ../blocks/subnav2
+  include ../blocks/nav2
+  include ../blocks/pagination
+  .slide-container
+    section.section.section-slide.home.js-subnav-true
+      .home__content.section__display
+        .scene
+          .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home3.jpg")')
+        .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p.content-b
+          h5.t-size-64.section__title Топливо оптом
+          span.t-size-24.t-w-500 Доставим или отгрузим в ваши бензовозы
+      .home__nav.section__bottom
+        .home__nav-item.js-animated.big-block-btn(data-slide='1')
+          .big-block-btn__text
+            span.t-size-20 Оптовая<br> продажа топлива
+            svg.icon 
+              use(xlink:href="img/icons/sprite.svg#ico1")
+        .home__nav-item.js-animated.big-block-btn(data-slide='2')
+          .big-block-btn__text
+            span.t-size-20 Прямые контракты<br> с производителями
+            svg.icon 
+              use(xlink:href="img/icons/sprite.svg#ico1")
+        .home__nav-item.js-animated.big-block-btn(data-slide='3')
+          .big-block-btn__text
+            span.t-size-20 Отгрузка топлива<br> в ваши бензовозы
+            svg.icon 
+              use(xlink:href="img/icons/sprite.svg#ico1")
+        .home__nav-item.js-animated.big-block-btn(data-slide='4')
+          .big-block-btn__text
+            span.t-size-20 Сертификаты<br> и паспорта
+            svg.icon 
+              use(xlink:href="img/icons/sprite.svg#ico1")
+    section.section.section-slide.js-subnav-true.js-nav-hidden
+      .home__content.section__display
+        .scene
+          .bg.bg_mask2(data-depth="0.05" style='background-image: url("img/bg/bg2.jpg")')
+        .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p
+    section.section.section-slide.manufacturers.js-subnav-true
+      .section__display
+        .scene
+          .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/bg1.jpg")')
+        .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p.content-b
+          h5.section__title.t-size-64 Прямые контракты<br> с производителями
+          span.t-size-20.t-w-500 Позволяют придерживаться гибкой ценовой политики и гарантируют высокое качество поставляемого топлива
+      .section__bottom
+        .manufacturers__items
+          .manufacturers__item.js-animated.big-block-btn
+            img(src="img/icons/factory1.svg", alt="КНПЗ")
+          .manufacturers__item.js-animated.big-block-btn
+            img(src="img/icons/factory2.svg", alt="РОСНЕФТЬ")
+          .manufacturers__item.js-animated.big-block-btn
+            img(src="img/icons/factory3.svg", alt="ПЕРВЫЙ ЗАВОД")
+          .manufacturers__item.js-animated.big-block-btn
+            img(src="img/icons/factory4.svg", alt="Новошахтинский НПЗ")
+    section.section.section-slide.js-subnav-true
+      .section__display
+        .scene
+          .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/bg3.jpg")')
+        .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p.content-b
+          h5.section__title.t-size-64 Отгрузка топлива<br> в ваши бензовозы
+      .section__bottom.category-preview__bottom
+        .category-preview__description
+          .category-preview__text.p-s
+            h6.category-preview__title.ff-2.t-size-24 На заводах производителях
+            p.t-color-gray.t-w-500 Отгрузим топливо в ваши бензовозы на заводах производителях или на наших нефтебазах в Воронежской и Тульской областях.
+    section.section.section-slide.js-subnav-true.js-nav-hidden
+      .section__display
+        .scene
+          .bg.bg_mask2(data-depth="0.05" style='background-image: url("img/bg/bg4.jpg")')
+        .section__content.p-s.p-r-p.p-t-h.p-b-p.content-b
+          h5.section__title.t-size-48 Сертификаты<br> и паспорта качества
+          
+    include ../blocks/contacts
