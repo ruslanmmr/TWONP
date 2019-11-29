@@ -6,7 +6,9 @@
   backdrop-filter: blur(5px);
   z-index: 99;
   width: 20%;
-  height: 35%;
+  .scrollbar-track {
+    visibility: hidden;
+  }
   &__content {
     position: absolute;
     top: 0;
@@ -20,7 +22,9 @@
   &__items {
     display: none;
     height: 100%;
-    padding-top: 100px;
+    .scroll-container {
+      height: 100%;
+    }
   }
   &__item {
     opacity: 0;
@@ -36,7 +40,9 @@
     position: relative;
     overflow: hidden;
     line-height: 1;
-    padding: 10px 10px 10px 40px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
     &:before {
       content: '';
       display: block;
@@ -49,30 +55,12 @@
       transform: translateX(-50%) scaleX(0);
       transition: inherit;
     }
-    &.in-dev {
-      cursor: default;
-      &:after {
-        content: '(В разработке)';
-        opacity: 0;
-        visibility: hidden;
-        transition: inherit;
-        color: $colorB;
-        margin-left: 5px;
-        font-size: 14px;
-      }
-    }
     &.hover,
     &.touch,
     &.active {
       color: $colorA;
       &:before {
         transform: translateX(0) scaleX(1);
-      }
-      &.in-dev {
-        &:after {
-          visibility: visible;
-          opacity: 1;
-        }
       }
     }
     &.active {
@@ -81,13 +69,13 @@
   }
   &__list {
     list-style: none;
-    padding: 40px 0;
     margin: 0;
+    padding: 0;
+    overflow: hidden;
   }
   &__copy {
     flex-shrink: 0;
     width: 100%;
-    padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -107,25 +95,46 @@
 
 @media all and(max-width: 1440px) {
   .nav {
-    &__items {
-      padding-top: 85px;
-    }
-    &__list {
-      padding: 30px 0;
-    }
     &__item {
       &:not(:last-child) {
         margin-bottom: 15px;
       }
     }
     &__link {
-      padding: 10px 10px 10px 30px;
       &:before {
         left: 30px;
       }
     }
-    &__copy {
-      padding: 30px;
+  }
+}
+
+@media all and(max-width: 1200px) {
+  .nav {
+    width: 250px;
+  }
+}
+@media all and(max-width: 1024px) {
+  .nav {
+    width: 25%;
+  }
+}
+@media all and(max-width: 992px) {
+  .nav {
+    width: 250px;
+  }
+}
+@media all and(max-width: 992px) {
+  .nav__copy {
+    //padding-top: 0 !important;
+  }
+}
+@media all and(max-width: 576px) {
+  .nav {
+    width: 100%;
+    &__link {
+      &:before {
+        left: 20px;
+      }
     }
   }
 }

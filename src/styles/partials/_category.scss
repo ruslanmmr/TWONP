@@ -36,3 +36,11 @@
     }
   }
 }
+@media all and(max-width: 768px) {
+  .category-preview {
+    &__description {
+      backdrop-filter: none;
+      background-color: $colorI;
+    }
+  }
+}

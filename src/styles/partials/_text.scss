@@ -92,28 +92,19 @@ p {
     font-size: 22px;
   }
   .t-size-64 {
-    font-size: 46px;
+    font-size: 42px;
     line-height: 1.25;
   }
   .t-size-48 {
     font-size: 34px;
   }
-  .t-size-20 {
-    font-size: 22px;
+  .t-size-24 {
+    font-size: 20px;
   }
 }
 @media all and(max-width: 768px) {
-  .page-head {
-    margin-bottom: 35px;
-    &__title:not(:last-child) {
-      margin-bottom: 15px;
-    }
-    &__description {
-      font-size: 16px;
-      br {
-        display: none;
-      }
-    }
+  .t-w-500 {
+    max-width: 100%;
   }
   .t-size-36 {
     font-size: 24px;
@@ -146,7 +137,7 @@ p {
     font-size: 16px;
   }
   .t-size-64 {
-    font-size: 24px;
+    font-size: 30px;
     line-height: 1.5;
   }
   .t-size-48 {

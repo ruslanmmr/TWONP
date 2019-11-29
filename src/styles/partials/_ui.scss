@@ -127,7 +127,7 @@ a {
 }
 .pagination {
   position: fixed;
-  z-index: 98;
+  z-index: 101;
   right: 0;
   width: 60px;
   display: flex;
@@ -143,14 +143,14 @@ a {
     padding: 10px;
     span {
       color: #fff;
-      transition: $trs1;
+      transition: color $trs1;
       transform: rotate(90deg);
     }
     .icon {
       height: 55px;
       width: 8px;
       display: block;
-      transition: $trs1;
+      transition: fill $trs1;
       fill: #fff;
     }
     &.hidden {
@@ -287,4 +287,60 @@ a {
 
 @media all and(max-width: 1440px) {
   
+}
+
+@media all and(max-width: 768px) {
+  .pagination {
+    top: 0;
+    right: 90px;
+    height: 80px;
+    flex-direction: row;
+    width: auto;
+    &-arrow {
+      flex-direction: row;
+      justify-content: space-between;
+      height: 40px;
+      width: 110px;
+      span {
+        transform: rotate(0);
+        margin: 0 !important;
+      }
+      &:first-child {
+        margin: 0 20px 0 0;
+        .icon {
+          transform: rotate(-90deg) translateY(-25px);
+        }
+      }
+      &:last-child {
+        .icon {
+          transform: rotate(-90deg) translateY(25px);
+        }
+      }
+    }
+  }
+}
+
+@media all and(max-width: 576px) {
+  .pagination {
+    height: 70px;
+    right: 70px;
+    &-arrow {
+      padding: 0;
+      height: 20px;
+      width: 45px;
+      overflow: hidden;
+      font-size: 14px;
+      &:first-child {
+        margin: 0 15px 0 0;
+        .icon {
+          transform: rotate(-90deg) translateY(8px);
+        }
+      }
+      &:last-child {
+        .icon {
+          transform: rotate(-90deg) translateY(-8px);
+        }
+      }
+    }
+  }
 }

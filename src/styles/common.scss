@@ -12,6 +12,7 @@ $colorF: #6C6C6C;
 $colorG: #363C46;
 $colorH: #282C33;
 $colorI: #121212;
+$colorJ: #1F2227;
 
 //условные обозначения
 $station: $colorA;
@@ -78,6 +79,9 @@ body {
     position: relative;
     z-index: 1;
   }
+  .scrollbar-track-x {
+    display: none !important;
+  }
   .scrollbar-track-y {
     top: 0;
     right: auto;
@@ -86,6 +90,7 @@ body {
     height: 100%;
     z-index: 3;
     background-color: transparent;
+    transition: 0 !important;
     &:after {
       content: '';
       display: block;
@@ -138,15 +143,12 @@ body {
     overflow: hidden;
   }
   &__content {
-    height: 65%;
     position: relative;
     z-index: 2;
+    height: 100%;
     &.l-pd {
       width: 80%;
       left: 20%;
-    }
-    &.full-h {
-      height: 100%;
     }
   }
   &__bottom {
@@ -188,7 +190,61 @@ body {
     }
   }
 }
+@media all and(max-width: 1200px) {
+  .section {
+    &__content {
+      &.l-pd {
+        width: calc(100% - 250px);
+        left: 250px;
+      }
+    }
+    &__bottom {
+      width: calc(100% - 250px);
+    }
+  }
+}
+@media all and(max-width: 1024px) {
+  .section {
+    &__bottom {
+      width: 100%;
+    }
+    &__content {
+      &.l-pd {
+        width: 100%;
+        left: 0;
+      }
+    }
+  }
+}
+@media all and(max-width: 768px) {
+  .section {
+    &__bottom {
+      //height: 200px;
+    }
+  }
+}
+@media all and(max-width: 576px) {
+  .scroll-container {
+    .scrollbar-track-y {
+      width: 20px;
+    }
+    .scrollbar-track-y:after,
+    .scrollbar-thumb:after {
+      height: calc(100% - 40px);
+      margin: 20px auto 20px auto;
+      width: 4px;
+      border-radius: 4px;
+    }
+    &.shadow {
+      &:before,
+      &:after {
+        height: 20px;
+      }
+    }
+  }
+}
 
+@import "./partials/text";
 @import "./partials/ui";
 @import "./partials/header";
 @import "./partials/category";
@@ -196,7 +252,6 @@ body {
 @import "./partials/nav";
 @import "./partials/map-section";
 @import "./partials/map";
-@import "./partials/text";
 @import "./partials/home";
 
 

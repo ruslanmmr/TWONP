@@ -37,6 +37,7 @@
   top: 0;
   right: 0;
   z-index: 100;
+  visibility: hidden;
   &__list {
     margin: auto;
     padding: 0;
@@ -123,5 +124,42 @@
   }
   .sub-nav {
     height: 85px;
+  }
+}
+
+@media all and(max-width: 1200px) {
+  .sub-nav {
+    font-size: 14px;
+  }
+  .header {
+    width: 250px;
+  }
+}
+@media all and(max-width: 1024px) {
+  .header {
+    width: 25%;
+  }
+}
+@media all and(max-width: 992px) {
+  .header {
+    width: 250px;
+  }
+}
+@media all and(max-width: 768px) {
+.sub-nav {
+  display: none;
+}
+ .header {
+   width: 100%;
+ } 
+}
+@media all and(max-width: 768px) {
+  .header .logo__link {
+    height: 20px;
+  }
+}
+@media all and(max-width: 576px) {
+  .header {
+    padding: 25px 20px;
   }
 }

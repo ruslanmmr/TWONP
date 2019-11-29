@@ -5,7 +5,7 @@ block content
   include blocks/nav
   include blocks/pagination
   .slide-container
-    section.section.section-slide.home
+    section.section.section-slide.home.js-subnav-hidden.active
       .home__content.section__display
         .home-slide
           .scene
@@ -61,7 +61,7 @@ block content
     //инфраструктура компании
     include blocks/map-section
     //сеть азс
-    section.section.section-slide.category-preview.js-subnav-true
+    section.section.section-slide.category-preview
       .section__display
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home2.jpg")')
@@ -74,7 +74,7 @@ block content
             h6.category-preview__title.ff-2.t-size-24 Кофортный отдых в пути
             p.t-color-gray.t-w-500 Наша современная сеть АЗС всегда обеспечит Вас качественным топливом и удобным сервисом. Будем рады видеть вас на наших заправках.
     //оптовые продажи
-    section.section.section-slide.category-preview.js-subnav-true
+    section.section.section-slide.category-preview
       .section__display
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home3.jpg")')
@@ -92,7 +92,7 @@ block content
             svg.icon 
               use(xlink:href="img/icons/sprite.svg#ico1")
     //Топливная логистика
-    section.section.section-slide.category-preview.js-subnav-true
+    section.section.section-slide.category-preview
       .section__display
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home4.jpg")')
@@ -105,7 +105,7 @@ block content
             h6.category-preview__title.ff-2.t-size-24 Любой объем на любое расстояние
             p.t-color-gray.t-w-500 Доставляем топливо собственными бензовозами по территории Южного и Центрального федерального округа. В собственности новый автопарк бензовозов, емкость бензовозов от пяти до сорока кубических метров.
     //Нефтебазы
-    section.section.section-slide.category-preview.js-subnav-true
+    section.section.section-slide.category-preview
       .section__display
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home5.jpg")')
@@ -118,7 +118,7 @@ block content
             h6.category-preview__title.ff-2.t-size-24 Хранение вашего топлива
             p.t-color-gray.t-w-500 На 2019 год наши нефтебазы расположены в двух областях ЦЧР - Воронежская и Тульская области. Готовы принять ваше топливо на хранение. Совокупный объем - 5500 тонн. 
     //Утилизация
-    section.section.section-slide.category-preview.js-subnav-true
+    section.section.section-slide.category-preview
       .section__display
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home6.jpg")')

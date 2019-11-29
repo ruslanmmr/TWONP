@@ -12,14 +12,18 @@ $(document).ready(function() {
   main();
   siteNavEvents();
   inputs();
+  resizeElems();
+
+
+
+  scrollArea.init({onComplete:function(){$nav.init();}});
 
   $subNav.update();
-  $nav.update()
+  
   $slide.change($slide.current, {
     onComplete: function() {
       $slide.updateAnimations();
       $slide.to($slide.current);
-      scrollArea.init();
       if($('.custom-map').length>0) {
         map.init();
       }
@@ -28,9 +32,9 @@ $(document).ready(function() {
 })
 
 $(window).resize(function () {
-  $('.lazy').each(function() {
+  /* $('.lazy').each(function() {
     imagesResize(this)
-  })
+  }) */
 })
 
 const $window = {
@@ -45,7 +49,7 @@ const $page = {
 }
 let scrollArea = {
   elms: document.querySelectorAll('.scroll-container'),
-  init: function() {
+  init: function(callbacks) {
     for (let elm of this.elms) {
       let scroll = Scrollbar.init(elm, {
         damping: 0.1,
@@ -54,6 +58,10 @@ let scrollArea = {
       setInterval(function() {
         scroll.update();
       }, 500)
+    }
+    //callback
+    if (typeof callbacks === 'object') {
+      callbacks.onComplete();
     }
   }
 }
@@ -71,8 +79,8 @@ let $nav = {
     $nav.fadeAnim.play();
     $nav.triggerAnim.play();
     $('html').addClass('navOpened').addClass('navInAnimation');
-    if($slide.current.hasClass('js-nav-hidden')) {
-      $nav.hideAnim.reverse();
+    if($slide.current.hasClass('js-nav-hidden') || $window.width()<=1024) {
+      $nav.hideAnim.reverse(0);
     }
   },
   close: function() {
@@ -81,7 +89,7 @@ let $nav = {
     $nav.triggerAnim.reverse();
     setTimeout(function() {
       $('html').removeClass('navInAnimation');
-      if($slide.current.hasClass('js-nav-hidden')) {
+      if($slide.current.hasClass('js-nav-hidden') || $window.width()<=1024) {
         $nav.hideAnim.play();
       }
     }, 500)
@@ -89,7 +97,7 @@ let $nav = {
       $('html').removeClass('navOpened');
     })
   },
-  update: function() {
+  init: function() {
     $nav.triggerAnim = gsap.timeline({paused:true})
       .to($nav.trigger.find('span:first-child'), {duration:0.5, y:8, ease:'power2.in'})
       .to($nav.trigger.find('span:last-child'), {duration:0.5, y:-8, ease:'power2.in'}, '-=0.5')
@@ -102,6 +110,7 @@ let $nav = {
       .set('.nav__items', {display:'block'}, '-=0.25')
       .fromTo('.nav__item', {autoAlpha:0}, {autoAlpha:1, ease:'power2.inOut', duration:0.5, stagger:{amount: 0.25}}, '-=0.25')
       .fromTo('.nav__item', {x:40}, {x:0, ease:'power2.out', duration:0.5, stagger:{amount:0.25}}, '-=0.75')
+      .set('.nav .scrollbar-track', {autoAlpha:1})
     $nav.hideAnim = gsap.timeline({paused:true})
       .to($nav.el, {autoAlpha:0, duration:0.5, yPercent: 100, ease:'power2.in'})
     //
@@ -120,9 +129,21 @@ let $nav = {
       }
     })
     //
+    if($window.width()<=1024) {
+      $nav.hideAnim.play(0.5);
+    }
+    //
+    $(window).resize(function () {
+      if($window.width()<=1024 && $nav.state == false && $nav.hideAnim.progress()==0) {
+        $nav.hideAnim.play(0.5);
+      } else if($window.width()>1024 && $nav.state == false && $nav.hideAnim.progress()==1 && !$slide.current.hasClass('js-nav-hidden')) {
+        $nav.hideAnim.reverse();
+      }
+    })
   }
 }
 let $subNav = {
+  elm: $('.sub-nav'),
   items: $('.sub-nav__item'),
   state: false,
   fadeAnim: '',
@@ -140,6 +161,7 @@ let $subNav = {
   },
   update: function() {
     $subNav.fadeAnim = gsap.timeline({paused:true})
+      .set($subNav.elm, {autoAlpha:1})
       .fromTo($subNav.items, {autoAlpha:0}, {autoAlpha:1, ease:'power2.inOut', duration:0.4, stagger:{amount: 0.1, from:'end'}})
       .fromTo($subNav.items, {x:-100}, {x:0, ease:'power2.out', duration:0.4, stagger:{amount:0.1, from:'end'}}, '-=0.5')
       
@@ -147,6 +169,7 @@ let $subNav = {
 }
 let $slide = {
   animationProgress: false,
+  elm: $('.section-slide'),
   count: $('.section-slide').length,
   current: $('.section-slide.active'),
   next: '',
@@ -169,7 +192,7 @@ let $slide = {
   to: function(newSlide) {
     $slide.animationProgress=true;
     this.exitAnimation.play();
-    $nav.close();
+    //$nav.close();
     $slide.change(newSlide);
     //animation
     let anim = gsap.timeline({onComplete:function(){$slide.updateAnimations()}})
@@ -187,11 +210,19 @@ let $slide = {
 
     $('[data-slide]').removeClass('active');
     $(`[data-slide='${newSlide.index()}']`).addClass('active');
-    this.current.hasClass('js-subnav-true') ? $subNav.fade() : $subNav.hide();
-    if($nav.state == false && newSlide.hasClass('js-nav-hidden')) {
-      $nav.hideAnim.play()
-    } else if($nav.state == false) {
-      $nav.hideAnim.reverse()
+    //
+    if(this.current.hasClass('js-subnav-hidden') || ( this.current.hasClass('map-section') && $window.width()<=992 ) ) {
+      $subNav.hide();
+    } else {
+      $subNav.fade()
+    }
+    //
+    if($window.width()>1024) {
+      if($nav.state == false && newSlide.hasClass('js-nav-hidden')) {
+        $nav.hideAnim.play()
+      } else if($nav.state == false) {
+        $nav.hideAnim.reverse()
+      }
     }
     //callback
     if (typeof callbacks === 'object') {
@@ -310,6 +341,7 @@ function elemsAnims() {
 function main() {
   //parralax
   if($('html').hasClass('desktop')) {
+
     let $scene = $('.scene');
     $scene.each(function() {
       let parallaxInstance = new Parallax(this, {
@@ -317,9 +349,8 @@ function main() {
         limitX: '100'
       });
     })
-  }
 
-  let $slideBtn = $('.home__nav-item'),
+    let $slideBtn = $('.home__nav-item'),
       $nav = $('.home__nav'),
       $slide = $('.home-slide'),
       current,
@@ -345,6 +376,31 @@ function main() {
       .fromTo($slide.eq(0).find('.scene'), {scale:1.05}, {duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
       old=0;
     }
+  })
+
+  }
+}
+function resizeElems() {
+  function contentResize() {
+    $slide.elm.each(function() {
+      if($(this).find('.section__bottom').length>0) {
+        let height = $(this).outerHeight() - $(this).find('.section__bottom').outerHeight();
+        $(this).find('.section__content').css('height', height);
+      }
+    })
+  }
+  function navResize() {
+    if($window.width()>1024 && $nav.state==false) {
+      $nav.el.css('height', '35%')
+    } else if($nav.state==false) {
+      $nav.el.css('height', '100%')
+    }
+  }
+  contentResize();
+  navResize();
+  $(window).resize(function () {
+    contentResize();
+    navResize();
   })
 }
 
@@ -394,8 +450,8 @@ let map = {
   innerR: '',
   innerB: '',
   innerL: '',
-  controlPlus: $('.custom-map__plus'),
-  controlMinus: $('.custom-map__minus'),
+  controlPlus: $('.custom-map-plus'),
+  controlMinus: $('.custom-map-minus'),
   zoomMax: 2,
   zoomGradations: 3,
   zoomPlus: function() {
@@ -650,7 +706,6 @@ let map = {
     //всплывайки
     let newPopup,
         oldPopup,
-        contentAnim,
         newAnimation,
         oldAnimation,
         data,
@@ -695,8 +750,7 @@ let map = {
         if(oldAnimation!==undefined) {
           oldAnimation.reverse();
         } else {
-          contentAnim = gsap.timeline()
-            .to('.map-section__description', {duration:0.5, autoAlpha:0, xPercent:-100, ease:'power2.in'})
+          $('.map-section__description, .map-section__legend').addClass('active');
         }
       }
     });
@@ -707,8 +761,8 @@ let map = {
         popupAvailable = false;
         map.trigger.removeClass('active').removeClass('dark').removeClass('is');
         map.lines.removeClass('active');
+        $('.map-section__description, .map-section__legend').removeClass('active');
         newAnimation.reverse();
-        contentAnim.reverse();
         newAnimation.eventCallback("onReverseComplete", function() {
           oldAnimation = undefined;
           popupAvailable = true;
