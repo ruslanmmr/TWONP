@@ -68,11 +68,11 @@ body {
     }
     &:before {
       top: 0;
-      background: linear-gradient(180deg, rgba(40, 44, 51,1) 0%, rgba(40, 44, 51,0.8) 40%, rgba(40, 44, 51,0.7) 55%, rgba(40, 44, 51,0.5) 72%, rgba(40, 44, 51,0) 100%);
+      background: linear-gradient(180deg, rgba(40, 44, 51,1) 0%, rgba(40, 44, 51,0.8) 20%, rgba(40, 44, 51,0.7) 35%, rgba(40, 44, 51,0.5) 50%, rgba(40, 44, 51,0) 100%);
     }
     &:after {
       bottom: 0;
-      background: linear-gradient(0deg, rgba(40, 44, 51,1) 0%, rgba(40, 44, 51,0.8) 40%, rgba(40, 44, 51,0.7) 55%, rgba(40, 44, 51,0.5) 72%, rgba(40, 44, 51,0) 100%);
+      background: linear-gradient(0deg, rgba(40, 44, 51,1) 0%, rgba(40, 44, 51,0.8) 20%, rgba(40, 44, 51,0.7) 35%, rgba(40, 44, 51,0.5) 50%, rgba(40, 44, 51,0) 100%);
     }
   }
   .scroll-content {
@@ -133,7 +133,7 @@ body {
   z-index: 1;
   &__title {
     &:not(:last-child) {
-      margin-bottom: 0.2em;
+      margin-bottom: 0.25em;
     }
   }
   &__display {
@@ -218,8 +218,8 @@ body {
 }
 @media all and(max-width: 768px) {
   .section {
-    &__bottom {
-      //height: 200px;
+    &__title:not(:last-child) {
+      margin-bottom: 0.5em;
     }
   }
 }
@@ -230,6 +230,7 @@ body {
   .section {
     &__title:not(:last-child) {
       margin-bottom: 0.3em;
+      line-height: 1.35;
     }
   }
   .scroll-container {

@@ -8,18 +8,19 @@ section.section.section-slide.contacts.js-subnav-true.js-pagination-dark
         .contacts-form__group
           .contacts-form__item
             .input.contacts-form__input
-              input(type="text").input__el
+              input(type="text" required).input__el
               label.t-color-gray.input__placeholder Имя
           .contacts-form__item
             .input.contacts-form__input
-              input.input__el(type="email").input__el
+              input.input__el(type="email" required).input__el
               label.t-color-gray.input__placeholder E-mail
         .contacts-form__group
           .contacts-form__item
             .input.contacts-form__text
-              textarea(type="email").input__el
+              textarea(type="email" required).input__el
               label.t-color-gray.input__placeholder Текст сообщения
           .contacts-form__item
+            button(type='submit').button.button_style1.js-animated Отправить
     .contacts-socials.p-s
       ul.contacts-socials__list
         li.contacts-socials__item
@@ -27,7 +28,7 @@ section.section.section-slide.contacts.js-subnav-true.js-pagination-dark
             svg.icon 
               use(xlink:href="img/icons/sprite.svg#vk")
         li.contacts-socials__item
-          a(href="#" target='_blank').contacts-socials__link.js-animated
+          a(href="tel:88005000000").contacts-socials__link.js-animated
             svg.icon 
               use(xlink:href="img/icons/sprite.svg#phone")
         li.contacts-socials__item

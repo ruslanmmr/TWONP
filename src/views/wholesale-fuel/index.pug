@@ -5,13 +5,13 @@ block content
   include ../blocks/nav2
   include ../blocks/pagination
   .slide-container
-    section.section.section-slide.home
+    section.section.section-slide.home.active
       .home__content.section__display
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home3.jpg")')
         .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p.content-b
           h5.t-size-64.section__title Топливо оптом
-          span.t-size-24.t-w-500 Доставим или отгрузим в ваши бензовозы
+          span.t-size-24 Доставим или отгрузим в ваши бензовозы
       .home__nav.section__bottom
         .home__nav-item.js-animated.big-block-btn(data-slide='1')
           .big-block-btn__text
@@ -45,7 +45,7 @@ block content
         .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p.content-b
           h5.section__title.t-size-64 Прямые контракты<br> с производителями
           span.t-size-20.t-w-500 Позволяют придерживаться гибкой ценовой политики и гарантируют высокое качество поставляемого топлива
-      .section__bottom
+      .section__bottom.manufacturers__bottom
         .manufacturers__items
           .manufacturers__item.js-animated.big-block-btn
             img(src="img/icons/factory1.svg", alt="КНПЗ")

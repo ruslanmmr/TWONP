@@ -1,9 +1,7 @@
 .category-preview {
   &__description {
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    flex: 1 0 75%;
+    width: 75%;
   }
   &__text {
     height: 100%;
@@ -11,6 +9,8 @@
   }
   &__bottom {
     display: flex;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
   }
   &__title {
     margin-bottom: 25px;
@@ -19,6 +19,9 @@
     height: 100%;
     width: 25%;
     background-color: $colorH;
+    position: absolute;
+    bottom: 0;
+    right: 0;
     &.hover,
     &.touch {
       background-color: $colorG;
@@ -31,16 +34,20 @@
   }
 }
 
-@media all and(max-width: 1440px) {
+@media all and(max-width: 1024px) {
   .category-preview {
     &__title {
       margin-bottom: 20px;
+    }
+    &__bottom {
+      height: auto;
+      min-height: 210px;
     }
   }
 }
 @media all and(max-width: 768px) {
   .category-preview {
-    &__description {
+    &__bottom {
       backdrop-filter: none;
       background-color: $colorI;
     }
@@ -51,11 +58,11 @@
     .button {
       display: block;
     }
+    &__description {
+      width: 100%;
+    }
     &__more {
       display: none;
-    }
-    &__bottom {
-      height: auto;
     }
     &__title {
       margin-bottom: 15px;

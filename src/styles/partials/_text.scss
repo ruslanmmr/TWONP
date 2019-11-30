@@ -92,8 +92,7 @@ p {
     font-size: 22px;
   }
   .t-size-64 {
-    font-size: 42px;
-    line-height: 1.25;
+    font-size: 48px;
   }
   .t-size-48 {
     font-size: 34px;
@@ -113,7 +112,7 @@ p {
     font-size: 16px;
   }
   .t-size-64 {
-    font-size: 48px;
+    font-size: 42px;
   }
   .t-size-48 {
     font-size: 32px;
@@ -122,19 +121,18 @@ p {
 @media all and(max-width: 576px) {
   .t-size-64 {
     font-size: 30px;
-    line-height: 1.35;
   }
   .t-size-48 {
     font-size: 22px;
-    line-height: 1.5;
   }
   .t-size-36 {
     font-size: 16px;
-    line-height: 1.5;
   }
   .t-size-24 {
     font-size: 16px;
-    line-height: 1.5;
+  }
+  .t-size-20 {
+    font-size: 16px;
   }
 }
 @media all and(max-width: 360px) {

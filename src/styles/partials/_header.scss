@@ -11,14 +11,14 @@
     &__link {
       display: block;
       height: 25px;
-      transition: $trs1;
+      transition: opacity $trs1;
       .icon {
         display: block;
         height: 100%;
         width: auto;
         fill: #fff;
         stroke: none;
-        transition: $trs1;
+        transition: fill $trs1;
       }
       &.hover,
       &.touch {
@@ -70,6 +70,7 @@
 }
 .navInAnimation {
   .header .logo__link .icon {
+    transition: fill $trs2 !important;
     fill: $colorA !important;
   }
 }

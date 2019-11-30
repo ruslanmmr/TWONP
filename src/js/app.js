@@ -36,9 +36,7 @@ window.addEventListener('load',
 }, false);
 
 $(window).resize(function () {
-  /* $('.lazy').each(function() {
-    imagesResize(this)
-  }) */
+  resizeElems();
 })
 
 const $window = {
@@ -424,7 +422,6 @@ let $nav = {
     }
   },
   close: function() {
-    $nav.state = false;
     $nav.fadeAnim.reverse();
     $nav.triggerAnim.reverse();
     setTimeout(function() {
@@ -435,6 +432,7 @@ let $nav = {
     }, 500)
     $nav.fadeAnim.eventCallback("onReverseComplete", function(){
       $('html').removeClass('navOpened');
+      $nav.state = false;
     })
   },
   init: function() {
@@ -532,7 +530,7 @@ let $slide = {
   to: function(newSlide) {
     $slide.animationProgress=true;
     this.exitAnimation.play();
-    //$nav.close();
+    $nav.close();
     $slide.change(newSlide);
     //animation
     let anim = gsap.timeline({onComplete:function(){$slide.updateAnimations()}})
@@ -739,10 +737,6 @@ function resizeElems() {
   }
   contentResize();
   navResize();
-  $(window).resize(function () {
-    contentResize();
-    navResize();
-  })
 }
 
 
