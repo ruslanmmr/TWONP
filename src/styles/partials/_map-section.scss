@@ -51,7 +51,7 @@
     display: flex;
     align-items: center;
     width: 45%;
-    height: 100%;
+    flex: 1 1 100%;
     position: relative;
     z-index: 3;
   }
@@ -59,6 +59,7 @@
     position: relative;
     z-index: 3;
     width: 45%;
+    flex: 0 0 auto;
     margin: 0 auto 0 0;
   }
   &__legend {
@@ -504,13 +505,13 @@
     &__description,
     &__legend {
       width: 100%;
+      flex: 0 0 auto;
     }
     &__legend,
     &__description {
       &.active {
         transform: translateX(0);
       }
-      height: auto;
       &:after {
         width: 100%;
         height: calc(100% - 30px);
@@ -550,6 +551,8 @@
   }
   .custom-map {
     width: 100%;
+    height: 0;
+    flex: 1 1 100%;
     position: relative;
     padding: 0 30px;
   }

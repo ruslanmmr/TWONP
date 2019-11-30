@@ -11,21 +11,21 @@
     &__link {
       display: block;
       height: 25px;
-      transition: opacity $trs1;
-      &.hover,
-      &.touch {
-        opacity: 0.8;
-        .icon {
-          fill: $colorA;
-        }
-      }
+      transition: $trs1;
       .icon {
         display: block;
         height: 100%;
         width: auto;
         fill: #fff;
         stroke: none;
-        transition: fill $trs1;
+        transition: $trs1;
+      }
+      &.hover,
+      &.touch {
+        opacity: 0.8;
+        .icon {
+          fill: $colorA;
+        }
       }
     }
   }
@@ -70,7 +70,6 @@
 }
 .navInAnimation {
   .header .logo__link .icon {
-    transition: fill $trs2 !important;
     fill: $colorA !important;
   }
 }
