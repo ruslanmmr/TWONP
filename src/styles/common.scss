@@ -224,6 +224,14 @@ body {
   }
 }
 @media all and(max-width: 576px) {
+  body {
+    font-size: 14px;
+  }
+  .section {
+    &__title:not(:last-child) {
+      margin-bottom: 0.3em;
+    }
+  }
   .scroll-container {
     .scrollbar-track-y {
       width: 20px;

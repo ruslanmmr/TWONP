@@ -12,9 +12,6 @@
   &__bottom {
     display: flex;
   }
-  &__description {
-    
-  }
   &__title {
     margin-bottom: 25px;
   }
@@ -26,6 +23,11 @@
     &.touch {
       background-color: $colorG;
     }
+  }
+  .button {
+    width: 100%;
+    margin: 20px 0 0 0;
+    display: none;
   }
 }
 
@@ -41,6 +43,22 @@
     &__description {
       backdrop-filter: none;
       background-color: $colorI;
+    }
+  }
+}
+@media all and(max-width: 576px) {
+  .category-preview {
+    .button {
+      display: block;
+    }
+    &__more {
+      display: none;
+    }
+    &__bottom {
+      height: auto;
+    }
+    &__title {
+      margin-bottom: 15px;
     }
   }
 }

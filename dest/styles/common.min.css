@@ -429,7 +429,7 @@ template {
   .p-b-s {
     padding-bottom: 20px; }
   .p-b-p {
-    padding-bottom: 30px; }
+    padding-bottom: 20px; }
   .p-r-p {
     padding-right: 20px; }
   .p-t-h {
@@ -1614,6 +1614,10 @@ body {
     left: 0; } }
 
 @media all and (max-width: 576px) {
+  body {
+    font-size: 14px; }
+  .section__title:not(:last-child) {
+    margin-bottom: 0.3em; }
   .scroll-container .scrollbar-track-y {
     width: 20px; }
   .scroll-container .scrollbar-track-y:after,
@@ -1628,7 +1632,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
-  line-height: 1.3;
+  line-height: 1.35;
   margin: 0;
   font-family: "Manrope"; }
 
@@ -1720,27 +1724,23 @@ p {
   .t-size-18 {
     font-size: 16px; }
   .t-size-64 {
-    font-size: 40px;
-    line-height: 1.5; }
+    font-size: 48px; }
   .t-size-48 {
     font-size: 32px; } }
 
 @media all and (max-width: 576px) {
-  .page-head {
-    margin-bottom: 30px; }
-    .page-head__description {
-      font-size: 14px; }
-  .t-size-36 {
-    font-size: 16px; }
-  .title_style1 {
-    margin-bottom: 25px; }
-  .t-size-24 {
-    font-size: 16px; }
   .t-size-64 {
     font-size: 30px;
-    line-height: 1.5; }
+    line-height: 1.35; }
   .t-size-48 {
-    font-size: 22px; } }
+    font-size: 22px;
+    line-height: 1.5; }
+  .t-size-36 {
+    font-size: 16px;
+    line-height: 1.5; }
+  .t-size-24 {
+    font-size: 16px;
+    line-height: 1.5; } }
 
 @media all and (max-width: 360px) {
   .t-size-36 {
@@ -1748,7 +1748,9 @@ p {
 
 .icon {
   fill: #000;
-  stroke: #000; }
+  stroke: #000;
+  display: block;
+  margin: 0; }
 
 .button {
   display: inline-block;
@@ -1763,6 +1765,14 @@ p {
      -moz-appearance: none;
           appearance: none;
   padding: 0; }
+  .button_style1 {
+    border-radius: 2px;
+    background-color: #6FDE9B;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 10px 20px;
+    text-align: center;
+    color: #121212; }
 
 a {
   color: inherit;
@@ -2116,7 +2126,15 @@ a {
       .pagination-arrow:last-child .icon {
         -webkit-transform: rotate(-90deg) translateY(-8px);
             -ms-transform: rotate(-90deg) translateY(-8px);
-                transform: rotate(-90deg) translateY(-8px); } }
+                transform: rotate(-90deg) translateY(-8px); }
+  .big-block-btn span {
+    font-size: 12px; }
+  .big-block-btn .icon {
+    bottom: -10px; }
+    .big-block-btn .icon use {
+      -webkit-transform: translateX(-35px);
+          -ms-transform: translateX(-35px);
+              transform: translateX(-35px); } }
 
 .header {
   position: fixed;
@@ -2294,6 +2312,11 @@ a {
   .category-preview__more.hover, .category-preview__more.touch {
     background-color: #363C46; }
 
+.category-preview .button {
+  width: 100%;
+  margin: 20px 0 0 0;
+  display: none; }
+
 @media all and (max-width: 1440px) {
   .category-preview__title {
     margin-bottom: 20px; } }
@@ -2303,6 +2326,16 @@ a {
     -webkit-backdrop-filter: none;
             backdrop-filter: none;
     background-color: #121212; } }
+
+@media all and (max-width: 576px) {
+  .category-preview .button {
+    display: block; }
+  .category-preview__more {
+    display: none; }
+  .category-preview__bottom {
+    height: auto; }
+  .category-preview__title {
+    margin-bottom: 15px; } }
 
 .contacts__bottom {
   display: -webkit-box;
@@ -2512,11 +2545,17 @@ a {
   .nav {
     width: 250px; } }
 
+@media all and (max-width: 768px) {
+  .nav {
+    width: 50%; } }
+
 @media all and (max-width: 576px) {
   .nav {
     width: 100%; }
     .nav__phone {
       margin-bottom: 15px; }
+    .nav__item:not(:last-child) {
+      margin-bottom: 10px; }
     .nav__link:before {
       left: 20px; } }
 
@@ -2837,7 +2876,7 @@ a {
               box-shadow: 0px 0px 24px 4px #fcb566; }
   .map-trigger[data-base-station] {
     border: 1px solid #6FDE9B;
-    z-index: 7;
+    z-index: 6;
     padding: 4px; }
     .map-trigger[data-base-station]:before {
       content: '';
@@ -3039,7 +3078,9 @@ a {
 
 @media all and (max-width: 576px) {
   .custom-map-controls {
-    right: 20px; }
+    right: 20px;
+    top: 75px;
+    bottom: auto; }
   .custom-map {
     padding: 0 20px; }
     .custom-map:before {
@@ -3074,17 +3115,29 @@ a {
       right: 15px;
       padding: 12px; }
   .map-section__title {
-    font-size: 24px; }
+    font-size: 24px;
+    margin-top: 0;
+    line-height: 1.5; }
+  .map-section__legend:after, .map-section__description:after {
+    height: -webkit-calc(100% - 20px);
+    height: calc(100% - 20px); }
+  .map-section__legend:before, .map-section__description:before {
+    height: 20px; }
+  .map-section__legend {
+    padding-top: 20px; }
+  .map-section__description {
+    padding-bottom: 20px; }
   .map-section__legend-title {
     display: none; }
   .map-section__legend-item {
-    font-size: 12px; }
-    .map-section__legend-item:not(:last-child) {
-      margin-bottom: 7px; }
+    font-size: 12px;
+    padding-left: 14px; }
+    .map-section__legend-item:before {
+      top: 6px;
+      width: 6px;
+      height: 6px; }
   .map-section__legend-section:first-child {
-    margin: 0 0 7px 0; }
-  .map-section__legend-list {
-    display: block; } }
+    margin: 0 15px 0 0; } }
 
 .map-section {
   background-color: #363C46; }
@@ -3115,5 +3168,19 @@ a {
   .home-slide__title {
     font-family: "Manrope";
     margin-bottom: 0.2em; }
+
+@media all and (max-width: 768px) {
+  .home__nav {
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    height: 280px; }
+    .home__nav-item {
+      width: 50%;
+      height: 50%; } }
+
+@media all and (max-width: 576px) {
+  .home__nav {
+    height: 170px; } }
 
 /*# sourceMappingURL=maps/common.min.css.map */

@@ -12,7 +12,6 @@ $(document).ready(function() {
   main();
   siteNavEvents();
   inputs();
-  resizeElems();
 
 
 
@@ -30,6 +29,11 @@ $(document).ready(function() {
     }
   });
 })
+
+window.addEventListener('load', 
+    function() { 
+      resizeElems();
+}, false);
 
 $(window).resize(function () {
   /* $('.lazy').each(function() {
@@ -207,6 +211,7 @@ let $slide = {
     this.prev = this.current.prev();
 
     $pagination.update();
+    resizeElems();
 
     $('[data-slide]').removeClass('active');
     $(`[data-slide='${newSlide.index()}']`).addClass('active');

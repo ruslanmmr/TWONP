@@ -29,3 +29,23 @@
     
   }
 }
+
+@media all and(max-width: 768px) {
+  .home {
+    &__nav {
+      flex-wrap: wrap;
+      height: 280px;
+      &-item {
+        width: 50%;
+        height: 50%;
+      }
+    }
+  }
+}
+@media all and(max-width: 576px) {
+  .home {
+    &__nav {
+      height: 170px;
+    }
+  }
+}
