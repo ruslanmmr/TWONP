@@ -69,6 +69,342 @@ let scrollArea = {
     }
   }
 }
+let map = {
+  container: $('.custom-map__container'),
+  inner: $('.custom-map__inner'),
+  trigger: $('.map-trigger'),
+  strokeElms: $('.custom-map .region, .custom-map .road'),
+  lines: $('.custom-map .line'),
+  itemsElls: $('.custom-map .item'),
+  available: false,
+  x: 0,
+  y: 0,
+  animation: '',
+  interval: '',
+  translateAnimation: '',
+  innerT: '',
+  innerR: '',
+  innerB: '',
+  innerL: '',
+  controlPlus: $('.custom-map-plus'),
+  controlMinus: $('.custom-map-minus'),
+  zoomMax: 2,
+  zoomGradations: 3,
+  zoomPlus: function() {
+    if(this.zoomGradation<this.zoomGradations) {
+      this.zoomGradation++;
+      this.zoom = 1 + ((this.zoomGradation-1)*map.zoomInterval);
+      this.update('zoom+', false);
+    }
+  },
+  zoomMinus: function() {
+    if(this.zoomGradation>1) {
+      this.zoomGradation--;
+      this.zoom = 1 + ((this.zoomGradation-1) * map.zoomInterval);
+      this.update('zoom-', false);
+    }
+  },
+  checkBtns: function() {
+    if(this.zoomGradation==this.zoomGradations) {
+      this.controlPlus.addClass('disabled');
+    } else {
+      this.controlPlus.removeClass('disabled');
+    }
+    if(this.zoomGradation==1) {
+      this.controlMinus.addClass('disabled');
+    } else {
+      this.controlMinus.removeClass('disabled');
+    }
+  },
+  update: function(zoomDir) {
+    this.available = false;
+    this.checkBtns();
+
+
+    if(zoomDir=='zoom-') {
+      let y = Math.round(map.y + ( 
+        (map.containerCenterY-map.mapCenterY) * 
+        (map.zoomInterval * (1/(map.zoom+map.zoomInterval))) 
+      ));
+      let x = Math.round(map.x + ( 
+        (map.containerCenterX-map.mapCenterX) * 
+        (map.zoomInterval * (1/(map.zoom+map.zoomInterval))) 
+      ));
+
+      if(map.innerT>map.innerB) {
+        let c = ((map.inner.height() * map.zoom - map.inner.height())/2);
+        if(y-c>0) {
+          map.y = c;
+        } else {
+          map.y = y;
+        }
+      } else {
+        let c = Math.round(((map.inner.height() * (1+map.zoomInterval) - map.inner.height())/2));
+        
+        if(y-(c+map.innerB)>map.y) {
+          map.y = y;
+        } else {
+          map.y = map.y + map.innerB + c;
+        }
+
+      }
+
+      if(map.innerL>map.innerR) {
+        let c = Math.round(((map.inner.height() * map.zoom - map.inner.height())/2));
+        
+        if(x-c>0) {
+          map.x = c;
+        } else {
+          map.x = x;
+        }
+      } else {
+        let c = Math.round(((map.inner.width() * (1+map.zoomInterval) - map.inner.width())/2));
+        
+
+        if(x-(c+map.innerR)>map.x) {
+          map.x = x;
+        } else {
+          map.x = map.x + map.innerR + c;
+        }
+      }
+
+    } else if(zoomDir=='zoom+') {
+
+      map.y = Math.round(map.y - ( 
+        (map.containerCenterY-map.mapCenterY) * 
+        (map.zoomInterval * (1/(map.zoom-map.zoomInterval))) 
+      ))
+
+      map.x = Math.round(map.x - ( 
+        (map.containerCenterX-map.mapCenterX) * 
+        (map.zoomInterval * (1/(map.zoom-map.zoomInterval))) 
+      ));
+
+    }
+
+    this.animation = gsap.timeline({
+      onComplete: function() {
+        map.zoomCurrent = map.zoom;
+        map.checkInner({onComplete() {
+          map.available = true;
+        }})
+        }
+    }).to(map.inner,{duration:0.25, scale:map.zoom, x:map.x, y:map.y, ease:'power2.inOut'})
+      .to(map.itemsElls,{duration:0.25, scale:1/map.zoom, ease:'power2.inOut'}, '-=0.25')
+      
+    
+
+    map.strokeElms.css('stroke-width', `${1/map.zoom}px`)
+    map.lines.css('stroke-width', `${2/map.zoom}px`)
+
+  },
+  checkInner: function(callbacks) {
+    let mapTop = this.inner.offset().top,
+        mapLeft = this.inner.offset().left,
+        containerTop = this.container.offset().top,
+        containerLeft = this.container.offset().left;
+
+      this.mapHeight = this.inner.height() * this.zoomCurrent;
+      this.mapWidth = this.inner.width() * this.zoomCurrent;
+      this.containerHeight = this.container.height();
+      this.containerWidth = this.container.width();
+
+    this.containerCenterY = (containerTop + (this.containerHeight/2));
+    this.mapCenterY = (mapTop + (this.mapHeight/2));
+    this.containerCenterX = (containerLeft + (this.containerWidth/2));
+    this.mapCenterX = (mapLeft + (this.mapWidth/2));
+
+    this.innerT = Math.round(mapTop - containerTop);
+    this.innerR = Math.round(-((mapLeft+this.mapWidth) - (containerLeft+this.containerWidth)));
+    this.innerB = Math.round(-((mapTop+this.mapHeight) - (containerTop+this.containerHeight)));
+    this.innerL = Math.round(mapLeft - containerLeft);
+
+    //callback
+    if (typeof callbacks === 'object') {
+      callbacks.onComplete();
+    }
+    
+
+  },
+  init: function() {
+    this.zoomInterval = (map.zoomMax-1)/(map.zoomGradations-1);
+    this.zoom = 1;
+    this.zoomCurrent = 1;
+    this.zoomGradation = 1;
+    
+    this.controlPlus.on('click', function(e) {
+      e.preventDefault();
+      if(map.available==true) {
+        map.zoomPlus();
+      }
+      
+    })
+    this.controlMinus.on('click', function(e) {
+      e.preventDefault();
+      if(map.available==true) { 
+        map.zoomMinus();
+      }
+    })
+
+    let area = new Hammer.Manager(map.container[0]);
+    let pan = new Hammer.Pan();
+    pan.set({ threshold: 1 });
+    area.add(pan);
+
+    let startX = 0,
+        startY = 0,
+        currentX,
+        currentY,
+        compensateX = 0,
+        compensateY = 0,
+        oldX = 0,
+        oldY = 0;
+  
+    //события свайпов
+    area.on("panend panstart panup pandown panleft panright", function(event) {
+      let Event = event.type;
+
+      if(map.available==true) {
+        if(Event=='panstart') {
+          startX = event.center.x;
+          startY = event.center.y;
+          oldX = map.x;
+          oldY = map.y;
+        } else if(Event=='panend') {
+          map.x = currentX;
+          map.y = currentY;
+          compensateX = 0;
+          compensateY = 0;
+        } else if(Event=='panup' || Event=='panright' || Event=='pandown' || Event=='panleft') {
+
+          currentX = map.x + event.center.x - startX + compensateX;
+          currentY = map.y + event.center.y - startY + compensateY;
+
+          map.checkInner({onComplete: function() {
+  
+            if(map.innerT>0 && currentY>oldY) {
+              currentY = oldY;
+              compensateY = currentY - map.y + startY - event.center.y;
+            }
+            if(map.innerB>0 && currentY<oldY) {
+              currentY = oldY;
+              compensateY = currentY - map.y + startY - event.center.y;
+            }
+            if(map.innerR>0 && currentX<oldX) {
+              currentX = oldX;
+              compensateX = currentX - map.x + startX - event.center.x;
+            }
+            if(map.innerL>0 && currentX>oldX) {
+              currentX = oldX;
+              compensateX = currentX - map.x + startX - event.center.x;
+            }
+
+            gsap.set(map.inner, {y:currentY, x:currentX})
+            oldX = currentX;
+            oldY = currentY;
+
+          }})
+        }
+      } else {
+        compensateY = startY - event.center.y;
+        compensateX = startX - event.center.x;
+      }
+    });
+    //условные обозначения
+    let $legendTrigger = $('.map-section__legend-item').not($('[data-disabled]'));
+    $legendTrigger.on('mouseenter mouseleave', function(event) {
+      if(event.type=='mouseenter') {
+        if($(this).is('[data-base]')) {
+          $legendTrigger.not($(this)).addClass('disabled');
+          map.trigger.not($('[data-base],[data-base-station],[data-disabled]')).addClass('disabled');
+        } else if($(this).is('[data-station]')) {
+          $legendTrigger.not($(this)).addClass('disabled');
+          map.trigger.not($('[data-station], [data-base-station], [data-disabled]')).addClass('disabled');
+        } else if($(this).is('[data-factory]')) {
+          $legendTrigger.not($(this)).addClass('disabled');
+          map.trigger.not($('[data-factory], [data-disabled]')).addClass('disabled');
+        }
+      } else {
+        $legendTrigger.removeClass('disabled');
+        map.trigger.removeClass('disabled');
+      }
+    })
+
+    this.checkBtns();
+    this.popups();
+    map.checkInner({onComplete() {
+      map.available = true;
+    }})
+  },
+  popups: function() {
+    //всплывайки
+    let newPopup,
+        oldPopup,
+        newAnimation,
+        oldAnimation,
+        data,
+        popupAvailable = true;
+
+    map.trigger.on('click', function(event) {
+      event.preventDefault();
+      if(map.available==true && popupAvailable==true) {
+        popupAvailable = false;
+        map.trigger.removeClass('active').removeClass('is');
+        map.lines.removeClass('active');
+        map.trigger.addClass('dark');
+        $(this).removeClass('dark').addClass('active');
+        //
+        if($(this).is('[data-station]')) {
+          newPopup = $(`.map-popup[data-station='${$(this).data('station')}']`);
+        } else if($(this).is('[data-base-station]')) {
+          newPopup = $(`.map-popup[data-base-station='${$(this).data('base-station')}']`);
+          //lines
+          $(`.custom-map .line[data-base='${$(this).data('base-station')}']`).addClass('active');
+          //factory
+          $('.map-trigger[data-factory]').removeClass('dark').addClass('is');;
+        } else if($(this).is('[data-base]')) {
+          newPopup = $(`.map-popup[data-base='${$(this).data('base')}']`);
+          $('.map-trigger[data-factory]').removeClass('dark').addClass('is');
+          //lines
+          $(`.custom-map .line[data-base='${$(this).data('base')}']`).addClass('active');
+        } else if($(this).is('[data-factory]')) {
+          newPopup = $(`.map-popup[data-factory='${$(this).data('factory')}']`);
+        }
+        
+        $('.map-popup').removeClass('active');
+        newPopup.addClass('active');
+        
+        newAnimation = gsap.timeline({onComplete:function() {
+          popupAvailable=true;
+          oldPopup=newPopup;
+          oldAnimation=newAnimation;
+        }})
+          .fromTo(newPopup, {yPercent:100, autoAlpha:0}, {duration:0.5, autoAlpha:1, yPercent:0, ease:'power2.out'})
+
+        if(oldAnimation!==undefined) {
+          oldAnimation.reverse();
+        } else {
+          $('.map-section__description, .map-section__legend').addClass('active');
+        }
+      }
+    });
+    //close
+    $('.map-popup .popup-close').on('click', function(event) {
+      event.preventDefault();
+      if(map.available==true && popupAvailable==true) {
+        popupAvailable = false;
+        map.trigger.removeClass('active').removeClass('dark').removeClass('is');
+        map.lines.removeClass('active');
+        $('.map-section__description, .map-section__legend').removeClass('active');
+        newAnimation.reverse();
+        newAnimation.eventCallback("onReverseComplete", function() {
+          oldAnimation = undefined;
+          popupAvailable = true;
+        })
+      }
+    })
+  }
+}
 let $nav = {
   trigger: $('.nav-btn'),
   el: $('.nav'),
@@ -264,8 +600,11 @@ let $pagination = {
   prev: $('.pagination-arrow_prev'),
   next: $('.pagination-arrow_next'),
   update: function() {
-
-    $slide.current.hasClass('js-pagination-dark') ? this.el.addClass('dark') : this.el.removeClass('dark');
+    if($slide.current.hasClass('js-pagination-dark') && $window.width()>768) {
+      this.el.addClass('dark')
+    } else {
+      this.el.removeClass('dark');
+    }
     
     if($slide.prev.length>0) {
       this.prev.find('span').text('0' + ($slide.prev.index()+1));
@@ -329,17 +668,14 @@ function elemsAnims() {
   $(document).on('mouseenter mouseleave touchstart touchend', '.js-animated', function(event) {
     let $target = $(this);
 
-    if(event.type=='touchstart') {
+    if(event.type=='touchstart' && !$('html').hasClass('desktop')) {
       $target.addClass('touch');
-    } else if(event.type=='mouseenter') {
+    } else if(event.type=='mouseenter' && $('html').hasClass('desktop')) {
       $target.addClass('hover');
-    }
-
-    if(event.type=='mouseleave' || event.type=='touchend') {
+    } else {
       $target.removeClass('touch');
       $target.removeClass('hover');
     }
-
   })
 }
 
@@ -423,6 +759,24 @@ function siteNavEvents() {
       }
     }
   });
+  //swipe
+  let touchEvents = new Hammer.Manager(document.querySelector('.page-wrapper'));
+  var swipe = new Hammer.Swipe();
+  touchEvents.add(swipe);
+
+  //события свайпов
+  touchEvents.on("swipeleft swiperight swipeup swipedown", function(event) {
+    //console.log(event.target)
+    if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.custom-map').length==0) {
+      if(!$slide.animationProgress) {
+        if((event.type=='swipeup' || event.type=='swipeleft') && $slide.current.index()+1 < $slide.count) {
+          $slide.toNext();
+        } else if((event.type=='swipedown' || event.type=='swiperight') && $slide.current.index()>0) {
+          $slide.toPrev();
+        }
+      }
+    }
+  });
 
   $('[data-slide]').on('click', function(event) {
     event.preventDefault();
@@ -436,345 +790,6 @@ function siteNavEvents() {
       }
     }
   })
-}
-
-let map = {
-  container: $('.custom-map__container'),
-  inner: $('.custom-map__inner'),
-  trigger: $('.map-trigger'),
-  strokeElms: $('.custom-map .region, .custom-map .road'),
-  lines: $('.custom-map .line'),
-  itemsElls: $('.custom-map .item'),
-  available: false,
-  x: 0,
-  y: 0,
-  animation: '',
-  interval: '',
-  translateAnimation: '',
-  innerT: '',
-  innerR: '',
-  innerB: '',
-  innerL: '',
-  controlPlus: $('.custom-map-plus'),
-  controlMinus: $('.custom-map-minus'),
-  zoomMax: 2,
-  zoomGradations: 3,
-  zoomPlus: function() {
-    if(this.zoomGradation<this.zoomGradations) {
-      this.zoomGradation++;
-      this.zoom = 1 + ((this.zoomGradation-1)*map.zoomInterval);
-      this.update('zoom+', false);
-    }
-  },
-  zoomMinus: function() {
-    if(this.zoomGradation>1) {
-      this.zoomGradation--;
-      this.zoom = 1 + ((this.zoomGradation-1) * map.zoomInterval);
-      this.update('zoom-', false);
-    }
-  },
-  checkBtns: function() {
-    if(this.zoomGradation==this.zoomGradations) {
-      this.controlPlus.addClass('disabled');
-    } else {
-      this.controlPlus.removeClass('disabled');
-    }
-    if(this.zoomGradation==1) {
-      this.controlMinus.addClass('disabled');
-    } else {
-      this.controlMinus.removeClass('disabled');
-    }
-  },
-  update: function(zoomDir) {
-    this.available = false;
-    this.checkBtns();
-
-
-    if(zoomDir=='zoom-') {
-      let y = Math.round(map.y + ( 
-        (map.containerCenterY-map.mapCenterY) * 
-        (map.zoomInterval * (1/(map.zoom+map.zoomInterval))) 
-      ));
-      let x = Math.round(map.x + ( 
-        (map.containerCenterX-map.mapCenterX) * 
-        (map.zoomInterval * (1/(map.zoom+map.zoomInterval))) 
-      ));
-
-      if(map.innerT>map.innerB) {
-        let c = ((map.inner.height() * map.zoom - map.inner.height())/2);
-        if(y-c>0) {
-          map.y = c;
-        } else {
-          map.y = y;
-        }
-      } else {
-        let c = Math.round(((map.inner.height() * (1+map.zoomInterval) - map.inner.height())/2));
-        
-        if(y-(c+map.innerB)>map.y) {
-          map.y = y;
-        } else {
-          map.y = map.y + map.innerB + c;
-        }
-
-      }
-
-      if(map.innerL>map.innerR) {
-        let c = Math.round(((map.inner.height() * map.zoom - map.inner.height())/2));
-        
-        if(x-c>0) {
-          map.x = c;
-        } else {
-          map.x = x;
-        }
-      } else {
-        let c = Math.round(((map.inner.width() * (1+map.zoomInterval) - map.inner.width())/2));
-        
-
-        if(x-(c+map.innerR)>map.x) {
-          map.x = x;
-        } else {
-          map.x = map.x + map.innerR + c;
-        }
-      }
-
-    } else if(zoomDir=='zoom+') {
-
-      map.y = Math.round(map.y - ( 
-        (map.containerCenterY-map.mapCenterY) * 
-        (map.zoomInterval * (1/(map.zoom-map.zoomInterval))) 
-      ))
-
-      map.x = Math.round(map.x - ( 
-        (map.containerCenterX-map.mapCenterX) * 
-        (map.zoomInterval * (1/(map.zoom-map.zoomInterval))) 
-      ));
-
-    }
-
-    this.animation = gsap.timeline({
-      onComplete: function() {
-        map.zoomCurrent = map.zoom;
-        map.checkInner({onComplete() {
-          map.available = true;
-        }})
-        }
-    }).to(map.inner,{duration:0.25, scale:map.zoom, x:map.x, y:map.y, ease:'power2.inOut'})
-      .to(map.itemsElls,{duration:0.25, scale:1/map.zoom, ease:'power2.inOut'}, '-=0.25')
-      
-    
-
-    map.strokeElms.css('stroke-width', `${1/map.zoom}px`)
-    map.lines.css('stroke-width', `${2/map.zoom}px`)
-
-  },
-  checkInner: function(callbacks) {
-    let mapTop = this.inner.offset().top,
-        mapLeft = this.inner.offset().left,
-        containerTop = this.container.offset().top,
-        containerLeft = this.container.offset().left;
-
-      this.mapHeight = this.inner.height() * this.zoomCurrent;
-      this.mapWidth = this.inner.width() * this.zoomCurrent;
-      this.containerHeight = this.container.height();
-      this.containerWidth = this.container.width();
-
-    this.containerCenterY = (containerTop + (this.containerHeight/2));
-    this.mapCenterY = (mapTop + (this.mapHeight/2));
-    this.containerCenterX = (containerLeft + (this.containerWidth/2));
-    this.mapCenterX = (mapLeft + (this.mapWidth/2));
-
-    this.innerT = Math.round(mapTop - containerTop);
-    this.innerR = Math.round(-((mapLeft+this.mapWidth) - (containerLeft+this.containerWidth)));
-    this.innerB = Math.round(-((mapTop+this.mapHeight) - (containerTop+this.containerHeight)));
-    this.innerL = Math.round(mapLeft - containerLeft);
-
-    //callback
-    if (typeof callbacks === 'object') {
-      callbacks.onComplete();
-    }
-    
-
-  },
-  init: function() {
-    this.zoomInterval = (map.zoomMax-1)/(map.zoomGradations-1);
-    this.zoom = 1;
-    this.zoomCurrent = 1;
-    this.zoomGradation = 1;
-    
-    this.controlPlus.on('click', function(e) {
-      e.preventDefault();
-      if(map.available==true) {
-        map.zoomPlus();
-      }
-      
-    })
-    this.controlMinus.on('click', function(e) {
-      e.preventDefault();
-      if(map.available==true) { 
-        map.zoomMinus();
-      }
-    })
-
-    let area = new Hammer.Manager(map.container[0]);
-    let swipe = new Hammer.Swipe();
-    let pan = new Hammer.Pan();
-    pan.set({ threshold: 1 });
-    area.add(swipe);
-    area.add(pan);
-
-    let startX = 0,
-        startY = 0,
-        currentX,
-        currentY,
-        compensateX = 0,
-        compensateY = 0,
-        oldX = 0,
-        oldY = 0;
-  
-    //события свайпов
-    area.on("panend panstart panup pandown panleft panright", function(event) {
-      let Event = event.type;
-
-      if(map.available==true) {
-        if(Event=='panstart') {
-          startX = event.center.x;
-          startY = event.center.y;
-          oldX = map.x;
-          oldY = map.y;
-        } else if(Event=='panend') {
-          map.x = currentX;
-          map.y = currentY;
-          compensateX = 0;
-          compensateY = 0;
-        } else if(Event=='panup' || Event=='panright' || Event=='pandown' || Event=='panleft') {
-
-          currentX = map.x + event.center.x - startX + compensateX;
-          currentY = map.y + event.center.y - startY + compensateY;
-
-          map.checkInner({onComplete: function() {
-  
-            if(map.innerT>0 && currentY>oldY) {
-              currentY = oldY;
-              compensateY = currentY - map.y + startY - event.center.y;
-            }
-            if(map.innerB>0 && currentY<oldY) {
-              currentY = oldY;
-              compensateY = currentY - map.y + startY - event.center.y;
-            }
-            if(map.innerR>0 && currentX<oldX) {
-              currentX = oldX;
-              compensateX = currentX - map.x + startX - event.center.x;
-            }
-            if(map.innerL>0 && currentX>oldX) {
-              currentX = oldX;
-              compensateX = currentX - map.x + startX - event.center.x;
-            }
-
-            gsap.set(map.inner, {y:currentY, x:currentX})
-            oldX = currentX;
-            oldY = currentY;
-
-          }})
-        }
-      } else {
-        compensateY = startY - event.center.y;
-        compensateX = startX - event.center.x;
-      }
-    });
-    //условные обозначения
-    let $legendTrigger = $('.map-section__legend-item').not($('[data-disabled]'));
-    $legendTrigger.on('mouseenter mouseleave', function(event) {
-      if(event.type=='mouseenter') {
-        if($(this).is('[data-base]')) {
-          $legendTrigger.not($(this)).addClass('disabled');
-          map.trigger.not($('[data-base],[data-base-station],[data-disabled]')).addClass('disabled');
-        } else if($(this).is('[data-station]')) {
-          $legendTrigger.not($(this)).addClass('disabled');
-          map.trigger.not($('[data-station], [data-base-station], [data-disabled]')).addClass('disabled');
-        } else if($(this).is('[data-factory]')) {
-          $legendTrigger.not($(this)).addClass('disabled');
-          map.trigger.not($('[data-factory], [data-disabled]')).addClass('disabled');
-        }
-      } else {
-        $legendTrigger.removeClass('disabled');
-        map.trigger.removeClass('disabled');
-      }
-    })
-
-    this.checkBtns();
-    this.popups();
-    map.checkInner({onComplete() {
-      map.available = true;
-    }})
-  },
-  popups: function() {
-    //всплывайки
-    let newPopup,
-        oldPopup,
-        newAnimation,
-        oldAnimation,
-        data,
-        popupAvailable = true;
-
-    map.trigger.on('click', function(event) {
-      event.preventDefault();
-      if(map.available==true && popupAvailable==true) {
-        popupAvailable = false;
-        map.trigger.removeClass('active').removeClass('is');
-        map.lines.removeClass('active');
-        map.trigger.addClass('dark');
-        $(this).removeClass('dark').addClass('active');
-        //
-        if($(this).is('[data-station]')) {
-          newPopup = $(`.map-popup[data-station='${$(this).data('station')}']`);
-        } else if($(this).is('[data-base-station]')) {
-          newPopup = $(`.map-popup[data-base-station='${$(this).data('base-station')}']`);
-          //lines
-          $(`.custom-map .line[data-base='${$(this).data('base-station')}']`).addClass('active');
-          //factory
-          $('.map-trigger[data-factory]').removeClass('dark').addClass('is');;
-        } else if($(this).is('[data-base]')) {
-          newPopup = $(`.map-popup[data-base='${$(this).data('base')}']`);
-          $('.map-trigger[data-factory]').removeClass('dark').addClass('is');
-          //lines
-          $(`.custom-map .line[data-base='${$(this).data('base')}']`).addClass('active');
-        } else if($(this).is('[data-factory]')) {
-          newPopup = $(`.map-popup[data-factory='${$(this).data('factory')}']`);
-        }
-        
-        $('.map-popup').removeClass('active');
-        newPopup.addClass('active');
-        
-        newAnimation = gsap.timeline({onComplete:function() {
-          popupAvailable=true;
-          oldPopup=newPopup;
-          oldAnimation=newAnimation;
-        }})
-          .fromTo(newPopup, {yPercent:100, autoAlpha:0}, {duration:0.5, autoAlpha:1, yPercent:0, ease:'power2.out'})
-
-        if(oldAnimation!==undefined) {
-          oldAnimation.reverse();
-        } else {
-          $('.map-section__description, .map-section__legend').addClass('active');
-        }
-      }
-    });
-    //close
-    $('.map-popup__close').on('click', function(event) {
-      event.preventDefault();
-      if(map.available==true && popupAvailable==true) {
-        popupAvailable = false;
-        map.trigger.removeClass('active').removeClass('dark').removeClass('is');
-        map.lines.removeClass('active');
-        $('.map-section__description, .map-section__legend').removeClass('active');
-        newAnimation.reverse();
-        newAnimation.eventCallback("onReverseComplete", function() {
-          oldAnimation = undefined;
-          popupAvailable = true;
-        })
-      }
-    })
-  }
 }
 
 function inputs() {
