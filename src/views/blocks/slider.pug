@@ -1,0 +1,38 @@
+mixin slide(index, liter, tonn, title)
+  .fuel-slide
+    .fuel-slide__container.js-animated
+      span.fuel-slide__index=index
+      .fuel-slide__top
+        .fuel-slide__item
+          span.fuel-slide__label Литр
+          span.fuel-slide__price=liter
+        .fuel-slide__item
+          span.fuel-slide__label Тонна
+          span.fuel-slide__price=tonn
+      .fuel-slide__bottom
+        a(target='_blank').fuel-slide__pasport.js-animated&attributes(attributes)
+          svg.icon 
+            use(xlink:href="img/icons/sprite.svg#ico5")
+          span Паспорт
+        h6.fuel-slide__title=title
+mixin pag(title)
+  a(href="javascript:void(0)").fuel-slider-pagination__item.js-animated
+    span=title
+
+section.section.section-slide.opt.active
+  .home__content.section__display
+    .scene
+      .bg.bg_mask2(data-depth="0.05" style='background-image: url("img/bg/bg2.jpg")')
+    .section__content.p-s.p-r-p.p-t-h.p-b-p.content-b
+      .fuel-slider-pagination
+        +pag('ДТ "ЕВРО" Л-К5')
+        +pag('АИ-95')
+        +pag('АИ-92')
+      .fuel-slider
+        .fuel-slider__center
+          .slider
+            +slide('01', '41.75 ₽', '50 000 ₽', 'ДТ "ЕВРО" Л-К5')(href='content/ДТ "ЕВРО" Л-К5.pdf')
+            +slide('02', '39.00 ₽', '52 000 ₽', 'АИ-95')(href='content/АИ-95-К5.pdf')
+            +slide('04', '36.45 ₽', '49 250 ₽', 'АИ-92')(href='content/АИ-92-К5.pdf')
+    .section__bottom
+      .opt

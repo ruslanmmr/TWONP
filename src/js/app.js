@@ -1,13 +1,15 @@
+
 import device from 'current-device';
 import Scrollbar from 'smooth-scrollbar';
 import Hammer from 'hammerjs';
 import { gsap } from "gsap";
-import Lazy from "jquery-lazy";
+import slick from "slick-carousel";
 import autosize from "autosize";
-import Parallax from 'parallax-js'
+import Parallax from 'parallax-js';
+
+let $ = require("jquery");
 
 $(document).ready(function() {
-  //lazy();
   elemsAnims();
   main();
   siteNavEvents();
@@ -18,6 +20,10 @@ $(document).ready(function() {
   scrollArea.init({onComplete:function(){$nav.init();}});
 
   $subNav.update();
+
+  if($slider.el.length>0) {
+    $slider.init();
+  }
   
   $slide.change($slide.current, {
     onComplete: function() {
@@ -618,49 +624,57 @@ let $pagination = {
     }
   }
 }
-
-//functions
-
-//lazy
-function lazy() {
-  $(".lazy").Lazy({
-    effect: 'show',
-    visibleOnly: true,
-    effectTime: 0,
-    threshold: 500,
-    imageBase: false,
-    defaultImage: false,
-    afterLoad: function(element) {
-      imagesResize(element);
-    }
-  });
-}
-function imagesResize(element) {
-  let $box = element.parent();
-  if(!$box.hasClass('cover-box_size-auto')) {
-    let boxH = $box.height(),
-        boxW = $box.width();
-
-    setTimeout(function() {
-      let imgH = element.height(),
-          imgW = element.width();
-
-      if ((boxW/boxH)>=(imgW/imgH)) {
-        element.addClass('ww').removeClass('wh');
-      } else {
-        element.addClass('wh').removeClass('ww');
+let $slider = {
+  el: $('.fuel-slider .slider'),
+  slide: $('.fuel-slide'),
+  pag: $('.fuel-slider-pagination__item'),
+  init: function() {
+    $slider.el.on('init', function(event, slick, direction){
+      let count = $slider.el.find('.slick-slide').not('.slick-cloned').length,
+          last_slides = count-4;
+          if(last_slides==0) {
+            last_slides = 2;
+          } else if(last_slides<0) {
+            last_slides = 1;
+          }
+      for(let i=0;i<last_slides;i++) {
+        $slider.el.find('.slick-cloned:last-child').remove();
       }
-      
-      setTimeout(function() {
-        element.addClass('visible');
-      }, 250)
-      
-    }, 250)
-
-  } else {
-    element.addClass('visible');
+    });
+    //pug
+    $slider.pag.eq(0).addClass('active');
+    $slider.pag.on('click', function(event) {
+      event.preventDefault();
+      let index = $(this).index();
+      $slider.pag.removeClass('active');
+      $slider.pag.eq(index).addClass('active');
+      $slider.el.slick('slickGoTo', index);
+    })
+    $slider.el.on('afterChange', function(event, slick, direction){
+      let index = $(this).find('.slick-center').data('slick-index');
+      $slider.pag.removeClass('active');
+      $slider.pag.eq(index).addClass('active');
+    });
+    //
+    $slider.slide.find('.fuel-slide__container').on('click', function() {
+      let index = $(this).parent().data('slick-index');
+      $slider.pag.removeClass('active');
+      $slider.pag.eq(index).addClass('active');
+      $slider.el.slick('slickGoTo', index);
+    })
+    //
+    $slider.el.slick({
+      rows: 0,
+      slidesToShow: 1,
+      centerMode: true,
+      centerPadding: '0',
+      arrows: false,
+      touchThreshold: 10
+    });
   }
 }
+
+//functions
 
 function elemsAnims() {
   $(document).on('mouseenter mouseleave touchstart touchend', '.js-animated', function(event) {
@@ -763,9 +777,9 @@ function siteNavEvents() {
     //console.log(event.target)
     if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.custom-map').length==0) {
       if(!$slide.animationProgress) {
-        if((event.type=='swipeup' || event.type=='swipeleft') && $slide.current.index()+1 < $slide.count) {
+        if((event.type=='swipeup' || (event.type=='swipeleft' && $(event.target).closest('.slider').length==0)) && $slide.current.index()+1 < $slide.count) {
           $slide.toNext();
-        } else if((event.type=='swipedown' || event.type=='swiperight') && $slide.current.index()>0) {
+        } else if((event.type=='swipedown' || (event.type=='swiperight' && $(event.target).closest('.slider').length==0)) && $slide.current.index()>0) {
           $slide.toPrev();
         }
       }

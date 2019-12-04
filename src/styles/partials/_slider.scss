@@ -1,0 +1,224 @@
+@import "../../../node_modules//slick-carousel/slick/slick.scss";
+
+.slick-slide {
+  a, button {
+    outline: none;
+  }
+}
+.fuel-slider-pagination {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 500px;
+  position: relative;
+  margin-bottom: 30px;
+  &__item {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    border-radius: 100%;
+    display: block;
+    border: 2px solid transparent;
+    transition: $trs1;
+    z-index: 2;
+    span {
+      position: absolute;
+      white-space: nowrap;
+      top: 0;
+      padding-bottom: 10px;
+      display: inline-block;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      color: $colorF;
+      transition: $trs1;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 12px;
+      height: 12px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $colorF;
+      border-radius: 100%;
+      transition: $trs1;
+    }
+    &.hover,
+    &.touch {
+      border-color: $colorE;
+      &:before {
+        background-color: $colorE;
+      }
+      span {
+        color: $colorE;
+      }
+    }
+    &.active {
+      border-color: $colorA;
+      box-shadow: 0px 0px 14px 4px rgba(111,222,155,1);
+      span {
+        color: #fff;
+      }
+      &:before {
+        background-color: $colorA;
+        box-shadow: 0px 0px 14px 4px rgba(111,222,155,1);
+      }
+    }
+  }
+  &:before {
+    content: '';
+    display: block;
+    width: calc(100% - 30px);
+    left: 15px;
+    height: 2px;
+    background-color: $colorF;
+    position: absolute;
+    z-index: 1;
+    top: 14px;
+  }
+}
+.fuel-slider {
+  overflow: hidden;
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  &__center {
+    margin: 0 -15px;
+  }
+  .slider {
+    margin: 0 auto;
+    width: 33.33%;
+    max-width: 1350px;
+  }
+  .slick-list {
+    overflow: visible;
+    //margin: 0 -15px;
+  }
+}
+.fuel-slide {
+  padding: 15px;
+  outline: none;
+  position: relative;
+  height: 240px;
+  &__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: $trs1;
+    background-color: $colorL;
+    font-size: 30px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    &.hover,
+    &.touch {
+      opacity: 0.95;
+    }
+  }
+  &__top {
+    border-bottom: 1px solid $colorF;
+    display: flex;
+    align-items: flex-start;
+    padding: 14px 30px;
+    flex: 1 0 auto;
+    transition: $trs1;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  &__label {
+    display: block;
+    font-size: 14px;
+    color: $colorF;
+    margin-bottom: 6px;
+  }
+  &__price {
+    color: $colorF;
+    opacity: 0.5;
+    font-family: $font2;
+    transition: $trs1;
+    font-size: 24px;
+    text-transform: uppercase;
+    display: block;
+    line-height: 1;
+
+  }
+  &__item {
+    &:not(:last-child) {
+      margin-right: 60px;
+    }
+  }
+  &__bottom {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: flex-end;
+    transition: $trs1;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  &__title {
+    padding: 35px 0px;
+    flex: 1 1 100%;
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    color: $colorA;
+  }
+  &__pasport {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1 0 30%;
+    height: 100%;
+    border-right: 1px solid $colorF;
+    .icon {
+      width: 55px;
+      height: 55px;
+      fill: $colorF;
+      transition: $trs1;
+    }
+    &.hover,
+    &.touch {
+      .icon {
+        fill: $colorA;
+      }
+    }
+    span {
+      font-size: 14px;
+      color: $colorA;
+      margin-top: 10px;
+    }
+  }
+  &__index {
+    position: absolute;
+    top: 14px;
+    right: 10px;
+    color: $colorF;
+    font-size: 14px;
+  }
+  &.slick-center {
+    .fuel-slide {
+      &__container {
+        height: 100%;
+        width: 100%;
+        cursor: default;
+        opacity: 1 !important;
+      }
+      &__top,
+      &__bottom {
+        opacity: 1;
+        pointer-events: all;
+      }
+      &__price {
+        color: #fff;
+        opacity: 1;
+      }
+    }
+  }
+}

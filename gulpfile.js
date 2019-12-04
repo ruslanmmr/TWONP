@@ -175,9 +175,9 @@ gulp.task("destPHP", function () {
     .pipe(gulp.dest("./dest/"))
     .on("end", browsersync.reload);
 });
-gulp.task("destVideos", function () {
-  return gulp.src("./src/videos/**/*")
-    .pipe(gulp.dest("./dest/videos/"))
+gulp.task("destContent", function () {
+  return gulp.src("./src/content/**/*")
+    .pipe(gulp.dest("./dest/content/"))
     .on("end", browsersync.reload);
 });
 gulp.task("destFonts", function () {
@@ -214,18 +214,18 @@ gulp.task("watch", function () {
     watch("./src/img/favicons/*.{jpg,jpeg,png,gif}", gulp.series("favicons"));
     watch("./src/fonts/**/*", gulp.series("destFonts"));
     watch("./src/php/**/*", gulp.series("destPHP"));
-    watch("./src/videos/**/*", gulp.series("destVideos"));
+    watch("./src/content/**/*", gulp.series("destContent"));
     res();
   });
 });
 
 // BUILD
 gulp.task("default", gulp.series("clean",
-  gulp.parallel("pug", "styles", "scripts", "destFonts", "destVideos", "destPHP", "images", "favicons"),
+  gulp.parallel("pug", "styles", "scripts", "destFonts", "destContent", "destPHP", "images", "favicons"),
   gulp.parallel("watch", "serve")
 ));
 //gulp build
-gulp.task("build", gulp.series("clean", gulp.parallel("pugBuild", "stylesBuild", "scriptsBuild", "destFonts", "destVideos", "destPHP", "images", "favicons")));
+gulp.task("build", gulp.series("clean", gulp.parallel("pugBuild", "stylesBuild", "scriptsBuild", "destFonts", "destContent", "destPHP", "images", "favicons")));
 
 /* //gulp deploy
 gulp.task("deploy", function () {

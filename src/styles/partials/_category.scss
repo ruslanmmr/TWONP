@@ -55,6 +55,9 @@
 }
 @media all and(max-width: 576px) {
   .category-preview {
+    &__bottom {
+      min-height: 0px;
+    }
     .button {
       display: block;
     }

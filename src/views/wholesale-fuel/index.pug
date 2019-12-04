@@ -5,7 +5,7 @@ block content
   include ../blocks/nav2
   include ../blocks/pagination
   .slide-container
-    section.section.section-slide.home.active
+    section.section.section-slide.home
       .home__content.section__display
         .scene
           .bg.bg_mask(data-depth="0.05" style='background-image: url("img/bg/home3.jpg")')
@@ -33,11 +33,7 @@ block content
             span.t-size-20 Сертификаты<br> и паспорта
             svg.icon 
               use(xlink:href="img/icons/sprite.svg#ico1")
-    section.section.section-slide.js-nav-hidden
-      .home__content.section__display
-        .scene
-          .bg.bg_mask2(data-depth="0.05" style='background-image: url("img/bg/bg2.jpg")')
-        .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p
+    include ../blocks/slider
     section.section.section-slide.manufacturers
       .section__display
         .scene

@@ -1,6 +1,5 @@
 @import "./partials/normalize";
 @import "./partials/fonts";
-@import "./partials/custom-grid";
 
 //color
 $colorA: #6FDE9B;
@@ -13,6 +12,8 @@ $colorG: #363C46;
 $colorH: #282C33;
 $colorI: #121212;
 $colorJ: #1F2227;
+$colorL: #1E1E1E;
+
 
 //условные обозначения
 $station: $colorA;
@@ -42,6 +43,10 @@ body {
   color: #fff;
   line-height: 1.5;
 }
+
+//grid
+@import "./partials/custom-grid";
+
 .page-wrapper {
   height: 100%;
   position: relative;
@@ -253,12 +258,14 @@ body {
   }
 }
 
+
 @import "./partials/text";
 @import "./partials/ui";
 @import "./partials/header";
 @import "./partials/category";
 @import "./partials/contacts";
 @import "./partials/nav";
+@import "./partials/slider";
 @import "./partials/map-section";
 @import "./partials/map";
 @import "./partials/home";
