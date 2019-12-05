@@ -425,7 +425,7 @@ body {
   .p-l-s {
     padding-left: 30px; }
   .p-b-p {
-    padding-bottom: 50px; }
+    padding-bottom: 40px; }
   .p-t-h {
     padding-top: 85px; }
   .pos-t-h {
@@ -4011,8 +4011,8 @@ a {
     height: 100%;
     border-right: 1px solid #6C6C6C; }
     .fuel-slide__pasport .icon {
-      width: 55px;
-      height: 55px;
+      width: 40px;
+      height: 40px;
       fill: #6C6C6C;
       -webkit-transition: 0.25s;
       -o-transition: 0.25s;
@@ -4034,6 +4034,9 @@ a {
     width: 100%;
     cursor: default;
     opacity: 1 !important; }
+  .fuel-slide.slick-center .fuel-slide__pasport .icon {
+    width: 55px;
+    height: 55px; }
   .fuel-slide.slick-center .fuel-slide__top, .fuel-slide.slick-center .fuel-slide__bottom {
     opacity: 1;
     pointer-events: all; }
@@ -4077,6 +4080,10 @@ a {
 @media all and (max-width: 1200px) {
   .opt__selection {
     left: 250px; } }
+
+@media all and (max-width: 1440px) {
+  .fuel-slide__price, .fuel-slide__title {
+    font-size: 22px; } }
 
 .input {
   position: relative;

@@ -219,8 +219,8 @@
     height: 100%;
     border-right: 1px solid $colorF;
     .icon {
-      width: 55px;
-      height: 55px;
+      width: 40px;
+      height: 40px;
       fill: $colorF;
       transition: $trs1;
     }
@@ -250,6 +250,12 @@
         width: 100%;
         cursor: default;
         opacity: 1 !important;
+      }
+      &__pasport {
+        .icon {
+          width: 55px;
+          height: 55px;
+        }
       }
       &__top,
       &__bottom {
@@ -294,6 +300,15 @@
   .opt {
     &__selection {
       left: 250px;
+    }
+  }
+}
+
+@media all and(max-width: 1440px) {
+  .fuel-slide {
+    &__price,
+    &__title {
+      font-size: 22px;
     }
   }
 }
