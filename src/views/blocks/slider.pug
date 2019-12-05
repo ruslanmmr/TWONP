@@ -17,22 +17,75 @@ mixin slide(index, liter, tonn, title)
         h6.fuel-slide__title=title
 mixin pag(title)
   a(href="javascript:void(0)").fuel-slider-pagination__item.js-animated
-    span=title
+    span.dot
+    span.title=title
 
 section.section.section-slide.opt.active
-  .home__content.section__display
+  //opt selection
+  .section__bottom.opt__selection.p-s
+    .opt__selection-container
+      .select
+        select.opt-main-select
+          option(value="0") ДТ "ЕВРО" Л-К5
+          option(value="1") АИ-95
+          option(value="2") АИ-92
+      a(href="javascript:void(0);" data-popup='#order').button.button_style1.js-animated Заказать
+  //opt slider
+  .section__display
     .scene
       .bg.bg_mask2(data-depth="0.05" style='background-image: url("img/bg/bg2.jpg")')
     .section__content.p-s.p-r-p.p-t-h.p-b-p.content-b
       .fuel-slider-pagination
-        +pag('ДТ "ЕВРО" Л-К5')
-        +pag('АИ-95')
-        +pag('АИ-92')
+        span.line
+        span.line
+        .fuel-slider-pagination__items
+          +pag('ДТ "ЕВРО" Л-К5')
+          +pag('АИ-95')
+          +pag('АИ-92')
       .fuel-slider
         .fuel-slider__center
           .slider
             +slide('01', '41.75 ₽', '50 000 ₽', 'ДТ "ЕВРО" Л-К5')(href='content/ДТ "ЕВРО" Л-К5.pdf')
             +slide('02', '39.00 ₽', '52 000 ₽', 'АИ-95')(href='content/АИ-95-К5.pdf')
-            +slide('04', '36.45 ₽', '49 250 ₽', 'АИ-92')(href='content/АИ-92-К5.pdf')
-    .section__bottom
-      .opt
+            +slide('03', '36.45 ₽', '49 250 ₽', 'АИ-92')(href='content/АИ-92-К5.pdf')
+  //opt info
+  .section__bottom.opt__info
+    .opt-info-item.p-s
+      ul.list
+        li
+          span Цетановое число
+          span 51.1
+        li
+          span Плотность при 15 °C, кг/м3
+          span 835.2
+        li
+          span Массовая доля серы для топлива К5, мг/кг
+          span 7.6
+        li
+          span Температура вспышки, °C
+          span 64
+        li
+          span Зольность, % масс.
+          span отсутствие
+    .opt-info-item.p-s
+      ul.list
+        li
+          span Октановое число
+          span 95
+        li
+          span Массовая доля серы, мг/кг
+          span 8.9
+        li
+          span Плотность при 15°C, кг/м3
+          span 744.8
+    .opt-info-item.p-s
+      ul.list
+        li
+          span Октановое число
+          span 92.1
+        li
+          span Массовая доля серы, мг/кг
+          span менее 3
+        li
+          span Плотность при 15°C, кг/м3
+          span 738.4

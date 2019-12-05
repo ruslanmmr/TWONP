@@ -1,4 +1,5 @@
 .map-section {
+  background-color: $colorG;
   .section__display {
     display: flex;
     flex-direction: column;
@@ -127,7 +128,6 @@
     }
   }
 }
-
 .custom-map {
   position: absolute;
   width: 55%;
@@ -371,6 +371,11 @@
   max-width: 500px;
   background-color: $colorH;
   visibility: hidden;
+  .popup-close {
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
   &.active {
     z-index: 4;
   }
@@ -388,34 +393,6 @@
   &__section {
     &:not(:last-child) {
       margin-bottom: 45px;
-    }
-  }
-  &__list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  &__item {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid $colorG;
-    &:not(:last-child) {
-      margin-bottom: 10px;
-    }
-    span {
-      line-height: 24px;
-      &:first-child {
-        color: $colorE;
-        font-weight: 300;
-      }
-      &:last-child {
-        text-align: right;
-      }
-    }
-    .icon {
-      height: 14px;
-      width: 20px;
-      fill: $colorA;
     }
   }
 }
@@ -440,7 +417,7 @@
     &__content {
       height: calc(100% - 85px);
     }
-    &__close {
+    .popup-close {
       right: 20px;
     }
   }
@@ -465,8 +442,8 @@
     width: 100%;
     bottom: 0;
     top: auto;
-    &__close {
-      right: 25px;
+    .popup-close {
+      right: 10px;
     }
     &__content {
       height: calc(100% - 60px);

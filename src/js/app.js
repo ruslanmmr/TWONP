@@ -1,3 +1,4 @@
+window.$ = window.jQuery = require('jquery');
 
 import device from 'current-device';
 import Scrollbar from 'smooth-scrollbar';
@@ -7,19 +8,20 @@ import slick from "slick-carousel";
 import autosize from "autosize";
 import Parallax from 'parallax-js';
 
-let $ = require("jquery");
 
 $(document).ready(function() {
   elemsAnims();
   main();
   siteNavEvents();
   inputs();
+  select();
 
 
 
   scrollArea.init({onComplete:function(){$nav.init();}});
 
   $subNav.update();
+  $popup.init();
 
   if($slider.el.length>0) {
     $slider.init();
@@ -629,6 +631,12 @@ let $slider = {
   slide: $('.fuel-slide'),
   pag: $('.fuel-slider-pagination__item'),
   init: function() {
+    let $select = $('.opt-main-select'),
+        flag = false;
+
+    $slider.index = $select.val();
+  
+    //slick hack
     $slider.el.on('init', function(event, slick, direction){
       let count = $slider.el.find('.slick-slide').not('.slick-cloned').length,
           last_slides = count-4;
@@ -641,28 +649,41 @@ let $slider = {
         $slider.el.find('.slick-cloned:last-child').remove();
       }
     });
-    //pug
-    $slider.pag.eq(0).addClass('active');
-    $slider.pag.on('click', function(event) {
-      event.preventDefault();
-      let index = $(this).index();
-      $slider.pag.removeClass('active');
-      $slider.pag.eq(index).addClass('active');
-      $slider.el.slick('slickGoTo', index);
+    //добавить индексы на слайды
+    $slider.slide.each(function(index) {
+      $(this).attr('data-index', index);
     })
+    //пагинация
+    $slider.pag.eq($slider.index).addClass('active');
+    $slider.pag.on('click', function() {
+      $slider.index = $(this).index();
+      $select.val($slider.index).trigger('change');
+    })
+    //события изменения селекта
+    $select.on('change', function() {
+      $slider.index = $(this).val();
+      $select.niceSelect('update');
+      $slider.pag.removeClass('active');
+      $slider.pag.eq($slider.index).addClass('active');
+      if(!flag) {
+        $slider.el.slick('slickGoTo', $slider.index);
+      }
+    })
+    //события когда слайдер изменился
     $slider.el.on('afterChange', function(event, slick, direction){
-      let index = $(this).find('.slick-center').data('slick-index');
-      $slider.pag.removeClass('active');
-      $slider.pag.eq(index).addClass('active');
+      $slider.index = $(this).find('.slick-center').not('.slick-cloned').data('slick-index');
+      $select.val($slider.index).trigger('change');
+      flag = false;
     });
-    //
+    //события клика по неактивному слайду
     $slider.slide.find('.fuel-slide__container').on('click', function() {
+      flag = true;
       let index = $(this).parent().data('slick-index');
-      $slider.pag.removeClass('active');
-      $slider.pag.eq(index).addClass('active');
       $slider.el.slick('slickGoTo', index);
+      $slider.index = $(this).parent().attr('data-index');
+      $select.val($slider.index).trigger('change');
     })
-    //
+    //инициализация слайдера
     $slider.el.slick({
       rows: 0,
       slidesToShow: 1,
@@ -673,9 +694,34 @@ let $slider = {
     });
   }
 }
+let $slideInfo = {
+  
+}
+let $popup = {
+  element: $('.popup'),
+  $open: $('[data-popup]'),
+  $close: $('[data-close]'),
+  visible: false,
+  init: function() {
+    $popup.$open.on('click', function() {
+      $popup.current = $($(this).data('popup'));
+      $popup.open();
+    })
+    $popup.$close.on('click', function() {
+      $popup.close();
+    })
+  },
+  open: function() {
+    $popup.animation = gsap.timeline()
+      .to($popup.current, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
+      .fromTo($popup.current.find('.popup__container'), {y:30}, {duration:0.5, y:0, ease:'power2.out'}, '-=0.5')
+  },
+  close: function() {
+    $popup.animation.reverse();
+  }
+}
 
 //functions
-
 function elemsAnims() {
   $(document).on('mouseenter mouseleave touchstart touchend', '.js-animated', function(event) {
     let $target = $(this);
@@ -690,7 +736,7 @@ function elemsAnims() {
     }
   })
 }
-
+//
 function main() {
   //parralax
   if($('html').hasClass('desktop')) {
@@ -733,6 +779,7 @@ function main() {
 
   }
 }
+//
 function resizeElems() {
   function contentResize() {
     $slide.elm.each(function() {
@@ -752,12 +799,11 @@ function resizeElems() {
   contentResize();
   navResize();
 }
-
-
+//
 function siteNavEvents() {
   //события скролла
   $(window).on('wheel', function(event){
-    if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0) {
+    if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.popup').length==0) {
       if(!$slide.animationProgress) {
         if(event.originalEvent.deltaY>0 && $slide.current.index()+1 < $slide.count) {
           $slide.toNext();
@@ -799,7 +845,7 @@ function siteNavEvents() {
     }
   })
 }
-
+//
 function inputs() {
   autosize($('textarea'));
 
@@ -813,4 +859,135 @@ function inputs() {
       }
     }
   })
+}
+//select
+(function($) {
+
+  $.fn.niceSelect = function(method) {
+    
+    // Methods
+    if (typeof method == 'string') {      
+      if (method == 'update') {
+        this.each(function() {
+          var $select = $(this);
+          var $dropdown = $(this).next('.nice-select');
+          var open = $dropdown.hasClass('open');
+          
+          if ($dropdown.length) {
+            $dropdown.remove();
+            create_nice_select($select);
+            
+            if (open) {
+              $select.next().trigger('click');
+            }
+          }
+        });
+      } else if (method == 'destroy') {
+        this.each(function() {
+          var $select = $(this);
+          var $dropdown = $(this).next('.nice-select');
+          
+          if ($dropdown.length) {
+            $dropdown.remove();
+            $select.css('display', '');
+          }
+        });
+        if ($('.nice-select').length == 0) {
+          $(document).off('.nice_select');
+        }
+      } else {
+        console.log('Method "' + method + '" does not exist.')
+      }
+      return this;
+    }
+      
+    // Hide native select
+    this.hide();
+    
+    // Create custom markup
+    this.each(function() {
+      var $select = $(this);
+      
+      if (!$select.next().hasClass('nice-select')) {
+        create_nice_select($select);
+      }
+    });
+    
+    function create_nice_select($select) {
+      $select.after($('<div></div>')
+        .addClass('nice-select')
+        .addClass($select.attr('class') || '')
+        .addClass($select.attr('disabled') ? 'disabled' : '')
+        .attr('tabindex', $select.attr('disabled') ? null : '0')
+        .html('<span class="current"></span><ul class="list"></ul>')
+      );
+        
+      var $dropdown = $select.next();
+      var $options = $select.find('option');
+      var $selected = $select.find('option:selected');
+      
+      $dropdown.find('.current').html($selected.data('display') || $selected.text());
+      
+      $options.each(function(i) {
+        var $option = $(this);
+        var display = $option.data('display');
+
+        $dropdown.find('ul').append($('<li></li>')
+          .attr('data-value', $option.val())
+          .attr('data-display', (display || null))
+          .addClass('option' +
+            ($option.is(':selected') ? ' selected' : '') +
+            ($option.is(':disabled') ? ' disabled' : ''))
+          .html($option.text())
+        );
+      });
+    }
+    
+    /* Event listeners */
+    
+    // Unbind existing events in case that the plugin has been initialized before
+    $(document).off('.nice_select');
+    
+    // Open/close
+    $(document).on('click.nice_select', '.nice-select', function(event) {
+      var $dropdown = $(this);
+      
+      $('.nice-select').not($dropdown).removeClass('open');
+      $dropdown.toggleClass('open');
+      
+      if ($dropdown.hasClass('open')) {
+        $dropdown.find('.option');  
+        $dropdown.find('.focus').removeClass('focus');
+        $dropdown.find('.selected').addClass('focus');
+      } else {
+        $dropdown.focus();
+      }
+    });
+    
+    // Close when clicking outside
+    $(document).on('click.nice_select', function(event) {
+      if ($(event.target).closest('.nice-select').length === 0) {
+        $('.nice-select').removeClass('open').find('.option');  
+      }
+    });
+    // Option click
+    $(document).on('click.nice_select', '.nice-select .option:not(.disabled)', function(event) {
+      var $option = $(this);
+      var $dropdown = $option.closest('.nice-select');
+      
+      $dropdown.find('.selected').removeClass('selected');
+      $option.addClass('selected');
+      
+      var text = $option.data('display') || $option.text();
+      $dropdown.find('.current').text(text);
+      
+      $dropdown.prev('select').val($option.data('value')).trigger('change');
+    });
+    return this;
+  };
+
+}(jQuery));
+//
+function select() {
+  $('.select select').niceSelect();
 }

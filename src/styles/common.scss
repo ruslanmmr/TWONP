@@ -258,16 +258,16 @@ body {
   }
 }
 
-
 @import "./partials/text";
+@import "./partials/fancybox";
 @import "./partials/ui";
 @import "./partials/header";
 @import "./partials/category";
 @import "./partials/contacts";
 @import "./partials/nav";
-@import "./partials/slider";
+@import "./partials/opt";
+@import "./partials/inputs";
 @import "./partials/map-section";
-@import "./partials/map";
 @import "./partials/home";
 
 

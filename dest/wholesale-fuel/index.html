@@ -90,12 +90,27 @@
           </div>
         </section>
         <section class="section section-slide opt active">
-          <div class="home__content section__display">
+          <!--opt selection-->
+          <div class="section__bottom opt__selection p-s">
+            <div class="opt__selection-container">
+              <div class="select">
+                <select class="opt-main-select">
+                  <option value="0">ДТ "ЕВРО" Л-К5</option>
+                  <option value="1">АИ-95</option>
+                  <option value="2">АИ-92</option>
+                </select>
+              </div><a class="button button_style1 js-animated" href="javascript:void(0);" data-popup="#order">Заказать</a>
+            </div>
+          </div>
+          <!--opt slider-->
+          <div class="section__display">
             <div class="scene">
               <div class="bg bg_mask2" data-depth="0.05" style="background-image: url(&quot;img/bg/bg2.jpg&quot;)"></div>
             </div>
             <div class="section__content p-s p-r-p p-t-h p-b-p content-b">
-              <div class="fuel-slider-pagination"><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span>ДТ &quot;ЕВРО&quot; Л-К5</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span>АИ-95</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span>АИ-92</span></a>
+              <div class="fuel-slider-pagination"><span class="line"></span><span class="line"></span>
+                <div class="fuel-slider-pagination__items"><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">ДТ &quot;ЕВРО&quot; Л-К5</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">АИ-95</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">АИ-92</span></a>
+                </div>
               </div>
               <div class="fuel-slider">
                 <div class="fuel-slider__center">
@@ -129,7 +144,7 @@
                               </div>
                             </div>
                             <div class="fuel-slide">
-                              <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">04</span>
+                              <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">03</span>
                                 <div class="fuel-slide__top">
                                   <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">36.45 ₽</span></div>
                                   <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">49 250 ₽</span></div>
@@ -146,8 +161,31 @@
                 </div>
               </div>
             </div>
-            <div class="section__bottom">
-              <div class="opt"></div>
+          </div>
+          <!--opt info-->
+          <div class="section__bottom opt__info">
+            <div class="opt-info-item p-s">
+              <ul class="list">
+                <li><span>Цетановое число</span><span>51.1</span></li>
+                <li><span>Плотность при 15 °C, кг/м3</span><span>835.2</span></li>
+                <li><span>Массовая доля серы для топлива К5, мг/кг</span><span>7.6</span></li>
+                <li><span>Температура вспышки, °C</span><span>64</span></li>
+                <li><span>Зольность, % масс.</span><span>отсутствие</span></li>
+              </ul>
+            </div>
+            <div class="opt-info-item p-s">
+              <ul class="list">
+                <li><span>Октановое число</span><span>95</span></li>
+                <li><span>Массовая доля серы, мг/кг</span><span>8.9</span></li>
+                <li><span>Плотность при 15°C, кг/м3</span><span>744.8</span></li>
+              </ul>
+            </div>
+            <div class="opt-info-item p-s">
+              <ul class="list">
+                <li><span>Октановое число</span><span>92.1</span></li>
+                <li><span>Массовая доля серы, мг/кг</span><span>менее 3</span></li>
+                <li><span>Плотность при 15°C, кг/м3</span><span>738.4</span></li>
+              </ul>
             </div>
           </div>
         </section>
@@ -249,6 +287,17 @@
             </div>
           </div>
         </section>
+        <div class="popup" id="order"><a class="popup__close" href="javascript:void(0)" data-close> </a>
+          <div class="popup__container">
+            <div class="popup__head">
+              <div class="popup__title">Отправьте заявку</div><a class="popup-close js-animated" href="javascript:void(0)" data-close>
+                <svg class="icon"> 
+                  <use xlink:href="img/icons/sprite.svg#close"></use>
+                </svg></a>
+            </div>
+            <div class="popup__content"></div>
+          </div>
+        </div>
       </div>
     </div>
     <!--styles-->

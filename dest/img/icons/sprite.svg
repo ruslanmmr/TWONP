@@ -51,4 +51,7 @@
   <symbol viewBox="0 0 21 14" stroke="none" xmlns="http://www.w3.org/2000/svg" id="tick">
     <path d="M19.457.073L7.688 11.84 1.543 5.696.5 6.739l7.188 7.188L20.5 1.116 19.457.073z"></path>
   </symbol>
+  <symbol viewBox="0 0 13 6" stroke="none" xmlns="http://www.w3.org/2000/svg" id="arb">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.369.22l-4.375 3.5L2.619.22a1 1 0 1 0-1.25 1.562l5 4a1 1 0 0 0 1.25 0l5-4A1 1 0 1 0 11.369.22z"></path>
+  </symbol>
 </svg>
