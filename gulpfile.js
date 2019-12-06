@@ -22,7 +22,7 @@ var gulp = require("gulp"),
     rsync = require('gulp-rsync');
 
 gulp.task("pug", function () {
-  return gulp.src(["./src/views/**/*.pug", "!./src/views/blocks/*.pug"])
+  return gulp.src(["./src/views/**/*.pug", "!./src/views/blocks/*.pug", "!./src/views/layout/*.pug"])
     .pipe(pug({
       pretty: true
     }))
@@ -170,19 +170,10 @@ gulp.task("favicons", function () {
       "title": "favicons"
     }));
 });
-gulp.task("destPHP", function () {
-  return gulp.src("./src/php/**/*")
+
+gulp.task("dest", function () {
+  return gulp.src(["./src/**/*", "./src/.htaccess", "!./src/img/**/*", "!./src/js/**/*", "!./src/styles/**/*", "!./src/views/**/*"])
     .pipe(gulp.dest("./dest/"))
-    .on("end", browsersync.reload);
-});
-gulp.task("destContent", function () {
-  return gulp.src("./src/content/**/*")
-    .pipe(gulp.dest("./dest/content/"))
-    .on("end", browsersync.reload);
-});
-gulp.task("destFonts", function () {
-  return gulp.src("./src/fonts/**/*")
-    .pipe(gulp.dest("./dest/fonts/"))
     .on("end", browsersync.reload);
 });
 gulp.task("clean", function () {
@@ -212,20 +203,18 @@ gulp.task("watch", function () {
     watch("./src/js/**/*.js", gulp.series("scripts"));
     watch(["./src/img/**/*.{jpg,jpeg,png,gif,svg}", "!./src/img/favicons/*.{jpg,jpeg,png,gif}"], gulp.series("images"));
     watch("./src/img/favicons/*.{jpg,jpeg,png,gif}", gulp.series("favicons"));
-    watch("./src/fonts/**/*", gulp.series("destFonts"));
-    watch("./src/php/**/*", gulp.series("destPHP"));
-    watch("./src/content/**/*", gulp.series("destContent"));
+    watch(["./src/**/*", "!./src/img/**/*", "!./src/js/**/*", "!./src/styles/**/*", "!./src/views/**/*"], gulp.series("dest"));
     res();
   });
 });
 
 // BUILD
 gulp.task("default", gulp.series("clean",
-  gulp.parallel("pug", "styles", "scripts", "destFonts", "destContent", "destPHP", "images", "favicons"),
+  gulp.parallel("pug", "styles", "scripts", "images", "favicons", "dest"),
   gulp.parallel("watch", "serve")
 ));
 //gulp build
-gulp.task("build", gulp.series("clean", gulp.parallel("pugBuild", "stylesBuild", "scriptsBuild", "destFonts", "destContent", "destPHP", "images", "favicons")));
+gulp.task("build", gulp.series("clean", gulp.parallel("pugBuild", "stylesBuild", "scriptsBuild", "images", "favicons")));
 
 /* //gulp deploy
 gulp.task("deploy", function () {
