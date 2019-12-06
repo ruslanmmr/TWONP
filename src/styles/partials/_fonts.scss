@@ -9,6 +9,7 @@
 	}
 }
 
+@include font-face("Manrope", "../fonts/Manrope/manrope-light", 300);
 @include font-face("Manrope", "../fonts/Manrope/manrope-regular", 400);
 @include font-face("Manrope", "../fonts/Manrope/manrope-medium", 500);
 @include font-face("Manrope", "../fonts/Manrope/manrope-semibold", 600);
