@@ -653,6 +653,8 @@ let $slider = {
     $slider.slide.each(function(index) {
       $(this).attr('data-index', index);
     })
+    //описание
+    $slideInfo.el.eq($slider.index).addClass('active');
     //пагинация
     $slider.pag.eq($slider.index).addClass('active');
     $slider.pag.on('click', function() {
@@ -665,6 +667,8 @@ let $slider = {
       $select.niceSelect('update');
       $slider.pag.removeClass('active');
       $slider.pag.eq($slider.index).addClass('active');
+      $slideInfo.el.removeClass('active');
+      $slideInfo.el.eq($slider.index).addClass('active');
       if(!flag) {
         $slider.el.slick('slickGoTo', $slider.index);
       }
@@ -695,7 +699,7 @@ let $slider = {
   }
 }
 let $slideInfo = {
-  
+  el: $('.opt-info-item')
 }
 let $popup = {
   element: $('.popup'),

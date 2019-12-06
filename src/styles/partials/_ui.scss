@@ -163,19 +163,36 @@ a {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-size: cover;
-  &_mask {
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &_mask1 {
     &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.1);
     }
   }
   &_mask2 {
+    &:before {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+  &_mask3 {
+    &:before {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+  &_mask4 {
+    &:before {
+      background: rgba(0, 0, 0, 0.4);
+    }
+  }
+  &_mask5 {
     &:before {
       content: '';
       display: block;

@@ -269,10 +269,20 @@
     }
   }
 }
-
 .opt-info-item {
   visibility: hidden;
   opacity: 0;
+  transition: $trs2;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  max-width: 720px;
+  transform: translate(-50%, -50%);
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 .opt {
@@ -293,6 +303,12 @@
     width: 50%;
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    &-container {
+      position: relative;
+      flex: 1 1 100%;
+    }
   }
 }
 
