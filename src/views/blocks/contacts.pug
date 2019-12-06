@@ -2,8 +2,14 @@ section.section.section-slide.contacts.js-subnav-true.js-pagination-dark
   .section__display
     .section__content.h-c-t.p-t-h
       <iframe src="https://yandex.ru/map-widget/v1/-/CGTXN41i" frameborder="1" allowfullscreen="true"></iframe>
+      a(href="javascript:void(0);").contact-open-btn.js-animated Свяжитесь с нами
   .section__bottom.contacts__bottom
-    form(action="").contacts-form.p-s
+    .contacts__head.p-r-s.p-l-s
+      a(href="javascript:void(0)").popup-close.contact-close-btn.js-animated
+        svg.icon 
+          use(xlink:href="img/icons/sprite.svg#close")
+    h6.contacts__title.p-r-s.p-l-s Свяжитесь с нами
+    form(action="").contacts-form.p-s.p-b-p
       .contacts-form__group.p-r-p
         .contacts-form__item
           .input.contacts-form__input

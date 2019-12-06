@@ -27,6 +27,9 @@ $(document).ready(function() {
   if($slider.el.length>0) {
     $slider.init();
   }
+  if($contactForm.$element.length>0) {
+    $contactForm.init();
+  }
   
   $slide.change($slide.current, {
     onComplete: function() {
@@ -481,6 +484,8 @@ let $nav = {
       .set('.nav__items', {display:'block'}, '-=0.25')
       .fromTo('.nav__item', {autoAlpha:0}, {autoAlpha:1, ease:'power2.inOut', duration:0.5, stagger:{amount: 0.25}}, '-=0.25')
       .fromTo('.nav__item', {x:40}, {x:0, ease:'power2.out', duration:0.5, stagger:{amount:0.25}}, '-=0.75')
+      .fromTo('.nav .contacts-socials li', {autoAlpha:0}, {autoAlpha:1, ease:'power2.inOut', duration:0.5, stagger:{amount: 0.25}}, '-=0.75')
+      .fromTo('.nav .contacts-socials li', {y:40}, {y:0, ease:'power2.out', duration:0.5, stagger:{amount:0.25}}, '-=0.75')
       .set('.nav .scrollbar-track', {autoAlpha:1})
     $nav.hideAnim = gsap.timeline({paused:true})
       .to($nav.el, {autoAlpha:0, duration:0.5, yPercent: 100, ease:'power2.in'})
@@ -753,6 +758,49 @@ let $popup = {
     $popup.animation.reverse();
   }
 }
+let $contactForm = {
+  $open: $('.contact-open-btn'),
+  $close: $('.contact-close-btn'),
+  $element: $('.contacts__bottom'),
+  inAnim: false,
+  init: function() {
+    $contactForm.animation = gsap.timeline({paused:true,
+      onStart: function() {
+        $contactForm.inAnim=true;
+      },
+      onComplete: function() {
+        $contactForm.inAnim=false;
+      },
+      onReverseComplete: function() {
+        $contactForm.inAnim=false;
+      }
+    })
+      .to($contactForm.$element, {duration:0.5, autoAlpha:0, yPercent:100, ease:'power2.in'})
+
+    $contactForm.$open.on('click', function() {
+      if($contactForm.inAnim==false) {
+        console.log('open')
+        $contactForm.animation.reverse();
+      }
+    })
+    $contactForm.$close.on('click', function() {
+      if($contactForm.inAnim==false) {
+        console.log('close')
+        $contactForm.animation.play();
+      }
+    })
+    if($page.width()<=576) {
+      $contactForm.animation.play();
+    }
+    $(window).resize(function() {
+      if($page.width()<=576 && $contactForm.animation.progress()==0) {
+        $contactForm.animation.play();
+      } else if($contactForm.animation.progress()==1) {
+        $contactForm.animation.reverse();
+      }
+    })
+  }
+}
 
 //functions
 function elemsAnims() {
@@ -814,17 +862,32 @@ function main() {
 }
 //
 function resizeElems() {
+  let headerH = $('.header').outerHeight(),
+      bottomH = $('.section__bottom').outerHeight(),
+      pageH = $('.page-wrapper').outerHeight();
   function contentResize() {
     $slide.elm.each(function() {
       if($(this).find('.section__bottom').length>0) {
         let height = $(this).outerHeight() - $(this).find('.section__bottom').outerHeight();
         $(this).find('.section__content').css('height', height);
+        if($window.width()<=768) {
+          $(this).find('.js-mobile-auto-size').css('height', height);
+        } else {
+          $(this).find('.js-mobile-auto-size').css('height', '');
+        }
       }
     })
   }
+  function paginationResize() {
+    if($window.width()>768) {
+      $('.pagination').css({'height': pageH-bottomH-headerH, 'top':headerH})
+    } else {
+      $('.pagination').css({'height':'', 'top':''})
+    }
+  }
   function navResize() {
     if($window.width()>1024 && $nav.state==false) {
-      $nav.el.css('height', '35%')
+      $nav.el.css('height', bottomH)
     } else if($nav.state==false) {
       $nav.el.css('height', '100%')
     }
@@ -837,6 +900,7 @@ function resizeElems() {
   contentResize();
   navResize();
   textareaSize();
+  paginationResize();
 }
 //
 function siteNavEvents() {

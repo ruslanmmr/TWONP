@@ -1,8 +1,51 @@
+.contact-open-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: none;
+  text-align: center;
+  line-height: 60px;
+  background-color: $colorH;
+  color: $colorA;
+  z-index: 100;
+  transition: $trs1;
+  &.hover,
+  &.touch {
+    background-color: $colorG;
+  }
+}
 .contacts {
   &__bottom {
     display: flex;
     background-color: $colorH;
     overflow: hidden;
+  }
+  &__title {
+    font-size: 24px;
+    font-weight: 500;
+    font-family: $font2;
+    flex-shrink: 0;
+    display: block;
+    margin: 30px 0 0 0;
+    display: none;
+  }
+  &__head {
+    display: none;
+    height: 50px;
+    background-color: $colorJ;
+    position: relative;
+    flex-shrink: 0;
+    .popup-close {
+      width: 50px;
+      height: 50px;
+      right: 3px;
+      top: 0;
+      .icon {
+        width: 15px;
+        height: 15px;
+      }
+    }
   }
   iframe {
     display: block;
@@ -102,39 +145,49 @@
   .contacts__bottom {
     height: 210px;
   }
-  .contacts-form {
-    &__content {
-      margin-top: 5px;
-    }
-  }
 }
 @media all and(max-width: 768px) {
   .contacts-form {
-    &__group:first-child {
-      margin-right: 30px;
+    &__group:first-child .input {
+      width: 200px;
     }
   }
 }
 @media all and(max-width: 576px) {
+  .contact-open-btn {
+    display: block;
+  }
   .contacts {
+    &__head {
+      display: block;
+    }
+    &__title {
+      display: block;
+    }
+    .section__content {
+      height: 100% !important;
+    }
     &__bottom {
-      height: auto;
+      height: calc(100% - 70px);
+      max-height: 100%;
       display: flex;
       flex-direction: column;
+    }
+    .contacts-socials {
+      display: none;
     }
   }
   .contacts-socials {
     position: static;
     background-color: transparent;
     &__list {
-      flex-direction: row;
-      justify-content: space-around;
-      padding: 0 30px;
+      padding: 0;
     }
   }
   .contacts-form {
     width: 100%;
-    max-height: 290px;
+    flex: 1 1 100%;
+    flex-direction: column;
     .button {
       margin-top: 20px;
       width: 100%;
@@ -144,13 +197,25 @@
       flex-wrap: wrap;
     }
     &__item:not(:last-child) {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
     &__group {
       max-width: 100% !important;
       width: 100% !important;
+      height: auto;
+      max-height: 100%;
+      &:last-child {
+        flex: 1 1 100%;
+        .input {
+          max-width: 100%;
+        }
+      }
       &:first-child {
-        margin: 0 0 15px 0;
+        margin: 0 0 20px 0;
+        padding: 0;
+        .input {
+          width: 100%;
+        }
       }
     }
   }

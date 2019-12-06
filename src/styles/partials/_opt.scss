@@ -242,6 +242,7 @@
     right: 10px;
     color: $colorN;
     font-size: 14px;
+    opacity: 0.5;
   }
   &.slick-center {
     .fuel-slide {
@@ -250,6 +251,9 @@
         width: 100%;
         cursor: default;
         opacity: 1 !important;
+      }
+      &__index {
+        opacity: 1;
       }
       &__pasport {
         .icon {

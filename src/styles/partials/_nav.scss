@@ -6,8 +6,12 @@
   backdrop-filter: blur(5px);
   z-index: 99;
   width: 20%;
+  min-height: 215px;
   .scrollbar-track {
     visibility: hidden;
+  }
+  .contacts-socials {
+    display: none;
   }
   &__content {
     position: absolute;
@@ -142,6 +146,21 @@
     &__link {
       &:before {
         left: 20px;
+      }
+    }
+    .contacts-socials {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      top: auto;
+      height: auto;
+      li {
+        visibility: hidden;
+        opacity: 0;
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
       }
     }
   }
