@@ -17,7 +17,7 @@
     margin: 0 15px;
     flex: 1 1 100%;
     height: 2px;
-    background-color: $colorF;
+    background-color: $colorN;
     z-index: 1;
     top: 14px;
   }
@@ -47,7 +47,7 @@
       top: 12px;
       left: -2px;
       transition: $trs1;
-      background-color: $colorF;
+      background-color: $colorN;
     }
     &:last-child {
       &:before {
@@ -68,7 +68,7 @@
       display: inline-block;
       left: 50%;
       transform: translate(-50%, -100%);
-      color: $colorF;
+      color: $colorN;
       transition: $trs1;
     }
     .dot {
@@ -78,7 +78,7 @@
       height: 12px;
       top: 7px;
       left: 7px;
-      background-color: $colorF;
+      background-color: $colorN;
       border-radius: 100%;
       transition: $trs1;
       z-index: 2;
@@ -163,7 +163,7 @@
     }
   }
   &__top {
-    border-bottom: 1px solid $colorF;
+    border-bottom: 1px solid $colorN;
     display: flex;
     align-items: flex-start;
     padding: 14px 30px;
@@ -175,11 +175,11 @@
   &__label {
     display: block;
     font-size: 14px;
-    color: $colorF;
+    color: $colorN;
     margin-bottom: 6px;
   }
   &__price {
-    color: $colorF;
+    color: $colorN;
     opacity: 0.5;
     font-family: $font2;
     transition: $trs1;
@@ -203,7 +203,7 @@
     pointer-events: none;
   }
   &__title {
-    padding: 35px 0px;
+    padding: 20px 0px;
     flex: 1 1 100%;
     display: block;
     text-align: center;
@@ -217,11 +217,11 @@
     justify-content: center;
     flex: 1 0 30%;
     height: 100%;
-    border-right: 1px solid $colorF;
+    border-right: 1px solid $colorN;
     .icon {
       width: 40px;
       height: 40px;
-      fill: $colorF;
+      fill: $colorN;
       transition: $trs1;
     }
     &.hover,
@@ -240,7 +240,7 @@
     position: absolute;
     top: 14px;
     right: 10px;
-    color: $colorF;
+    color: $colorN;
     font-size: 14px;
   }
   &.slick-center {
@@ -292,11 +292,16 @@
     width: 30%;
     right: auto;
     left: 20%;
+    display: flex;
     &-container {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      width: 100%;
       height: 100%;
+      margin: auto;
+      max-width: 280px;
+      max-height: 180px;
     }
   }
   &__info {
@@ -325,6 +330,27 @@
     &__price,
     &__title {
       font-size: 22px;
+    }
+  }
+}
+//fix height
+@media all and(min-width: 1024px) {
+  @media all and(max-height: 650px) {
+    .fuel-slide.slick-center .fuel-slide__pasport .icon {
+      width: 40px;
+      height: 40px;
+    }
+    .fuel-slide {
+      &__container {
+        height: 100%;
+      }
+    }
+  }
+}
+@media all and(max-width: 1376px) {
+  .fuel-slide {
+    &__pasport {
+      
     }
   }
 }

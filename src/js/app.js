@@ -22,6 +22,7 @@ $(document).ready(function() {
 
   $subNav.update();
   $popup.init();
+  $checkbox.init();
 
   if($slider.el.length>0) {
     $slider.init();
@@ -55,6 +56,30 @@ const $window = {
 const $page = {
   width: function() {
     return Math.min(window.innerWidth, document.documentElement.clientWidth);
+  }
+}
+//
+let $checkbox = {
+  element: $('.checkbox'),
+  init: function() {
+    $(document).on('click', '.checkbox', function() {
+      $checkbox.check();
+    })
+  },
+  check: function() {
+    $checkbox.element.each(function() {
+      if($(this).find('input').prop('checked') || $('#' + $(this).attr('for')).prop('checked')) {
+        $(this).addClass('checked');
+        if($(this).hasClass('toggle-checkbox')) {
+          $(this).parents('form').find('.toggle-item').addClass('active');
+        }
+      } else {
+        $(this).removeClass('checked');
+        if($(this).hasClass('toggle-checkbox')) {
+          $(this).parents('form').find('.toggle-item').removeClass('active');
+        }
+      }
+    })
   }
 }
 let scrollArea = {
@@ -318,8 +343,8 @@ let map = {
     });
     //условные обозначения
     let $legendTrigger = $('.map-section__legend-item').not($('[data-disabled]'));
-    $legendTrigger.on('mouseenter mouseleave', function(event) {
-      if(event.type=='mouseenter') {
+    $legendTrigger.on('mouseenter mouseleave touchstart touchend', function(event) {
+      if((event.type=='mouseenter' && $('html').hasClass('desktop')) || event.type=='touchstart') {
         if($(this).is('[data-base]')) {
           $legendTrigger.not($(this)).addClass('disabled');
           map.trigger.not($('[data-base],[data-base-station],[data-disabled]')).addClass('disabled');
@@ -330,7 +355,7 @@ let map = {
           $legendTrigger.not($(this)).addClass('disabled');
           map.trigger.not($('[data-factory], [data-disabled]')).addClass('disabled');
         }
-      } else {
+      } else if((event.type=='mouseleave' && $('html').hasClass('desktop')) || event.type=='touchend') {
         $legendTrigger.removeClass('disabled');
         map.trigger.removeClass('disabled');
       }
@@ -664,6 +689,7 @@ let $slider = {
     //события изменения селекта
     $select.on('change', function() {
       $slider.index = $(this).val();
+      $select.val($slider.index);
       $select.niceSelect('update');
       $slider.pag.removeClass('active');
       $slider.pag.eq($slider.index).addClass('active');
@@ -672,11 +698,14 @@ let $slider = {
       if(!flag) {
         $slider.el.slick('slickGoTo', $slider.index);
       }
+      flag = true;
     })
     //события когда слайдер изменился
     $slider.el.on('afterChange', function(event, slick, direction){
-      $slider.index = $(this).find('.slick-center').not('.slick-cloned').data('slick-index');
-      $select.val($slider.index).trigger('change');
+      if(!flag) {
+        $slider.index = $(this).find('.slick-center').not('.slick-cloned').data('slick-index');
+        $select.val($slider.index).trigger('change');
+      }
       flag = false;
     });
     //события клика по неактивному слайду
@@ -800,8 +829,14 @@ function resizeElems() {
       $nav.el.css('height', '100%')
     }
   }
+  function textareaSize() {
+    let parent = $('.input-size-parent'),
+        max = parent.height() - 17;
+    parent.find('.scroll-container').css('max-height', max)
+  }
   contentResize();
   navResize();
+  textareaSize();
 }
 //
 function siteNavEvents() {
@@ -824,7 +859,6 @@ function siteNavEvents() {
 
   //события свайпов
   touchEvents.on("swipeleft swiperight swipeup swipedown", function(event) {
-    //console.log(event.target)
     if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.custom-map').length==0) {
       if(!$slide.animationProgress) {
         if((event.type=='swipeup' || (event.type=='swipeleft' && $(event.target).closest('.slider').length==0)) && $slide.current.index()+1 < $slide.count) {
@@ -852,9 +886,7 @@ function siteNavEvents() {
 //
 function inputs() {
   autosize($('textarea'));
-
   $(document).on('focusin focusout', 'input, textarea', function(event) {
-    console.log(event.type, event.target)
     if(event.type=='focusin') {
       $(event.target).parents('.input').addClass('focus')
     } else {
@@ -899,8 +931,6 @@ function inputs() {
         if ($('.nice-select').length == 0) {
           $(document).off('.nice_select');
         }
-      } else {
-        console.log('Method "' + method + '" does not exist.')
       }
       return this;
     }
@@ -923,7 +953,7 @@ function inputs() {
         .addClass($select.attr('class') || '')
         .addClass($select.attr('disabled') ? 'disabled' : '')
         .attr('tabindex', $select.attr('disabled') ? null : '0')
-        .html('<span class="current"></span><ul class="list"></ul>')
+        .html(`<span class="current js-animated"></span><svg class="icon"><use xlink:href="${$select.data('icon')}"></use></svg><ul class="nice-select__list"></ul>`)
       );
         
       var $dropdown = $select.next();
@@ -931,7 +961,6 @@ function inputs() {
       var $selected = $select.find('option:selected');
       
       $dropdown.find('.current').html($selected.data('display') || $selected.text());
-      
       $options.each(function(i) {
         var $option = $(this);
         var display = $option.data('display');
@@ -943,6 +972,7 @@ function inputs() {
             ($option.is(':selected') ? ' selected' : '') +
             ($option.is(':disabled') ? ' disabled' : ''))
           .html($option.text())
+          .addClass('js-animated')
         );
       });
     }
