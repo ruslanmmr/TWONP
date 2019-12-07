@@ -106,36 +106,28 @@
           </div>
         </section>
         <section class="section section-slide opt active">
-          <!--opt selection-->
-          <div class="section__bottom opt__selection p-s">
-            <div class="opt__selection-container">
-              <div class="select opt-main-select"><span class="select__placeholder">Выберите вид топлива</span>
-                <select data-icon="img/icons/sprite.svg#arb">
-                  <option value="0">ДТ "ЕВРО" Л-К5</option>
-                  <option value="1">АИ-95</option>
-                  <option value="2">АИ-92</option>
-                </select>
-              </div><a class="button button_style1 js-animated" href="javascript:void(0);" data-popup="#order">Заказать</a>
-            </div>
-          </div>
           <!--opt slider-->
           <div class="section__display">
             <div class="scene">
               <div class="bg bg_mask5" data-depth="0.05" style="background-image: url(&quot;img/bg/bg2.jpg&quot;)"></div>
             </div>
-            <div class="section__content p-s p-r-p p-t-h p-b-p content-b">
+            <div class="section__content p-s p-r-p p-t-h p-b-p content-b js-mobile-full-size">
               <!--mobile select-->
-              <div class="select opt-main-select"><span class="select__placeholder">Выберите вид топлива</span>
-                <select data-icon="img/icons/sprite.svg#arb">
-                  <option value="0">ДТ "ЕВРО" Л-К5</option>
-                  <option value="1">АИ-95</option>
-                  <option value="2">АИ-92</option>
-                </select>
+              <div class="opt__mobile-select">
+                <div class="select opt-main-select"><span class="select__placeholder">Выберите вид топлива</span>
+                  <select data-icon="img/icons/sprite.svg#arb">
+                    <option value="0">ДТ "ЕВРО" Л-К5</option>
+                    <option value="1">АИ-95</option>
+                    <option value="2">АИ-92</option>
+                  </select>
+                </div>
               </div>
+              <!--pagination-->
               <div class="fuel-slider-pagination"><span class="line"></span><span class="line"></span>
                 <div class="fuel-slider-pagination__items"><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">ДТ &quot;ЕВРО&quot; Л-К5</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">АИ-95</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">АИ-92</span></a>
                 </div>
               </div>
+              <!--slider-->
               <div class="fuel-slider">
                 <div class="fuel-slider__center">
                   <div class="slider">
@@ -188,31 +180,56 @@
           </div>
           <!--opt info-->
           <div class="section__bottom opt__info">
-            <div class="opt__info-head"></div>
-            <div class="opt__info-container">
-              <div class="opt-info-item p-s">
-                <ul class="list">
-                  <li><span>Цетановое число</span><span>51.1</span></li>
-                  <li><span>Плотность при 15 °C, кг/м3</span><span>835.2</span></li>
-                  <li><span>Массовая доля серы для топлива К5, мг/кг</span><span>7.6</span></li>
-                  <li><span>Температура вспышки, °C</span><span>64</span></li>
-                  <li><span>Зольность, % масс.</span><span>отсутствие</span></li>
-                </ul>
+            <div class="opt__mobile-button p-r-s p-l-s"><a class="button button_style2 opt__info-open js-animated" href="javascript:void(0);">Показать характеристики</a></div>
+            <div class="opt__mobile-button p-r-s p-l-s p-b-s"><a class="button button_style1 js-animated" href="javascript:void(0);" data-popup="#order">Заказать</a></div>
+            <div class="opt__info-content">
+              <div class="opt__info-head"><a class="popup-close js-animated opt__info-close" href="javascript:void(0)">
+                  <svg class="icon"> 
+                    <use xlink:href="img/icons/sprite.svg#close"></use>
+                  </svg></a></div>
+              <div class="opt__info-container">
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Цетановое число</span><span>51.1</span></li>
+                      <li><span>Плотность при 15 °C, кг/м3</span><span>835.2</span></li>
+                      <li><span>Массовая доля серы для топлива К5, мг/кг</span><span>7.6</span></li>
+                      <li><span>Температура вспышки, °C</span><span>64</span></li>
+                      <li><span>Зольность, % масс.</span><span>отсутствие</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Октановое число</span><span>95</span></li>
+                      <li><span>Массовая доля серы, мг/кг</span><span>8.9</span></li>
+                      <li><span>Плотность при 15°C, кг/м3</span><span>744.8</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Октановое число</span><span>92.1</span></li>
+                      <li><span>Массовая доля серы, мг/кг</span><span>менее 3</span></li>
+                      <li><span>Плотность при 15°C, кг/м3</span><span>738.4</span></li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <div class="opt-info-item p-s">
-                <ul class="list">
-                  <li><span>Октановое число</span><span>95</span></li>
-                  <li><span>Массовая доля серы, мг/кг</span><span>8.9</span></li>
-                  <li><span>Плотность при 15°C, кг/м3</span><span>744.8</span></li>
-                </ul>
-              </div>
-              <div class="opt-info-item p-s">
-                <ul class="list">
-                  <li><span>Октановое число</span><span>92.1</span></li>
-                  <li><span>Массовая доля серы, мг/кг</span><span>менее 3</span></li>
-                  <li><span>Плотность при 15°C, кг/м3</span><span>738.4</span></li>
-                </ul>
-              </div>
+            </div>
+          </div>
+          <!--opt selection-->
+          <div class="section__bottom opt__selection p-s">
+            <div class="opt__selection-container">
+              <div class="select opt-main-select"><span class="select__placeholder">Выберите вид топлива</span>
+                <select data-icon="img/icons/sprite.svg#arb">
+                  <option value="0">ДТ "ЕВРО" Л-К5</option>
+                  <option value="1">АИ-95</option>
+                  <option value="2">АИ-92</option>
+                </select>
+              </div><a class="button button_style1 js-animated" href="javascript:void(0);" data-popup="#order">Заказать</a>
             </div>
           </div>
         </section>
@@ -288,8 +305,8 @@
                       <input class="input__el" type="text" required>
                       <label class="input__placeholder">Номер телефона</label>
                     </div>
-                    <div class="select form-order__item"><span class="select__placeholder">Выберите вид топлива</span>
-                      <select class="opt-main-select" data-icon="img/icons/sprite.svg#arb">
+                    <div class="select opt-main-select form-order__item"><span class="select__placeholder">Выберите вид топлива</span>
+                      <select data-icon="img/icons/sprite.svg#arb">
                         <option value="0">ДТ "ЕВРО" Л-К5</option>
                         <option value="1">АИ-95</option>
                         <option value="2">АИ-92</option>

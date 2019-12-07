@@ -20,12 +20,26 @@
     background-color: $colorA;
     font-size: 14px;
     line-height: 20px;
-    padding: 10px 20px;
-    text-align: center;
     color: $colorI;
+    text-align: center;
+    padding: 10px 20px;
     &.touch,
     &.hover {
       opacity: 0.8;
+    }
+  }
+  &_style2 {
+    border-radius: 2px;
+    border: 1px solid $colorA;
+    color: $colorA;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    padding: 10px 20px;
+    &.touch,
+    &.hover {
+      background-color: $colorA;
+      color: $colorI;
     }
   }
 }
@@ -128,8 +142,8 @@ a {
   position: relative;
 }
 .popup-close {
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,6 +165,7 @@ a {
   margin: 0;
   padding: 0;
   list-style: none;
+  font-size: 14px;
   li {
     display: flex;
     justify-content: space-between;
@@ -159,7 +174,7 @@ a {
       margin-bottom: 10px;
     }
     span {
-      line-height: 24px;
+      line-height: 22px;
       &:first-child {
         color: $colorN;
         font-weight: 300;
@@ -419,7 +434,7 @@ a {
   .popup-close {
     width: 50px;
     height: 50px;
-    right: 3px;
+    right: 4px;
     top: 0;
     .icon {
       width: 15px;

@@ -660,6 +660,7 @@ let $slider = {
   el: $('.fuel-slider .slider'),
   slide: $('.fuel-slide'),
   pag: $('.fuel-slider-pagination__item'),
+  info: $('.opt-info-item'),
   scroll: false,
   init: function() {
     let $select = $('.opt-main-select select'),
@@ -685,7 +686,7 @@ let $slider = {
       $(this).attr('data-index', index);
     })
     //описание
-    $slideInfo.el.eq($slider.index).addClass('active');
+    $slider.info.eq($slider.index).addClass('active');
     //пагинация
     $slider.pag.eq($slider.index).addClass('active');
     $slider.pag.on('click', function() {
@@ -702,8 +703,7 @@ let $slider = {
       $select.niceSelect('update');
       $slider.pag.removeClass('active');
       $slider.pag.eq($slider.index).addClass('active');
-      $slideInfo.el.removeClass('active');
-      $slideInfo.el.eq($slider.index).addClass('active');
+      $slider.info.removeClass('active').eq($slider.index).addClass('active');
       $slider.el.slick('slickGoTo', $slider.index);
     })
     //события когда слайдер изменился
@@ -737,10 +737,33 @@ let $slider = {
       arrows: false,
       touchThreshold: 10
     });
+    //information
+    let $block = $('.opt__info-content'),
+        $open = $('.opt__info-open'),
+        $close = $('.opt__info-close, .opt__mobile-select'),
+        animation;
+      animation = gsap.timeline({paused:true})
+        .to($block, {duration:0.5, autoAlpha:0, yPercent:100, ease:'power2.in'})
+
+      if($page.width()<=576) {
+        animation.play();
+      }
+      $open.on('click', function() {
+        animation.reverse();
+      })
+      $close.on('click', function() {
+        animation.play();
+      })
+      $(window).resize(function() {
+        if($page.width()<=576 && animation.progress()==1) {
+          animation.play();
+        } else if($page.width()>576 && animation.progress()==1) {
+          animation.reverse();
+        }
+      })
+
+
   }
-}
-let $slideInfo = {
-  el: $('.opt-info-item')
 }
 let $popup = {
   element: $('.popup'),
@@ -799,9 +822,9 @@ let $contactForm = {
       $contactForm.animation.play();
     }
     $(window).resize(function() {
-      if($page.width()<=576 && $contactForm.animation.progress()==0) {
+      if($page.width()<=576 && $contactForm.animation.progress()==1) {
         $contactForm.animation.play();
-      } else if($contactForm.animation.progress()==1) {
+      } else if($page.width()>576 && $contactForm.animation.progress()==1) {
         $contactForm.animation.reverse();
       }
     })
