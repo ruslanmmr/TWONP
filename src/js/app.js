@@ -660,9 +660,10 @@ let $slider = {
   el: $('.fuel-slider .slider'),
   slide: $('.fuel-slide'),
   pag: $('.fuel-slider-pagination__item'),
+  scroll: false,
   init: function() {
-    let $select = $('.opt-main-select'),
-        flag = false;
+    let $select = $('.opt-main-select select'),
+        flag=true;
 
     $slider.index = $select.val();
   
@@ -688,8 +689,11 @@ let $slider = {
     //пагинация
     $slider.pag.eq($slider.index).addClass('active');
     $slider.pag.on('click', function() {
-      $slider.index = $(this).index();
-      $select.val($slider.index).trigger('change');
+      if(flag==true) {
+        flag=false;
+        $slider.index = $(this).index();
+        $select.val($slider.index).trigger('change');
+      }
     })
     //события изменения селекта
     $select.on('change', function() {
@@ -700,26 +704,29 @@ let $slider = {
       $slider.pag.eq($slider.index).addClass('active');
       $slideInfo.el.removeClass('active');
       $slideInfo.el.eq($slider.index).addClass('active');
-      if(!flag) {
-        $slider.el.slick('slickGoTo', $slider.index);
-      }
-      flag = true;
+      $slider.el.slick('slickGoTo', $slider.index);
     })
     //события когда слайдер изменился
+    $slider.el.on('swipe', function(){
+      $slider.scroll=true;
+    })
     $slider.el.on('afterChange', function(event, slick, direction){
-      if(!flag) {
+      if($slider.scroll==true) {
         $slider.index = $(this).find('.slick-center').not('.slick-cloned').data('slick-index');
         $select.val($slider.index).trigger('change');
       }
-      flag = false;
+      $slider.scroll=false;
+      flag=true;
     });
     //события клика по неактивному слайду
     $slider.slide.find('.fuel-slide__container').on('click', function() {
-      flag = true;
-      let index = $(this).parent().data('slick-index');
-      $slider.el.slick('slickGoTo', index);
-      $slider.index = $(this).parent().attr('data-index');
-      $select.val($slider.index).trigger('change');
+      if(flag==true) {
+        flag=false;
+        let index = $(this).parent().data('slick-index');
+        $slider.el.slick('slickGoTo', index);
+        $slider.index = $(this).parent().attr('data-index');
+        $select.val($slider.index).trigger('change');
+      }
     })
     //инициализация слайдера
     $slider.el.slick({
@@ -753,6 +760,7 @@ let $popup = {
     $popup.animation = gsap.timeline()
       .to($popup.current, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
       .fromTo($popup.current.find('.popup__container'), {y:30}, {duration:0.5, y:0, ease:'power2.out'}, '-=0.5')
+      .to($popup.current.find('.scrollbar-track-y'), {autoAlpha:1, duration:0})
   },
   close: function() {
     $popup.animation.reverse();
@@ -779,13 +787,11 @@ let $contactForm = {
 
     $contactForm.$open.on('click', function() {
       if($contactForm.inAnim==false) {
-        console.log('open')
         $contactForm.animation.reverse();
       }
     })
     $contactForm.$close.on('click', function() {
       if($contactForm.inAnim==false) {
-        console.log('close')
         $contactForm.animation.play();
       }
     })

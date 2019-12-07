@@ -1,15 +1,12 @@
 .contact-open-btn {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
   display: none;
   text-align: center;
   line-height: 60px;
   background-color: $colorH;
   color: $colorA;
-  z-index: 100;
   transition: $trs1;
+  flex-shrink: 0;
   &.hover,
   &.touch {
     background-color: $colorG;
@@ -73,7 +70,9 @@
     height: 100%;
   }
   &__link {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid $colorE;
     border-radius: 100%;
     width: 30px;
@@ -164,8 +163,14 @@
     &__title {
       display: block;
     }
+    iframe {
+      flex: 1 1 100%;
+      height: auto;
+    }
     .section__content {
       height: 100% !important;
+      display: flex;
+      flex-direction: column;
     }
     &__bottom {
       height: calc(100% - 70px);

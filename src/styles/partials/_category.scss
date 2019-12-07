@@ -42,6 +42,11 @@
     background-position: 50% 100%;
   }
 }
+.shipment {
+  .bg {
+    background-position: 50% 100%;
+  }
+}
 
 @media all and(max-width: 1024px) {
   .category-preview {
@@ -83,6 +88,11 @@
     }
     &__title {
       margin-bottom: 15px;
+    }
+  }
+  .shipment {
+    .bg {
+      background-position: 30% 50%;
     }
   }
 }

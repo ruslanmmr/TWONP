@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <title>TWONP</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <!--base(href="http://localhost:9000/")-->
-    <base href="https://ruslanmmr.github.io/TWONP/dest/">
+    <base href="http://localhost:9000/">
+    <!--base(href="https://ruslanmmr.github.io/TWONP/dest/")-->
     <link rel="shortcut icon" href="img/favicon.png" type="image/png">
   </head>
   <body style="overflow:hidden">
@@ -39,6 +39,22 @@
             </div>
           </div>
           <div class="nav__copy p-s"><a class="nav__phone ff-2 js-animated" href="tel:88005000000">8 800 500 0000</a><span class="copy">&copy Все права защищены</span></div>
+          <div class="contacts-socials p-s">
+            <ul class="contacts-socials__list">
+              <li class="contacts-socials__item"><a class="contacts-socials__link js-animated" href="https://vk.com/id295109674" target="_blank">
+                  <svg class="icon"> 
+                    <use xlink:href="img/icons/sprite.svg#vk"></use>
+                  </svg></a></li>
+              <li class="contacts-socials__item"><a class="contacts-socials__link js-animated" href="tel:88005000000">
+                  <svg class="icon"> 
+                    <use xlink:href="img/icons/sprite.svg#phone"></use>
+                  </svg></a></li>
+              <li class="contacts-socials__item"><a class="contacts-socials__link js-animated" href="#" target="_blank">
+                  <svg class="icon"> 
+                    <use xlink:href="img/icons/sprite.svg#mail"></use>
+                  </svg></a></li>
+            </ul>
+          </div>
         </div>
       </nav>
       <div class="pagination pos-t-h"><a class="pagination-arrow pagination-arrow_prev js-animated" href="javascript:void(0)" data-slide="prev"><span>00</span>
@@ -49,7 +65,7 @@
             <use xlink:href="img/icons/sprite.svg#bottomA"></use>
           </svg><span>00</span></a></div>
       <div class="slide-container">
-        <section class="section section-slide home">
+        <section class="section section-slide home opt-home">
           <div class="home__content section__display">
             <div class="scene">
               <div class="bg bg_mask3" data-depth="0.05" style="background-image: url(&quot;img/bg/home3.jpg&quot;)"></div>
@@ -93,8 +109,8 @@
           <!--opt selection-->
           <div class="section__bottom opt__selection p-s">
             <div class="opt__selection-container">
-              <div class="select"><span class="select__placeholder">Выберите вид топлива</span>
-                <select class="opt-main-select" data-icon="img/icons/sprite.svg#arb">
+              <div class="select opt-main-select"><span class="select__placeholder">Выберите вид топлива</span>
+                <select data-icon="img/icons/sprite.svg#arb">
                   <option value="0">ДТ "ЕВРО" Л-К5</option>
                   <option value="1">АИ-95</option>
                   <option value="2">АИ-92</option>
@@ -108,6 +124,14 @@
               <div class="bg bg_mask5" data-depth="0.05" style="background-image: url(&quot;img/bg/bg2.jpg&quot;)"></div>
             </div>
             <div class="section__content p-s p-r-p p-t-h p-b-p content-b">
+              <!--mobile select-->
+              <div class="select opt-main-select"><span class="select__placeholder">Выберите вид топлива</span>
+                <select data-icon="img/icons/sprite.svg#arb">
+                  <option value="0">ДТ "ЕВРО" Л-К5</option>
+                  <option value="1">АИ-95</option>
+                  <option value="2">АИ-92</option>
+                </select>
+              </div>
               <div class="fuel-slider-pagination"><span class="line"></span><span class="line"></span>
                 <div class="fuel-slider-pagination__items"><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">ДТ &quot;ЕВРО&quot; Л-К5</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">АИ-95</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">АИ-92</span></a>
                 </div>
@@ -115,48 +139,48 @@
               <div class="fuel-slider">
                 <div class="fuel-slider__center">
                   <div class="slider">
-                            <div class="fuel-slide">
-                              <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">01</span>
-                                <div class="fuel-slide__top">
-                                  <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">41.75 ₽</span></div>
-                                  <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">50 000 ₽</span></div>
-                                </div>
-                                <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" target="_blank" href="content/ДТ &quot;ЕВРО&quot; Л-К5.pdf">
-                                    <svg class="icon"> 
-                                      <use xlink:href="img/icons/sprite.svg#ico5"></use>
-                                    </svg><span>Паспорт</span></a>
-                                  <h6 class="fuel-slide__title">ДТ &quot;ЕВРО&quot; Л-К5</h6>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="fuel-slide">
-                              <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">02</span>
-                                <div class="fuel-slide__top">
-                                  <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">39.00 ₽</span></div>
-                                  <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">52 000 ₽</span></div>
-                                </div>
-                                <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" target="_blank" href="content/АИ-95-К5.pdf">
-                                    <svg class="icon"> 
-                                      <use xlink:href="img/icons/sprite.svg#ico5"></use>
-                                    </svg><span>Паспорт</span></a>
-                                  <h6 class="fuel-slide__title">АИ-95</h6>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="fuel-slide">
-                              <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">03</span>
-                                <div class="fuel-slide__top">
-                                  <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">36.45 ₽</span></div>
-                                  <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">49 250 ₽</span></div>
-                                </div>
-                                <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" target="_blank" href="content/АИ-92-К5.pdf">
-                                    <svg class="icon"> 
-                                      <use xlink:href="img/icons/sprite.svg#ico5"></use>
-                                    </svg><span>Паспорт</span></a>
-                                  <h6 class="fuel-slide__title">АИ-92</h6>
-                                </div>
-                              </div>
-                            </div>
+                    <div class="fuel-slide">
+                      <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">01</span>
+                        <div class="fuel-slide__top">
+                          <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">41.75 ₽</span></div>
+                          <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">50 000 ₽</span></div>
+                        </div>
+                        <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" href="content/ДТ &quot;ЕВРО&quot; Л-К5.pdf" target="_blank">
+                            <svg class="icon"> 
+                              <use xlink:href="img/icons/sprite.svg#ico5"></use>
+                            </svg><span>Паспорт</span></a>
+                          <h6 class="fuel-slide__title">ДТ "ЕВРО" <span>Л-К5</span></h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="fuel-slide">
+                      <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">02</span>
+                        <div class="fuel-slide__top">
+                          <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">39.00 ₽</span></div>
+                          <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">52 000 ₽</span></div>
+                        </div>
+                        <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" href="content/АИ-95-К5.pdf" target="_blank">
+                            <svg class="icon"> 
+                              <use xlink:href="img/icons/sprite.svg#ico5"></use>
+                            </svg><span>Паспорт</span></a>
+                          <h6 class="fuel-slide__title">АИ-95</h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="fuel-slide">
+                      <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">03</span>
+                        <div class="fuel-slide__top">
+                          <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">36.45 ₽</span></div>
+                          <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">49 250 ₽</span></div>
+                        </div>
+                        <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" href="content/АИ-92-К5.pdf" target="_blank">
+                            <svg class="icon"> 
+                              <use xlink:href="img/icons/sprite.svg#ico5"></use>
+                            </svg><span>Паспорт</span></a>
+                          <h6 class="fuel-slide__title">АИ-92</h6>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -210,9 +234,9 @@
             </div>
           </div>
         </section>
-        <section class="section section-slide">
+        <section class="section section-slide shipment">
           <div class="section__display">
-            <div class="scene">
+            <div class="scene js-mobile-auto-size">
               <div class="bg bg_mask4" data-depth="0.05" style="background-image: url(&quot;img/bg/bg3.jpg&quot;)"></div>
             </div>
             <div class="section__content l-pd p-s p-r-p p-t-h p-b-p content-b">
@@ -238,8 +262,10 @@
             </div>
           </div>
         </section>
-        <div class="popup" id="order"><a class="popup__close" href="javascript:void(0)" data-close> </a>
-          <div class="popup__container">
+      </div>
+      <div class="popup" id="order"><a class="popup__close" href="javascript:void(0)" data-close></a>
+        <div class="scroll-container">
+          <div class="popup__container scroll-child p-s"> 
             <div class="popup__element">
               <div class="popup__head">
                 <div class="popup__title">Оставьте заявку</div><a class="popup-close js-animated" href="javascript:void(0)" data-close>

@@ -1,35 +1,36 @@
 .popup(id="order")
-  a(href="javascript:void(0)" data-close).popup__close  
-  .popup__container
-    .popup__element
-      .popup__head
-        .popup__title Оставьте заявку
-        a(href="javascript:void(0)" data-close).popup-close.js-animated
-          svg.icon 
-            use(xlink:href="img/icons/sprite.svg#close")
-      .popup__content
-        form(action="#").form-order
-          .form-order__group
-            .input.form-order__item
-              input(type="text" required).input__el
-              label.input__placeholder Имя
-            .input.form-order__item
-              input.input__el(type="email" required).input__el
-              label.input__placeholder E-mail
-            .input.form-order__item
-              input(type="text" required).input__el
-              label.input__placeholder Номер телефона
-            .select.form-order__item
-              span.select__placeholder Выберите вид топлива
-              select.opt-main-select(data-icon='img/icons/sprite.svg#arb')
-                option(value="0") ДТ "ЕВРО" Л-К5
-                option(value="1") АИ-95
-                option(value="2") АИ-92
-            label.checkbox.form-order__item
-              svg.icon 
-                use(xlink:href="img/icons/sprite.svg#tick")
-              input(type="checkbox")
-              | Я ознакомлен и согласен<br> с 
-              a(href="#").link.js-animated политикой конфиденциальности
-          .form-order__btn
-            button(type='submit').button.button_style1.js-animated Отправить
+  a(href="javascript:void(0)" data-close).popup__close
+  .scroll-container
+    .popup__container.scroll-child.p-s 
+      .popup__element
+        .popup__head
+          .popup__title Оставьте заявку
+          a(href="javascript:void(0)" data-close).popup-close.js-animated
+            svg.icon 
+              use(xlink:href="img/icons/sprite.svg#close")
+        .popup__content
+          form(action="#").form-order
+            .form-order__group
+              .input.form-order__item
+                input(type="text" required).input__el
+                label.input__placeholder Имя
+              .input.form-order__item
+                input.input__el(type="email" required).input__el
+                label.input__placeholder E-mail
+              .input.form-order__item
+                input(type="text" required).input__el
+                label.input__placeholder Номер телефона
+              .select.form-order__item
+                span.select__placeholder Выберите вид топлива
+                select.opt-main-select(data-icon='img/icons/sprite.svg#arb')
+                  option(value="0") ДТ "ЕВРО" Л-К5
+                  option(value="1") АИ-95
+                  option(value="2") АИ-92
+              label.checkbox.form-order__item
+                svg.icon 
+                  use(xlink:href="img/icons/sprite.svg#tick")
+                input(type="checkbox")
+                | Я ознакомлен и согласен<br> с 
+                a(href="#").link.js-animated политикой конфиденциальности
+            .form-order__btn
+              button(type='submit').button.button_style1.js-animated Отправить

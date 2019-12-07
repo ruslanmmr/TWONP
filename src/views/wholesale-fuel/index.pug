@@ -5,7 +5,7 @@ block content
   include ../blocks/nav2
   include ../blocks/pagination
   .slide-container
-    section.section.section-slide.home
+    section.section.section-slide.home.opt-home
       .home__content.section__display
         .scene
           .bg.bg_mask3(data-depth="0.05" style='background-image: url("img/bg/home3.jpg")')
@@ -51,9 +51,9 @@ block content
             img(src="img/icons/factory3.svg", alt="ПЕРВЫЙ ЗАВОД")
           .manufacturers__item.js-animated.big-block-btn
             img(src="img/icons/factory4.svg", alt="Новошахтинский НПЗ")
-    section.section.section-slide
+    section.section.section-slide.shipment
       .section__display
-        .scene
+        .scene.js-mobile-auto-size
           .bg.bg_mask4(data-depth="0.05" style='background-image: url("img/bg/bg3.jpg")')
         .section__content.l-pd.p-s.p-r-p.p-t-h.p-b-p.content-b
           h5.section__title.t-size-64 Отгрузка топлива<br> в ваши бензовозы
@@ -68,4 +68,4 @@ block content
           .bg.bg_mask8(data-depth="0.05" style='background-image: url("img/bg/bg4.jpg")')
         .section__content.p-s.p-r-p.p-t-h.p-b-p.content-b
           h5.section__title.t-size-48 Сертификаты<br> и паспорта качества
-    include ../blocks/popups
+  include ../blocks/popups

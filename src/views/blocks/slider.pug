@@ -1,20 +1,3 @@
-mixin slide(index, liter, tonn, title)
-  .fuel-slide
-    .fuel-slide__container.js-animated
-      span.fuel-slide__index=index
-      .fuel-slide__top
-        .fuel-slide__item
-          span.fuel-slide__label Литр
-          span.fuel-slide__price=liter
-        .fuel-slide__item
-          span.fuel-slide__label Тонна
-          span.fuel-slide__price=tonn
-      .fuel-slide__bottom
-        a(target='_blank').fuel-slide__pasport.js-animated&attributes(attributes)
-          svg.icon 
-            use(xlink:href="img/icons/sprite.svg#ico5")
-          span Паспорт
-        h6.fuel-slide__title=title
 mixin pag(title)
   a(href="javascript:void(0)").fuel-slider-pagination__item.js-animated
     span.dot
@@ -24,10 +7,9 @@ section.section.section-slide.opt.active
   //opt selection
   .section__bottom.opt__selection.p-s
     .opt__selection-container
-      .select
+      .select.opt-main-select
         span.select__placeholder Выберите вид топлива
-  
-        select.opt-main-select(data-icon='img/icons/sprite.svg#arb')
+        select(data-icon='img/icons/sprite.svg#arb')
           option(value="0") ДТ "ЕВРО" Л-К5
           option(value="1") АИ-95
           option(value="2") АИ-92
@@ -37,6 +19,13 @@ section.section.section-slide.opt.active
     .scene
       .bg.bg_mask5(data-depth="0.05" style='background-image: url("img/bg/bg2.jpg")')
     .section__content.p-s.p-r-p.p-t-h.p-b-p.content-b
+      //mobile select
+      .select.opt-main-select
+        span.select__placeholder Выберите вид топлива
+        select(data-icon='img/icons/sprite.svg#arb')
+          option(value="0") ДТ "ЕВРО" Л-К5
+          option(value="1") АИ-95
+          option(value="2") АИ-92
       .fuel-slider-pagination
         span.line
         span.line
@@ -47,9 +36,55 @@ section.section.section-slide.opt.active
       .fuel-slider
         .fuel-slider__center
           .slider
-            +slide('01', '41.75 ₽', '50 000 ₽', 'ДТ "ЕВРО" Л-К5')(href='content/ДТ "ЕВРО" Л-К5.pdf')
-            +slide('02', '39.00 ₽', '52 000 ₽', 'АИ-95')(href='content/АИ-95-К5.pdf')
-            +slide('03', '36.45 ₽', '49 250 ₽', 'АИ-92')(href='content/АИ-92-К5.pdf')
+            .fuel-slide
+              .fuel-slide__container.js-animated
+                span.fuel-slide__index 01
+                .fuel-slide__top
+                  .fuel-slide__item
+                    span.fuel-slide__label Литр
+                    span.fuel-slide__price 41.75 ₽
+                  .fuel-slide__item
+                    span.fuel-slide__label Тонна
+                    span.fuel-slide__price 50 000 ₽
+                .fuel-slide__bottom
+                  a(href='content/ДТ "ЕВРО" Л-К5.pdf' target='_blank').fuel-slide__pasport.js-animated
+                    svg.icon 
+                      use(xlink:href="img/icons/sprite.svg#ico5")
+                    span Паспорт
+                  h6.fuel-slide__title ДТ "ЕВРО" 
+                    span Л-К5
+            .fuel-slide
+              .fuel-slide__container.js-animated
+                span.fuel-slide__index 02
+                .fuel-slide__top
+                  .fuel-slide__item
+                    span.fuel-slide__label Литр
+                    span.fuel-slide__price 39.00 ₽
+                  .fuel-slide__item
+                    span.fuel-slide__label Тонна
+                    span.fuel-slide__price 52 000 ₽
+                .fuel-slide__bottom
+                  a(href='content/АИ-95-К5.pdf' target='_blank').fuel-slide__pasport.js-animated
+                    svg.icon 
+                      use(xlink:href="img/icons/sprite.svg#ico5")
+                    span Паспорт
+                  h6.fuel-slide__title АИ-95
+            .fuel-slide
+              .fuel-slide__container.js-animated
+                span.fuel-slide__index 03
+                .fuel-slide__top
+                  .fuel-slide__item
+                    span.fuel-slide__label Литр
+                    span.fuel-slide__price 36.45 ₽
+                  .fuel-slide__item
+                    span.fuel-slide__label Тонна
+                    span.fuel-slide__price 49 250 ₽
+                .fuel-slide__bottom
+                  a(href='content/АИ-92-К5.pdf' target='_blank').fuel-slide__pasport.js-animated
+                    svg.icon 
+                      use(xlink:href="img/icons/sprite.svg#ico5")
+                    span Паспорт
+                  h6.fuel-slide__title АИ-92
   //opt info
   .section__bottom.opt__info
     .opt__info-head

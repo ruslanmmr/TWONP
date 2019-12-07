@@ -51,11 +51,16 @@
       }
     }
   }
+  .opt-home {
+    .big-block-btn__text {
+      margin-bottom: 8px;
+    }
+  }
 }
 @media all and(max-width: 576px) {
   .home {
     &__nav {
-      height: 170px;
+      height: 180px;
     }
   }
 }
