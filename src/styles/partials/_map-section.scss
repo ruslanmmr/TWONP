@@ -70,8 +70,6 @@
       margin-bottom: 1.4em;
       font-family: $font2;
     }
-    &-list {
-    }
     &-section {
       display: flex;
       flex-direction: column;
@@ -83,7 +81,7 @@
     &-item {
       position: relative;
       padding-left: 20px;
-      cursor: default;
+      cursor: default !important;
       user-select: none;
       font-size: 14px;
       display: inline-block;
@@ -229,8 +227,8 @@
     visibility: hidden;
     opacity: 0;
     &.active {
-      visibility: visible;
       opacity: 1;
+      visibility: visible;
     }
   }
 }
@@ -246,7 +244,7 @@
     overflow: hidden;
     display: block;
     &:first-child {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
     .icon {
       width: 100%;

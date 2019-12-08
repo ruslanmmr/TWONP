@@ -105,7 +105,7 @@
             </div>
           </div>
         </section>
-        <section class="section section-slide opt active">
+        <section class="section section-slide opt">
           <!--opt slider-->
           <div class="section__display">
             <div class="scene">
@@ -269,13 +269,64 @@
             </div>
           </div>
         </section>
-        <section class="section section-slide js-nav-hidden">
+        <section class="section section-slide js-nav-hidden documents active">
           <div class="section__display">
             <div class="scene">
               <div class="bg bg_mask8" data-depth="0.05" style="background-image: url(&quot;img/bg/bg4.jpg&quot;)"></div>
             </div>
-            <div class="section__content p-s p-r-p p-t-h p-b-p content-b">
-              <h5 class="section__title t-size-48">Сертификаты<br> и паспорта качества</h5>
+            <div class="section__content p-t-h">
+              <div class="scroll-container">
+                <div class="scroll-child p-s p-r-p p-b-p">
+                  <h5 class="section__title t-size-48">Сертификаты<br> и паспорта качества</h5>
+                  <div class="documents__container row">
+                    <div class="documents-item col-xl-3 col-md-4 col-sm-6 col-12"><a class="documents-item__container js-animated" href="content/АИ-92-К5.pdf" download>
+                        <div class="documents-item__content"><span class="documents-item__title">Паспорт <br>АИ-92-К5</span><span class="documents-item__index">1</span>
+                          <svg class="icon documents-item__small">
+                            <use xlink:href="img/icons/sprite.svg#ico3"></use>
+                          </svg>
+                          <svg class="icon documents-item__big">
+                            <use xlink:href="img/icons/sprite.svg#ico5"></use>
+                          </svg><span class="documents-item__format">.pdf</span>
+                        </div></a></div>
+                    <div class="documents-item col-xl-3 col-md-4 col-sm-6 col-12"><a class="documents-item__container js-animated" href="content/АИ-95-К5.pdf" download>
+                        <div class="documents-item__content"><span class="documents-item__title">Паспорт <br>АИ-95-К5</span><span class="documents-item__index">2</span>
+                          <svg class="icon documents-item__small">
+                            <use xlink:href="img/icons/sprite.svg#ico3"></use>
+                          </svg>
+                          <svg class="icon documents-item__big">
+                            <use xlink:href="img/icons/sprite.svg#ico5"></use>
+                          </svg><span class="documents-item__format">.pdf</span>
+                        </div></a></div>
+                    <div class="documents-item col-xl-3 col-md-4 col-sm-6 col-12"><a class="documents-item__container js-animated" href="content/ДТ &quot;ЕВРО&quot; Л-К5.pdf" download>
+                        <div class="documents-item__content"><span class="documents-item__title">Паспорт <br> ДТ "ЕВРО" Л-К5</span><span class="documents-item__index">3</span>
+                          <svg class="icon documents-item__small">
+                            <use xlink:href="img/icons/sprite.svg#ico3"></use>
+                          </svg>
+                          <svg class="icon documents-item__big">
+                            <use xlink:href="img/icons/sprite.svg#ico5"></use>
+                          </svg><span class="documents-item__format">.pdf</span>
+                        </div></a></div>
+                    <div class="documents-item col-xl-3 col-md-4 col-sm-6 col-12"><a class="documents-item__container js-animated" href="content/Топливо высоковязкое вид 1.pdf" download>
+                        <div class="documents-item__content"><span class="documents-item__title">Топливо высоковязкое вид 1</span><span class="documents-item__index">4</span>
+                          <svg class="icon documents-item__small">
+                            <use xlink:href="img/icons/sprite.svg#ico3"></use>
+                          </svg>
+                          <svg class="icon documents-item__big">
+                            <use xlink:href="img/icons/sprite.svg#ico5"></use>
+                          </svg><span class="documents-item__format">.pdf</span>
+                        </div></a></div>
+                    <div class="documents-item col-xl-3 col-md-4 col-sm-6 col-12"><a class="documents-item__container js-animated" href="content/Топливо высоковязкое вид 2.pdf" download>
+                        <div class="documents-item__content"><span class="documents-item__title">Топливо высоковязкое вид 2</span><span class="documents-item__index">5</span>
+                          <svg class="icon documents-item__small">
+                            <use xlink:href="img/icons/sprite.svg#ico3"></use>
+                          </svg>
+                          <svg class="icon documents-item__big">
+                            <use xlink:href="img/icons/sprite.svg#ico5"></use>
+                          </svg><span class="documents-item__format">.pdf</span>
+                        </div></a></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -293,33 +344,35 @@
               <div class="popup__content">
                 <form class="form-order" action="#">
                   <div class="form-order__group">
-                    <div class="input form-order__item">
+                    <div class="input form-order__item popup-item">
                       <input class="input__el" type="text" required>
                       <label class="input__placeholder">Имя</label>
                     </div>
-                    <div class="input form-order__item">
+                    <div class="input form-order__item popup-item">
                       <input class="input__el input__el" type="email" required>
                       <label class="input__placeholder">E-mail</label>
                     </div>
-                    <div class="input form-order__item">
+                    <div class="input form-order__item popup-item">
                       <input class="input__el" type="text" required>
                       <label class="input__placeholder">Номер телефона</label>
                     </div>
-                    <div class="select opt-main-select form-order__item"><span class="select__placeholder">Выберите вид топлива</span>
+                    <div class="select opt-main-select form-order__item popup-item"><span class="select__placeholder">Выберите вид топлива</span>
                       <select data-icon="img/icons/sprite.svg#arb">
                         <option value="0">ДТ "ЕВРО" Л-К5</option>
                         <option value="1">АИ-95</option>
                         <option value="2">АИ-92</option>
                       </select>
                     </div>
-                    <label class="checkbox form-order__item">
-                      <svg class="icon"> 
-                        <use xlink:href="img/icons/sprite.svg#tick"></use>
-                      </svg>
-                      <input type="checkbox">Я ознакомлен и согласен<br> с <a class="link js-animated" href="#">политикой конфиденциальности</a>
-                    </label>
+                    <div class="form-order__item popup-item">
+                      <label class="checkbox">
+                        <svg class="icon"> 
+                          <use xlink:href="img/icons/sprite.svg#tick2"></use>
+                        </svg>
+                        <input type="checkbox">Я ознакомлен и согласен<br> с <a class="link js-animated" href="#">политикой конфиденциальности</a>
+                      </label>
+                    </div>
                   </div>
-                  <div class="form-order__btn">
+                  <div class="form-order__btn popup-item">
                     <button class="button button_style1 js-animated" type="submit">Отправить</button>
                   </div>
                 </form>

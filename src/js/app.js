@@ -90,8 +90,7 @@ let scrollArea = {
   init: function(callbacks) {
     for (let elm of this.elms) {
       let scroll = Scrollbar.init(elm, {
-        damping: 0.1,
-        alwaysShowTracks: true
+        damping: 0.1
       });
       setInterval(function() {
         scroll.update();
@@ -783,7 +782,10 @@ let $popup = {
     $popup.animation = gsap.timeline()
       .to($popup.current, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
       .fromTo($popup.current.find('.popup__container'), {y:30}, {duration:0.5, y:0, ease:'power2.out'}, '-=0.5')
+      .fromTo($popup.current.find('.popup-item'), {autoAlpha:0}, {autoAlpha:1, ease:'power2.inOut', duration:0.5, stagger:{amount: 0.25}},  '-=0.5')
+      .fromTo($popup.current.find('.popup-item'), {y:40}, {y:0, ease:'power2.out', duration:0.5, stagger:{amount:0.25}}, '-=0.75')
       .to($popup.current.find('.scrollbar-track-y'), {autoAlpha:1, duration:0})
+
   },
   close: function() {
     $popup.animation.reverse();

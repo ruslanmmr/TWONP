@@ -299,7 +299,6 @@
     visibility: visible;
   }
 }
-
 .opt {
   &__mobile-button {
     display: none;
@@ -348,6 +347,10 @@
       position: relative;
     }
   }
+}
+.opt-main-select {
+  position: relative;
+  z-index: 2;
 }
 
 @media all and(max-width: 1200px) {

@@ -11,26 +11,27 @@
         .popup__content
           form(action="#").form-order
             .form-order__group
-              .input.form-order__item
+              .input.form-order__item.popup-item
                 input(type="text" required).input__el
                 label.input__placeholder Имя
-              .input.form-order__item
+              .input.form-order__item.popup-item
                 input.input__el(type="email" required).input__el
                 label.input__placeholder E-mail
-              .input.form-order__item
+              .input.form-order__item.popup-item
                 input(type="text" required).input__el
                 label.input__placeholder Номер телефона
-              .select.opt-main-select.form-order__item
+              .select.opt-main-select.form-order__item.popup-item
                 span.select__placeholder Выберите вид топлива
                 select(data-icon='img/icons/sprite.svg#arb')
                   option(value="0") ДТ "ЕВРО" Л-К5
                   option(value="1") АИ-95
                   option(value="2") АИ-92
-              label.checkbox.form-order__item
-                svg.icon 
-                  use(xlink:href="img/icons/sprite.svg#tick")
-                input(type="checkbox")
-                | Я ознакомлен и согласен<br> с 
-                a(href="#").link.js-animated политикой конфиденциальности
-            .form-order__btn
+              .form-order__item.popup-item
+                label.checkbox
+                  svg.icon 
+                    use(xlink:href="img/icons/sprite.svg#tick2")
+                  input(type="checkbox")
+                  | Я ознакомлен и согласен<br> с 
+                  a(href="#").link.js-animated политикой конфиденциальности
+            .form-order__btn.popup-item
               button(type='submit').button.button_style1.js-animated Отправить

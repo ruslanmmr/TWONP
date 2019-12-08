@@ -30,12 +30,12 @@
   }
   .icon {
     display: block;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     position: absolute;
     z-index: 3;
-    left: 3px;
-    top: 3px;
+    left: 2px;
+    top: 2px;
     opacity: 0;
     transition: $trs1;
     fill: #fff;
