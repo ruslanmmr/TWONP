@@ -1,7 +1,18 @@
 section.section.section-slide.contacts.js-subnav-true.js-pagination-dark
   .section__display
     .section__content.h-c-t.p-t-h
-      <iframe src="https://yandex.ru/map-widget/v1/-/CGTXN41i" frameborder="1" allowfullscreen="true"></iframe>
+      .contacts__map
+        svg.loader(xmlns='http://www.w3.org/2000/svg', width='120', height='30', viewBox='0 0 120 30', fill='#fff')
+          circle(cx='15', cy='15', r='12.2866')
+            animate(attributeName='r', from='15', to='15', begin='0s', dur='0.8s', values='15;9;15', calcMode='linear', repeatCount='indefinite')
+            animate(attributeName='fill-opacity', from='1', to='1', begin='0s', dur='0.8s', values='1;.5;1', calcMode='linear', repeatCount='indefinite')
+          circle(cx='60', cy='15', r='11.7134', fill-opacity='0.3')
+            animate(attributeName='r', from='9', to='9', begin='0s', dur='0.8s', values='9;15;9', calcMode='linear', repeatCount='indefinite')
+            animate(attributeName='fill-opacity', from='0.5', to='0.5', begin='0s', dur='0.8s', values='.5;1;.5', calcMode='linear', repeatCount='indefinite')
+          circle(cx='105', cy='15', r='12.2866')
+            animate(attributeName='r', from='15', to='15', begin='0s', dur='0.8s', values='15;9;15', calcMode='linear', repeatCount='indefinite')
+            animate(attributeName='fill-opacity', from='1', to='1', begin='0s', dur='0.8s', values='1;.5;1', calcMode='linear', repeatCount='indefinite')
+        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ac35c50786db94c833a7f1a99569be995b657bc3f440e4a2047a056a37bb7c525&amp;width=100%&amp;height=100%&amp;lang=ru_RU&amp;scroll=true"></script>
       a(href="javascript:void(0);").contact-open-btn.js-animated Свяжитесь с нами
   .section__bottom.contacts__bottom
     .contacts__head.p-r-s.p-l-s
