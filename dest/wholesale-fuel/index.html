@@ -25,7 +25,7 @@
   </head>
   <body style="overflow:hidden;background-color:#363C46;">
     <!--preloader-->
-    <div class="preloader" style="visibility:hidden;opacity:0; position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 100; transition:.2s">
+    <div class="preloader" style="visibility:hidden;opacity:0; position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 100; transition:.5s">
       <svg class="preloader__loader" style="width: 100px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" stroke="none" viewBox="0 0 129 26" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <mask id="mask-1" x="0" y="0" width="100" height="100">
@@ -451,7 +451,7 @@
           let attr = -(100 - Math.round((100/this.count)*this.loaded));
           $preloader.item.setAttribute('x', attr+'%');
           if(this.loaded == this.count) {
-            $preloader.preloader.style.cssText = 'transition:.5s;visibility:hidden;opacity:0';
+            $preloader.preloader.style.cssText = 'visibility:hidden;opacity:0';
             setTimeout(function() {
               $preloader.wrap.style.cssText = 'visibility:visible;opacity:1';
               setTimeout(function() {
