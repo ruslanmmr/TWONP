@@ -1,3 +1,54 @@
+let $preloader = {
+  background: document.querySelectorAll('.bg'),
+  preloader: document.querySelector('.preloader'),
+  item: document.querySelector('.preloader__item'),
+  wrap: document.querySelector('.page-wrapper'),
+  init: function() {
+    $preloader.preloader.style.cssText = 'visibility:visible;opacity:1';
+    //
+    this.count = this.background.length;
+    this.loaded = 0;
+    function loading() {
+      if($preloader.loaded<$preloader.count) {
+        let attr = $preloader.background[$preloader.loaded].getAttribute('data-image');
+        $preloader.background[$preloader.loaded].style.backgroundImage = 'url("'+attr+'")';
+        let clone = new Image();
+        //
+        function event() {
+          setTimeout(function() {
+            $preloader.loaded++;
+            loading();
+            $preloader.load();
+          }, 100)
+        }
+        //
+        clone.onload = function() {
+          event();
+        };
+        clone.onerror = function() {
+          event();
+        };
+        clone.src = attr;
+      }
+    }
+    loading();
+  },
+  load: function() {
+    let attr = -(100 - Math.round((100/this.count)*this.loaded));
+    $preloader.item.setAttribute('x', attr+'%');
+    if(this.loaded == this.count) {
+      $preloader.preloader.style.cssText = 'visibility:hidden;opacity:0';
+      setTimeout(function() {
+        $preloader.wrap.style.cssText = 'visibility:visible;opacity:1';
+        setTimeout(function() {
+          $preloader.wrap.classList.add('loaded')
+        }, 500)
+      }, 500)
+    }
+  }
+}
+
+
 window.$ = window.jQuery = require('jquery');
 
 import device from 'current-device';
