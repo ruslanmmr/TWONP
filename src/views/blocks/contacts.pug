@@ -12,7 +12,7 @@ section.section.section-slide.contacts.js-subnav-true.js-pagination-dark
           circle(cx='105', cy='15', r='12.2866')
             animate(attributeName='r', from='15', to='15', begin='0s', dur='0.8s', values='15;9;15', calcMode='linear', repeatCount='indefinite')
             animate(attributeName='fill-opacity', from='1', to='1', begin='0s', dur='0.8s', values='1;.5;1', calcMode='linear', repeatCount='indefinite')
-        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ac35c50786db94c833a7f1a99569be995b657bc3f440e4a2047a056a37bb7c525&amp;width=100%&amp;height=100%&amp;lang=ru_RU&amp;scroll=true"></script>
+        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ac35c50786db94c833a7f1a99569be995b657bc3f440e4a2047a056a37bb7c525&amp;width=100%&amp;height=100%&amp;lang=ru_RU&amp;scroll=false"></script>
       a(href="javascript:void(0);").contact-open-btn.js-animated Свяжитесь с нами
   .section__bottom.contacts__bottom
     .contacts__head.p-r-s.p-l-s
@@ -21,7 +21,7 @@ section.section.section-slide.contacts.js-subnav-true.js-pagination-dark
           use(xlink:href="img/icons/sprite.svg#close")
     h6.contacts__title.p-r-s.p-l-s Свяжитесь с нами
     form(action="").contacts-form.p-s.p-b-p
-      .contacts-form__group.p-r-p
+      .contacts-form__group.p-r-p.first
         .contacts-form__item
           .input.contacts-form__input
             input(type="text" required).input__el
@@ -30,11 +30,10 @@ section.section.section-slide.contacts.js-subnav-true.js-pagination-dark
           .input.contacts-form__input
             input.input__el(type="email" required).input__el
             label.input__placeholder E-mail
-      .contacts-form__group
+      .contacts-form__group.last
         .contacts-form__item.contacts-form__text.input-size-parent
-          .input
-            .scroll-container
-              textarea(type="email" required).input__el.scroll-child
+          .input.has-error
+            textarea(type="email" required).input__el
             label.input__placeholder Текст сообщения
         .contacts-form__item
           button(type='submit').button.button_style1.js-animated Отправить
@@ -49,6 +48,6 @@ section.section.section-slide.contacts.js-subnav-true.js-pagination-dark
             svg.icon 
               use(xlink:href="img/icons/sprite.svg#phone")
         li.contacts-socials__item
-          a(href="#" target='_blank').contacts-socials__link.js-animated
+          a(href="mailto:info@twonp.ru").contacts-socials__link.js-animated
             svg.icon 
               use(xlink:href="img/icons/sprite.svg#mail")

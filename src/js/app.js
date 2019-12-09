@@ -4,12 +4,13 @@ import device from 'current-device';
 import Scrollbar from 'smooth-scrollbar';
 import Hammer from 'hammerjs';
 import { gsap } from "gsap";
+import imagesLoaded from "imagesloaded";
 import slick from "slick-carousel";
 import autosize from "autosize";
 import Parallax from 'parallax-js';
 
-
 $(document).ready(function() {
+
   elemsAnims();
   main();
   siteNavEvents();
@@ -27,19 +28,21 @@ $(document).ready(function() {
   if($slider.el.length>0) {
     $slider.init();
   }
+  if($('.custom-map').length>0) {
+    map.init();
+  }
   if($contactForm.$element.length>0) {
     $contactForm.init();
   }
-  
-  $slide.change($slide.current, {
-    onComplete: function() {
-      $slide.updateAnimations();
-      $slide.to($slide.current);
-      if($('.custom-map').length>0) {
-        map.init();
+
+  $slide.getFirstSlide({onComplete:function(){
+    $slide.change($slide.current, {
+      onComplete: function() {
+        $slide.updateAnimations();
+        $slide.to($slide.current);
       }
-    }
-  });
+    });
+  }})
 })
 
 window.addEventListener('load', 
@@ -61,7 +64,9 @@ const $page = {
     return Math.min(window.innerWidth, document.documentElement.clientWidth);
   }
 }
-//
+
+$preloader.init();
+
 let $checkbox = {
   element: $('.checkbox'),
   init: function() {
@@ -542,11 +547,11 @@ let $subNav = {
       
   }
 }
+
 let $slide = {
   animationProgress: false,
   elm: $('.section-slide'),
   count: $('.section-slide').length,
-  current: $('.section-slide.active'),
   next: '',
   prev: '',
   forwardAnimation: '',
@@ -573,6 +578,18 @@ let $slide = {
     let anim = gsap.timeline({onComplete:function(){$slide.updateAnimations()}})
       .to(newSlide, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
       .fromTo(newSlide.find('.scene'), {scale:1.05}, {immediateRender:false, duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
+  },
+  getFirstSlide: function(callbacks) {
+    let index = localStorage.getItem('slide');
+    if(index==null) {
+      index = 0;
+    }
+    this.current = $('.section-slide').eq(index);
+    localStorage.removeItem('slide');
+  
+    if (typeof callbacks === 'object') {
+      callbacks.onComplete();
+    }
   },
   change: function(newSlide, callbacks) {
     this.current.removeClass('active');
@@ -973,6 +990,28 @@ function siteNavEvents() {
       } else {
         $slide.to($('.section-slide').eq($(this).data('slide')));
       }
+    }
+  })
+  $('[data-first-slide]').on('click', function() {
+    let index = $(this).data('first-slide');
+    localStorage.setItem('slide', index);
+  })
+  //планый переход
+  $('[data-animate-link]').on('click', function(event) {
+    if($slide.animationProgress==false) {
+      $slide.animationProgress=true;
+      event.preventDefault();
+      $slide.animationProgress=true;
+      $('a').removeClass('active');
+      $('.page-wrapper').css('pointer-events', 'none');
+      $(this).addClass('active');
+      let href = $(this).attr('href');
+      let animation = gsap.timeline({
+            onComplete:function(){
+              document.location.href = href;
+            }
+          })
+          .to('.page-wrapper', {duration:0.5, autoAlpha:0, ease:'power2.in'})
     }
   })
 }

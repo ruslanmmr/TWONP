@@ -116,13 +116,13 @@
     flex-direction: column;
     justify-content: space-between;
     max-height: 160px;
-    &:first-child {
+    &.first {
       flex-shrink: 0;
       .input {
         width: 220px;
       }
     }
-    &:last-child {
+    &.last {
       flex: 1 1 100%;
       .input {
         width: 100%;
@@ -158,7 +158,7 @@
 }
 @media all and(max-width: 768px) {
   .contacts-form {
-    &__group:first-child .input {
+    &__group.first .input {
       width: 200px;
     }
   }
@@ -218,17 +218,17 @@
       width: 100% !important;
       height: auto;
       max-height: 100%;
-      &:last-child {
-        flex: 1 1 100%;
-        .input {
-          max-width: 100%;
-        }
-      }
-      &:first-child {
+      &.first {
         margin: 0 0 20px 0;
         padding: 0;
         .input {
           width: 100%;
+        }
+      }
+      &.last {
+        flex: 1 1 100%;
+        .input {
+          max-width: 100%;
         }
       }
     }

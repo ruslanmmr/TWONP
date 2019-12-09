@@ -71,6 +71,10 @@
   width: 100%;
   padding-top: 15px;
   overflow: hidden;
+  transition: $trs1;
+  &.has-error {
+    border-color: $colorAA;
+  }
   .scroll-content {
     padding-right: 10px;
   }

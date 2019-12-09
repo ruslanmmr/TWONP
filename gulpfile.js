@@ -216,16 +216,18 @@ gulp.task("default", gulp.series("clean",
 //gulp build
 gulp.task("build", gulp.series("clean", gulp.parallel("pugBuild", "stylesBuild", "scriptsBuild", "images", "favicons")));
 
-/* //gulp deploy
+//gulp deploy
 gulp.task("deploy", function () {
   return gulp.src('./dest/**')
     .pipe(rsync({
       root: './dest/',
-      hostname: 'u0683784@37.140.192.157',
-      destination: 'www/test.artica.art/',
+      hostname: '92.53.96.11',
+      destination: '/home/c/ct60473/public_html/assets/components/project/dest',
+      username: 'ct60473',
       archive: true,
       silent: false,
-      compress: true,
-      exclude: ['.htpasswd', '.htaccess'],
-    }));
-}); */
+      compress: true
+  }));
+});
+
+//pass Qmt7usfjXrxg 

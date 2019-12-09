@@ -281,7 +281,7 @@
   visibility: hidden;
   opacity: 0;
   transition: $trs2;
-  position: absolute;
+  position: absolute !important;
   left: 50%;
   top: 50%;
   width: 100%;
@@ -350,7 +350,7 @@
 }
 .opt-main-select {
   position: relative;
-  z-index: 2;
+  z-index: 10;
 }
 
 @media all and(max-width: 1200px) {
