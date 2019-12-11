@@ -571,22 +571,6 @@ a {
     &__item {
       &:first-child {
         img{
-          width: 100px;
-          height: 100px;
-        } 
-      }
-      img {
-        width: 130px;
-        height: 130px;
-      }
-    }
-  }
-}
-@media all and(max-width: 1024px) {
-  .manufacturers {
-    &__item {
-      &:first-child {
-        img{
           width: 90px;
           height: 90px;
         } 
@@ -662,7 +646,6 @@ a {
     }
   }
 }
-
 @media all and(max-width: 576px) {
   .pagination {
     height: 70px;

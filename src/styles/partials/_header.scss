@@ -27,6 +27,9 @@
           fill: $colorA;
         }
       }
+      &.active {
+        pointer-events: none;
+      }
     }
   }
 }

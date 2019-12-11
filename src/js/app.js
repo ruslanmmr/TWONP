@@ -3,11 +3,23 @@ let $preloader = {
   preloader: document.querySelector('.preloader'),
   item: document.querySelector('.preloader__item'),
   wrap: document.querySelector('.page-wrapper'),
+  pageLoaded: false,
+  imagesLoaded: false,
   init: function() {
-    $preloader.preloader.style.cssText = 'visibility:visible;opacity:1';
-    //
     this.count = this.background.length;
     this.loaded = 0;
+    window.onload = function() {
+      $preloader.pageLoaded = true;
+      //если картинок вообще нет
+      if($preloader.count==0) {
+        setTimeout(function() {
+          $preloader.loadFinished();
+        }, 200)
+      }
+    };
+    //
+    $preloader.preloader.style.cssText = 'visibility:visible;opacity:1';
+    ///
     function loading() {
       if($preloader.loaded<$preloader.count) {
         let attr = $preloader.background[$preloader.loaded].getAttribute('data-image');
@@ -19,7 +31,7 @@ let $preloader = {
             $preloader.loaded++;
             loading();
             $preloader.load();
-          }, 100)
+          }, 50)
         }
         //
         clone.onload = function() {
@@ -33,21 +45,36 @@ let $preloader = {
     }
     loading();
   },
+
   load: function() {
     let attr = -(100 - Math.round((100/this.count)*this.loaded));
     $preloader.item.setAttribute('x', attr+'%');
     if(this.loaded == this.count) {
-      $preloader.preloader.style.cssText = 'visibility:hidden;opacity:0';
-      setTimeout(function() {
-        $preloader.wrap.style.cssText = 'visibility:visible;opacity:1';
-        setTimeout(function() {
-          $preloader.wrap.classList.add('loaded')
-        }, 500)
-      }, 500)
+      $preloader.imagesLoaded = true;
     }
+    if($preloader.imagesLoaded==true) {
+      if($preloader.pageLoaded==true) {
+        $preloader.loadFinished();
+      } else {
+        window.onload = function() {
+          $preloader.loadFinished();
+        }
+      }
+    }
+  },
+
+  loadFinished: function() {
+    $preloader.item.setAttribute('x', '0%');
+    setTimeout(function() {
+      $preloader.preloader.style.cssText = 'visibility:hidden;opacity:0';
+      $preloader.wrap.style.cssText = 'visibility:visible;opacity:1';
+      setTimeout(function() {
+        $preloader.wrap.classList.add('loaded')
+      }, 500)
+      //
+    }, 200)
   }
 }
-
 
 window.$ = window.jQuery = require('jquery');
 
@@ -63,7 +90,6 @@ import Parallax from 'parallax-js';
 $(document).ready(function() {
 
   elemsAnims();
-  main();
   siteNavEvents();
   inputs();
   select();
@@ -81,6 +107,12 @@ $(document).ready(function() {
   }
   if($('.custom-map').length>0) {
     map.init();
+  }
+  if($('html').hasClass('desktop')) {
+    parallax.init();
+    if($('.js-tabs-true').length>0) {
+      $tabs.init();
+    }
   }
   if($contactForm.$element.length>0) {
     $contactForm.init();
@@ -545,17 +577,34 @@ let $nav = {
     $nav.hideAnim = gsap.timeline({paused:true})
       .to($nav.el, {autoAlpha:0, duration:0.5, yPercent: 100, ease:'power2.in'})
     //
-    $nav.trigger.on('click', function() {
+    $(document).on('click', function(event){
       if($nav.flag == true) {
         $nav.flag = false;
         setTimeout(function() {
           $nav.flag = true;
         }, $nav.interval)
-  
-        if($nav.state == false) {
+        //
+        if($(event.target).closest($nav.trigger).length>0 && $nav.state==false) {
           $nav.open();
-        } else {
+        } else if(($(event.target).closest($nav.trigger).length>0 && $nav.state==true) ||
+          ($(event.target).closest($nav.el).length==0 && $nav.state==true)) {
           $nav.close();
+        } else {
+          $nav.flag = true;
+        }
+      }
+      if($(event.target).closest($nav.trigger).length>0) {
+        if($nav.flag == true) {
+          $nav.flag = false;
+          setTimeout(function() {
+            $nav.flag = true;
+          }, $nav.interval)
+    
+          if($nav.state == false) {
+            $nav.open();
+          } else {
+            $nav.close();
+          }
         }
       }
     })
@@ -598,7 +647,6 @@ let $subNav = {
       
   }
 }
-
 let $slide = {
   animationProgress: false,
   elm: $('.section-slide'),
@@ -629,6 +677,12 @@ let $slide = {
     let anim = gsap.timeline({onComplete:function(){$slide.updateAnimations()}})
       .to(newSlide, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
       .fromTo(newSlide.find('.scene'), {scale:1.05}, {immediateRender:false, duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
+  },
+  afterChange: function() {
+    if($('html').hasClass('desktop') && $('.js-tabs-true').length>0 && !this.current.hasClass('js-tabs-true')) {
+      $tabs.slideTo(0);
+    }
+    $slide.animationProgress=false;
   },
   getFirstSlide: function(callbacks) {
     let index = localStorage.getItem('slide');
@@ -694,8 +748,7 @@ let $slide = {
         .to($slide.prev, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
         .fromTo($slide.prev.find('.section__display'), {yPercent:-100}, {immediateRender:false, duration:0.5, yPercent:0, ease:'power2.out'}, '-=0.5')
     }
-
-    $slide.animationProgress=false;
+    $slide.afterChange();
   }
 }
 let $pagination = {
@@ -898,6 +951,44 @@ let $contactForm = {
     })
   }
 }
+let parallax = {
+  scene: $('.scene'),
+  init: function() {
+    this.scene.each(function() {
+      let parallaxInstance = new Parallax(this, {
+        limitY: '0',
+        limitX: '100'
+      });
+    })
+  }
+}
+let $tabs = {
+  btn: $('.home__nav-item'),
+  nav: $('.home__nav'),
+  slide: $('.home-slide'),
+  old: 0,
+  init: function() {
+    this.btn.on('mouseenter', function() {
+      if(!$slide.animationProgress) {
+        let index = $(this).index() + 1;
+        $tabs.slideTo(index);
+      }
+    })
+    this.nav.on('mouseleave', function() {
+      if(!$slide.animationProgress) {
+        $tabs.slideTo(0);
+      }
+    })
+  },
+  slideTo: function(index) {
+    let animation = gsap.timeline()
+      .to($tabs.slide.eq($tabs.old), {duration:0.5, autoAlpha:0, ease:'power2.out'})
+      .to($tabs.slide.eq(index), {duration:0.5, autoAlpha:1, ease:'power2.out'}, '-=0.5')
+      .fromTo($tabs.slide.eq($tabs.old).find('.scene'), {scale:1}, {immediateRender:false, duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
+      .fromTo($tabs.slide.eq(index).find('.scene'), {scale:1.05}, {immediateRender:false, duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
+    $tabs.old=index;
+  }
+}
 
 //functions
 function elemsAnims() {
@@ -913,49 +1004,6 @@ function elemsAnims() {
       $target.removeClass('hover');
     }
   })
-}
-//
-function main() {
-  //parralax
-  if($('html').hasClass('desktop')) {
-
-    let $scene = $('.scene');
-    $scene.each(function() {
-      let parallaxInstance = new Parallax(this, {
-        limitY: '0',
-        limitX: '100'
-      });
-    })
-
-    let $slideBtn = $('.home__nav-item'),
-      $nav = $('.home__nav'),
-      $slide = $('.home-slide'),
-      current,
-      old = 0;
-
-  $slideBtn.on('mouseenter', function() {
-    if(!$slide.animationProgress) {
-      current = $(this).index() + 1;
-      let animation = gsap.timeline()
-        .to($slide.eq(old), {duration:0.5, autoAlpha:0, ease:'power2.out'})
-        .to($slide.eq(current), {duration:0.5, autoAlpha:1, ease:'power2.out'}, '-=0.5')
-        .fromTo($slide.eq(old).find('.scene'), {scale:1}, {immediateRender:false, duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
-        .fromTo($slide.eq(current).find('.scene'), {scale:1.05}, {immediateRender:false, duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
-      old=current;
-    }
-  })
-  $nav.on('mouseleave', function() {
-    if(!$slide.animationProgress) {
-      let animation = gsap.timeline()
-      .to($slide.eq(old), {duration:0.5, autoAlpha:0, ease:'power2.out'})
-      .to($slide.eq(0), {duration:0.5, autoAlpha:1, ease:'power2.out'}, '-=0.5')
-      .to($slide.eq(old).find('.scene'), {duration:0.5, scale:1.05, ease:'power2.in'}, '-=0.5')
-      .fromTo($slide.eq(0).find('.scene'), {scale:1.05}, {duration:0.5, scale:1, ease:'power2.out'}, '-=0.5')
-      old=0;
-    }
-  })
-
-  }
 }
 //
 function resizeElems() {
@@ -1052,7 +1100,6 @@ function siteNavEvents() {
     if($slide.animationProgress==false) {
       $slide.animationProgress=true;
       event.preventDefault();
-      $slide.animationProgress=true;
       $('a').removeClass('active');
       $('.page-wrapper').css('pointer-events', 'none');
       $(this).addClass('active');

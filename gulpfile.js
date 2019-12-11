@@ -216,6 +216,7 @@ gulp.task("default", gulp.series("clean",
 //gulp build
 gulp.task("build", gulp.series("clean", gulp.parallel("pugBuild", "stylesBuild", "scriptsBuild", "images", "favicons")));
 
+
 //gulp deploy
 gulp.task("deploy", function () {
   return gulp.src('./dest/**')
@@ -230,4 +231,3 @@ gulp.task("deploy", function () {
   }));
 });
 
-//pass Qmt7usfjXrxg 
