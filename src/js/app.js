@@ -92,12 +92,11 @@ $(document).ready(function() {
   elemsAnims();
   siteNavEvents();
   inputs();
-  select();
 
 
+  $select.init();
 
-  scrollArea.init({onComplete:function(){$nav.init();}});
-
+  $nav.init();
   $subNav.update();
   $popup.init();
   $checkbox.init();
@@ -173,12 +172,14 @@ let $checkbox = {
     })
   }
 }
-let scrollArea = {
-  elms: document.querySelectorAll('.scroll-container'),
+let $scrollArea = {
   init: function(callbacks) {
+    this.elms = document.querySelectorAll('.scroll-container');
+
     for (let elm of this.elms) {
       let scroll = Scrollbar.init(elm, {
-        damping: 0.1
+        damping: 0.1,
+        alwaysShowTracks: true
       });
       setInterval(function() {
         scroll.update();
@@ -352,6 +353,26 @@ let map = {
     this.zoom = 1;
     this.zoomCurrent = 1;
     this.zoomGradation = 1;
+
+    map.inner.on('wheel', function(event){
+      if(event.originalEvent.deltaY>0 && map.available==true) {
+        map.zoomMinus();
+      } else if(event.originalEvent.deltaY<0 && map.available==true) {
+        map.zoomPlus();
+      }
+    });
+
+    let touchScale = new Hammer.Manager(map.inner[0]);
+    let pinch = new Hammer.Pinch();
+    touchScale.add(pinch);
+
+    touchScale.on("pinchin pinchout", function(event) {
+      if(event.type =='pinchin' && map.available==true) {
+        map.zoomMinus();
+      } else if(event.type =='pinchout' && map.available==true) {
+        map.zoomPlus();
+      }
+    })
     
     this.controlPlus.on('click', function(e) {
       e.preventDefault();
@@ -367,7 +388,7 @@ let map = {
       }
     })
 
-    let area = new Hammer.Manager(map.container[0]);
+    let area = new Hammer.Manager(map.inner[0]);
     let pan = new Hammer.Pan();
     pan.set({ threshold: 1 });
     area.add(pan);
@@ -727,7 +748,7 @@ let $slide = {
       callbacks.onComplete();
     }
   },
-  updateAnimations: function(callbacks) {
+  updateAnimations: function() {
     
     //exit anim
     $slide.exitAnimation = gsap.timeline({paused:true})
@@ -786,20 +807,28 @@ let $slider = {
     let $select = $('.opt-main-select select'),
         flag=true;
 
-    $slider.index = $select.val();
-  
+    /* let values = {};
+    console.log($select.eq(0).find('option'))
+    $select.eq(0).find('option').each(function() {
+      
+    }) */
+
+    $slider.index = $select.find('option:selected').index();
     //slick hack
     $slider.el.on('init', function(event, slick, direction){
-      let count = $slider.el.find('.slick-slide').not('.slick-cloned').length,
-          last_slides = count-4;
+      let count = $slider.el.find('.slick-cloned').length,
+          last_slides = count - 4;
+
           if(last_slides==0) {
             last_slides = 2;
           } else if(last_slides<0) {
             last_slides = 1;
           }
+      
       for(let i=0;i<last_slides;i++) {
         $slider.el.find('.slick-cloned:last-child').remove();
       }
+
     });
     //добавить индексы на слайды
     $slider.slide.each(function(index) {
@@ -813,13 +842,13 @@ let $slider = {
       if(flag==true) {
         flag=false;
         $slider.index = $(this).index();
-        $select.val($slider.index).trigger('change');
+        $select.val($select.eq(0).find('option').eq($slider.index).attr('value')).trigger('change');
       }
     })
     //события изменения селекта
     $select.on('change', function() {
-      $slider.index = $(this).val();
-      $select.val($slider.index);
+      $select.val($(this).find(':selected').attr('value'));
+      $slider.index = $(this).find(':selected').index();
       $select.niceSelect('update');
       $slider.pag.removeClass('active');
       $slider.pag.eq($slider.index).addClass('active');
@@ -833,7 +862,7 @@ let $slider = {
     $slider.el.on('afterChange', function(event, slick, direction){
       if($slider.scroll==true) {
         $slider.index = $(this).find('.slick-center').not('.slick-cloned').data('slick-index');
-        $select.val($slider.index).trigger('change');
+        $select.val($select.eq(0).find('option').eq($slider.index).attr('value')).trigger('change');
       }
       $slider.scroll=false;
       flag=true;
@@ -845,7 +874,7 @@ let $slider = {
         let index = $(this).parent().data('slick-index');
         $slider.el.slick('slickGoTo', index);
         $slider.index = $(this).parent().attr('data-index');
-        $select.val($slider.index).trigger('change');
+        $select.val($select.eq(0).find('option').eq($slider.index).attr('value')).trigger('change');
       }
     })
     //инициализация слайдера
@@ -989,6 +1018,14 @@ let $tabs = {
     $tabs.old=index;
   }
 }
+let $select = {
+  el: $('.select select'),
+  init: function() {
+    this.el.niceSelect({onComplete: function() {
+      $scrollArea.init();
+    }});
+  }
+}
 
 //functions
 function elemsAnims() {
@@ -1051,7 +1088,7 @@ function resizeElems() {
 function siteNavEvents() {
   //события скролла
   $(window).on('wheel', function(event){
-    if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.popup').length==0) {
+    if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.js-no-scroll').length==0) {
       if(!$slide.animationProgress) {
         if(event.originalEvent.deltaY>0 && $slide.current.index()+1 < $slide.count) {
           $slide.toNext();
@@ -1068,7 +1105,7 @@ function siteNavEvents() {
 
   //события свайпов
   touchEvents.on("swipeleft swiperight swipeup swipedown", function(event) {
-    if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.custom-map').length==0) {
+    if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.js-no-scroll').length==0) {
       if(!$slide.animationProgress) {
         if((event.type=='swipeup' || (event.type=='swipeleft' && $(event.target).closest('.slider').length==0)) && $slide.current.index()+1 < $slide.count) {
           $slide.toNext();
@@ -1126,6 +1163,7 @@ function inputs() {
     }
   })
 }
+
 //select
 (function($) {
 
@@ -1134,34 +1172,16 @@ function inputs() {
     // Methods
     if (typeof method == 'string') {      
       if (method == 'update') {
+
         this.each(function() {
-          var $select = $(this);
-          var $dropdown = $(this).next('.nice-select');
-          var open = $dropdown.hasClass('open');
-          
-          if ($dropdown.length) {
-            $dropdown.remove();
-            create_nice_select($select);
-            
-            if (open) {
-              $select.next().trigger('click');
-            }
-          }
+          let index = $(this).parents('.select').find(':selected').index();
+          $(this).parents('.select').find('.selected').removeClass('selected');
+          $(this).parents('.select').find('.option').eq(index).addClass('selected');
+          let text = $(this).parents('.select').find('.option').eq(index).text();
+          $(this).parents('.select').find('.current').text(text);
         });
-      } else if (method == 'destroy') {
-        this.each(function() {
-          var $select = $(this);
-          var $dropdown = $(this).next('.nice-select');
-          
-          if ($dropdown.length) {
-            $dropdown.remove();
-            $select.css('display', '');
-          }
-        });
-        if ($('.nice-select').length == 0) {
-          $(document).off('.nice_select');
-        }
-      }
+
+      } 
       return this;
     }
       
@@ -1183,7 +1203,7 @@ function inputs() {
         .addClass($select.attr('class') || '')
         .addClass($select.attr('disabled') ? 'disabled' : '')
         .attr('tabindex', $select.attr('disabled') ? null : '0')
-        .html(`<span class="current js-animated"></span><svg class="icon"><use xlink:href="${$select.data('icon')}"></use></svg><ul class="nice-select__list"></ul>`)
+        .html(`<span class="current js-animated"></span><svg class="icon"><use xlink:href="${$select.data('icon')}"></use></svg><div class="scroll-container nice-select__list"><div class="scroll-child"><ul></ul></div></div>`)
       );
         
       var $dropdown = $select.next();
@@ -1247,11 +1267,13 @@ function inputs() {
       
       $dropdown.prev('select').val($option.data('value')).trigger('change');
     });
+
+    //callback
+    if (typeof method === 'object') {
+      method.onComplete();
+    }
+
     return this;
   };
 
 }(jQuery));
-//
-function select() {
-  $('.select select').niceSelect();
-}

@@ -46,7 +46,7 @@
       <div class="sub-nav p-r-p">
         <ul class="sub-nav__list">
           <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="/TWONP/dest/index.html">Заправиться</a></li>
-          <li class="sub-nav__item"><a class="sub-nav__link js-animated active" href="/TWONP/dest/wholesale-fuel/index.html">Закупить</a></li>
+          <li class="sub-nav__item"><a class="sub-nav__link js-animated active" href="/TWONP/dest/wholesale-fuel/index.html">Топливо оптом</a></li>
           <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="/TWONP/dest/index.html">Перевезти</a></li>
           <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="/TWONP/dest/index.html">Хранить</a></li>
         </ul>
@@ -145,19 +145,24 @@
               <div class="opt__mobile-select">
                 <div class="select opt-main-select"><span class="select__placeholder">Выберите вид топлива</span>
                   <select data-icon="img/icons/sprite.svg#arb">
-                    <option value="0">ДТ "ЕВРО" Л-К5</option>
-                    <option value="1">АИ-95</option>
-                    <option value="2">АИ-92</option>
+                    <option value="ДТ 'ЕВРО' Л-К5">ДТ 'ЕВРО' Л-К5</option>
+                    <option value="АИ-95">АИ-95</option>
+                    <option value="АИ-92">АИ-92</option>
+                    <option value="Газойль">Газойль</option>
+                    <option value="Топливо высоковязкое">Топливо высоковязкое</option>
+                    <option value="Широкий нефтяной дистиллят">Широкий нефтяной дистиллят</option>
                   </select>
                 </div>
               </div>
               <!--pagination-->
-              <div class="fuel-slider-pagination"><span class="line"></span><span class="line"></span>
-                <div class="fuel-slider-pagination__items"><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">ДТ &quot;ЕВРО&quot; Л-К5</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">АИ-95</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">АИ-92</span></a>
+              <div class="fuel-slider-pagination">
+                <div class="fuel-slider-pagination__container"><span class="line"></span><span class="line"></span><span class="line"></span><span class="line"></span><span class="line"></span>
+                  <div class="fuel-slider-pagination__items"><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">ДТ &quot;ЕВРО&quot;</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">АИ-95</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">АИ-92</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">Газойль</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">ТВ</span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span><span class="title">ШНД</span></a>
+                  </div>
                 </div>
               </div>
               <!--slider-->
-              <div class="fuel-slider">
+              <div class="fuel-slider js-no-scroll">
                 <div class="fuel-slider__center">
                   <div class="slider">
                     <div class="fuel-slide">
@@ -170,7 +175,7 @@
                             <svg class="icon"> 
                               <use xlink:href="img/icons/sprite.svg#ico5"></use>
                             </svg><span>Паспорт</span></a>
-                          <h6 class="fuel-slide__title">ДТ "ЕВРО" <span>Л-К5</span></h6>
+                          <h6 class="fuel-slide__title">ДТ "ЕВРО" Л-К5</h6>
                         </div>
                       </div>
                     </div>
@@ -199,6 +204,48 @@
                               <use xlink:href="img/icons/sprite.svg#ico5"></use>
                             </svg><span>Паспорт</span></a>
                           <h6 class="fuel-slide__title">АИ-92</h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="fuel-slide">
+                      <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">04</span>
+                        <div class="fuel-slide__top">
+                          <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">-</span></div>
+                          <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">-</span></div>
+                        </div>
+                        <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" href="content/АИ-92-К5.pdf" target="_blank">
+                            <svg class="icon"> 
+                              <use xlink:href="img/icons/sprite.svg#ico5"></use>
+                            </svg><span>Паспорт</span></a>
+                          <h6 class="fuel-slide__title">Газойль <br><span>(аналог ДТ)</span></h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="fuel-slide">
+                      <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">05</span>
+                        <div class="fuel-slide__top">
+                          <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">-</span></div>
+                          <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">-</span></div>
+                        </div>
+                        <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" href="content/АИ-92-К5.pdf" target="_blank">
+                            <svg class="icon"> 
+                              <use xlink:href="img/icons/sprite.svg#ico5"></use>
+                            </svg><span>Паспорт</span></a>
+                          <h6 class="fuel-slide__title">Топливо высоковязкое <br><span>(аналог ДТ)</span></h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="fuel-slide">
+                      <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">06</span>
+                        <div class="fuel-slide__top">
+                          <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">-</span></div>
+                          <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">-</span></div>
+                        </div>
+                        <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" href="content/АИ-92-К5.pdf" target="_blank">
+                            <svg class="icon"> 
+                              <use xlink:href="img/icons/sprite.svg#ico5"></use>
+                            </svg><span>Паспорт</span></a>
+                          <h6 class="fuel-slide__title">Широкий нефтяной дистиллят<br><span>(аналог ДТ)        </span></h6>
                         </div>
                       </div>
                     </div>
@@ -246,6 +293,34 @@
                     </ul>
                   </div>
                 </div>
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Плотность при 15 °C, кг/м3</span><span>837</span></li>
+                      <li><span>Массовая доля серы, %</span><span>0.872</span></li>
+                      <li><span>Температура вспышки, °C</span><span>84</span></li>
+                      <li><span>Температура застывания, °C</span><span>-36</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Вязкость кинематическая, мм2/с</span><span>2.44</span></li>
+                      <li><span>Температура вспышки, *С</span><span>93</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Плотность, кг./м3</span><span>821</span></li>
+                      <li><span>Массовая доля серы,%</span><span>0.34 </span></li>
+                      <li><span>Температура вспышки, *С</span><span>82</span></li>
+                      <li><span>Температура застывания, *С</span><span>-36</span></li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -254,9 +329,12 @@
             <div class="opt__selection-container">
               <div class="select opt-main-select"><span class="select__placeholder">Выберите вид топлива</span>
                 <select data-icon="img/icons/sprite.svg#arb">
-                  <option value="0">ДТ "ЕВРО" Л-К5</option>
-                  <option value="1">АИ-95</option>
-                  <option value="2">АИ-92</option>
+                  <option value="ДТ 'ЕВРО' Л-К5">ДТ 'ЕВРО' Л-К5</option>
+                  <option value="АИ-95">АИ-95</option>
+                  <option value="АИ-92">АИ-92</option>
+                  <option value="Газойль">Газойль</option>
+                  <option value="Топливо высоковязкое">Топливо высоковязкое</option>
+                  <option value="Широкий нефтяной дистиллят">Широкий нефтяной дистиллят</option>
                 </select>
               </div><a class="button button_style1 js-animated" href="javascript:void(0);" data-popup="#order">Заказать</a>
             </div>
@@ -387,9 +465,12 @@
                     </div>
                     <div class="select opt-main-select form-order__item popup-item"><span class="select__placeholder">Выберите вид топлива</span>
                       <select data-icon="img/icons/sprite.svg#arb">
-                        <option value="0">ДТ "ЕВРО" Л-К5</option>
-                        <option value="1">АИ-95</option>
-                        <option value="2">АИ-92</option>
+                        <option value="ДТ 'ЕВРО' Л-К5">ДТ 'ЕВРО' Л-К5</option>
+                        <option value="АИ-95">АИ-95</option>
+                        <option value="АИ-92">АИ-92</option>
+                        <option value="Газойль">Газойль</option>
+                        <option value="Топливо высоковязкое">Топливо высоковязкое</option>
+                        <option value="Широкий нефтяной дистиллят">Широкий нефтяной дистиллят</option>
                       </select>
                     </div>
                     <div class="form-order__item popup-item">

@@ -109,7 +109,8 @@ body {
       width: 5px;
       margin: 40px auto 40px auto;
       border-radius: 5px;
-      background-color: $colorG;
+      background-color: $colorI;
+      opacity: 0.25;
       position: relative;
       z-index: 1;
     }
@@ -271,7 +272,6 @@ body {
 }
 
 @import "./partials/text";
-@import "./partials/fancybox";
 @import "./partials/ui";
 @import "./partials/header";
 @import "./partials/category";

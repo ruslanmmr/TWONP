@@ -217,7 +217,7 @@ gulp.task("default", gulp.series("clean",
 gulp.task("build", gulp.series("clean", gulp.parallel("pugBuild", "stylesBuild", "scriptsBuild", "images", "favicons")));
 
 
-//gulp deploy
+/* //gulp deploy
 gulp.task("deploy", function () {
   return gulp.src('./dest/**')
     .pipe(rsync({
@@ -229,5 +229,20 @@ gulp.task("deploy", function () {
       silent: false,
       compress: true
   }));
+}); */
+
+gulp.task("deploy", function () {
+  return gulp.src('./dest/**')
+    .pipe(rsync({
+      root: './dest/',
+      hostname: 'palmayasen.beget.tech',
+      destination: '/home/p/palmayasen/palmayasen.beget.tech/public_html/assets/components/project/dest',
+      username: 'palmayasen_test',
+      archive: true,
+      silent: false,
+      compress: true
+  }));
 });
+
+//*SY8mm9q
 

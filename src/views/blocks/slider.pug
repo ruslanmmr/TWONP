@@ -14,19 +14,29 @@ section.section.section-slide.opt
         .select.opt-main-select
           span.select__placeholder Выберите вид топлива
           select(data-icon='img/icons/sprite.svg#arb')
-            option(value="0") ДТ "ЕВРО" Л-К5
-            option(value="1") АИ-95
-            option(value="2") АИ-92
+            option(value="ДТ 'ЕВРО' Л-К5") ДТ 'ЕВРО' Л-К5
+            option(value="АИ-95") АИ-95
+            option(value="АИ-92") АИ-92
+            option(value="Газойль") Газойль
+            option(value="Топливо высоковязкое") Топливо высоковязкое
+            option(value="Широкий нефтяной дистиллят") Широкий нефтяной дистиллят
       //pagination
       .fuel-slider-pagination
-        span.line
-        span.line
-        .fuel-slider-pagination__items
-          +pag('ДТ "ЕВРО" Л-К5')
-          +pag('АИ-95')
-          +pag('АИ-92')
+        .fuel-slider-pagination__container
+          span.line
+          span.line
+          span.line
+          span.line
+          span.line
+          .fuel-slider-pagination__items
+            +pag('ДТ "ЕВРО"')
+            +pag('АИ-95')
+            +pag('АИ-92')
+            +pag('Газойль')
+            +pag('ТВ')
+            +pag('ШНД')
       //slider
-      .fuel-slider
+      .fuel-slider.js-no-scroll
         .fuel-slider__center
           .slider
             .fuel-slide
@@ -44,8 +54,7 @@ section.section.section-slide.opt
                     svg.icon 
                       use(xlink:href="img/icons/sprite.svg#ico5")
                     span Паспорт
-                  h6.fuel-slide__title ДТ "ЕВРО" 
-                    span Л-К5
+                  h6.fuel-slide__title ДТ "ЕВРО" Л-К5
             .fuel-slide
               .fuel-slide__container.js-animated
                 span.fuel-slide__index 02
@@ -78,6 +87,57 @@ section.section.section-slide.opt
                       use(xlink:href="img/icons/sprite.svg#ico5")
                     span Паспорт
                   h6.fuel-slide__title АИ-92
+            .fuel-slide
+              .fuel-slide__container.js-animated
+                span.fuel-slide__index 04
+                .fuel-slide__top
+                  .fuel-slide__item
+                    span.fuel-slide__label Литр
+                    span.fuel-slide__price -
+                  .fuel-slide__item
+                    span.fuel-slide__label Тонна
+                    span.fuel-slide__price -
+                .fuel-slide__bottom
+                  a(href='content/АИ-92-К5.pdf' target='_blank').fuel-slide__pasport.js-animated
+                    svg.icon 
+                      use(xlink:href="img/icons/sprite.svg#ico5")
+                    span Паспорт
+                  h6.fuel-slide__title Газойль <br>
+                    span (аналог ДТ)
+            .fuel-slide
+              .fuel-slide__container.js-animated
+                span.fuel-slide__index 05
+                .fuel-slide__top
+                  .fuel-slide__item
+                    span.fuel-slide__label Литр
+                    span.fuel-slide__price -
+                  .fuel-slide__item
+                    span.fuel-slide__label Тонна
+                    span.fuel-slide__price -
+                .fuel-slide__bottom
+                  a(href='content/АИ-92-К5.pdf' target='_blank').fuel-slide__pasport.js-animated
+                    svg.icon 
+                      use(xlink:href="img/icons/sprite.svg#ico5")
+                    span Паспорт
+                  h6.fuel-slide__title Топливо высоковязкое <br>
+                    span (аналог ДТ)
+            .fuel-slide
+              .fuel-slide__container.js-animated
+                span.fuel-slide__index 06
+                .fuel-slide__top
+                  .fuel-slide__item
+                    span.fuel-slide__label Литр
+                    span.fuel-slide__price -
+                  .fuel-slide__item
+                    span.fuel-slide__label Тонна
+                    span.fuel-slide__price -
+                .fuel-slide__bottom
+                  a(href='content/АИ-92-К5.pdf' target='_blank').fuel-slide__pasport.js-animated
+                    svg.icon 
+                      use(xlink:href="img/icons/sprite.svg#ico5")
+                    span Паспорт
+                  h6.fuel-slide__title Широкий нефтяной дистиллят<br>
+                    span (аналог ДТ)        
   //opt info
   .section__bottom.opt__info
     .opt__mobile-button.p-r-s.p-l-s
@@ -132,13 +192,56 @@ section.section.section-slide.opt
               li
                 span Плотность при 15°C, кг/м3
                 span 738.4
+        .opt-info-item.scroll-container.shadow
+          .scroll-child.p-s
+            ul.list
+              li
+                span Плотность при 15 °C, кг/м3
+                span 837
+              li
+                span Массовая доля серы, %
+                span 0.872
+              li
+                span Температура вспышки, °C
+                span 84
+              li
+                span Температура застывания, °C
+                span -36
+        .opt-info-item.scroll-container.shadow
+          .scroll-child.p-s
+            ul.list
+              li
+                span Вязкость кинематическая, мм2/с
+                span 2.44
+              li
+                span Температура вспышки, *С
+                span 93
+        .opt-info-item.scroll-container.shadow
+          .scroll-child.p-s
+            ul.list
+              li
+                span Плотность, кг./м3
+                span 821
+              li
+                span Массовая доля серы,%
+                span 0.34 
+              li
+                span Температура вспышки, *С
+                span 82
+              li
+                span Температура застывания, *С
+                span -36
+
   //opt selection
   .section__bottom.opt__selection.p-s
     .opt__selection-container
       .select.opt-main-select
         span.select__placeholder Выберите вид топлива
         select(data-icon='img/icons/sprite.svg#arb')
-          option(value="0") ДТ "ЕВРО" Л-К5
-          option(value="1") АИ-95
-          option(value="2") АИ-92
+          option(value="ДТ 'ЕВРО' Л-К5") ДТ 'ЕВРО' Л-К5
+          option(value="АИ-95") АИ-95
+          option(value="АИ-92") АИ-92
+          option(value="Газойль") Газойль
+          option(value="Топливо высоковязкое") Топливо высоковязкое
+          option(value="Широкий нефтяной дистиллят") Широкий нефтяной дистиллят
       a(href="javascript:void(0);" data-popup='#order').button.button_style1.js-animated Заказать
