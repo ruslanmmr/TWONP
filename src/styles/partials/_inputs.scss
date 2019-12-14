@@ -27,6 +27,11 @@
     transition: $trs1;
     z-index: 2;
   }
+  &.has-error {
+    &:before {
+      border-color: $colorAA;
+    }
+  }
   .icon {
     display: block;
     width: 12px;
@@ -73,6 +78,9 @@
   transition: $trs1;
   &.has-error {
     border-color: $colorAA;
+  }
+  &.has-success {
+    border-color: $colorA;
   }
   .scroll-content {
     padding-right: 10px;
@@ -124,6 +132,13 @@
     color: $colorD;
     height: 35px;
     padding: 5px 0;
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 100px $colorH inset;
+      -webkit-text-fill-color: $colorD !important;
+    }
+    &::placeholder {
+      color: transparent;
+    }
   }
   &.focus {
     .input__placeholder {
@@ -205,6 +220,7 @@
       transition: $trs1;
       z-index: 10;
       height: 130px;
+      min-width: 100%;
       .scrollbar-track-y {
         width: 14px !important;
         left: auto;

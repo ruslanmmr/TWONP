@@ -51,7 +51,7 @@
           <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="/TWONP/dest/index.html">Хранить</a></li>
         </ul>
       </div>
-      <nav class="nav">
+      <nav class="nav js-no-scroll">
         <div class="nav__content">
           <div class="nav__items p-t-h">
             <div class="scroll-container">
@@ -67,7 +67,11 @@
               </div>
             </div>
           </div>
-          <div class="nav__copy p-s"><a class="nav__phone ff-2 js-animated" href="tel:88005000000">8 800 500 0000</a><span class="copy">&copy Все права защищены</span></div>
+          <ul class="nav__footer p-s">
+            <li><a class="nav__phone ff-2 js-animated" href="tel:+74732303637">+7 473 230-36-37</a></li>
+            <li><span class="copy">&copy Все права защищены</span></li>
+            <li><a class="link js-animated" href="#" target="_blank">Политика конфиденциальности</a></li>
+          </ul>
           <div class="contacts-socials p-s">
             <ul class="contacts-socials__list">
               <li class="contacts-socials__item"><a class="contacts-socials__link js-animated" href="https://vk.com/id295109674" target="_blank">
@@ -449,8 +453,21 @@
                   </svg></a>
               </div>
               <div class="popup__content">
+                <div class="popup-succes">
+                  <div class="popup-succes__top">
+                    <div class="popup-succes__icon">
+                      <svg class="round" width="80px" height="80px">
+                        <circle class="round__circle" stroke-width="2px" cx="40" cy="40" r="39" fill="transparent"></circle>
+                      </svg>
+                      <svg class="icon"> 
+                        <use xlink:href="img/icons/sprite.svg#tick"></use>
+                      </svg>
+                    </div><span class="popup-succes__title popup-succes__item t-size-24">Спасибо за заявку!</span><span class="popup-succes__text popup-succes__item">Ваш заказ находится в обработке.<br> Мы свяжемся с вами в ближайшее время!</span>
+                  </div>
+                  <div class="popup-succes__button"><a class="button button_style1 js-animated" href="javascript:void(0)" data-close> <span>Готово</span></a></div>
+                </div>
                 <form class="form-order" action="#">
-                  <div class="form-order__group">
+                  <div class="form-order__group disabled-animated">
                     <div class="input form-order__item popup-item">
                       <input class="input__el" type="text" required>
                       <label class="input__placeholder">Имя</label>
@@ -460,7 +477,7 @@
                       <label class="input__placeholder">E-mail</label>
                     </div>
                     <div class="input form-order__item popup-item">
-                      <input class="input__el" type="text" required>
+                      <input class="input__el phone" type="text" name="phone" required>
                       <label class="input__placeholder">Номер телефона</label>
                     </div>
                     <div class="select opt-main-select form-order__item popup-item"><span class="select__placeholder">Выберите вид топлива</span>
@@ -475,7 +492,7 @@
                     </div>
                     <div class="form-order__item popup-item">
                       <label class="checkbox">
-                        <svg class="icon"> 
+                        <svg class="icon">
                           <use xlink:href="img/icons/sprite.svg#tick2"></use>
                         </svg>
                         <input type="checkbox">Я ознакомлен и согласен<br> с <a class="link js-animated" href="#">политикой конфиденциальности</a>
@@ -483,7 +500,7 @@
                     </div>
                   </div>
                   <div class="form-order__btn popup-item">
-                    <button class="button button_style1 js-animated" type="submit">Отправить</button>
+                    <button class="button button_style1 js-animated" type="submit"><span>Отправить</span><img src="img/icons/loader-dark.svg" alt="loader"></button>
                   </div>
                 </form>
               </div>

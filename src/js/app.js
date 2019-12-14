@@ -86,6 +86,8 @@ import imagesLoaded from "imagesloaded";
 import slick from "slick-carousel";
 import autosize from "autosize";
 import Parallax from 'parallax-js';
+import "inputmask/lib/extensions/inputmask.numeric.extensions";
+import Inputmask from "inputmask/lib/extensions/inputmask.date.extensions";
 
 $(document).ready(function() {
 
@@ -100,6 +102,7 @@ $(document).ready(function() {
   $subNav.update();
   $popup.init();
   $checkbox.init();
+  $mask.init();
 
   if($slider.el.length>0) {
     $slider.init();
@@ -361,18 +364,6 @@ let map = {
         map.zoomPlus();
       }
     });
-
-    let touchScale = new Hammer.Manager(map.inner[0]);
-    let pinch = new Hammer.Pinch();
-    touchScale.add(pinch);
-
-    touchScale.on("pinchin pinchout", function(event) {
-      if(event.type =='pinchin' && map.available==true) {
-        map.zoomMinus();
-      } else if(event.type =='pinchout' && map.available==true) {
-        map.zoomPlus();
-      }
-    })
     
     this.controlPlus.on('click', function(e) {
       e.preventDefault();
@@ -390,6 +381,8 @@ let map = {
 
     let area = new Hammer.Manager(map.inner[0]);
     let pan = new Hammer.Pan();
+    let pinch = new Hammer.Pinch();
+    area.add(pinch);
     pan.set({ threshold: 1 });
     area.add(pan);
 
@@ -400,30 +393,38 @@ let map = {
         compensateX = 0,
         compensateY = 0,
         oldX = 0,
-        oldY = 0;
+        oldY = 0,
+        pinched=false;
   
     //события свайпов
-    area.on("panend panstart panup pandown panleft panright", function(event) {
+    area.on("panend panstart panup pandown panleft panright pinchstart pinchend pinchin pinchout", function(event) {
       let Event = event.type;
 
-      if(map.available==true) {
-        if(Event=='panstart') {
-          startX = event.center.x;
-          startY = event.center.y;
-          oldX = map.x;
-          oldY = map.y;
-        } else if(Event=='panend') {
-          map.x = currentX;
-          map.y = currentY;
-          compensateX = 0;
-          compensateY = 0;
-        } else if(Event=='panup' || Event=='panright' || Event=='pandown' || Event=='panleft') {
+      if(Event == 'pinchin' && map.available==true) {
+        map.zoomMinus();
+      } else if(Event =='pinchout' && map.available==true) {
+        map.zoomPlus();
+      } else if(Event == 'pinchend') {
+        compensateX = 0;
+        compensateY = 0;
+      } else if(Event=='panstart') {
+        startX = event.center.x;
+        startY = event.center.y;
+        oldX = map.x;
+        oldY = map.y;
+      } else if(Event=='panend') {
+        map.x = currentX;
+        map.y = currentY;
+        compensateX = 0;
+        compensateY = 0;
+      } else if(Event=='panup' || Event=='panright' || Event=='pandown' || Event=='panleft') {
+        if($(event.target).closest('.map-trigger').length==0) {
 
           currentX = map.x + event.center.x - startX + compensateX;
           currentY = map.y + event.center.y - startY + compensateY;
 
           map.checkInner({onComplete: function() {
-  
+
             if(map.innerT>0 && currentY>oldY) {
               currentY = oldY;
               compensateY = currentY - map.y + startY - event.center.y;
@@ -447,9 +448,6 @@ let map = {
 
           }})
         }
-      } else {
-        compensateY = startY - event.center.y;
-        compensateX = startX - event.center.x;
       }
     });
     //условные обозначения
@@ -918,22 +916,26 @@ let $popup = {
   element: $('.popup'),
   $open: $('[data-popup]'),
   $close: $('[data-close]'),
+  //current: $('#order'),
   visible: false,
   init: function() {
     $popup.$open.on('click', function() {
       $popup.current = $($(this).data('popup'));
-      $popup.open();
+      $popup.open($popup.current);
     })
     $popup.$close.on('click', function() {
       $popup.close();
     })
   },
-  open: function() {
-    $popup.animation = gsap.timeline()
-      .to($popup.current, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
-      .fromTo($popup.current.find('.popup__container'), {y:30}, {duration:0.5, y:0, ease:'power2.out'}, '-=0.5')
-      .to($popup.current.find('.scrollbar-track-y'), {autoAlpha:1, duration:0})
-
+  open: function(current) {
+    $popup.animation = gsap.timeline({onReverseComplete: function() {
+      let anim = gsap.timeline()
+        .to(current.find('form'), {duration:0,autoAlpha:1})
+        .to(current.find('.popup-succes'), {duration:0,autoAlpha:0}) 
+    }})
+      .to(current, {duration:0.5, autoAlpha:1, ease:'power2.inOut'})
+      .fromTo(current.find('.popup__container'), {y:30}, {duration:0.5, y:0, ease:'power2.out'}, '-=0.5')
+      .to(current.find('.scrollbar-track-y'), {autoAlpha:1, duration:0})
   },
   close: function() {
     $popup.animation.reverse();
@@ -998,7 +1000,9 @@ let $tabs = {
   old: 0,
   init: function() {
     this.btn.on('mouseenter', function() {
+      console.log($slide.animationProgress)
       if(!$slide.animationProgress) {
+        console.log('hover')
         let index = $(this).index() + 1;
         $tabs.slideTo(index);
       }
@@ -1024,6 +1028,39 @@ let $select = {
     this.el.niceSelect({onComplete: function() {
       $scrollArea.init();
     }});
+  }
+}
+let $mask = {
+  el: document.querySelector('[name="phone"]'),
+  init: function() {
+    if($mask.el!==null) {
+      Inputmask({
+        mask: "+7 999 999-9999",
+        clearIncomplete: true
+      }).mask($mask.el);
+    }
+  }
+}
+//форма отправлена
+window.$form = {
+  submited: function(obj) {
+    let circle = document.querySelector('.round__circle'),
+        radius = circle.r.baseVal.value,
+        w = 2*Math.PI*radius;
+
+        let animationMessage = gsap.timeline({paused: true})
+          .fromTo(obj.find('.popup-succes'), {autoAlpha:0}, {duration:0, autoAlpha:1})
+          .fromTo(obj.find('.popup-succes__button'), {autoAlpha:0}, {duration:0.25, autoAlpha:1, ease:'power2.inOut'})
+          .fromTo(obj.find('.popup-succes .round__circle'), {css:{strokeDashoffset:w}}, {duration:0.5, css:{strokeDashoffset:0}, ease:'power2.inOut'})
+          .fromTo(obj.find('.popup-succes .icon'), {autoAlpha:0, scale:0.7}, {duration:0.25, autoAlpha:1, scale:1, ease:'power2.inOut'}, '-=0.5')
+          .fromTo(obj.find('.popup-succes__item'), {autoAlpha:0, y:20}, {duration:0.4, autoAlpha:1, y:0, ease:'power2.out', stagger:{amount:0.1}}, '-=0.5')
+
+    if(obj.is('#order')) {
+      animationMessage.play();
+      let anim = gsap.timeline()
+        .to(obj.find('form'), {duration:0.25, autoAlpha:0, ease:'power2.in'})
+    }
+
   }
 }
 
@@ -1099,9 +1136,11 @@ function siteNavEvents() {
     }
   });
   //swipe
-  let touchEvents = new Hammer.Manager(document.querySelector('.page-wrapper'));
-  var swipe = new Hammer.Swipe();
+  let touchEvents = new Hammer.Manager(document);
+  let swipe = new Hammer.Swipe();
   touchEvents.add(swipe);
+
+
 
   //события свайпов
   touchEvents.on("swipeleft swiperight swipeup swipedown", function(event) {
@@ -1153,16 +1192,26 @@ function siteNavEvents() {
 //
 function inputs() {
   autosize($('textarea'));
-  $(document).on('focusin focusout', 'input, textarea', function(event) {
-    if(event.type=='focusin') {
+  $('input, textarea').each(function() {
+    if($(this).val()!=='') {
+      $(this).parents('.input').addClass('focus');
+    } else {
+      $(this).parents('.input').removeClass('focus');
+    }
+  })
+  $(document).on('focusin focus focusout', 'input, textarea', function(event) {
+    if(event.type=='focusin' || event.type=='focus') {
       $(event.target).parents('.input').addClass('focus')
     } else {
-      if($(event.target).val()=='') {
-        $(event.target).parents('.input').removeClass('focus')
-      }
+      setTimeout(function() {
+        if($(event.target).val()=='') {
+          $(event.target).parents('.input').removeClass('focus')
+        }
+      }, 100)
     }
   })
 }
+
 
 //select
 (function($) {

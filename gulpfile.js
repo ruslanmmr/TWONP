@@ -217,7 +217,7 @@ gulp.task("default", gulp.series("clean",
 gulp.task("build", gulp.series("clean", gulp.parallel("pugBuild", "stylesBuild", "scriptsBuild", "images", "favicons")));
 
 
-/* //gulp deploy
+//gulp deploy
 gulp.task("deploy", function () {
   return gulp.src('./dest/**')
     .pipe(rsync({
@@ -229,9 +229,10 @@ gulp.task("deploy", function () {
       silent: false,
       compress: true
   }));
-}); */
+});
+// Qmt7usfjXrxg
 
-gulp.task("deploy", function () {
+/* gulp.task("deploy", function () {
   return gulp.src('./dest/**')
     .pipe(rsync({
       root: './dest/',
@@ -242,7 +243,6 @@ gulp.task("deploy", function () {
       silent: false,
       compress: true
   }));
-});
+}); */
 
-//*SY8mm9q
 
