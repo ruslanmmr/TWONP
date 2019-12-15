@@ -53,3 +53,21 @@
               button(type='submit').button.button_style1.js-animated
                 span Отправить
                 img(src="img/icons/loader-dark.svg", alt="loader")
+.popup(id="succes")
+  a(href="javascript:void(0)" data-close).popup__close
+  .scroll-container
+    .popup__container.scroll-child.p-s 
+      .popup__element
+        .popup__content
+          .popup-succes
+            .popup-succes__top
+              .popup-succes__icon
+                svg.round(width='80px' height='80px')
+                  circle.round__circle(stroke-width='2px' cx='40' cy='40' r='39' fill='transparent')
+                svg.icon 
+                  use(xlink:href="img/icons/sprite.svg#tick")
+              span.popup-succes__title.popup-succes__item.t-size-24 Спасибо за заявку!
+              span.popup-succes__text.popup-succes__item Ваш заказ находится в обработке.<br> Мы свяжемся с вами в ближайшее время!
+            .popup-succes__button
+              a(href="javascript:void(0)" data-close).button.button_style1.js-animated 
+                span Готово

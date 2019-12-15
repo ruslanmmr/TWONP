@@ -938,6 +938,7 @@ let $popup = {
       .to(current.find('.scrollbar-track-y'), {autoAlpha:1, duration:0})
   },
   close: function() {
+    clearTimeout($form.timer)
     $popup.animation.reverse();
   }
 }
@@ -1059,10 +1060,19 @@ window.$form = {
       animationMessage.play();
       let anim = gsap.timeline()
         .to(obj.find('form'), {duration:0.25, autoAlpha:0, ease:'power2.in'})
+    } else if(obj.is('#succes')) {
+      $popup.open(obj)
+      animationMessage.play();
+      if($page.width()<=576 && $contactForm.animation.progress()==0) {
+        $contactForm.animation.play();
+      }
     }
-
+    $form.timer = setTimeout(function() {
+      $popup.close();
+    }, 3000)
   }
 }
+
 
 //functions
 function elemsAnims() {

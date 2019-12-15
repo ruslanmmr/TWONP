@@ -914,6 +914,95 @@
           </div>
         </section>
       </div>
+      <div class="popup" id="order"><a class="popup__close" href="javascript:void(0)" data-close></a>
+        <div class="scroll-container">
+          <div class="popup__container scroll-child p-s"> 
+            <div class="popup__element">
+              <div class="popup__head">
+                <div class="popup__title">Оставьте заявку</div><a class="popup-close js-animated" href="javascript:void(0)" data-close>
+                  <svg class="icon"> 
+                    <use xlink:href="img/icons/sprite.svg#close"></use>
+                  </svg></a>
+              </div>
+              <div class="popup__content">
+                <div class="popup-succes">
+                  <div class="popup-succes__top">
+                    <div class="popup-succes__icon">
+                      <svg class="round" width="80px" height="80px">
+                        <circle class="round__circle" stroke-width="2px" cx="40" cy="40" r="39" fill="transparent"></circle>
+                      </svg>
+                      <svg class="icon"> 
+                        <use xlink:href="img/icons/sprite.svg#tick"></use>
+                      </svg>
+                    </div><span class="popup-succes__title popup-succes__item t-size-24">Спасибо за заявку!</span><span class="popup-succes__text popup-succes__item">Ваш заказ находится в обработке.<br> Мы свяжемся с вами в ближайшее время!</span>
+                  </div>
+                  <div class="popup-succes__button"><a class="button button_style1 js-animated" href="javascript:void(0)" data-close> <span>Готово</span></a></div>
+                </div>
+                <form class="form-order" action="#">
+                  <div class="form-order__group disabled-animated">
+                    <div class="input form-order__item popup-item">
+                      <input class="input__el" type="text" required>
+                      <label class="input__placeholder">Имя</label>
+                    </div>
+                    <div class="input form-order__item popup-item">
+                      <input class="input__el input__el" type="email" required>
+                      <label class="input__placeholder">E-mail</label>
+                    </div>
+                    <div class="input form-order__item popup-item">
+                      <input class="input__el phone" type="text" name="phone" required>
+                      <label class="input__placeholder">Номер телефона</label>
+                    </div>
+                    <div class="select opt-main-select form-order__item popup-item"><span class="select__placeholder">Выберите вид топлива</span>
+                      <select data-icon="img/icons/sprite.svg#arb">
+                        <option value="ДТ 'ЕВРО' Л-К5">ДТ 'ЕВРО' Л-К5</option>
+                        <option value="АИ-95">АИ-95</option>
+                        <option value="АИ-92">АИ-92</option>
+                        <option value="Газойль">Газойль</option>
+                        <option value="Топливо высоковязкое">Топливо высоковязкое</option>
+                        <option value="Широкий нефтяной дистиллят">Широкий нефтяной дистиллят</option>
+                      </select>
+                    </div>
+                    <div class="form-order__item popup-item">
+                      <label class="checkbox">
+                        <svg class="icon">
+                          <use xlink:href="img/icons/sprite.svg#tick2"></use>
+                        </svg>
+                        <input type="checkbox">Я ознакомлен и согласен<br> с <a class="link js-animated" href="#">политикой конфиденциальности</a>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-order__btn popup-item">
+                    <button class="button button_style1 js-animated" type="submit"><span>Отправить</span><img src="img/icons/loader-dark.svg" alt="loader"></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="popup" id="succes"><a class="popup__close" href="javascript:void(0)" data-close></a>
+        <div class="scroll-container">
+          <div class="popup__container scroll-child p-s"> 
+            <div class="popup__element">
+              <div class="popup__content">
+                <div class="popup-succes">
+                  <div class="popup-succes__top">
+                    <div class="popup-succes__icon">
+                      <svg class="round" width="80px" height="80px">
+                        <circle class="round__circle" stroke-width="2px" cx="40" cy="40" r="39" fill="transparent"></circle>
+                      </svg>
+                      <svg class="icon"> 
+                        <use xlink:href="img/icons/sprite.svg#tick"></use>
+                      </svg>
+                    </div><span class="popup-succes__title popup-succes__item t-size-24">Спасибо за заявку!</span><span class="popup-succes__text popup-succes__item">Ваш заказ находится в обработке.<br> Мы свяжемся с вами в ближайшее время!</span>
+                  </div>
+                  <div class="popup-succes__button"><a class="button button_style1 js-animated" href="javascript:void(0)" data-close> <span>Готово</span></a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!--styles-->
     <link rel="stylesheet" href="styles/common.min.css">

@@ -2524,6 +2524,13 @@ a {
     font-family: "Manrope";
     margin-bottom: 10px; }
 
+#succes {
+  padding: 0; }
+  #succes .popup__content {
+    padding: 0; }
+  #succes .popup-succes {
+    padding: 35px 20px; }
+
 .form-order {
   position: relative;
   z-index: 1; }
