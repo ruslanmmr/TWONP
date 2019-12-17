@@ -286,6 +286,7 @@ a {
 .js-animated {
   user-select: none;
   cursor: default;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .desktop .js-animated {
   cursor: pointer;

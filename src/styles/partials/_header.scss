@@ -41,6 +41,7 @@
   right: 0;
   z-index: 100;
   visibility: hidden;
+  font-size: 14px;
   &__list {
     margin: auto;
     padding: 0;
@@ -51,7 +52,7 @@
     opacity: 0;
     visibility: hidden;
     &:not(:last-child) {
-      margin-right: 85px;
+      margin-right: 45px;
     }
   }
   &__link {
@@ -122,17 +123,8 @@
 }
 
 @media all and(max-width: 1440px) {
-  .sub-nav__item:not(:last-child) {
-    margin-right: 50px;
-  }
   .sub-nav {
     height: 85px;
-  }
-}
-
-@media all and(max-width: 1376px) {
-  .sub-nav {
-    font-size: 14px;
   }
 }
 
@@ -148,6 +140,9 @@
   .header {
     width: 25%;
   }
+  .sub-nav {
+    display: none;
+  }
 }
 @media all and(max-width: 992px) {
   .header {
@@ -155,9 +150,6 @@
   }
 }
 @media all and(max-width: 768px) {
-.sub-nav {
-  display: none;
-}
  .header {
    width: 100%;
  } 

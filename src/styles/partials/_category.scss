@@ -2,6 +2,8 @@
   &__description {
     height: 100%;
     width: 75%;
+    display: flex !important;
+    align-items: center;
     p {
       margin: 0 !important;
     }

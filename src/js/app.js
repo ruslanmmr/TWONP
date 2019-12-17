@@ -1121,15 +1121,18 @@ function resizeElems() {
       $nav.el.css('height', '100%')
     }
   }
-  function textareaSize() {
-    let parent = $('.input-size-parent'),
-        max = parent.height() - 17;
-    parent.find('.scroll-container').css('max-height', max)
+  function footerSize() {
+    let f = $('.nav__footer'),
+        m = (bottomH-f.outerHeight())/2;
+
+    if($window.width()>1024) {
+      f.css('margin-bottom', m);
+    }
   }
   contentResize();
   navResize();
-  textareaSize();
   paginationResize();
+  footerSize();
 }
 //
 function siteNavEvents() {

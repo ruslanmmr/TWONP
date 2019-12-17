@@ -2211,7 +2211,8 @@ a {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  cursor: default; }
+  cursor: default;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 .desktop .js-animated {
   cursor: pointer; }
@@ -2822,7 +2823,8 @@ a {
   top: 0;
   right: 0;
   z-index: 100;
-  visibility: hidden; }
+  visibility: hidden;
+  font-size: 14px; }
   .sub-nav__list {
     margin: auto;
     padding: 0;
@@ -2835,7 +2837,7 @@ a {
     opacity: 0;
     visibility: hidden; }
     .sub-nav__item:not(:last-child) {
-      margin-right: 85px; }
+      margin-right: 45px; }
   .sub-nav__link {
     -webkit-transition: 0.25s;
     -o-transition: 0.25s;
@@ -2890,14 +2892,8 @@ a {
       bottom: 0px; }
 
 @media all and (max-width: 1440px) {
-  .sub-nav__item:not(:last-child) {
-    margin-right: 50px; }
   .sub-nav {
     height: 85px; } }
-
-@media all and (max-width: 1376px) {
-  .sub-nav {
-    font-size: 14px; } }
 
 @media all and (max-width: 1200px) {
   .sub-nav {
@@ -2907,15 +2903,15 @@ a {
 
 @media all and (max-width: 1024px) {
   .header {
-    width: 25%; } }
+    width: 25%; }
+  .sub-nav {
+    display: none; } }
 
 @media all and (max-width: 992px) {
   .header {
     width: 250px; } }
 
 @media all and (max-width: 768px) {
-  .sub-nav {
-    display: none; }
   .header {
     width: 100%; } }
 
@@ -2929,7 +2925,15 @@ a {
 
 .category-preview__description {
   height: 100%;
-  width: 75%; }
+  width: 75%;
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
   .category-preview__description p {
     margin: 0 !important; }
 
@@ -3327,7 +3331,8 @@ a {
     -webkit-box-flex: 1;
     -webkit-flex: 1 1 100%;
         -ms-flex: 1 1 100%;
-            flex: 1 1 100%; }
+            flex: 1 1 100%;
+    overflow: auto; }
     .nav__items .scroll-container {
       height: 100%; }
   .nav__item {
@@ -3396,10 +3401,6 @@ a {
     -webkit-align-items: flex-start;
         -ms-flex-align: start;
             align-items: flex-start;
-    -webkit-box-pack: end;
-    -webkit-justify-content: flex-end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
     text-align: left;
     font-size: 14px; }
     .nav__footer li:not(:last-child) {
