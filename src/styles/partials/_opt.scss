@@ -207,18 +207,31 @@
     transition: $trs1;
     opacity: 0.25;
     pointer-events: none;
+    position: relative;
+  }
+  &__factory {
+    position: absolute;
+    display: block;
+    top: 0;
+    padding: 15px;
+    right: 0;
+    font-size: 12px;
+    padding: 14px 10px 0 0;
+    text-align: right;
+    line-height: 1;
   }
   &__title {
     padding: 0 15px 20px 15px;
     flex: 1 1 100%;
     display: block;
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
     color: $colorA;
+    line-height: 1.2;
     span {
       display: inline-block;
       white-space: nowrap;
-      font-size: 16px;
+      font-size: 14px;
       line-height: 1;
     }
   }
@@ -474,7 +487,7 @@
 }
 @media all and(max-width: 576px) {
   .fuel-slider {
-    padding: 0 30px;
+    padding: 0 5px;
     max-height: 160px;
     order: 1;
     margin: 30px 0;
@@ -532,6 +545,9 @@
   }
   .fuel-slide {
     padding: 20px 30px;
+    &__factory {
+      padding: 12px 10px;
+    }
     &__container {
       height: 100%;
       width: calc(100% - 20px)!important;
