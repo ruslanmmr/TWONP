@@ -101,6 +101,10 @@ $(document).ready(function() {
   elemsAnims();
   siteNavEvents();
   inputs();
+  
+  //work
+  $preloader.loadFinished();
+  localStorage.setItem('slide', 1);
 
 
   $select.init();
@@ -220,8 +224,8 @@ let map = {
   innerL: '',
   controlPlus: $('.custom-map-plus'),
   controlMinus: $('.custom-map-minus'),
-  zoomMax: 2,
-  zoomGradations: 3,
+  zoomMax: 3,
+  zoomGradations: 4,
   zoomPlus: function() {
     if(this.zoomGradation<this.zoomGradations) {
       this.zoomGradation++;
@@ -687,14 +691,12 @@ let $slide = {
   forwardAnimation: '',
   toNext: function() {
     $slide.animationProgress=true;
-    //this.exitAnimation.play();
     this.forwardExitAnimation.play();
     this.forwardAnimation.play();
     $slide.change($slide.next);
   },
   toPrev: function() {
     $slide.animationProgress=true;
-    //this.exitAnimation.play();
     this.backExitAnimation.play();
     this.backAnimation.play();
     $slide.change($slide.prev);
@@ -707,7 +709,7 @@ let $slide = {
     //animation
     let anim = gsap.timeline({onComplete:function(){$slide.updateAnimations()}})
       .to(newSlide, {duration:1, autoAlpha:1, ease:'power2.inOut'})
-      .fromTo(newSlide.find('.scene'), {scale:1.05}, {immediateRender:false, duration:1, scale:1, ease:'power2.out'}, '-=1')
+      .fromTo(newSlide.find('.scene, .custom-map'), {scale:1.1}, {immediateRender:false, duration:1, scale:1, ease:'power2.out'}, '-=1')
   },
   afterChange: function() {
     if($('html').hasClass('desktop') && $('.js-tabs-true').length>0 && !this.current.hasClass('js-tabs-true')) {

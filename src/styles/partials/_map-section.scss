@@ -358,7 +358,6 @@
     pointer-events: none;
   }
 }
-
 .map-popup {
   position: absolute;
   z-index: 3;
@@ -393,6 +392,15 @@
       margin-bottom: 45px;
     }
   }
+}
+
+.test {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80.2%;
+  opacity: 0.2;
+  height: 92.5%;
 }
 
 @media all and(max-width: 1440px) {
