@@ -103,8 +103,8 @@ $(document).ready(function() {
   inputs();
   
   //work
-  $preloader.loadFinished();
-  localStorage.setItem('slide', 1);
+  //$preloader.loadFinished();
+  //localStorage.setItem('slide', 1);
 
 
   $select.init();

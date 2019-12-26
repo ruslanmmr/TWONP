@@ -4821,14 +4821,6 @@ a {
   .map-popup__section:not(:last-child) {
     margin-bottom: 45px; }
 
-.test {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 80.2%;
-  opacity: 0.2;
-  height: 92.5%; }
-
 @media all and (max-width: 1440px) {
   .map-section__legend-section:first-child {
     margin-bottom: 10px; }
