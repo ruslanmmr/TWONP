@@ -764,7 +764,7 @@ let $slide = {
     //exit anim
     $slide.exitAnimation = gsap.timeline({paused:true})
       .to($slide.current, {duration:1, autoAlpha:0, ease:'power2.in'})
-      .fromTo($slide.current.find('.scene, .custom-map'), {scale:1}, {duration:1, scale:1.1, ease:'power2.in'}, '-=1')
+      .fromTo($slide.current.find('.scene, .custom-map'), {scale:1}, {duration:1, scale:1.3, ease:'power2.in'}, '-=1')
       .to($slide.current.find('.scene, .custom-map'), {duration:0, scale:1})
 
     if($window.width()>768) {
