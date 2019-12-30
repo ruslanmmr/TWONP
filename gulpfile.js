@@ -33,19 +33,15 @@ gulp.task("pug", function () {
     }))
     .on("end", browsersync.reload);
 });
-gulp.task("pugBuild", function () {
-  return gulp.src(["./src/views/**/*.pug", "!./src/views/blocks/*.pug"])
-    .pipe(pug({
-      pretty: false
-    }))
-    .pipe(replace("../dest/", "../"))
-    .pipe(gulp.dest("./dest/"))
-    .on("end", browsersync.reload);
-});
 gulp.task("scripts", function () {
   return gulp.src("./src/js/app.js")
     .pipe(webpackStream({
-      mode: 'development',
+      mode: 'production',
+      performance: {
+        hints: false,
+        maxEntrypointSize: 1000,
+        maxAssetSize: 1000
+      },
       output: {
         filename: 'app.js',
       },
@@ -76,53 +72,10 @@ gulp.task("scripts", function () {
     .pipe(debug({"title": "scripts"}))
     .on("end", browsersync.reload);
 });
-gulp.task("scriptsBuild", function () {
-  return gulp.src("./src/js/app.js")
-    .pipe(webpackStream({
-      mode: 'production',
-      output: {
-        filename: 'app.js',
-      },
-      module: {
-        rules: [{
-          test: /\.(js)$/,
-          exclude: /(node_modules)/,
-          loader: 'babel-loader',
-          query: {
-            cacheDirectory: true,
-            presets: ['env']
-          }
-        }]
-      }
-    }))
-    .pipe(rename({
-      suffix: ".min"
-    }))
-    .pipe(gulp.dest("./dest/js/"))
-    .on("end", browsersync.reload);
-});
 gulp.task("styles", function () {
   return gulp.src(["./src/styles/**/*.scss", "!./src/vendor/**/*.css"])
     .pipe(plumber())
     .pipe(sourcemaps.init())
-    .pipe(sass())
-    .pipe(autoprefixer({
-      overrideBrowserslist: ["last 12 versions", "> 1%"]
-    }))
-    .pipe(rename({
-      suffix: ".min"
-    }))
-    .pipe(replace("../../dest/", "../"))
-    .pipe(plumber.stop())
-    .pipe(sourcemaps.write("./maps/"))
-    .pipe(gulp.dest("./dest/styles/"))
-    .pipe(debug({
-      "title": "styles"
-    }))
-    .on("end", browsersync.reload);
-});
-gulp.task("stylesBuild", function () {
-  return gulp.src(["./src/styles/**/*.scss", "!./src/vendor/**/*.css"])
     .pipe(sass())
     .pipe(autoprefixer({
       overrideBrowserslist: ["last 12 versions", "> 1%"]
@@ -138,6 +91,8 @@ gulp.task("stylesBuild", function () {
       suffix: ".min"
     }))
     .pipe(replace("../../dest/", "../"))
+    .pipe(plumber.stop())
+    .pipe(sourcemaps.write("./maps/"))
     .pipe(gulp.dest("./dest/styles/"))
     .on("end", browsersync.reload);
 });
@@ -170,7 +125,6 @@ gulp.task("favicons", function () {
       "title": "favicons"
     }));
 });
-
 gulp.task("dest", function () {
   return gulp.src(["./src/**/*", "./src/.htaccess", "!./src/img/**/*", "!./src/js/**/*", "!./src/styles/**/*", "!./src/views/**/*"])
     .pipe(gulp.dest("./dest/"))
@@ -213,9 +167,6 @@ gulp.task("default", gulp.series("clean",
   gulp.parallel("pug", "styles", "scripts", "images", "favicons", "dest"),
   gulp.parallel("watch", "serve")
 ));
-//gulp build
-gulp.task("build", gulp.series("clean", gulp.parallel("pugBuild", "stylesBuild", "scriptsBuild", "images", "favicons")));
-
 
 //gulp deploy
 gulp.task("deploy", function () {

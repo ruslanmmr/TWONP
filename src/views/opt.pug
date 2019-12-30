@@ -1,9 +1,9 @@
-extends ../layout/layout
+extends layout/layout
 block content
-  include ../blocks/header
-  include ../blocks/subnav2
-  include ../blocks/nav2
-  include ../blocks/pagination
+  include blocks/header
+  include blocks/subnav
+  include blocks/nav
+  include blocks/pagination
   .slide-container
     section.section.section-slide.home.opt-home
       .home__content.section__display
@@ -33,7 +33,7 @@ block content
             span.t-size-20 Сертификаты<br> и паспорта
             svg.icon 
               use(xlink:href="img/icons/sprite.svg#ico1")
-    include ../blocks/slider
+    include blocks/slider
     section.section.section-slide.manufacturers
       .section__display
         .scene
@@ -122,4 +122,4 @@ block content
                         use(xlink:href="img/icons/sprite.svg#ico5")
                       span.documents-item__format .pdf
 
-  include ../blocks/popups
+  include blocks/popups

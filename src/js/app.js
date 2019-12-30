@@ -89,7 +89,6 @@ import device from 'current-device';
 import Scrollbar from 'smooth-scrollbar';
 import Hammer from 'hammerjs';
 import { gsap } from "gsap";
-import imagesLoaded from "imagesloaded";
 import slick from "slick-carousel";
 import autosize from "autosize";
 import Parallax from 'parallax-js';
@@ -709,7 +708,7 @@ let $slide = {
     //animation
     let anim = gsap.timeline({onComplete:function(){$slide.updateAnimations()}})
       .to(newSlide, {duration:1, autoAlpha:1, ease:'power2.inOut'})
-      .fromTo(newSlide.find('.scene, .custom-map'), {scale:1.1}, {immediateRender:false, duration:1, scale:1, ease:'power2.out'}, '-=1')
+      .fromTo(newSlide.find('.scene, .custom-map'), {scale:1.3}, {immediateRender:false, duration:1, scale:1, ease:'power2.out'}, '-=1')
   },
   afterChange: function() {
     if($('html').hasClass('desktop') && $('.js-tabs-true').length>0 && !this.current.hasClass('js-tabs-true')) {

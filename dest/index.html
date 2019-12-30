@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <title>TWONP - Топливная компания</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <!--base(href="http://localhost:9000/")-->
-    <base href="https://ruslanmmr.github.io/TWONP/dest/">
     <link rel="shortcut icon" href="img/favicons/favicon.ico" type="image/x-icon">
     <link rel="icon" sizes="16x16" href="img/favicons/favicon-16x16.png" type="image/png">
     <link rel="icon" sizes="32x32" href="img/favicons/favicon-32x32.png" type="image/png">
@@ -45,10 +43,10 @@
       </header>
       <div class="sub-nav p-r-p">
         <ul class="sub-nav__list">
-          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="javascript:void(0);" data-slide="1">Инфраструктура компании</a></li>
-          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="javascript:void(0);" data-slide="2">Заправиться</a></li>
-          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="javascript:void(0);" data-slide="3">Топливо оптом</a></li>
-          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="javascript:void(0);" data-slide="4">Перевезти</a></li>
+          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="/index.html" data-animate-link>Инфраструктура компании</a></li>
+          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="/azs.html" data-animate-link>Заправиться</a></li>
+          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="/opt.html" data-animate-link data-first-slide="1">Топливо оптом</a></li>
+          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="#" data-animate-link>Перевезти</a></li>
           <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="javascript:void(0);" data-slide="5">Хранить</a></li>
         </ul>
       </div>
@@ -58,12 +56,71 @@
             <div class="scroll-container">
               <div class="scroll-child p-t-s">
                 <ul class="nav__list">
-                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="javascript:void(0);" data-slide="2">Сеть АЗС</a></li>
-                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="wholesale-fuel/" data-animate-link>Оптовая продажа</a></li>
-                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="javascript:void(0);" data-slide="4">Логистика</a></li>
-                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="javascript:void(0);" data-slide="5">Нефтебазы</a></li>
+                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="/azs.html" data-animate-link>Сеть АЗС</a></li>
+                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="/opt.html" data-animate-link data-first-slide="1">Оптовая продажа</a></li>
+                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="#" data-animate-link>Логистика</a></li>
+                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="index.html" data-animate-link data-first-slide="5">Нефтебазы</a></li>
                   <li class="nav__item"><a class="nav__link js-animated p-l-s" href="http://ecopromvrn.ru/" target="_blank">Утилизация</a></li>
-                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="javascript:void(0);" data-slide="7">Контакты</a></li>
+                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="index.html" data-animate-link data-first-slide="5">Контакты</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <ul class="nav__footer p-s">
+            <li><a class="nav__phone ff-2 js-animated" href="tel:+74732303637">+7 473 230-36-37</a></li>
+            <li><span class="copy">&copy Все права защищены</span></li>
+            <li><a class="link js-animated" href="#" target="_blank">Политика конфиденциальности</a></li>
+          </ul>
+          <div class="contacts-socials p-s">
+            <ul class="contacts-socials__list">
+              <li class="contacts-socials__item"><a class="contacts-socials__link js-animated" href="https://vk.com/id295109674" target="_blank">
+                  <svg class="icon"> 
+                    <use xlink:href="img/icons/sprite.svg#vk"></use>
+                  </svg></a></li>
+              <li class="contacts-socials__item"><a class="contacts-socials__link js-animated" href="tel:+74732303637">
+                  <svg class="icon"> 
+                    <use xlink:href="img/icons/sprite.svg#phone"></use>
+                  </svg></a></li>
+              <li class="contacts-socials__item"><a class="contacts-socials__link js-animated" href="mailto:info@twonp.ru">
+                  <svg class="icon"> 
+                    <use xlink:href="img/icons/sprite.svg#mail"></use>
+                  </svg></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="pagination pos-t-h"><a class="pagination-arrow pagination-arrow_prev js-animated" href="javascript:void(0)" data-slide="prev"><span>00</span>
+          <svg class="icon"> 
+            <use xlink:href="img/icons/sprite.svg#topA"></use>
+          </svg></a><a class="pagination-arrow pagination-arrow_next js-animated" href="javascript:void(0)" data-slide="next">
+          <svg class="icon"> 
+            <use xlink:href="img/icons/sprite.svg#bottomA"></use>
+          </svg><span>00</span></a></div>
+      <header class="header p-s">
+        <div class="logo"><a class="logo__link js-animated" href="javascript:void(0)" data-slide="0"><svg class="icon" viewBox="0 0 129 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M78.5544 26H1.75397C0.554435 26 -0.195276 25.0404 0.044632 23.8408L4.63287 2.15917C4.87278 0.95963 6.04233 0 7.24186 0H84.2223L78.5544 26ZM27.784 6.86736C27.664 7.46713 27.0642 7.94694 26.4945 7.94694H21.7263L19.0873 20.3322C18.9374 20.932 18.3676 21.4118 17.7978 21.4118H11.5302C10.9304 21.4118 10.5706 20.932 10.6905 20.3322L13.3295 7.94694H8.38143C7.81165 7.94694 7.45179 7.46713 7.57174 6.86736L7.87162 5.4579C7.99158 4.88812 8.56136 4.4083 9.13114 4.4083H27.2442C27.8439 4.4083 28.2038 4.88812 28.0839 5.4579L27.784 6.86736ZM50.0054 20.3022C49.7055 20.902 49.0758 21.3818 48.476 21.3818H43.228C42.8682 21.3818 42.4783 21.3518 42.4183 20.722L41.6386 14.3045L38.13 20.722C37.8001 21.3518 37.4103 21.3818 37.0504 21.3818H31.7724C31.1727 21.3818 30.7828 20.902 30.7228 20.3022L28.9535 5.42791C28.8935 4.85813 29.4333 4.37831 30.0031 4.37831H37.1404C37.7401 4.37831 38.19 4.85813 38.19 5.42791L38.5798 13.6148L42.8982 6.32756H43.7378L44.9674 13.6148L48.8359 5.42791C49.1058 4.85813 49.7055 4.37831 50.3053 4.37831H57.4725C58.0423 4.37831 58.3422 4.85813 58.0723 5.42791L50.0054 20.3022ZM76.7252 18.5629C76.4253 20.1223 74.416 21.3818 72.2868 21.3818H60.0216C57.8924 21.3818 56.4529 20.1223 56.7528 18.5629L59.1519 7.22722C59.4818 5.66782 61.461 4.4083 63.5902 4.4083H75.8855C78.0146 4.4083 79.4541 5.66782 79.1242 7.22722L76.7252 18.5629ZM69.228 6.86736C68.2684 6.86736 67.2788 7.76701 67.0389 8.87658L65.3295 16.9135C65.0896 18.0231 65.6594 18.8927 66.649 18.8927C67.6386 18.8927 68.5983 18.0231 68.8682 16.9135L70.5775 8.87658C70.8174 7.76701 70.2177 6.86736 69.228 6.86736ZM103.835 20.3922C103.685 20.9619 103.145 21.4417 102.545 21.4417H97.2972C96.9973 21.4417 96.6675 21.4118 96.4276 21.2018C96.4276 21.2018 96.1577 20.9919 96.0077 20.6321L92.709 12.6851L91.0596 20.3922C90.9397 20.9619 90.3699 21.4417 89.8001 21.4417H83.2326C82.6629 21.4417 82.333 20.9619 82.423 20.3922L85.6317 5.39792C85.7517 4.82814 86.3215 4.34832 86.8912 4.34832H92.2892C92.9189 4.34832 93.2488 4.58823 93.4587 5.09803L96.6975 13.3149L98.3768 5.42791C98.4968 4.85813 99.0665 4.37831 99.6363 4.37831H106.204C106.774 4.37831 107.133 4.85813 107.014 5.42791L103.835 20.3922ZM127.706 12.1753C127.376 13.7347 125.366 15.0242 123.237 15.0242H115.29L114.151 20.3622C114.031 20.9619 113.431 21.4417 112.861 21.4417H106.744C106.144 21.4417 105.784 20.9619 105.874 20.3622L109.053 5.39792C109.173 4.82814 109.742 4.34832 110.342 4.34832H125.516C127.646 4.34832 129.115 5.63783 128.755 7.19723L127.706 12.1753ZM119.069 6.80738H117.03L115.74 12.8651H117.779C118.649 12.8651 119.399 12.5052 119.519 12.0254L120.418 7.67704C120.568 7.19723 119.939 6.80738 119.069 6.80738Z"/></svg></a></div>
+        <button class="button nav-btn js-animated"><span></span><span></span><span></span></button>
+      </header>
+      <div class="sub-nav p-r-p">
+        <ul class="sub-nav__list">
+          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="/index.html" data-animate-link>Инфраструктура компании</a></li>
+          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="/azs.html" data-animate-link>Заправиться</a></li>
+          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="/opt.html" data-animate-link data-first-slide="1">Топливо оптом</a></li>
+          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="#" data-animate-link>Перевезти</a></li>
+          <li class="sub-nav__item"><a class="sub-nav__link js-animated" href="javascript:void(0);" data-slide="5">Хранить</a></li>
+        </ul>
+      </div>
+      <nav class="nav js-no-scroll">
+        <div class="nav__content">
+          <div class="nav__items p-t-h">
+            <div class="scroll-container">
+              <div class="scroll-child p-t-s">
+                <ul class="nav__list">
+                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="/azs.html" data-animate-link>Сеть АЗС</a></li>
+                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="/opt.html" data-animate-link data-first-slide="1">Оптовая продажа</a></li>
+                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="#" data-animate-link>Логистика</a></li>
+                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="index.html" data-animate-link data-first-slide="5">Нефтебазы</a></li>
+                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="http://ecopromvrn.ru/" target="_blank">Утилизация</a></li>
+                  <li class="nav__item"><a class="nav__link js-animated p-l-s" href="index.html" data-animate-link data-first-slide="5">Контакты</a></li>
                 </ul>
               </div>
             </div>
@@ -218,7 +275,7 @@
                   </svg><span class="item custom-map__label" style="top:11%;left:14%">m1</span><span class="item custom-map__label" style="top:21.4%;left:32.8%">e101</span><span class="item custom-map__label" style="top:26%;left:47.4%">e105</span><span class="item custom-map__label" style="top:36%;left:37%">m2</span><span class="item custom-map__label" style="top:27%;left:54.3%">m4</span><span class="item custom-map__label" style="top:18.5%;left:69%">m5</span><span class="item custom-map__label" style="top:23.2%;left:66.2%">p22</span><span class="item custom-map__label" style="top:33.5%;left:66%">p204</span><span class="item custom-map__label" style="top:13%;left:77.5%">p-125</span><span class="item custom-map__label" style="top:48.2%;left:74.5%">p298</span><span class="item custom-map__label" style="top:79%;left:75.8%">a-260</span><span class="item custom-map__label" style="top:88%;left:60.5%">a-280</span><span class="item custom-map__label" style="top:40.5%;left:76%">p-193</span>
                   <!--goroda--><span class="item custom-map__region rb" style="top:14%;left:9%"><span>Смоленск</span></span><span class="item custom-map__region lb" style="top:30%;left:25.5%"><span>Брянск</span></span><span class="item custom-map__region rb" style="top:16.8%;left:39.7%"><span>Калуга</span></span><span class="item custom-map__region rb" style="top:21.5%;left:50.5%"><span>Тула</span></span><span class="item custom-map__region r" style="top:15.6%;left:66%"><span>Рязань</span></span><span class="item custom-map__region tl" style="top:32.7%;left:39.3%"><span>Орёл</span></span><span class="item custom-map__region rb" style="top:36.8%;left:65.1%"><span>Липецк</span></span><span class="item custom-map__region r" style="top:34.5%;left:78%"><span>Тамбов</span></span><span class="item custom-map__region rb" style="top:45.5%;left:40%"><span>Курск</span></span><span class="item custom-map__region lb" style="top:46.8%;left:62.5%"><span>Воронеж</span></span><span class="item custom-map__region rb" style="top:89%;left:64.5%"><span>Ростов-на-Дону</span></span><span class="item custom-map__region rt" style="top:56.5%;left:42.3%"><span>Белгород</span></span>
                   <!--lines-->
-                  <svg class="line" style="top:31%;left:50.6%;width:25.5%" data-base="2" viewBox="0 0 231 336" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="line" style="top:31%;left:50.7%;width:25.5%" data-base="2" viewBox="0 0 231 336" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M217 335C261.5 192 184.5 -27.0001 1 5.50004" stroke="url(#paint0_linear)"></path>
                     <defs>
                       <lineargradient id="paint0_linear" x1="213" y1="189.5" x2="96" y2="3" gradientUnits="userSpaceOnUse">
@@ -783,7 +840,12 @@
                 <h6 class="category-preview__title ff-2 t-size-24">Комфортный отдых в пути</h6>
                 <p class="t-color-gray t-w-500">Наша современная сеть АЗС всегда обеспечит Вас качественным топливом и удобным сервисом. Будем рады видеть Вас на наших заправках.</p>
               </div>
-            </div>
+            </div><a class="category-preview__more js-animated big-block-btn" href="/azs.html" data-animate-link>
+              <div class="big-block-btn__text"><span class="t-size-20">Перейти</span>
+                <svg class="icon"> 
+                  <use xlink:href="img/icons/sprite.svg#ico1"></use>
+                </svg>
+              </div></a>
           </div>
         </section>
         <!--оптовые продажи-->
@@ -804,7 +866,7 @@
                 <h6 class="category-preview__title ff-2 t-size-24">Прямые поставки от производителей</h6>
                 <p class="t-color-gray t-w-500">Оптовые поставки бензина, дизельного топлива и СМТ. Доставим нашими бензовозами, или отгрузим топливо в Ваши бензовозы на заводах производителях.</p><a class="button button_style1 js-animated" href="/TWONP/dest/wholesale-fuel/index.html">Перейти на страницу</a>
               </div>
-            </div><a class="category-preview__more js-animated big-block-btn" href="/index.html" data-animate-link>
+            </div><a class="category-preview__more js-animated big-block-btn" href="/opt.html" data-animate-link data-first-slide="1">
               <div class="big-block-btn__text"><span class="t-size-20">Перейти</span>
                 <svg class="icon"> 
                   <use xlink:href="img/icons/sprite.svg#ico1"></use>

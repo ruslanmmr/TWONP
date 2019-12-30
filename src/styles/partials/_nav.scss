@@ -128,6 +128,9 @@
 @media all and(max-width: 1024px) {
   .nav {
     width: 25%;
+    &__footer {
+      margin: 0 !important;
+    }
   }
 }
 @media all and(max-width: 992px) {

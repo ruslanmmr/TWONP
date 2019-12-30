@@ -87,20 +87,6 @@
   text-decoration: none;
   position: relative;
   transition: $trs1;
-  &.hover,
-  &.touch {
-    opacity: 0.8;
-    span {
-      background-color: $colorA;
-      &:nth-child(1),
-      &:nth-child(3) {
-        width: 75%;
-      }
-      &:nth-child(2) {
-        width: 100%;
-      }
-    }
-  }
   span {
     display: block;
     position: absolute;
@@ -118,6 +104,21 @@
     }
     &:nth-child(3) {
       bottom: 0px;
+    }
+  }
+  &.hover,
+  &.touch {
+    opacity: 0.8;
+    span {
+      background-color: $colorA;
+      width: 75%;
+      &:nth-child(1),
+      &:nth-child(3) {
+        width: 75%;
+      } 
+      &:nth-child(2) {
+        width: 100%;
+      }
     }
   }
 }
