@@ -50,11 +50,20 @@
   }
   &__description {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     width: 45%;
     flex: 1 1 100%;
     position: relative;
     z-index: 3;
+  }
+  &__title {
+    &:not(:last-child) {
+      margin-bottom: 0.3em;
+    }
+  }
+  &__text {
+    max-width: 400px;
   }
   &__legend {
     position: relative;
@@ -138,11 +147,14 @@
     width: 100%;
     position: relative;
     z-index: 1;
+    display: flex;
   }
   &__inner {
     z-index: 1;
     user-select: none;
     position: relative;
+    margin: auto;
+    min-width: 100%;
   }
   &__map {
     display: block;
@@ -433,6 +445,7 @@
   .custom-map-controls {
     right: 30px;
   }
+
   .map-popup {
     height: calc(100% - 85px);
     max-width: 100%;
@@ -448,6 +461,9 @@
     }
   }
   .map-section {
+    &__text {
+      max-width: 100%;
+    }
     &__title {
       margin-top: 15px;
     }
@@ -561,6 +577,9 @@
       font-size: 24px;
       margin-top: 0;
       line-height: 1.5;
+    }
+    &__text {
+      display: none;
     }
     &__legend,
     &__description {
