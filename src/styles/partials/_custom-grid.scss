@@ -10,6 +10,7 @@
 }
 .d-hidden {
   visibility: hidden;
+  pointer-events: none;
 }
 .d-none {
   display: none;

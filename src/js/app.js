@@ -102,8 +102,8 @@ $(document).ready(function() {
   inputs();
   
   //work
-  //$preloader.loadFinished();
-  //localStorage.setItem('slide', 1);
+  $preloader.loadFinished();
+  localStorage.setItem('slide', 1);
 
 
   $select.init();
@@ -210,6 +210,7 @@ let map = {
   trigger: $('.map-trigger'),
   strokeElms: $('.custom-map .region, .custom-map .road'),
   lines: $('.custom-map .line'),
+  area: $('.custom-map .map-area'),
   itemsElls: $('.custom-map .item'),
   available: false,
   x: 0,
@@ -466,17 +467,24 @@ let map = {
       if((event.type=='mouseenter' && $('html').hasClass('desktop')) || event.type=='touchstart') {
         if($(this).is('[data-base]')) {
           $legendTrigger.not($(this)).addClass('disabled');
-          map.trigger.not($('[data-base],[data-base-station],[data-disabled]')).addClass('disabled');
+          map.trigger.not($('[data-base]')).addClass('disabled');
+          map.area.addClass('disabled');
         } else if($(this).is('[data-station]')) {
           $legendTrigger.not($(this)).addClass('disabled');
-          map.trigger.not($('[data-station], [data-base-station], [data-disabled]')).addClass('disabled');
+          map.trigger.not($('[data-station]')).addClass('disabled');
+          map.area.addClass('disabled');
         } else if($(this).is('[data-factory]')) {
           $legendTrigger.not($(this)).addClass('disabled');
-          map.trigger.not($('[data-factory], [data-disabled]')).addClass('disabled');
+          map.trigger.not($('[data-factory]')).addClass('disabled');
+          map.area.addClass('disabled');
+        } else if($(this).is('[data-area]')) {
+          $legendTrigger.not($(this)).addClass('disabled');
+          map.trigger.addClass('disabled');
         }
       } else if((event.type=='mouseleave' && $('html').hasClass('desktop')) || event.type=='touchend') {
         $legendTrigger.removeClass('disabled');
         map.trigger.removeClass('disabled');
+        map.area.removeClass('disabled');
       }
     })
 
@@ -495,6 +503,7 @@ let map = {
         data,
         popupAvailable = true;
 
+    //точки
     map.trigger.on('click', function(event) {
       event.preventDefault();
       if(map.available==true && popupAvailable==true) {
@@ -502,21 +511,18 @@ let map = {
         map.trigger.removeClass('active').removeClass('is');
         map.lines.removeClass('active');
         map.trigger.addClass('dark');
+        map.area.addClass('dark');
         $(this).removeClass('dark').addClass('active');
         //
         if($(this).is('[data-station]')) {
           newPopup = $(`.map-popup[data-station='${$(this).data('station')}']`);
-        } else if($(this).is('[data-base-station]')) {
-          newPopup = $(`.map-popup[data-base-station='${$(this).data('base-station')}']`);
-          //lines
-          $(`.custom-map .line[data-base='${$(this).data('base-station')}']`).addClass('active');
-          //factory
-          $('.map-trigger[data-factory]').removeClass('dark').addClass('is');;
         } else if($(this).is('[data-base]')) {
           newPopup = $(`.map-popup[data-base='${$(this).data('base')}']`);
           $('.map-trigger[data-factory]').removeClass('dark').addClass('is');
           //lines
-          $(`.custom-map .line[data-base='${$(this).data('base')}']`).addClass('active');
+          if($(this).hasClass('js-lines-true')) {
+            $(`.custom-map .line[data-base='${$(this).data('base')}']`).addClass('active');
+          }
         } else if($(this).is('[data-factory]')) {
           newPopup = $(`.map-popup[data-factory='${$(this).data('factory')}']`);
         }
@@ -538,19 +544,35 @@ let map = {
         }
       }
     });
-    //close
     $('.map-popup .popup-close').on('click', function(event) {
       event.preventDefault();
       if(map.available==true && popupAvailable==true) {
         popupAvailable = false;
         map.trigger.removeClass('active').removeClass('dark').removeClass('is');
         map.lines.removeClass('active');
+        map.area.removeClass('dark');
         $('.map-section__description, .map-section__legend').removeClass('active');
         newAnimation.reverse();
         newAnimation.eventCallback("onReverseComplete", function() {
           oldAnimation = undefined;
           popupAvailable = true;
         })
+      }
+    })
+
+    //круги
+    map.area.on('mouseenter mouseleave touchstart', function(event) {
+      if((event.type=='mouseenter' && $('html').hasClass('desktop')) || event.type=='touchstart') {
+        map.area.not($(this)).addClass('disabled').removeClass('active');
+        $('.price-delivery-item [data-area]').removeClass('active');
+        //
+        $(this).addClass('active');
+        $('.price-delivery-item').addClass('active');
+        $(`.price-delivery-item [data-area='${$(this).data('area')}']`).addClass('active');
+      } else if((event.type=='mouseleave' && $('html').hasClass('desktop'))) {
+        map.area.removeClass('disabled').removeClass('active');
+        $('.price-delivery-item').removeClass('active');
+        $('.price-delivery-item [data-area]').removeClass('active');
       }
     })
   }
@@ -845,6 +867,8 @@ let $pagination = {
     }
   }
 }
+
+//Слайдер топлива и грузовиков
 let $slider = {
   el: $('.fuel-slider .slider'),
   slide: $('.fuel-slide'),
@@ -854,12 +878,6 @@ let $slider = {
   init: function() {
     let $select = $('.opt-main-select select'),
         flag=true;
-
-    /* let values = {};
-    console.log($select.eq(0).find('option'))
-    $select.eq(0).find('option').each(function() {
-      
-    }) */
 
     $slider.index = $select.find('option:selected').index();
     //slick hack
@@ -891,6 +909,7 @@ let $slider = {
         flag=false;
         $slider.index = $(this).index();
         $select.val($select.eq(0).find('option').eq($slider.index).attr('value')).trigger('change');
+        console.log($select)
       }
     })
     //события изменения селекта
@@ -899,6 +918,7 @@ let $slider = {
       $slider.index = $(this).find(':selected').index();
       $select.niceSelect('update');
       $slider.pag.removeClass('active');
+      //console.log($slider.index)
       $slider.pag.eq($slider.index).addClass('active');
       $slider.info.removeClass('active').eq($slider.index).addClass('active');
       $slider.el.slick('slickGoTo', $slider.index);

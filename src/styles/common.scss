@@ -25,8 +25,8 @@ $base: $colorC;
 
 
 //transition
-$trs1: .25s;
-$trs2: .5s;
+$trs1: .25s ease-out;
+$trs2: .5s ease-out;
 //fonts
 $font1: 'Roboto';
 $font2: 'Manrope';
@@ -44,6 +44,10 @@ body {
   position: fixed;
   color: #fff;
   line-height: 1.5;
+}
+
+* {
+  user-select: none;
 }
 
 //grid
@@ -281,5 +285,6 @@ body {
 @import "./partials/inputs";
 @import "./partials/map-section";
 @import "./partials/home";
+@import "./partials/gallery";
 
 

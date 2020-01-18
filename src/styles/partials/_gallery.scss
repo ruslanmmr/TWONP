@@ -1,0 +1,41 @@
+.galery-slider {
+  height: calc(100% - 3px);
+  margin: 0 auto;
+  max-width: 1380px;
+  &__container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+}
+.galery-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  &__description {
+    background-color: #000;
+    flex: 0 0 500px;
+  }
+  &__image {
+    flex: 1 1 100%;
+    background-color: $colorJ;
+  }
+}
+
+.galery-pagination {
+  &__container {
+    background-color: $colorI;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1380px;
+    height: 3px;
+    display: flex;
+  }
+  a {
+    flex: 1 1 100%;
+    height: 3px;
+  }
+}

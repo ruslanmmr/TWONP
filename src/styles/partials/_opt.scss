@@ -321,6 +321,9 @@
   }
 }
 .opt {
+  .section__content {
+    justify-content: center;
+  }
   &__mobile-button {
     display: none;
   }

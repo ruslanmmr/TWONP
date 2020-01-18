@@ -1,4 +1,4 @@
-.popup(id="order")
+//.popup(id="order")
   a(href="javascript:void(0)" data-close).popup__close
   .scroll-container
     .popup__container.scroll-child.p-s 
@@ -32,7 +32,7 @@
               .input.form-order__item.popup-item
                 input(type="text" name="phone" required).input__el.phone
                 label.input__placeholder Номер телефона
-              .select.opt-main-select.form-order__item.popup-item
+              .select.form-order__item.popup-item
                 span.select__placeholder Выберите вид топлива
                 select(data-icon='img/icons/sprite.svg#arb')
                   option(value="ДТ 'ЕВРО' Л-К5") ДТ 'ЕВРО' Л-К5
@@ -71,3 +71,59 @@
             .popup-succes__button
               a(href="javascript:void(0)" data-close).button.button_style1.js-animated 
                 span Готово
+.popup(id="order")
+  a(href="javascript:void(0)" data-close).popup__close
+  .scroll-container
+    .popup__container.scroll-child.p-s 
+      .popup__element
+        .popup__head
+          .popup__title Оставьте заявку
+          a(href="javascript:void(0)" data-close).popup-close.js-animated
+            svg.icon 
+              use(xlink:href="img/icons/sprite.svg#close")
+        .popup__content
+          .popup-succes
+            .popup-succes__top
+              .popup-succes__icon
+                svg.round(width='80px' height='80px')
+                  circle.round__circle(stroke-width='2px' cx='40' cy='40' r='39' fill='transparent')
+                svg.icon 
+                  use(xlink:href="img/icons/sprite.svg#tick")
+              span.popup-succes__title.popup-succes__item.t-size-24 Спасибо за заявку!
+              span.popup-succes__text.popup-succes__item Ваша заявка находится в обработке.<br> Мы свяжемся с вами в ближайшее время!
+            .popup-succes__button
+              a(href="javascript:void(0)" data-close).button.button_style1.js-animated 
+                span Готово
+          form(action="#").form-order
+            .form-order__group.disabled-animated
+              .input.form-order__item.popup-item
+                input(type="text" required).input__el
+                label.input__placeholder Имя
+              .input.form-order__item.popup-item
+                input.input__el(type="email" required).input__el
+                label.input__placeholder E-mail
+              .input.form-order__item.popup-item
+                input(type="text" name="phone" required).input__el.phone
+                label.input__placeholder Номер телефона
+              .select.form-order__item.popup-item
+                span.select__placeholder Выберите тип автомобиля
+                select(data-icon='img/icons/sprite.svg#arb')
+                  option(value="КАМАЗ 26107") КАМАЗ 26107
+                  option(value="МАЗ 28095") МАЗ 28095
+                  option(value="ИВЕКО 27726") ИВЕКО 27726
+                  option(value="ИВЕКО 27972") ИВЕКО 27972
+                  option(value="КАМАЗ 28010") КАМАЗ 28010
+                  option(value="ГРАЗ 4910") ГРАЗ 4910
+                  option(value="KENWORTH 26107") KENWORTH 26107
+                  option(value="КАМАЗ 27914") КАМАЗ 27914
+              .form-order__item.popup-item
+                label.checkbox
+                  svg.icon
+                    use(xlink:href="img/icons/sprite.svg#tick2")
+                  input(type="checkbox")
+                  | Я ознакомлен и согласен<br> с 
+                  a(href="#").link.js-animated политикой конфиденциальности
+            .form-order__btn.popup-item
+              button(type='submit').button.button_style1.js-animated
+                span Отправить
+                img(src="img/icons/loader-dark.svg", alt="loader")

@@ -36,7 +36,7 @@ gulp.task("pug", function () {
 gulp.task("scripts", function () {
   return gulp.src("./src/js/app.js")
     .pipe(webpackStream({
-      mode: 'production',
+      mode: 'development',
       performance: {
         hints: false,
         maxEntrypointSize: 1000,

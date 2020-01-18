@@ -5,6 +5,18 @@ block content
   include blocks/nav
   include blocks/pagination
   .slide-container
-    include blocks/azs-map-section
-
+    section.section.section-slide.category-preview.azs
+      .section__display
+        .scene.js-mobile-auto-size
+          .bg.bg_mask2(data-depth="0.05" data-image='img/bg/home2.jpg')
+        .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
+          .section__container
+            h5.section__title.t-size-64 Сеть АЗС
+      .section__bottom.category-preview__bottom
+        .category-preview__description.scroll-container
+          .scroll-child.p-s
+            h6.category-preview__title.ff-2.t-size-24 Комфортный отдых в пути
+            p.t-color-gray.t-w-500 Наша современная сеть АЗС всегда обеспечит Вас качественным топливом и удобным сервисом. Будем рады видеть Вас на наших заправках.
+    include blocks/map-azs
+    include blocks/gallery
       

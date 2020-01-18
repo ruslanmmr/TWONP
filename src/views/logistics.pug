@@ -1,0 +1,23 @@
+extends layout/layout
+block content
+  include blocks/header
+  include blocks/subnav
+  include blocks/nav
+  include blocks/pagination
+  include blocks/popups
+  .slide-container
+    //Топливная логистика
+    section.section.section-slide.category-preview
+      .section__display
+        .scene.js-mobile-auto-size
+          .bg.bg_mask3(data-depth="0.05" data-image='img/bg/home4.jpg')
+        .section__content.l-pd.p-s.p-r-p.p-t-h.content-b.p-b-p
+          .section__container
+            h5.section__title.t-size-64 Топливная<br> логистика
+      .section__bottom.category-preview__bottom
+        .category-preview__description.scroll-container
+          .scroll-child.p-s
+            h6.category-preview__title.ff-2.t-size-24 Любой объем на любое расстояние
+            p.t-color-gray.t-w-500 Доставляем топливо собственными бензовозами по территории Южного и Центрального федерального округа. В собственности новый автопарк бензовозов, емкость бензовозов от пяти до сорока кубических метров.
+    include blocks/map-logis  
+    include blocks/cars
