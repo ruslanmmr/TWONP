@@ -436,7 +436,12 @@
                       </lineargradient>
                     </defs>
                   </svg>
-                  <!--область доставки--><span class="map-area" data-area="3" style="top:46.5%;left:62%;width:98%"></span><span class="map-area" data-area="2" style="top:46.5%;left:62%;width:50%"></span><span class="map-area" data-area="1" style="top:46.5%;left:62%;width:26%"></span><a class="item map-trigger size1 js-animated" data-base="1" href="javascript:void(0);" style="top:31%;left:56.7%"></a><a class="item map-trigger size1 js-animated" data-base="2" href="javascript:void(0);" style="top:46.5%;left:62%"></a>
+                  <!--область доставки-->
+                  <svg class="area-block" style="top:46.5%;left:62%;width:98.5%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1875 1875" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" id="круги">
+                    <path class="area-block__item" data-area="3" d="M1875 937.5C1875 419.73 1455.27 0 937.5 0S0 419.73 0 937.5 419.73 1875 937.5 1875 1875 1455.27 1875 937.5zm-468.75 0c0-258.88-209.87-468.75-468.75-468.75S468.75 678.62 468.75 937.5s209.87 468.75 468.75 468.75 468.75-209.87 468.75-468.75z"></path>
+                    <path class="area-block__item" data-area="2" d="M1171.87 937.5c0-129.44-104.93-234.37-234.37-234.37S703.13 808.06 703.13 937.5s104.93 234.37 234.37 234.37 234.37-104.93 234.37-234.37zm234.38 0c0-258.88-209.87-468.75-468.75-468.75S468.75 678.62 468.75 937.5s209.87 468.75 468.75 468.75 468.75-209.87 468.75-468.75z"></path>
+                    <path class="area-block__item" data-area="1" d="M1171.87 937.5c0-129.44-104.93-234.37-234.37-234.37S703.13 808.06 703.13 937.5s104.93 234.37 234.37 234.37 234.37-104.93 234.37-234.37z"></path>
+                  </svg><a class="item map-trigger size1 js-animated" data-base="1" href="javascript:void(0);" style="top:31%;left:56.7%"></a><a class="item map-trigger size1 js-animated" data-base="2" href="javascript:void(0);" style="top:46.5%;left:62%"></a>
                 </div>
               </div>
             </div>
@@ -568,127 +573,74 @@
             </div>
           </div>
         </section>
-        <section class="section section-slide opt">
+        <section class="section section-slide cars">
           <!--opt slider-->
           <div class="section__display">
             <div class="scene">
               <div class="bg bg_mask5" data-depth="0.05" data-image="img/bg/bg2.jpg"></div>
             </div>
             <div class="section__content p-s p-r-p p-t-h p-b-p content-b js-mobile-full-size">
-              <!--mobile select-->
-              <div class="opt__mobile-select">
-                <div class="select opt-main-select"><span class="select__placeholder">Выберите тип автомобиля</span>
-                  <select data-icon="img/icons/sprite.svg#arb">
-                    <option value="КАМАЗ 26107">КАМАЗ 26107</option>
-                    <option value="МАЗ 28095">МАЗ 28095</option>
-                    <option value="ИВЕКО 27726">ИВЕКО 27726</option>
-                    <option value="ИВЕКО 27972">ИВЕКО 27972</option>
-                    <option value="КАМАЗ 28010">КАМАЗ 28010</option>
-                    <option value="ГРАЗ 4910">ГРАЗ 4910</option>
-                    <option value="KENWORTH 26107">KENWORTH 26107</option>
-                    <option value="КАМАЗ 27914">КАМАЗ 27914</option>
-                  </select>
-                </div>
-              </div>
-              <!--pagination-->
-              <div class="fuel-slider-pagination">
-                <div class="fuel-slider-pagination__container"><span class="line"></span><span class="line"></span><span class="line"></span><span class="line"></span><span class="line"></span><span class="line"></span>
-                  <div class="fuel-slider-pagination__items"><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a>
+              <div class="cars__content">
+                <!--mobile select-->
+                <div class="opt__mobile-select">
+                  <div class="select opt-main-select"><span class="select__placeholder">Выберите тип автомобиля</span>
+                    <select data-icon="img/icons/sprite.svg#arb">
+                      <option value="КАМАЗ 26107">КАМАЗ 26107</option>
+                      <option value="МАЗ 28095">МАЗ 28095</option>
+                      <option value="ИВЕКО 27726">ИВЕКО 27726</option>
+                      <option value="ИВЕКО 27972">ИВЕКО 27972</option>
+                      <option value="КАМАЗ 28010">КАМАЗ 28010</option>
+                      <option value="ГРАЗ 4910">ГРАЗ 4910</option>
+                      <option value="KENWORTH 26107">KENWORTH 26107</option>
+                      <option value="КАМАЗ 27914">КАМАЗ 27914</option>
+                    </select>
                   </div>
                 </div>
-              </div>
-              <!--slider-->
-              <div class="fuel-slider js-no-scroll">
-                <div class="fuel-slider__center">
-                  <div class="slider">
-                    <div class="fuel-slide">
-                      <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">01</span>
-                        <div class="fuel-slide__top">
-                          <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">41.75 ₽</span></div>
-                          <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">50 000 ₽</span></div>
-                        </div>
-                        <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" href="content/ДТ &quot;ЕВРО&quot; Л-К5.pdf" target="_blank">
-                            <svg class="icon"> 
-                              <use xlink:href="img/icons/sprite.svg#ico5"></use>
-                            </svg><span>Паспорт</span></a>
-                          <h6 class="fuel-slide__title">ДТ "ЕВРО" Л-К5</h6>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="fuel-slide">
-                      <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">02</span>
-                        <div class="fuel-slide__top">
-                          <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">39.00 ₽</span></div>
-                          <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">52 000 ₽</span></div>
-                        </div>
-                        <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" href="content/АИ-95-К5.pdf" target="_blank">
-                            <svg class="icon"> 
-                              <use xlink:href="img/icons/sprite.svg#ico5"></use>
-                            </svg><span>Паспорт</span></a>
-                          <h6 class="fuel-slide__title">АИ-95</h6>
-                          <div class="fuel-slide__factory">Новошахтинск</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="fuel-slide">
-                      <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">03</span>
-                        <div class="fuel-slide__top">
-                          <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">36.45 ₽</span></div>
-                          <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">49 250 ₽</span></div>
-                        </div>
-                        <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" href="content/АИ-92-К5.pdf" target="_blank">
-                            <svg class="icon"> 
-                              <use xlink:href="img/icons/sprite.svg#ico5"></use>
-                            </svg><span>Паспорт</span></a>
-                          <h6 class="fuel-slide__title">АИ-92</h6>
-                          <div class="fuel-slide__factory">Каменск Шахтинский</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="fuel-slide">
-                      <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">04</span>
-                        <div class="fuel-slide__top">
-                          <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">-</span></div>
-                          <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">-</span></div>
-                        </div>
-                        <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" href="content/АИ-92-К5.pdf" target="_blank">
-                            <svg class="icon"> 
-                              <use xlink:href="img/icons/sprite.svg#ico5"></use>
-                            </svg><span>Паспорт</span></a>
-                          <h6 class="fuel-slide__title">Газойль <br><span>(аналог ДТ)</span></h6>
-                          <div class="fuel-slide__factory">Каменск Шахтинский</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="fuel-slide">
-                      <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">05</span>
-                        <div class="fuel-slide__top">
-                          <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">-</span></div>
-                          <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">-</span></div>
-                        </div>
-                        <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" href="content/АИ-92-К5.pdf" target="_blank">
-                            <svg class="icon"> 
-                              <use xlink:href="img/icons/sprite.svg#ico5"></use>
-                            </svg><span>Паспорт</span></a>
-                          <h6 class="fuel-slide__title">Топливо высоковязкое <br><span>(аналог ДТ)</span></h6>
-                          <div class="fuel-slide__factory">Каменск Шахтинский</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="fuel-slide">
-                      <div class="fuel-slide__container js-animated"><span class="fuel-slide__index">06</span>
-                        <div class="fuel-slide__top">
-                          <div class="fuel-slide__item"><span class="fuel-slide__label">Литр</span><span class="fuel-slide__price">-</span></div>
-                          <div class="fuel-slide__item"><span class="fuel-slide__label">Тонна</span><span class="fuel-slide__price">-</span></div>
-                        </div>
-                        <div class="fuel-slide__bottom"><a class="fuel-slide__pasport js-animated" href="content/АИ-92-К5.pdf" target="_blank">
-                            <svg class="icon"> 
-                              <use xlink:href="img/icons/sprite.svg#ico5"></use>
-                            </svg><span>Паспорт</span></a>
-                          <h6 class="fuel-slide__title">Широкий нефтяной дистиллят<br><span>(аналог ДТ) </span></h6>
-                          <div class="fuel-slide__factory">Каменск Шахтинский  </div>
-                        </div>
-                      </div>
+                <!--grad-->
+                <svg class="cars-slide__grad">
+                  <defs>
+                    <lineargradient id="gradient" x1="88" y1="0" x2="88" y2="112" gradientunits="userSpaceOnUse">
+                      <stop stop-color="#6FDE9B"></stop>
+                      <stop offset="1" stop-color="#129042" stop-opacity="0"></stop>
+                      <stop offset="1" stop-color="#6FDE9B"></stop>
+                    </lineargradient>
+                  </defs>
+                </svg>
+                <!--slider-->
+                <div class="cars-slider js-no-scroll">
+                                    <div class="cars-slide">
+                                      <div class="cars-slide__image">
+                                        <svg class="cars-slide__car" viewBox="0 0 698 195">
+                                          <use xlink:href="img/icons/cars-sprite.svg#tanker"></use>
+                                        </svg>
+                                        <svg class="cars-slide__wheel wheel1" viewBox="0 0 462.938 462.974">
+                                          <use xlink:href="img/icons/cars-sprite.svg#wheel"> </use>
+                                        </svg>
+                                        <svg class="cars-slide__wheel wheel2" viewBox="0 0 462.938 462.974">
+                                          <use xlink:href="img/icons/cars-sprite.svg#wheel"> </use>
+                                        </svg>
+                                        <svg class="cars-slide__wheel wheel3" viewBox="0 0 462.938 462.974">
+                                          <use xlink:href="img/icons/cars-sprite.svg#wheel"> </use>
+                                        </svg>
+                                        <svg class="cars-slide__wheel wheel4" viewBox="0 0 462.938 462.974">
+                                          <use xlink:href="img/icons/cars-sprite.svg#wheel"> </use>
+                                        </svg>
+                                        <svg class="cars-slide__wheel wheel5" viewBox="0 0 462.938 462.974">
+                                          <use xlink:href="img/icons/cars-sprite.svg#wheel"></use>
+                                        </svg>
+                                        <!--svg(viewBox="0 0 176 111" fill="url(#gradient)").cars-slide__gradient.gradient1use(xlink:href='img/icons/cars-sprite.svg#gradient1')
+                                        -->
+                                        <!--svg(viewBox="0 0 176 111" fill="url(#gradient)").cars-slide__gradient.gradient2use(xlink:href='img/icons/cars-sprite.svg#gradient2')
+                                        -->
+                                        <!--svg(viewBox="0 0 175 112" fill="url(#gradient)").cars-slide__gradient.gradient3use(xlink:href='img/icons/cars-sprite.svg#gradient3')
+                                        -->
+                                      </div>
+                                    </div>
+                </div>
+                <!--pagination-->
+                <div class="fuel-slider-pagination">
+                  <div class="fuel-slider-pagination__container"><span class="line"></span><span class="line"></span><span class="line"></span><span class="line"></span><span class="line"></span><span class="line"></span>
+                    <div class="fuel-slider-pagination__items"><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a><a class="fuel-slider-pagination__item js-animated" href="javascript:void(0)"><span class="dot"></span></a>
                     </div>
                   </div>
                 </div>
@@ -708,10 +660,79 @@
                 <div class="opt-info-item scroll-container shadow">
                   <div class="scroll-child p-s">
                     <ul class="list">
-                      <li><span>Отсек 1</span><span> </span></li>
-                      <li><span>Отсек 2</span><span> </span></li>
-                      <li><span>Отсек 3</span><span> </span></li>
-                      <li><span>Общий литраж цистерны</span><span> </span></li>
+                      <li><span>Отсек 1</span><span>9456 л.</span></li>
+                      <li><span>Отсек 2</span><span>8263 л.</span></li>
+                      <li><span>Отсек 3</span><span>8388 л.</span></li>
+                      <li><span>Общий литраж цистерны</span><span>26107 л.</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Отсек 1</span><span>6920 л.</span></li>
+                      <li><span>Отсек 2</span><span>16030 л.</span></li>
+                      <li><span>Отсек 3</span><span>5145 л.</span></li>
+                      <li><span>Общий литраж цистерны</span><span>28095 л.</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Отсек 1</span><span>7474 л.</span></li>
+                      <li><span>Отсек 2</span><span>10859 л.</span></li>
+                      <li><span>Отсек 3</span><span>9393 л.</span></li>
+                      <li><span>Общий литраж цистерны</span><span>27726 л.</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Отсек 1</span><span>6442 л.</span></li>
+                      <li><span>Отсек 2</span><span>10760 л.</span></li>
+                      <li><span>Отсек 3</span><span>10270 л.</span></li>
+                      <li><span>Общий литраж цистерны</span><span>27972 л.</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Отсек 1</span><span>6915 л.</span></li>
+                      <li><span>Отсек 2</span><span>10865 л.</span></li>
+                      <li><span>Отсек 3</span><span>10230 л.</span></li>
+                      <li><span>Общий литраж цистерны</span><span>28010 л.</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Отсек 1</span><span>2457 л.</span></li>
+                      <li><span>Отсек 2</span><span>2453 л.</span></li>
+                      <li><span>Общий литраж цистерны</span><span>4910 л.</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Отсек 1</span><span>9456 л.</span></li>
+                      <li><span>Отсек 2</span><span>8263 л.</span></li>
+                      <li><span>Отсек 3</span><span>8388 л.</span></li>
+                      <li><span>Общий литраж цистерны</span><span>26107 л.</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="opt-info-item scroll-container shadow">
+                  <div class="scroll-child p-s">
+                    <ul class="list">
+                      <li><span>Отсек 1</span><span>7425 л.</span></li>
+                      <li><span>Отсек 2</span><span>10494 л.</span></li>
+                      <li><span>Отсек 3</span><span>9995 л.</span></li>
+                      <li><span>Общий литраж цистерны</span><span>27914 л.</span></li>
                     </ul>
                   </div>
                 </div>

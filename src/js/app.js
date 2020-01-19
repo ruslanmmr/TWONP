@@ -102,8 +102,8 @@ $(document).ready(function() {
   inputs();
   
   //work
-  $preloader.loadFinished();
-  localStorage.setItem('slide', 1);
+  //$preloader.loadFinished();
+  //localStorage.setItem('slide', 1);
 
 
   $select.init();
@@ -116,7 +116,9 @@ $(document).ready(function() {
 
   if($slider.el.length>0) {
     $slider.init();
+    optinfo.init();
   }
+
   if($('.custom-map').length>0) {
     map.init();
   }
@@ -210,7 +212,7 @@ let map = {
   trigger: $('.map-trigger'),
   strokeElms: $('.custom-map .region, .custom-map .road'),
   lines: $('.custom-map .line'),
-  area: $('.custom-map .map-area'),
+  area: $('.area-block__item'),
   itemsElls: $('.custom-map .item'),
   available: false,
   x: 0,
@@ -769,6 +771,11 @@ let $slide = {
       $subNav.fade()
     }
     //
+    if(this.current.hasClass('cars') && $cars.initialized==false) {
+      $cars.init();
+      optinfo.init();
+    }
+    //
     if($window.width()>1024) {
       if($nav.state == false && newSlide.hasClass('js-nav-hidden')) {
         $nav.hideAnim.play()
@@ -868,7 +875,33 @@ let $pagination = {
   }
 }
 
-//Слайдер топлива и грузовиков
+let optinfo = {
+  $block: $('.opt__info-content'),
+  $open: $('.opt__info-open'),
+  $close: $('.opt__info-close, .opt__mobile-select'),
+  init: function() {
+    this.animation = gsap.timeline({paused:true})
+    .to(optinfo.$block, {duration:0.5, autoAlpha:0, yPercent:100, ease:'power2.in'})
+
+    if($page.width()<=576) {
+      this.animation.play();
+    }
+    this.$open.on('click', function() {
+      optinfo.animation.reverse();
+    })
+    this.$close.on('click', function() {
+      optinfo.animation.play();
+    })
+    $(window).resize(function() {
+      if($page.width()<=576 && optinfo.animation.progress()==1) {
+        optinfo.animation.play();
+      } else if($page.width()>576 && optinfo.animation.progress()==1) {
+        optinfo.animation.reverse();
+      }
+    })
+  }
+}
+//Слайдер топлива
 let $slider = {
   el: $('.fuel-slider .slider'),
   slide: $('.fuel-slide'),
@@ -954,31 +987,23 @@ let $slider = {
       arrows: false,
       touchThreshold: 10
     });
-    //information
-    let $block = $('.opt__info-content'),
-        $open = $('.opt__info-open'),
-        $close = $('.opt__info-close, .opt__mobile-select'),
-        animation;
-      animation = gsap.timeline({paused:true})
-        .to($block, {duration:0.5, autoAlpha:0, yPercent:100, ease:'power2.in'})
+  }
+}
 
-      if($page.width()<=576) {
-        animation.play();
-      }
-      $open.on('click', function() {
-        animation.reverse();
-      })
-      $close.on('click', function() {
-        animation.play();
-      })
-      $(window).resize(function() {
-        if($page.width()<=576 && animation.progress()==1) {
-          animation.play();
-        } else if($page.width()>576 && animation.progress()==1) {
-          animation.reverse();
-        }
-      })
 
+//Слайдер грузовики
+let $cars = {
+  el: $('.cars-slide'),
+  new: $('.cars-slide:first-child'),
+  scroll: false,
+  initialized: false,
+  init: function() {
+    this.initialized=true;
+    console.log('initialized')
+
+    let anim = gsap.timeline()
+      .fromTo($cars.new, {xPercent:100, autoAlpha:0}, {duration:2, xPercent:0, autoAlpha:1, ease:"back.out(0.3)"})
+      .fromTo($cars.new.find('.cars-slide__wheel'), {rotation:700}, {duration:2, rotation:0, ease:"back.out(0.3)"}, '-=2')
 
   }
 }
