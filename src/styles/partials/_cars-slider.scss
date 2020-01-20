@@ -57,6 +57,7 @@
   width: 100%;
   &__image {
     position: relative;
+    will-change: transform;
   }
   &__title {
     font-weight: 600;
@@ -111,6 +112,7 @@
     position: absolute;
     width: 7.2%;
     bottom: 1.5%;
+    will-change: transform;
     &.wheel1 {
       left: 6.25%;
     }
@@ -150,6 +152,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       transition: $trs1;
+      will-change: opacity;
       &:first-child {
         color: $colorA;
       }
