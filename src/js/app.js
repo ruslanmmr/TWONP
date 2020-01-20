@@ -218,6 +218,7 @@ let map = {
   controlMinus: $('.custom-map-minus'),
   zoomMax: 3,
   zoomGradations: 4,
+  animated: false,
   zoomPlus: function() {
     if(this.zoomGradation<this.zoomGradations) {
       this.zoomGradation++;
@@ -722,7 +723,7 @@ let $slide = {
     //animation
     let anim = gsap.timeline({onComplete:function(){$slide.updateAnimations()}})
       .to(newSlide, {duration:1, autoAlpha:1, ease:'power2.inOut'})
-      .fromTo(newSlide.find('.scene, .custom-map'), {scale:1.3}, {immediateRender:false, duration:1, scale:1, ease:'power2.out'}, '-=1')
+      .fromTo(newSlide.find('.scene'), {scale:1.3}, {immediateRender:false, duration:1, scale:1, ease:'power2.out'}, '-=1')
   },
   afterChange: function() {
     if($('html').hasClass('desktop') && $('.js-tabs-true').length>0 && !this.current.hasClass('js-tabs-true')) {
@@ -750,22 +751,26 @@ let $slide = {
     this.prev = this.current.prev();
 
     $pagination.update();
-    //resizeElems();
 
     $('[data-slide]').removeClass('active');
     $(`[data-slide='${newSlide.index()}']`).addClass('active');
-    //
+    
     if(this.current.hasClass('js-subnav-hidden') || ( this.current.hasClass('map-section') && $window.width()<=992 ) ) {
       $subNav.hide();
     } else {
       $subNav.fade()
     }
-    //
+    
     if(this.current.hasClass('cars') && $cars.initialized==false) {
       $cars.init();
       optinfo.init();
     }
-    //
+    if(this.current.hasClass('map-section') && map.animated==false) {
+      map.animated=true;
+      let anim = gsap.timeline()
+        .fromTo($('.custom-map'), {scale:0.5}, {duration:1, scale:1, ease:'power2.inOut'})
+    }
+    
     if($window.width()>1024) {
       if($nav.state == false && newSlide.hasClass('js-nav-hidden')) {
         $nav.hideAnim.play()
@@ -782,8 +787,8 @@ let $slide = {
     //exit anim
     $slide.exitAnimation = gsap.timeline({paused:true})
       .to($slide.current, {duration:1, autoAlpha:0, ease:'power2.in'})
-      .fromTo($slide.current.find('.scene, .custom-map'), {scale:1}, {duration:1, scale:1.1, ease:'power2.in'}, '-=1')
-      .to($slide.current.find('.scene, .custom-map'), {duration:0, scale:1})
+      .fromTo($slide.current.find('.scene'), {scale:1}, {duration:1, scale:1.1, ease:'power2.in'}, '-=1')
+      .to($slide.current.find('.scene'), {duration:0, scale:1})
 
     if($window.width()>768) {
       if($slide.next.length>0) {
@@ -897,12 +902,11 @@ let $slider = {
   slide: $('.fuel-slide'),
   pag: $('.fuel-slider-pagination__item'),
   info: $('.opt-info-item'),
+  selects: $('select'),
   scroll: false,
   init: function() {
-    let $select = $('.opt-main-select select'),
-        flag=true;
-
-    $slider.index = $select.find('option:selected').index();
+    this.index = 0;
+    this.flas = true;
     //slick hack
     $slider.el.on('init', function(event, slick, direction){
       let count = $slider.el.find('.slick-cloned').length,
@@ -923,48 +927,26 @@ let $slider = {
     $slider.slide.each(function(index) {
       $(this).attr('data-index', index);
     })
-    //описание
-    $slider.info.eq($slider.index).addClass('active');
-    //пагинация
-    $slider.pag.eq($slider.index).addClass('active');
-    $slider.pag.on('click', function() {
-      if(flag==true) {
-        flag=false;
-        $slider.index = $(this).index();
-        $select.val($select.eq(0).find('option').eq($slider.index).attr('value')).trigger('change');
-      }
-    })
-    //события изменения селекта
-    $select.on('change', function() {
-      $select.val($(this).find(':selected').attr('value'));
+
+    //события
+    this.selects.on('change', function() {
       $slider.index = $(this).find(':selected').index();
-      $select.niceSelect('update');
-      $slider.pag.removeClass('active');
-      $slider.pag.eq($slider.index).addClass('active');
-      $slider.info.removeClass('active').eq($slider.index).addClass('active');
-      $slider.el.slick('slickGoTo', $slider.index);
+      $slider.change();
     })
-    //события когда слайдер изменился
-    $slider.el.on('swipe', function(){
-      $slider.scroll=true;
+    $slider.pag.on('click', function() {
+      $slider.index = $(this).index();
+      $slider.change();
     })
     $slider.el.on('afterChange', function(event, slick, direction){
-      if($slider.scroll==true) {
-        $slider.index = $(this).find('.slick-center').not('.slick-cloned').data('slick-index');
-        $select.val($select.eq(0).find('option').eq($slider.index).attr('value')).trigger('change');
-      }
-      $slider.scroll=false;
-      flag=true;
+      $slider.index = $(this).find('.slick-center').not('.slick-cloned').data('slick-index');
+      $slider.change();
     });
     //события клика по неактивному слайду
     $slider.slide.find('.fuel-slide__container').on('click', function() {
-      if(flag==true) {
-        flag=false;
-        let index = $(this).parent().data('slick-index');
-        $slider.el.slick('slickGoTo', index);
-        $slider.index = $(this).parent().attr('data-index');
-        $select.val($select.eq(0).find('option').eq($slider.index).attr('value')).trigger('change');
-      }
+      let index = $(this).parent().data('slick-index');
+      $slider.el.slick('slickGoTo', index);
+      $slider.index = $(this).parent().attr('data-index');
+      $slider.change();
     })
     //инициализация слайдера
     $slider.el.slick({
@@ -975,10 +957,18 @@ let $slider = {
       arrows: false,
       touchThreshold: 10
     });
+    this.change();
+  },
+  change: function() {
+    this.selects.val($slider.selects.eq(0).find('option').eq($slider.index).attr('value'));
+    console.log($slider.selects.eq(0).find('option').eq($slider.index).attr('value'))
+    this.selects.niceSelect('update');
+    $slider.pag.removeClass('active');
+    $slider.pag.eq($slider.index).addClass('active');
+    $slider.info.removeClass('active').eq($slider.index).addClass('active');
+    $slider.el.slick('slickGoTo', $slider.index);
   }
 }
-
-
 //Слайдер грузовики
 let $cars = {
   el: $('.cars-slide'),
@@ -1049,12 +1039,8 @@ let $cars = {
         $('.cars-slide__gradient, .cars-slide__section').removeClass('active');
       }
     })
-
-
-
   },
   change: function() {
-    console.log('change')
     $cars.pag.removeClass('active');
     $slider.pag.eq($cars.index).addClass('active');
     this.selects.val($cars.selects.eq(0).find('option').eq($cars.index).attr('value'));
@@ -1109,7 +1095,6 @@ let $cars = {
     }
   }
 }
-
 let $popup = {
   element: $('.popup'),
   $open: $('[data-popup]'),
