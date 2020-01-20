@@ -13,7 +13,7 @@ $(document).ready(function() {
   $preloader.init();
   //work
   //$preloader.loadFinished();
-  //localStorage.setItem('slide', 2);
+  //localStorage.setItem('slide', 1);
 
   elemsAnims();
   siteNavEvents();
@@ -981,7 +981,6 @@ let $slider = {
 
 //Слайдер грузовики
 let $cars = {
-  parent: $('.cars-slider'),
   el: $('.cars-slide'),
   selects: $('select'),
   info: $('.opt-info-item'),
@@ -994,6 +993,7 @@ let $cars = {
     this.initialized=true;
     this.index=0;
     this.sizeCar();
+    this.interval = undefined;
     $(window).resize(function(){
       $cars.sizeCar();
     })
@@ -1079,22 +1079,30 @@ let $cars = {
 
     this.showAnimation = gsap.timeline()
       .to($cars.current, {duration:1.5,autoAlpha:1,ease:'power2.inOut'})
-      .fromTo($cars.current.find('.cars-slide__image'), {xPercent:50}, {duration:2, xPercent:0, ease:"back.out(0.3)"}, '-=1.5')
-      .fromTo($cars.current.find('.cars-slide__wheel'), {rotation:380}, {duration:2, rotation:0, ease:"back.out(0.3)"}, '-=2')
+      .fromTo($cars.current.find('.cars-slide__image'), {xPercent:100}, {duration:2, xPercent:0, ease:"back.out(0.3)"}, '-=1.5')
+      .fromTo($cars.current.find('.cars-slide__wheel'), {rotation:760}, {duration:2, rotation:0, ease:"back.out(0.3)"}, '-=2')
       .fromTo($cars.current.find('.cars-slide__title'), {autoAlpha:0}, {duration:1.5, autoAlpha:1, ease:'power2.inOut'}, '-=1.5')
   },
   sizeCar: function() {
-    this.el.each(function() {
-      let h = $cars.parent.height() - ($('.cars-slide__title').height()+20),
-          $image = $(this).find('.cars-slide__image'),
-          $car = $(this).find('.cars-slide__car'),
-          w;
+    let $img = $('.cars-slide__image'),
+        $car = $('.cars-slide__car'),
+        $slide = $('.cars-slide'), 
+        $slider = $('.cars-slider'), 
+        ww = $('.section__content').width(),
+        h = $slider.height() - ($('.cars-slide__title').height()+20),
+        w;
 
-          $image.height(h);
-          w = $car.width();
-          $cars.parent.width(w)
-    })
-  },
+    if($window.width()>1024) {
+      $img.css({'width':'auto','height':h});
+      w = $car.width();
+      $slider.width(w);
+    } else {
+      $img.css({'width':ww*1.24});
+      $car.css({'width':'100%','height':'auto'});
+      $img.css({'height':$car.height()});
+      $slider.css({'height':$slide.height(),'width':'100%'});
+    }
+  }
 }
 
 let $popup = {

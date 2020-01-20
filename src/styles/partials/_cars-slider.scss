@@ -11,6 +11,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    max-width: 100%;
   }
   .fuel-slider-pagination {
     padding: 0;
@@ -176,8 +178,35 @@
   }
 }
 
-@media all and(min-width: 1024px) {
-  @media all and(max-height: 800px) {
-    
+@media all and(max-width: 1024px) {
+  .cars__content {
+    width: 100%;
+  }
+  .cars-slider {
+    flex: 0 0 auto;
+  }
+}
+@media all and(max-width: 576px) {
+  .cars-slide {
+    transform: translateX(-24%);
+    &__title {
+      display: none;
+    }
+    &__gradations {
+      font-size: 14px;
+    }
+  }
+  .cars-slider {
+    margin: 30px 0;
+  }
+  .cars .fuel-slider-pagination__btn {
+    display: none;
+  }
+  .cars .fuel-slider-pagination {
+    margin: 0 auto;
+    padding: 0 30px;
+    &__container {
+      margin: 0;
+    }
   }
 }
