@@ -1094,10 +1094,15 @@ let $cars = {
 
     if($window.width()>1024) {
       $img.css({'width':'auto','height':h});
+      $car.css({'width':'auto','height':h});
       w = $car.width();
       $slider.width(w);
     } else {
-      $img.css({'width':ww*1.24});
+      if($window.width()>576) {
+        $img.css({'width':ww});
+      } else {
+        $img.css({'width':ww*1.24});
+      }
       $car.css({'width':'100%','height':'auto'});
       $img.css({'height':$car.height()});
       $slider.css({'height':$slide.height(),'width':'100%'});
