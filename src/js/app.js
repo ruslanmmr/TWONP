@@ -148,6 +148,9 @@ let $preloader = {
     setTimeout(function() {
       $preloader.preloader.style.cssText = 'visibility:hidden;opacity:0';
       $preloader.wrap.style.cssText = 'visibility:visible;opacity:1';
+      setTimeout(function() {
+        $preloader.wrap.style.cssText = 'transition:none;';
+      }, 500)
     }, 200)
   }
 }
