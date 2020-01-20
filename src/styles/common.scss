@@ -56,10 +56,7 @@ body {
 .page-wrapper {
   height: 100%;
   position: relative;
-  transition: 1s;
-  &.loaded {
-    transition: none;
-  }
+  transition: opacity 1s;
 }
 .container {
   margin: 0 auto;

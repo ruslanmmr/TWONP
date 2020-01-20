@@ -1,3 +1,73 @@
+window.$ = window.jQuery = require('jquery');
+import device from 'current-device';
+import Scrollbar from 'smooth-scrollbar';
+import Hammer from 'hammerjs';
+import { gsap } from "gsap";
+import slick from "slick-carousel";
+import autosize from "autosize";
+import Parallax from 'parallax-js';
+import "inputmask/lib/extensions/inputmask.numeric.extensions";
+import Inputmask from "inputmask/lib/extensions/inputmask.date.extensions";
+
+$(document).ready(function() {
+  $preloader.init();
+  //work
+  //$preloader.loadFinished();
+  //localStorage.setItem('slide', 2);
+
+  elemsAnims();
+  siteNavEvents();
+  inputs();
+
+
+  $select.init();
+  $nav.init();
+  $subNav.update();
+  $popup.init();
+  $checkbox.init();
+  $mask.init();
+
+  if($slider.el.length>0) {
+    $slider.init();
+    optinfo.init();
+  }
+
+  if($('.custom-map').length>0) {
+    map.init();
+  }
+  if($('html').hasClass('desktop')) {
+    parallax.init();
+    if($('.js-tabs-true').length>0) {
+      $tabs.init();
+    }
+  }
+  if($contactForm.$element.length>0) {
+    $contactForm.init();
+  }
+
+  $slide.getFirstSlide({onComplete:function(){
+    $slide.change($slide.current, {
+      onComplete: function() {
+        $slide.updateAnimations();
+        $slide.to($slide.current);
+      }
+    });
+  }})
+})
+$(window).resize(function () {
+  resizeElems();
+})
+
+
+const $window = {
+  width: function() {
+    return Math.max(window.innerWidth, document.documentElement.clientWidth);
+  }
+}
+const $page = document.querySelector('.page-wrapper');
+
+
+
 let $preloader = {
   background: document.querySelectorAll('.bg'),
   preloader: document.querySelector('.preloader'),
@@ -69,101 +139,18 @@ let $preloader = {
       }
     }
   },
-
   loadFinished: function() {
+    //собрать страницу и выставить отступы
+    resizeElems();
+
     $preloader.item.setAttribute('x', '0%');
+
     setTimeout(function() {
       $preloader.preloader.style.cssText = 'visibility:hidden;opacity:0';
       $preloader.wrap.style.cssText = 'visibility:visible;opacity:1';
-      setTimeout(function() {
-        $preloader.wrap.classList.add('loaded')
-      }, 500)
-      //
     }, 200)
   }
 }
-
-window.$ = window.jQuery = require('jquery');
-
-import device from 'current-device';
-import Scrollbar from 'smooth-scrollbar';
-import Hammer from 'hammerjs';
-import { gsap } from "gsap";
-import slick from "slick-carousel";
-import autosize from "autosize";
-import Parallax from 'parallax-js';
-import "inputmask/lib/extensions/inputmask.numeric.extensions";
-import Inputmask from "inputmask/lib/extensions/inputmask.date.extensions";
-
-$(document).ready(function() {
-
-  elemsAnims();
-  siteNavEvents();
-  inputs();
-  
-  //work
-  //$preloader.loadFinished();
-  //localStorage.setItem('slide', 1);
-
-
-  $select.init();
-
-  $nav.init();
-  $subNav.update();
-  $popup.init();
-  $checkbox.init();
-  $mask.init();
-
-  if($slider.el.length>0) {
-    $slider.init();
-    optinfo.init();
-  }
-
-  if($('.custom-map').length>0) {
-    map.init();
-  }
-  if($('html').hasClass('desktop')) {
-    parallax.init();
-    if($('.js-tabs-true').length>0) {
-      $tabs.init();
-    }
-  }
-  if($contactForm.$element.length>0) {
-    $contactForm.init();
-  }
-
-  $slide.getFirstSlide({onComplete:function(){
-    $slide.change($slide.current, {
-      onComplete: function() {
-        $slide.updateAnimations();
-        $slide.to($slide.current);
-      }
-    });
-  }})
-})
-
-window.addEventListener('load', 
-    function() { 
-      resizeElems();
-}, false);
-
-$(window).resize(function () {
-  resizeElems();
-})
-
-const $window = {
-  width: function() {
-    return Math.max(window.innerWidth, document.documentElement.clientWidth);
-  }
-}
-const $page = {
-  width: function() {
-    return Math.min(window.innerWidth, document.documentElement.clientWidth);
-  }
-}
-
-$preloader.init();
-
 let $checkbox = {
   element: $('.checkbox'),
   init: function() {
@@ -620,7 +607,7 @@ let $nav = {
       .to($nav.trigger.find('span:last-child'), 0.5, {duration:0.5, rotation:135, ease:'power2.out'}, '-=0.5')
     $nav.fadeAnim = gsap.timeline({paused:true})
       .to($nav.el, {duration:0.5, height:'100%', ease:'power2.inOut'})
-      .to($nav.el, {duration:0.5, backgroundColor:'rgba(0, 0, 0, 0.75)', ease:'power2.inOut'}, '-=0.5')
+      .to($nav.el, {duration:0.5, backgroundColor:'rgba(0, 0, 0, 0.5)', ease:'power2.inOut'}, '-=0.5')
       .set('.nav__items', {display:'block'}, '-=0.25')
       .fromTo('.nav__item', {autoAlpha:0}, {autoAlpha:1, ease:'power2.inOut', duration:0.5, stagger:{amount: 0.25}}, '-=0.25')
       .fromTo('.nav__item', {x:40}, {x:0, ease:'power2.out', duration:0.5, stagger:{amount:0.25}}, '-=0.75')
@@ -760,7 +747,7 @@ let $slide = {
     this.prev = this.current.prev();
 
     $pagination.update();
-    resizeElems();
+    //resizeElems();
 
     $('[data-slide]').removeClass('active');
     $(`[data-slide='${newSlide.index()}']`).addClass('active');
@@ -883,7 +870,7 @@ let optinfo = {
     this.animation = gsap.timeline({paused:true})
     .to(optinfo.$block, {duration:0.5, autoAlpha:0, yPercent:100, ease:'power2.in'})
 
-    if($page.width()<=576) {
+    if($window.width()<=576) {
       this.animation.play();
     }
     this.$open.on('click', function() {
@@ -893,9 +880,9 @@ let optinfo = {
       optinfo.animation.play();
     })
     $(window).resize(function() {
-      if($page.width()<=576 && optinfo.animation.progress()==1) {
+      if($window.width()<=576 && optinfo.animation.progress()==1) {
         optinfo.animation.play();
-      } else if($page.width()>576 && optinfo.animation.progress()==1) {
+      } else if($window.width()>576 && optinfo.animation.progress()==1) {
         optinfo.animation.reverse();
       }
     })
@@ -942,7 +929,6 @@ let $slider = {
         flag=false;
         $slider.index = $(this).index();
         $select.val($select.eq(0).find('option').eq($slider.index).attr('value')).trigger('change');
-        console.log($select)
       }
     })
     //события изменения селекта
@@ -951,7 +937,6 @@ let $slider = {
       $slider.index = $(this).find(':selected').index();
       $select.niceSelect('update');
       $slider.pag.removeClass('active');
-      //console.log($slider.index)
       $slider.pag.eq($slider.index).addClass('active');
       $slider.info.removeClass('active').eq($slider.index).addClass('active');
       $slider.el.slick('slickGoTo', $slider.index);
@@ -993,20 +978,122 @@ let $slider = {
 
 //Слайдер грузовики
 let $cars = {
+  parent: $('.cars-slider'),
   el: $('.cars-slide'),
-  new: $('.cars-slide:first-child'),
+  selects: $('select'),
+  info: $('.opt-info-item'),
+  pag: $('.cars .fuel-slider-pagination__item'),
+  nextBtn: $('.fuel-slider-pagination__btn.next'),
+  prevBtn: $('.fuel-slider-pagination__btn.prev'),
   scroll: false,
   initialized: false,
   init: function() {
     this.initialized=true;
-    console.log('initialized')
+    this.index=0;
+    this.sizeCar();
+    $(window).resize(function(){
+      $cars.sizeCar();
+    })
+    this.show();
+    this.change();
 
-    let anim = gsap.timeline()
-      .fromTo($cars.new, {xPercent:100, autoAlpha:0}, {duration:2, xPercent:0, autoAlpha:1, ease:"back.out(0.3)"})
-      .fromTo($cars.new.find('.cars-slide__wheel'), {rotation:700}, {duration:2, rotation:0, ease:"back.out(0.3)"}, '-=2')
+    //events
+    this.pag.on('click', function() {
+      $cars.index = $(this).index();
+      $cars.hide();
+      $cars.change();
+    })
+    this.nextBtn.on('click', function() {
+      $cars.index++;
+      if($cars.index>$cars.el.length-1) {
+        $cars.index=0;
+      }
+      $cars.hide();
+      $cars.change();
+    })
+    this.prevBtn.on('click', function() {
+      $cars.index--;
+      if($cars.index<0) {
+        $cars.index=$cars.el.length-1;
+      }
+      $cars.hide();
+      $cars.change();
+    })
+    this.selects.on('change', function() {
+      $cars.index = $(this).find(':selected').index();
+      $cars.hide();
+      $cars.change();
+    })
 
-  }
+    //gradients
+    $('.cars-slide__gradient').on('mouseenter mouseleave touchstart', function(event) {
+      let $target = $(this),
+          index = $target.data('gradient');
+  
+      if(event.type=='touchstart') {
+        $('.cars-slide__gradient, .cars-slide__section').removeClass('active');
+        $target.addClass('active');
+        $target.parent().find('.cars-slide__section').eq(index).addClass('active');
+      } else if(event.type=='mouseenter' && $('html').hasClass('desktop')) {
+        $target.addClass('active');
+        $target.parent().find('.cars-slide__section').eq(index).addClass('active');
+      } else if(event.type=='mouseleave' && $('html').hasClass('desktop')) {
+        $('.cars-slide__gradient, .cars-slide__section').removeClass('active');
+      }
+    })
+    $(document).on('touchstart', function(event) {
+      if(!event.target.closest('.cars-slide__gradient')) {
+        $('.cars-slide__gradient, .cars-slide__section').removeClass('active');
+      }
+    })
+
+
+
+  },
+  change: function() {
+    console.log('change')
+    $cars.pag.removeClass('active');
+    $slider.pag.eq($cars.index).addClass('active');
+    this.selects.val($cars.selects.eq(0).find('option').eq($cars.index).attr('value'));
+    this.selects.niceSelect('update');
+    $cars.info.removeClass('active').eq($cars.index).addClass('active');
+  },
+  hide: function() {
+    if($cars.hideAnimation!==undefined) {
+      this.hideAnimation.kill();
+      this.showAnimation.kill();
+    }
+    this.hideAnimation = gsap.timeline({onComplete:function(){
+      $cars.show()
+    }})
+      .to($cars.current, {duration:1,autoAlpha:0,ease:'power1.in'})
+      .to($cars.current.find('.cars-slide__image'), {duration:1, xPercent:-25, ease: "power2.in"}, '-=1')
+      .to($cars.current.find('.cars-slide__wheel'), {duration:1, rotation:-190, ease: "power2.in"}, '-=1')
+      .to($cars.current.find('.cars-slide__title'), {duration:1, autoAlpha:0, ease: "power2.in"}, '-=1')
+  },
+  show: function() {
+    $cars.current = $cars.el.eq($cars.index);
+
+    this.showAnimation = gsap.timeline()
+      .to($cars.current, {duration:1.5,autoAlpha:1,ease:'power2.inOut'})
+      .fromTo($cars.current.find('.cars-slide__image'), {xPercent:50}, {duration:2, xPercent:0, ease:"back.out(0.3)"}, '-=1.5')
+      .fromTo($cars.current.find('.cars-slide__wheel'), {rotation:380}, {duration:2, rotation:0, ease:"back.out(0.3)"}, '-=2')
+      .fromTo($cars.current.find('.cars-slide__title'), {autoAlpha:0}, {duration:1.5, autoAlpha:1, ease:'power2.inOut'}, '-=1.5')
+  },
+  sizeCar: function() {
+    this.el.each(function() {
+      let h = $cars.parent.height() - ($('.cars-slide__title').height()+20),
+          $image = $(this).find('.cars-slide__image'),
+          $car = $(this).find('.cars-slide__car'),
+          w;
+
+          $image.height(h);
+          w = $car.width();
+          $cars.parent.width(w)
+    })
+  },
 }
+
 let $popup = {
   element: $('.popup'),
   $open: $('[data-popup]'),
@@ -1066,13 +1153,13 @@ let $contactForm = {
         $contactForm.animation.play();
       }
     })
-    if($page.width()<=576) {
+    if($window.width()<=576) {
       $contactForm.animation.play();
     }
     $(window).resize(function() {
-      if($page.width()<=576 && $contactForm.animation.progress()==1) {
+      if($window.width()<=576 && $contactForm.animation.progress()==1) {
         $contactForm.animation.play();
-      } else if($page.width()>576 && $contactForm.animation.progress()==1) {
+      } else if($window.width()>576 && $contactForm.animation.progress()==1) {
         $contactForm.animation.reverse();
       }
     })
@@ -1096,9 +1183,7 @@ let $tabs = {
   old: 0,
   init: function() {
     this.btn.on('mouseenter', function() {
-      console.log($slide.animationProgress)
       if(!$slide.animationProgress) {
-        console.log('hover')
         let index = $(this).index() + 1;
         $tabs.slideTo(index);
       }
@@ -1158,7 +1243,7 @@ window.$form = {
     } else if(obj.is('#succes')) {
       $popup.open(obj)
       animationMessage.play();
-      if($page.width()<=576 && $contactForm.animation.progress()==0) {
+      if($window.width()<=576 && $contactForm.animation.progress()==0) {
         $contactForm.animation.play();
       }
     }
@@ -1229,53 +1314,13 @@ function resizeElems() {
   paginationResize();
   footerSize();
 }
+
 //
 function siteNavEvents() {
-  let time = 0,
-      flag=true,
-      timeout,
-      interval,
-      anim;
-  //события скролла
+  //scroll navigation
   $(window).on('wheel', function(event){
     if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.js-no-scroll').length==0) {
       if(!$slide.animationProgress) {
-
-        /* clearTimeout(timeout);
-        timeout = setTimeout(function() {
-          $slide.exitAnimation.reverse();
-          $slide.animationProgress = true;
-          clearInterval(interval);
-          time = 0;
-          setTimeout(function() {
-            $slide.animationProgress = false;
-            flag=true;
-          }, time*1000)
-        }, 400)
-
-        if(flag==true) {
-          flag=false;
-          interval = setInterval(function() {
-            time = +((time+0.01).toFixed(3));
-            $slide.exitAnimation.seek(time);
-            console.log(time)
-
-            if(time>=0.25) {
-              clearInterval(interval);
-              clearTimeout(timeout);
-              time=0;
-              $slide.animationProgress=true;
-              flag=true;
-              if(event.originalEvent.deltaY>0 && $slide.current.index()+1 < $slide.count) {
-                $slide.toNext();
-              } else if(event.originalEvent.deltaY<0 && $slide.current.index()>0) {
-                $slide.toPrev();
-              }
-            }
-
-          }, 30)
-        } */
-
         if(event.originalEvent.deltaY>0 && $slide.current.index()+1 < $slide.count) {
           $slide.toNext();
         } else if(event.originalEvent.deltaY<0 && $slide.current.index()>0) {
@@ -1284,20 +1329,24 @@ function siteNavEvents() {
       }
     }
   });
-  //swipe
-  let touchEvents = new Hammer.Manager(document);
-  let swipe = new Hammer.Swipe();
-  touchEvents.add(swipe);
 
 
-
-  //события свайпов
-  touchEvents.on("swipeleft swiperight swipeup swipedown", function(event) {
+  //swipe navigation
+  let manager = new Hammer.Manager(document, {
+    touchAction: 'auto',
+    inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput,
+    recognizers: [
+      [Hammer.Swipe, {
+        direction: Hammer.DIRECTION_ALL
+      }]
+    ]
+  });
+  manager.on("swipe", function(event) {
     if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.js-no-scroll').length==0 && !$('html').hasClass('desktop')) {
       if(!$slide.animationProgress) {
-        if((event.type=='swipeup' || (event.type=='swipeleft' && $(event.target).closest('.slider').length==0)) && $slide.current.index()+1 < $slide.count) {
+        if((event.offsetDirection=='8' || (event.offsetDirection=='2' && $(event.target).closest('.slider').length==0)) && $slide.current.index()+1 < $slide.count) {
           $slide.toNext();
-        } else if((event.type=='swipedown' || (event.type=='swiperight' && $(event.target).closest('.slider').length==0)) && $slide.current.index()>0) {
+        } else if((event.offsetDirection=='16' || (event.offsetDirection=='4' && $(event.target).closest('.slider').length==0)) && $slide.current.index()>0) {
           $slide.toPrev();
         }
       }

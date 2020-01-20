@@ -57,4 +57,8 @@
   <symbol viewBox="0 0 11 8" stroke="none" xmlns="http://www.w3.org/2000/svg" id="tick2">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M3.929 8L0 4.154l1.1-1.077 2.829 2.77L9.9 0 11 1.077 3.929 8z"></path>
   </symbol>
+  <symbol viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg" id="nav-arrow">
+    <circle cx="12.5" cy="12.5" r="12" fill="#1b1e23" fill-opacity=".5"></circle>
+    <path stroke='none' d="M8.646 11.646a.5.5 0 0 0 0 .708l3.182 3.182a.5.5 0 1 0 .708-.708L9.707 12l2.829-2.828a.5.5 0 1 0-.708-.708l-3.182 3.182zM17 11.5H9v1h8v-1z"></path>
+  </symbol>
 </svg>
