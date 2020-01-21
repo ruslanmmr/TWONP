@@ -12,8 +12,8 @@ import Inputmask from "inputmask/lib/extensions/inputmask.date.extensions";
 $(document).ready(function() {
   $preloader.init();
   //work
-  //$preloader.loadFinished();
-  //localStorage.setItem('slide', 1);
+  $preloader.loadFinished();
+  localStorage.setItem('slide', 2);
 
   elemsAnims();
   siteNavEvents();
@@ -512,10 +512,7 @@ let map = {
         } else if($(this).is('[data-base]')) {
           newPopup = $(`.map-popup[data-base='${$(this).data('base')}']`);
           $('.map-trigger[data-factory]').removeClass('dark').addClass('is');
-          //lines
-          if($(this).hasClass('js-lines-true')) {
-            $(`.custom-map .line[data-base='${$(this).data('base')}']`).addClass('active');
-          }
+          $(`.custom-map .line[data-base='${$(this).data('base')}']`).addClass('active');
         } else if($(this).is('[data-factory]')) {
           newPopup = $(`.map-popup[data-factory='${$(this).data('factory')}']`);
         }
@@ -765,6 +762,9 @@ let $slide = {
       $cars.init();
       optinfo.init();
     }
+    if(this.current.hasClass('gallery') && $gallery.initialized==false) {
+      $gallery.init();
+    }
     if(this.current.hasClass('map-section') && map.animated==false) {
       map.animated=true;
       let anim = gsap.timeline()
@@ -869,7 +869,6 @@ let $pagination = {
     }
   }
 }
-
 let optinfo = {
   $block: $('.opt__info-content'),
   $open: $('.opt__info-open'),
@@ -1223,6 +1222,38 @@ let $mask = {
     }
   }
 }
+
+let $gallery = {
+  slide: $('.galery-slide'),
+  initialized: false,
+  interval: 3000,
+  init: function() {
+    this.index = 0;
+    this.available = false;
+    this.show(); 
+  },
+  show: function() {
+    this.$newSlide = this.slide.eq($gallery.index);
+    let $photo = $gallery.$newSlide.find('.bg');
+
+    if(this.initialized==false) {
+      this.initialized=true;
+      //first animation
+      let animation = gsap.timeline({onComplete:function(){$gallery.available=true}})
+        .to($gallery.$newSlide, {duration:0,autoAlpha:1})
+    } 
+    else {
+      //else animations
+      let animation = gsap.timeline({onComplete:function(){$gallery.available=true}})
+        .to($gallery.$old, {duration:0,autoAlpha:1})
+        .to($gallery.$newSlide, {duration:0,autoAlpha:1})
+        //.fromTo($photo, {},{})
+    }
+
+
+    this.$oldSlide = this.$newSlide;
+  }
+}
 //форма отправлена
 window.$form = {
   submited: function(obj) {
@@ -1253,7 +1284,6 @@ window.$form = {
     }, 3000)
   }
 }
-
 
 //functions
 function elemsAnims() {

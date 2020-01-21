@@ -155,24 +155,11 @@
       transform: translate(-50%, -50%);
       transition: $trs1;
       will-change: opacity;
-      &:first-child {
-        color: $colorA;
-      }
-      &:last-child {
-        opacity: 0;
-        visibility: hidden;
-      }
+      color: $colorA;
     }
     &.active {
       span {
-        &:first-child {
-          opacity: 0;
-          visibility: hidden;
-        }
-        &:last-child {
-          opacity: 1;
-          visibility: visible;
-        }
+        color: #fff;
       }
     }
   }

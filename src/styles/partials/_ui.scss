@@ -236,6 +236,7 @@ a {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-size: cover;
+  position: relative;
   &:before {
     content: '';
     display: block;

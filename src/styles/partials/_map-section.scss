@@ -384,7 +384,6 @@
   }
 }
 .area-block {
-  display: none;
   position: absolute;
   z-index: 5;
   transform: translate(-50%, -50%);
@@ -407,9 +406,6 @@
       fill: rgba(53, 225, 173, 0.6);
     }
   }
-}
-.logisticks-map .area-block {
-  display: block;
 }
 
 @media all and(max-width: 1440px) {
