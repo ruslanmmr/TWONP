@@ -1,19 +1,37 @@
 mixin slide(title, index)
-  .galery-slide
-    .galery-slide__description
-      span.galery-slide__index=index
-      h5.galery-slide__title=title
-    .galery-slide__image
-      .bg.bg_mask2(data-depth="0.05")&attributes(attributes)
+  .gallery-slide
+    .gallery-slide__description
+      span.gallery-slide__index.gallery-slide__d-item=index
+      h5.gallery-slide__title.gallery-slide__d-item=title
+      h4.gallery-slide__sub-title.gallery-slide__d-item  Lorem ipsum dolor sit amet
+      p.gallery-slide__text.gallery-slide__d-item Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    .gallery-slide__image
+      .gallery-slide__cover
+        .bg.bg_mask2(data-depth="0.05")&attributes(attributes)
+
 
 section.section.section-slide.gallery.js-nav-hidden 
   .section__display.p-t-h
     .section__content.p-l-s.p-r-p.p-b-p
-      .galery-slider.p-b-s
-        .galery-slider__container
-          +slide('Сеть АЗС', '1')(data-image='img/bg/home2.jpg')
-          +slide('Заголовок', '2')(data-image='img/bg/home1.jpg')
-      .galery-pagination
-        .galery-pagination__container
-          a(href="javascript:void(0)").js-animated.galery-pagination__item
-          a(href="javascript:void(0)").js-animated.galery-pagination__item
+      .gallery-slider
+        a(href="javascript:void(0)").js-animated.gallery-slider__next
+          svg.round
+            circle.round__circle
+          svg.icon 
+            use(xlink:href="img/icons/sprite.svg#arrow3")
+          svg.icon.icon_mobile
+            use(xlink:href="img/icons/sprite.svg#ico9")
+        .gallery-slider__container
+          +slide('Сеть АЗС', '01')(data-image='img/img1.jpg')
+          +slide('Заголовок', '02')(data-image='img/img2.jpg')
+          +slide('Сеть АЗС', '03')(data-image='img/img3.jpg')
+          +slide('Заголовок', '04')(data-image='img/img4.jpg')
+          +slide('Заголовок', '05')(data-image='img/img5.jpg')
+        .gallery-pagination
+          span.gallery-pagination__ind
+          .gallery-pagination__container
+            a(href="javascript:void(0)").js-animated.gallery-pagination__item
+            a(href="javascript:void(0)").js-animated.gallery-pagination__item
+            a(href="javascript:void(0)").js-animated.gallery-pagination__item
+            a(href="javascript:void(0)").js-animated.gallery-pagination__item
+            a(href="javascript:void(0)").js-animated.gallery-pagination__item

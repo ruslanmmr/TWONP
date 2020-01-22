@@ -588,6 +588,26 @@ a {
     }
   }
 }
+.artica-link {
+  color: $colorN;
+  a {
+    display: inline-block;
+    line-height: 20px;
+    transition: $trs1;
+    margin-bottom: -2px;
+    &:hover {
+      svg {
+        fill: #fff;
+      }
+    }
+  }
+  svg {
+    fill: $colorN;
+    height: 15px;
+    display: block;
+    transition: $trs1;
+  }
+}
 .documents {
   .section__title {
     margin-bottom: 0.75em;

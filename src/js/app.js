@@ -12,8 +12,8 @@ import Inputmask from "inputmask/lib/extensions/inputmask.date.extensions";
 $(document).ready(function() {
   $preloader.init();
   //work
-  $preloader.loadFinished();
-  localStorage.setItem('slide', 2);
+  //$preloader.loadFinished();
+  //localStorage.setItem('slide', 2);
 
   elemsAnims();
   siteNavEvents();
@@ -1224,34 +1224,157 @@ let $mask = {
 }
 
 let $gallery = {
-  slide: $('.galery-slide'),
+  $slider: $('.gallery-slider'),
+  slide: $('.gallery-slide'),
+  $pagination: $('.gallery-pagination'),
+  $pagitem: $('.gallery-pagination__item'),
+  $next: $('.gallery-slider__next'),
+  $circle: $('.gallery .round__circle'),
+  $ind: $('.gallery-pagination__ind'),
   initialized: false,
-  interval: 3000,
+  intervalDuration: 4000,
   init: function() {
     this.index = 0;
     this.available = false;
-    this.show(); 
+    this.getParams();
+    this.show();
+
+    $(window).resize(function () {
+      $gallery.getParams();
+    })
+
+
+    this.$pagitem.on('click', function(){
+      if($gallery.available==true) {
+        $gallery.available=false;
+        $gallery.index = $(this).index();
+        $gallery.show();
+      }
+    })
+    this.$next.on('click', function(){
+      if($gallery.available==true) {
+        $gallery.available=false;
+        $gallery.index++;
+        if($gallery.index==$gallery.slide.length) {
+          $gallery.index=0;
+        }
+        $gallery.show();
+      }
+    })
+    //swipe
+    let area = document.querySelector('.gallery-slider'),
+      manager = new Hammer.Manager(area, {
+      touchAction: 'auto',
+      inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput,
+      recognizers: [
+        [Hammer.Swipe, {
+          direction: Hammer.DIRECTION_ALL
+        }]
+      ]
+    });
+    manager.on("swipe", function(event) {
+      if(event.offsetDirection=='2' && $gallery.available==true) {
+        $gallery.available=false;
+        $gallery.index++;
+        if($gallery.index==$gallery.slide.length) {
+          $gallery.index=0;
+        }
+        $gallery.show();
+      } else if(event.offsetDirection=='4' && $gallery.available==true) {
+        $gallery.available=false;
+        $gallery.index--;
+        if($gallery.index<0) {
+          $gallery.index=$gallery.slide.length-1;
+        }
+        $gallery.show();
+      }
+    });
+
+    //interval
+    this.interval = setInterval(()=>{
+      if(!$gallery.paused) {
+        this.$next.trigger('click');
+      }
+    },this.intervalDuration)
+
+    if(!$('html').hasClass('desktop')) {
+      this.paused=true;
+    } else {
+      $gallery.$slider.on('mouseenter mousemove mouseleave', function(event) {
+        if(event.type=='mouseenter' || event.type=='mousemove') {
+          $gallery.paused=true;
+        } else {
+          $gallery.paused=false;
+        }
+      })
+    }
   },
   show: function() {
     this.$newSlide = this.slide.eq($gallery.index);
-    let $photo = $gallery.$newSlide.find('.bg');
+
+    this.$pagitem.removeClass('active');
+    this.$pagitem.eq($gallery.index).addClass('active');
+    
+    let $cover = $gallery.$newSlide.find('.gallery-slide__cover'),
+        $OLDcover,
+        $image = $gallery.$newSlide.find('.bg'),
+        $OLDimage,
+        $item = $gallery.$newSlide.find('.gallery-slide__d-item'),
+        $OLDitem,
+        $pagitem = $gallery.$pagination.find('.gallery-pagination__item');
+
+    if($gallery.$oldSlide!==undefined) {
+      $OLDcover = $gallery.$oldSlide.find('.gallery-slide__cover');
+      $OLDimage = $gallery.$oldSlide.find('.bg');
+      $OLDitem = $gallery.$oldSlide.find('.gallery-slide__d-item');
+    }
 
     if(this.initialized==false) {
       this.initialized=true;
       //first animation
       let animation = gsap.timeline({onComplete:function(){$gallery.available=true}})
-        .to($gallery.$newSlide, {duration:0,autoAlpha:1})
+        .to([$gallery.$newSlide,$gallery.$pagination], {duration:0,autoAlpha:1},'+=0.5')
+        .fromTo($cover, {xPercent:100}, {duration:1,xPercent:0,ease:'power2.out'})
+        .fromTo($image, {xPercent:-50,scale:1.5}, {duration:1,xPercent:0,scale:1,ease:'power2.out'}, '-=1')
+        //items fade
+        .fromTo($item, {autoAlpha:0}, {duration:0.75,autoAlpha:1,ease:'power2.inOut',stagger:{amount:0.25}}, '-=1')
+        .fromTo($item, {y:45,rotation:5}, {duration:0.75,y:0,rotation:0,ease:'power2.out',stagger:{amount:0.25}}, '-=1')
+        //btn
+        .fromTo($gallery.$circle, {css:{strokeDashoffset:$gallery.circumference}}, {duration:1, css:{strokeDashoffset:$gallery.circumference*0.25}, ease:'power2.out'}, '-=0.5')
+        .fromTo($gallery.$next.find('.icon'), {autoAlpha:0}, {duration:1,autoAlpha:1,ease:'power2.inOut'}, '-=1')
+        .fromTo($gallery.$next.find('.icon'), {scale:0.5}, {duration:1,scale:1,ease:'power2.out'}, '-=1')
     } 
     else {
       //else animations
       let animation = gsap.timeline({onComplete:function(){$gallery.available=true}})
-        .to($gallery.$old, {duration:0,autoAlpha:1})
         .to($gallery.$newSlide, {duration:0,autoAlpha:1})
-        //.fromTo($photo, {},{})
+        .to($OLDcover, {duration:0.5,xPercent:-100,ease:'power1.in'})
+        .to($OLDimage, {duration:0.5,xPercent:50,scale:1.1,ease:'power1.in'}, '-=0.5')
+        .to($OLDitem, {duration:0.4,y:-20,rotation:-1,autoAlpha:0,ease:'power1.in',stagger:{amount:0.1}}, '-=0.5')
+        .fromTo($gallery.$circle, {css:{strokeDashoffset:$gallery.circumference*2.25}}, {duration:0.5, css:{strokeDashoffset:$gallery.circumference*1.25}, ease:'power2.in'}, '-=0.5')
+        .fromTo($cover, {xPercent:100}, {duration:1,xPercent:0,ease:'power2.out'})
+        .fromTo($image, {xPercent:-50,scale:1.2}, {duration:1,xPercent:0,scale:1,ease:'power2.out'}, '-=1')
+        //items fade
+        .fromTo($item, {autoAlpha:0}, {duration:0.75,autoAlpha:1,ease:'power2.inOut',stagger:{amount:0.25}}, '-=1')
+        .fromTo($item, {y:45,rotation:5}, {duration:0.75,y:0,rotation:0,ease:'power2.out',stagger:{amount:0.25}}, '-=1')
+        //
+        .to($gallery.$circle, {duration:1, css:{strokeDashoffset:$gallery.circumference*0.25}, ease:'power2.out'}, '-=1')
+        .to($gallery.$ind, {duration:1.5,xPercent:$gallery.index*100 ,ease:'power2.inOut'}, '-=1.5')
+        .to($gallery.$oldSlide, {duration:0,autoAlpha:0})
     }
 
-
     this.$oldSlide = this.$newSlide;
+  },
+  getParams: function() {
+    let bw = this.$next.width();
+    //круг
+    this.$circle.attr('cx', bw/2);
+    this.$circle.attr('cy', bw/2);
+    this.$circle.attr('r', bw/2-1);
+    this.$ind.css('width', `${100/($gallery.slide.length)}%`)
+    
+    this.circumference = 2*Math.PI*this.$circle.attr('r');
+    this.$circle.attr('style', `stroke-dasharray:${$gallery.circumference} ${$gallery.circumference};stroke-dashoffset:${$gallery.circumference*2.25};`)
   }
 }
 //форма отправлена
@@ -1375,9 +1498,9 @@ function siteNavEvents() {
   manager.on("swipe", function(event) {
     if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.js-no-scroll').length==0 && !$('html').hasClass('desktop')) {
       if(!$slide.animationProgress) {
-        if((event.offsetDirection=='8' || (event.offsetDirection=='2' && $(event.target).closest('.slider').length==0)) && $slide.current.index()+1 < $slide.count) {
+        if((event.offsetDirection=='8' || (event.offsetDirection=='2' && $(event.target).closest('.slider,.gallery').length==0)) && $slide.current.index()+1 < $slide.count) {
           $slide.toNext();
-        } else if((event.offsetDirection=='16' || (event.offsetDirection=='4' && $(event.target).closest('.slider').length==0)) && $slide.current.index()>0) {
+        } else if((event.offsetDirection=='16' || (event.offsetDirection=='4' && $(event.target).closest('.slider,.gallery').length==0)) && $slide.current.index()>0) {
           $slide.toPrev();
         }
       }

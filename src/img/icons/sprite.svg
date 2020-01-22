@@ -61,4 +61,7 @@
     <circle cx="12.5" cy="12.5" r="12" fill="#1b1e23" fill-opacity=".5"></circle>
     <path stroke='none' d="M8.646 11.646a.5.5 0 0 0 0 .708l3.182 3.182a.5.5 0 1 0 .708-.708L9.707 12l2.829-2.828a.5.5 0 1 0-.708-.708l-3.182 3.182zM17 11.5H9v1h8v-1z"></path>
   </symbol>
+  <symbol viewBox="0 0 38 16" stroke="none" xmlns="http://www.w3.org/2000/svg" id="arrow3">
+    <path d="M37.707 8.707a1 1 0 0 0 0-1.414L31.343.929a1 1 0 1 0-1.414 1.414L35.586 8l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM0 9h37V7H0v2z"></path>
+  </symbol>
 </svg>

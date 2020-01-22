@@ -157,11 +157,15 @@
 }
 @media all and(max-width: 768px) {
   .header .logo__link {
-    height: 20px;
+    height: 26px;
+    margin: -3px 0;
   }
 }
 @media all and(max-width: 576px) {
   .header {
     padding: 25px 20px;
+    .logo__link {
+      margin: 0;
+    }
   }
 }

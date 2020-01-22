@@ -50,7 +50,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      &:first-child {
+      &:not(:last-child) {
         margin-bottom: 15px;
       }
     }
@@ -406,6 +406,10 @@
       fill: rgba(53, 225, 173, 0.6);
     }
   }
+}
+.azs-map .area-block,
+.infr-map .area-block {
+  display: none;
 }
 
 @media all and(max-width: 1440px) {
