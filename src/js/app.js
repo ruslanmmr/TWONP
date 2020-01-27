@@ -12,13 +12,12 @@ import Inputmask from "inputmask/lib/extensions/inputmask.date.extensions";
 $(document).ready(function() {
   $preloader.init();
   //work
-  //$preloader.loadFinished();
   //localStorage.setItem('slide', 1);
+  //$preloader.loadFinished();
 
   elemsAnims();
   siteNavEvents();
   inputs();
-
 
   $select.init();
   $nav.init();
@@ -41,19 +40,14 @@ $(document).ready(function() {
       $tabs.init();
     }
   }
+
   if($contactForm.$element.length>0) {
     $contactForm.init();
   }
 
-  $slide.getFirstSlide({onComplete:function(){
-    $slide.change($slide.current, {
-      onComplete: function() {
-        $slide.updateAnimations();
-        $slide.to($slide.current);
-      }
-    });
-  }})
 })
+
+
 $(window).resize(function () {
   resizeElems();
 })
@@ -142,6 +136,16 @@ let $preloader = {
   loadFinished: function() {
     //собрать страницу и выставить отступы
     resizeElems();
+
+    $slide.getFirstSlide({onComplete:function(){
+      $slide.change($slide.current, {
+        onComplete: function() {
+          $slide.updateAnimations();
+          $slide.to($slide.current);
+        }
+      });
+
+    }})
 
     $preloader.item.setAttribute('x', '0%');
 
@@ -761,11 +765,8 @@ let $slide = {
     }
     
     if(this.current.hasClass('cars') && $cars.initialized==false) {
-      //ждем формирование страницы
-      setTimeout(function() {
-        $cars.init();
-        optinfo.init();
-      },500)
+      optinfo.init();
+      $cars.init();
     }
     if(this.current.hasClass('gallery') && $gallery.initialized==false) {
       $gallery.init();
@@ -900,6 +901,7 @@ let optinfo = {
     })
   }
 }
+
 //Слайдер топлива
 let $slider = {
   el: $('.fuel-slider .slider'),
@@ -972,6 +974,7 @@ let $slider = {
     $slider.el.slick('slickGoTo', $slider.index);
   }
 }
+
 //Слайдер грузовики
 let $cars = {
   el: $('.cars-slide'),
@@ -1074,6 +1077,8 @@ let $cars = {
       .fromTo($cars.current.find('.cars-slide__title'), {autoAlpha:0}, {duration:1.5, autoAlpha:1, ease:'power2.inOut'}, '-=1.5')
   },
   sizeCar: function() {
+    console.log('size car')
+
     let $img = $('.cars-slide__image'),
         $car = $('.cars-slide__car'),
         $slide = $('.cars-slide'), 
