@@ -6,8 +6,8 @@ import { gsap } from "gsap";
 import slick from "slick-carousel";
 import autosize from "autosize";
 import Parallax from 'parallax-js';
-import "inputmask/lib/extensions/inputmask.numeric.extensions";
-import Inputmask from "inputmask/lib/extensions/inputmask.date.extensions";
+//import "inputmask/lib/extensions/inputmask.numeric.extensions";
+//import Inputmask from "inputmask/lib/extensions/inputmask.date.extensions";
 
 $(document).ready(function() {
   $preloader.init();
@@ -25,7 +25,7 @@ $(document).ready(function() {
   $subNav.update();
   $popup.init();
   $checkbox.init();
-  $mask.init();
+  //$mask.init();
 
   if($slider.el.length>0) {
     $slider.init();
