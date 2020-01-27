@@ -425,12 +425,12 @@ a {
   backdrop-filter: blur(10px);
   opacity: 0;
   visibility: hidden;
-  input {
+  /* input {
     &:-webkit-autofill {
       -webkit-box-shadow: 0 0 0 100px $colorM inset;
       -webkit-text-fill-color: $colorD !important;
     }
-  }
+  } */
   .scrollbar-track-y {
     visibility: hidden;
     opacity: 0;
