@@ -13,7 +13,7 @@ $(document).ready(function() {
   $preloader.init();
   //work
   //$preloader.loadFinished();
-  //localStorage.setItem('slide', 7);
+  //localStorage.setItem('slide', 1);
 
   elemsAnims();
   siteNavEvents();
@@ -761,8 +761,11 @@ let $slide = {
     }
     
     if(this.current.hasClass('cars') && $cars.initialized==false) {
-      $cars.init();
-      optinfo.init();
+      //ждем формирование страницы
+      setTimeout(function() {
+        $cars.init();
+        optinfo.init();
+      },500)
     }
     if(this.current.hasClass('gallery') && $gallery.initialized==false) {
       $gallery.init();
@@ -962,7 +965,6 @@ let $slider = {
   },
   change: function() {
     this.selects.val($slider.selects.eq(0).find('option').eq($slider.index).attr('value'));
-    console.log($slider.selects.eq(0).find('option').eq($slider.index).attr('value'))
     this.selects.niceSelect('update');
     $slider.pag.removeClass('active');
     $slider.pag.eq($slider.index).addClass('active');
@@ -1040,6 +1042,7 @@ let $cars = {
         $('.cars-slide__gradient, .cars-slide__section').removeClass('active');
       }
     })
+
   },
   change: function() {
     $cars.pag.removeClass('active');
