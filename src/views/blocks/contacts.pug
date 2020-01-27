@@ -1,6 +1,7 @@
 section.section.section-slide.contacts.js-subnav-true.js-pagination-dark
   .section__display
     .section__content.h-c-t.p-t-h
+      input(type="text")
       .contacts__map
         img.loader(src="img/icons/loader.svg", alt="loader")
         //<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ac35c50786db94c833a7f1a99569be995b657bc3f440e4a2047a056a37bb7c525&amp;width=100%&amp;height=100%&amp;lang=ru_RU&amp;scroll=false"></script>
@@ -11,7 +12,7 @@ section.section.section-slide.contacts.js-subnav-true.js-pagination-dark
         svg.icon 
           use(xlink:href="img/icons/sprite.svg#close")
     h6.contacts__title.p-r-s.p-l-s Свяжитесь с нами
-    form(action="").contacts-form.p-s.p-b-p
+    form(action="#").contacts-form.p-s.p-b-p
       .contacts-form__group.p-r-p.first
         .contacts-form__item.disabled-animated
           input(type="text")
