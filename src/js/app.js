@@ -362,10 +362,12 @@ let map = {
     this.zoomGradation = 1;
 
     map.inner.on('wheel', function(event){
-      if(event.originalEvent.deltaY>0 && map.available==true) {
-        map.zoomMinus();
-      } else if(event.originalEvent.deltaY<0 && map.available==true) {
-        map.zoomPlus();
+      if(map.available==true && map.inner.hasClass('js-no-scroll')) {
+        if(event.originalEvent.deltaY>0) {
+          map.zoomMinus();
+        } else if(event.originalEvent.deltaY<0) {
+          map.zoomPlus();
+        }
       }
     });
     
@@ -608,7 +610,7 @@ let $nav = {
       .to($nav.trigger.find('span:last-child'), 0.5, {duration:0.5, rotation:135, ease:'power2.out'}, '-=0.5')
     $nav.fadeAnim = gsap.timeline({paused:true})
       .to($nav.el, {duration:0.5, height:'100%', ease:'power2.inOut'})
-      .to($nav.el, {duration:0.5, backgroundColor:'rgba(0, 0, 0, 0.5)', ease:'power2.inOut'}, '-=0.5')
+      .to($nav.el, {duration:0.5, backgroundColor:'rgba(0, 0, 0, 0.7)', ease:'power2.inOut'}, '-=0.5')
       .set('.nav__items', {display:'block'}, '-=0.25')
       .fromTo('.nav__item', {autoAlpha:0}, {autoAlpha:1, ease:'power2.inOut', duration:0.5, stagger:{amount: 0.25}}, '-=0.25')
       .fromTo('.nav__item', {x:40}, {x:0, ease:'power2.out', duration:0.5, stagger:{amount:0.25}}, '-=0.75')
@@ -1468,7 +1470,6 @@ function resizeElems() {
   paginationResize();
   footerSize();
 }
-
 //
 function siteNavEvents() {
   //scroll navigation
@@ -1496,11 +1497,13 @@ function siteNavEvents() {
     ]
   });
   manager.on("swipe", function(event) {
-    if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.js-no-scroll').length==0 && !$('html').hasClass('desktop')) {
+    //
+    if($(event.target).closest('.scroll-container').find('.scrollbar-track:visible').length==0 && $(event.target).closest('.js-no-scroll').length==0 && $(event.target).closest('.js-no-swipe').length==0 && !$('html').hasClass('desktop')) {
+      
       if(!$slide.animationProgress) {
-        if((event.offsetDirection=='8' || (event.offsetDirection=='2' && $(event.target).closest('.slider,.gallery').length==0)) && $slide.current.index()+1 < $slide.count) {
+        if((event.offsetDirection=='8' || (event.offsetDirection=='2' && $(event.target).closest('.gallery').length==0)) && $slide.current.index()+1 < $slide.count) {
           $slide.toNext();
-        } else if((event.offsetDirection=='16' || (event.offsetDirection=='4' && $(event.target).closest('.slider,.gallery').length==0)) && $slide.current.index()>0) {
+        } else if((event.offsetDirection=='16' || (event.offsetDirection=='4' && $(event.target).closest('.gallery').length==0)) && $slide.current.index()>0) {
           $slide.toPrev();
         }
       }
