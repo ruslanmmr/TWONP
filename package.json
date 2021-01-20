@@ -34,7 +34,7 @@
 		"@fancyapps/fancybox": "^3.5.7",
 		"autosize": "^4.0.2",
 		"current-device": "^0.8.2",
-		"gsap": "^3.0.4",
+		"gsap": "^3.6.0",
 		"hammerjs": "^2.0.8",
 		"inputmask": "^5.0.0",
 		"jquery": "^3.4.1",
