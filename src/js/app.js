@@ -13,7 +13,6 @@ $(document).ready(function() {
   $preloader.init();
   //work
   //localStorage.setItem('slide', 1);
-  //$preloader.loadFinished();
 
   elemsAnims();
   siteNavEvents();
@@ -144,7 +143,6 @@ let $preloader = {
           $slide.to($slide.current);
         }
       });
-
     }})
 
     $preloader.item.setAttribute('x', '0%');
@@ -200,6 +198,7 @@ let $scrollArea = {
     }
   }
 }
+
 let map = {
   container: $('.custom-map__container'),
   inner: $('.custom-map__inner'),
@@ -209,8 +208,6 @@ let map = {
   area: $('.area-block__item'),
   itemsElls: $('.custom-map .item'),
   available: false,
-  x: 0,
-  y: 0,
   animation: '',
   interval: '',
   translateAnimation: '',
@@ -360,6 +357,8 @@ let map = {
 
   },
   init: function() {
+    this.y = this.inner.offset().top - this.container.offset().top;
+    this.x = this.inner.offset().left - this.container.offset().left;
     this.zoomInterval = (map.zoomMax-1)/(map.zoomGradations-1);
     this.zoom = 1;
     this.zoomCurrent = 1;

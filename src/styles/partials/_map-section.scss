@@ -124,19 +124,31 @@
     position: relative;
     margin: auto;
     min-width: 100%;
+    transform: translateY(-15%);
+    &::before {
+      content: '';
+      display: block;
+      padding-top: 182.9%;
+    }
   }
   &__map {
-    display: block;
-    width: 100%;
-    height: auto;
-    position: relative;
-    z-index: 1;
-    pointer-events: none;
+    position: absolute;
+    width: 1000%;
+    top: -223.4%;
+    left: -450%;
     .region,
     .road {
       stroke-width: 1px;
       transition: $trs1;
     }
+  }
+  &__map-element {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
   }
   &__region {
     position: absolute;
@@ -165,6 +177,10 @@
     }
     &.rt span {
       left: 0;
+      bottom: 10px;
+    }
+    &.lt span {
+      right: 0; 
       bottom: 10px;
     }
     &.lb span {
