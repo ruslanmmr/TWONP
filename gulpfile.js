@@ -182,19 +182,7 @@ gulp.task("deploy", function () {
   }));
 });
 
-// Qmt7usfjXrxg
+//Qmt7usfjXrxg
 
-/* gulp.task("deploy", function () {
-  return gulp.src('./dest/**')
-    .pipe(rsync({
-      root: './dest/',
-      hostname: 'palmayasen.beget.tech',
-      destination: '/home/p/palmayasen/palmayasen.beget.tech/public_html/assets/components/project/dest',
-      username: 'palmayasen_test',
-      archive: true,
-      silent: false,
-      compress: true
-  }));
-}); */
 
 
