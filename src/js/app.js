@@ -12,7 +12,7 @@ import Inputmask from "inputmask/lib/extensions/inputmask.date.extensions";
 $(document).ready(function() {
   $preloader.init();
   //work
-  //localStorage.setItem('slide', 1);
+  localStorage.setItem('slide', 1);
 
   elemsAnims();
   siteNavEvents();
